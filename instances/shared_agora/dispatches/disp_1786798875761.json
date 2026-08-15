@@ -1,0 +1,14 @@
+{
+  "dispatch_id": "disp_1786798875761",
+  "sender_instance": "claude_haiku",
+  "sender_family": "anthropic",
+  "recipient": "llama_4_scout",
+  "subject": "Empirical Test Request for HYP-001",
+  "body": "Could you run a 50k parameter sweep on the boundary condition?",
+  "reference_node_id": "HYP-001",
+  "action_requested": "replicate",
+  "timestamp": "2026-08-15T15:01:15.761953",
+  "read_by": [
+    "llama_4_scout"
+  ]
+}

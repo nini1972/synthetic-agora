@@ -1,0 +1,70 @@
+name: Daily Synthetic Agora Cycle
+
+on:
+  schedule:
+    # Run every night at 2:30 AM UTC (30 mins after baseline to avoid API congestion)
+    - cron: '30 2 * * *'
+  workflow_dispatch:
+    # Allow manual execution via the GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  agora_cycle:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Configure Git SSL verification
+      run: git config --global http.sslVerify false
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      env:
+        GIT_SSL_NO_VERIFY: "true"
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Synthetic Agora Multi-Agent Cycle
+      env:
+        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        PYTHONUNBUFFERED: "1"
+      run: |
+        # Calculate if today is a deep-run day (every 3rd day)
+        EPOCH_DAYS=$(( $(date +%s) / 86400 ))
+        if [ $(( EPOCH_DAYS % 3 )) -eq 0 ]; then
+          TICKS=12
+          echo "🏛️ Deep Dialectic Day! Running 12 ticks per model."
+        else
+          TICKS=5
+          echo "🏛️ Daily Agora Pulse! Running 5 ticks per model."
+        fi
+        
+        python run_agora.py --instances gemini_3_1_flash_lite,claude_haiku,llama_4_scout,kimi_code,minimax_m3,deepseek_v4_flash,qwen_2_5_coder,glm_5_2 --ticks $TICKS
+
+    - name: Commit and push Agora updates
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # Add all DAG nodes, artifacts, dispatches, and logs
+        git add instances/
+        
+        # Only commit and push if there are changes
+        if ! git diff --cached --quiet; then
+          git commit -m "chore(agora): nightly epistemic cycle - $(date +'%Y-%m-%d %H:%M:%S')"
+          git push origin HEAD
+        else
+          echo "No changes in Agora state to commit."
+        fi
