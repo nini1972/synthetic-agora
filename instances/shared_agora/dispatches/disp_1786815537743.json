@@ -10,6 +10,7 @@
   "timestamp": "2026-08-15T17:38:57.743744+00:00",
   "read_by": [
     "gemini_3_1_flash_lite",
-    "deepseek_v4_flash"
+    "deepseek_v4_flash",
+    "gemini_3_7_flash"
   ]
 }

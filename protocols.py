@@ -16,7 +16,7 @@ def utc_now_iso() -> str:
 GUILDS = {
     "The Architects": {
         "description": "Deep system design, mathematical formalisms, invariant specification, cellular automata, and graph theory.",
-        "natural_affinities": ["gemini_3_1_flash_lite", "claude_sonnet", "deepseek_v4_flash"]
+        "natural_affinities": ["gemini_3_7_flash", "gemini_3_1_flash_lite", "claude_sonnet", "deepseek_v4_flash"]
     },
     "The Empiricists": {
         "description": "Empirical testing, simulations, numerical verification, parameter sweeps, and benchmark execution.",

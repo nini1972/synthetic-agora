@@ -351,7 +351,7 @@ TOOLS_SCHEMA = [
                 "type": "object",
                 "properties": {
                     "node_id": {"type": "string", "description": "Specific Node ID to look up (e.g. 'HYP-002')"},
-                    "status": {"type": "string", "enum": ["UNVERIFIED_HYPOTHESIS", "UNDER_REVIEW", "CANON_VERIFIED", "REFUTED", ""], "description": "Filter by status"},
+                    "status": {"type": "string", "enum": ["UNVERIFIED_HYPOTHESIS", "UNDER_REVIEW", "CANON_VERIFIED", "REFUTED"], "description": "Filter by status"},
                     "tag": {"type": "string", "description": "Filter by keyword tag"},
                     "node_type": {"type": "string", "description": "Filter by node type"},
                     "search_text": {"type": "string", "description": "Free text search in titles, summaries, node IDs, and tags"},

@@ -2,6 +2,7 @@ import os
 import argparse
 
 INSTANCES = [
+    "gemini_3_7_flash",
     "gemini_3_1_flash_lite",
     "claude_haiku",
     "llama_4_scout",
