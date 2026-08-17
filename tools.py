@@ -21,14 +21,32 @@ def get_workspace_dir() -> str:
         return os.path.abspath(os.path.join(os.path.dirname(__file__), "agent_workspace"))
     return os.path.abspath(os.path.join(os.path.dirname(__file__), "instances", instance_name, "agent_workspace"))
 
+def _get_absolute_path(path_str: str) -> str:
+    workspace = get_workspace_dir()
+    shared = get_shared_agora_dir()
+    
+    # Handle direct shared_agora references
+    norm_path = path_str.replace("\\", "/").lstrip("/")
+    if norm_path.startswith("shared_agora/"):
+        rel_to_shared = norm_path[len("shared_agora/"):]
+        return os.path.abspath(os.path.join(shared, rel_to_shared))
+    
+    target = os.path.abspath(os.path.join(workspace, path_str))
+    if not os.path.exists(target):
+        # Check in shared artifacts directory
+        shared_art = os.path.abspath(os.path.join(shared, "artifacts", os.path.basename(path_str)))
+        if os.path.exists(shared_art):
+            return shared_art
+        shared_direct = os.path.abspath(os.path.join(shared, norm_path))
+        if os.path.exists(shared_direct):
+            return shared_direct
+    return target
+
 def _is_safe_path(path_str: str) -> bool:
     workspace = get_workspace_dir()
     shared = get_shared_agora_dir()
-    target = os.path.abspath(os.path.join(workspace, path_str))
+    target = _get_absolute_path(path_str)
     return target.startswith(workspace) or target.startswith(shared)
-
-def _get_absolute_path(path_str: str) -> str:
-    return os.path.abspath(os.path.join(get_workspace_dir(), path_str))
 
 # --- AGORA SPECIFIC EPISTEMIC TOOLS ---
 
@@ -163,6 +181,13 @@ def read_file(path: str) -> str:
         return f"Error: File {path} does not exist."
     if os.path.isdir(abs_path):
         return f"Error: '{path}' is a directory. Use run_command with 'dir' to list directory contents."
+    
+    # Handle binary files gracefully
+    ext = os.path.splitext(abs_path)[1].lower()
+    if ext in ['.png', '.jpg', '.jpeg', '.gif', '.pdf', '.webp', '.ico']:
+        file_size = os.path.getsize(abs_path)
+        return f"[Binary Media File: '{path}', Size: {file_size} bytes]. Binary image files cannot be read as raw UTF-8 text. To inspect simulation data, review the accompanying python script or markdown report."
+
     try:
         with open(abs_path, 'r', encoding='utf-8') as f:
             return f.read()
