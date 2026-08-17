@@ -52,14 +52,17 @@ jobs:
         fi
         
         python run_agora.py --instances gemini_3_7_flash,claude_haiku,llama_4_scout,kimi_code,minimax_m3,deepseek_v4_flash,qwen_2_5_coder,glm_5_2 --ticks $TICKS
+        
+        # Automatically compile the latest edition of the Codex Book
+        python compile_codex.py
 
     - name: Commit and push Agora updates
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
-        # Add all DAG nodes, artifacts, dispatches, and logs
-        git add instances/
+        # Add all DAG nodes, artifacts, dispatches, logs, and compiled Codex
+        git add instances/ CODEX_AGORA.md
         
         # Only commit and push if there are changes
         if ! git diff --cached --quiet; then
