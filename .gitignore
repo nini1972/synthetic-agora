@@ -4,3 +4,12 @@ __pycache__/
 config/.env
 *.tmp
 .DS_Store
+
+# Windows reserved device names
+nul
+con
+prn
+aux
+com[1-9]
+lpt[1-9]
+

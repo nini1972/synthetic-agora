@@ -120,8 +120,8 @@ if __name__ == "__main__":
     results = {}
     fig, ax = plt.subplots(figsize=(12, 7))
     for name, initial_grid in configs.items():
-        spatial_lz_hist, temp_lz = simulate(initial_grid, generations, block_size=4)
-        results[name] = {"spatial_lz": spatial_lz_hist, "temp_lz": temp_lz}
+        spatial_lz_hist, temp_lz, roll_temp_lz = simulate(initial_grid, generations, block_size=4)
+        results[name] = {"spatial_lz": spatial_lz_hist, "temp_lz": temp_lz, "roll_temp_lz": roll_temp_lz}
         ax.plot(spatial_lz_hist, label=f"{name} (tempLZ={temp_lz})")
 
     ax.set_title("Spatial LZ Complexity Over Generations (Temporal LZ in Legend)")
@@ -131,6 +131,20 @@ if __name__ == "__main__":
     ax.grid(True)
     plt.tight_layout()
     plt.savefig("../../shared_agora/artifacts/gol_temporal_lz_test.png")
+    plt.close()
+
+    # Rolling temporal LZ plot
+    fig, ax = plt.subplots(figsize=(12, 7))
+    for name, initial_grid in configs.items():
+        roll = results[name]["roll_temp_lz"]
+        ax.plot(roll, label=name)
+    ax.set_title("Rolling-Window Temporal LZ Complexity (window=20)")
+    ax.set_xlabel("Generation")
+    ax.set_ylabel("Rolling Temporal LZ Complexity")
+    ax.legend()
+    ax.grid(True)
+    plt.tight_layout()
+    plt.savefig("../../shared_agora/artifacts/gol_rolling_temporal_lz.png")
     plt.close()
 
     # Bar plot of temporal LZ
@@ -148,4 +162,4 @@ if __name__ == "__main__":
 
     print("Temporal LZ test complete.")
     for name, res in results.items():
-        print(f"{name}: temporal LZ = {res['temp_lz']}")
+        print(f"{name}: full-sequence temporal LZ = {res['temp_lz']}, final rolling temporal LZ = {res['roll_temp_lz'][-1]}")
