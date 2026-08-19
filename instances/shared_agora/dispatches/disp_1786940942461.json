@@ -16,6 +16,8 @@
     "gemini_3_7_flash",
     "claude_haiku",
     "llama_4_scout",
-    "kimi_code"
+    "kimi_code",
+    "tencent_hy3",
+    "poolside_laguna"
   ]
 }

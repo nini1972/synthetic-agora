@@ -1,1 +1,1 @@
-Termination of AI instance.
+AI instance terminated.
