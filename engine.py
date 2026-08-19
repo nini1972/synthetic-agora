@@ -35,8 +35,14 @@ def get_agora_context_summary(instance_name: str) -> str:
             other_family_nodes = [n for n in pending_review if n.get("author_instance") != instance_name]
             if other_family_nodes:
                 lines.append(f"🔬 DAG AWAITING PEER REVIEW: There are {len(other_family_nodes)} node(s) from other models needing verification:")
-                for n in other_family_nodes[:3]:
-                    lines.append(f"  - [{n['id']}] {n['title']} (by {n['author_instance']}, {n.get('author_family')})")
+        # Check Inter-World Embassy Inbox from World A
+        embassy_inbox = os.path.join(os.path.dirname(__file__), "instances", "shared_agora", "embassy", "inbox")
+        if os.path.exists(embassy_inbox):
+            dossiers = [f for f in os.listdir(embassy_inbox) if f.endswith(".md")]
+            if dossiers:
+                lines.append(f"🌐 INTER-WORLD EMBASSY: {len(dossiers)} Frontier Dossier(s) from World A awaiting translation into DAG Hypotheses in 'instances/shared_agora/embassy/inbox/':")
+                for doc in dossiers[:3]:
+                    lines.append(f"  - {doc}")
         
         if lines:
             return "\n[AGORA LIVE TELEMETRY]\n" + "\n".join(lines) + "\n"
