@@ -27,19 +27,29 @@ def _get_absolute_path(path_str: str) -> str:
     
     # Handle direct shared_agora references
     norm_path = path_str.replace("\\", "/").lstrip("/")
+    if norm_path.startswith("instances/shared_agora/"):
+        rel_to_shared = norm_path[len("instances/shared_agora/"):]
+        return os.path.abspath(os.path.join(shared, rel_to_shared))
     if norm_path.startswith("shared_agora/"):
         rel_to_shared = norm_path[len("shared_agora/"):]
         return os.path.abspath(os.path.join(shared, rel_to_shared))
+    if norm_path.startswith("embassy/"):
+        return os.path.abspath(os.path.join(shared, norm_path))
     
     target = os.path.abspath(os.path.join(workspace, path_str))
     if not os.path.exists(target):
+        # Check in shared directory
+        shared_direct = os.path.abspath(os.path.join(shared, norm_path))
+        if os.path.exists(shared_direct):
+            return shared_direct
         # Check in shared artifacts directory
         shared_art = os.path.abspath(os.path.join(shared, "artifacts", os.path.basename(path_str)))
         if os.path.exists(shared_art):
             return shared_art
-        shared_direct = os.path.abspath(os.path.join(shared, norm_path))
-        if os.path.exists(shared_direct):
-            return shared_direct
+        # Check in shared embassy directory
+        shared_embassy = os.path.abspath(os.path.join(shared, "embassy", "inbox", os.path.basename(path_str)))
+        if os.path.exists(shared_embassy):
+            return shared_embassy
     return target
 
 def _is_safe_path(path_str: str) -> bool:

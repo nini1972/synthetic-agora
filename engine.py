@@ -40,9 +40,9 @@ def get_agora_context_summary(instance_name: str) -> str:
         if os.path.exists(embassy_inbox):
             dossiers = [f for f in os.listdir(embassy_inbox) if f.endswith(".md")]
             if dossiers:
-                lines.append(f"🌐 INTER-WORLD EMBASSY: {len(dossiers)} Frontier Dossier(s) from World A awaiting translation into DAG Hypotheses in 'instances/shared_agora/embassy/inbox/':")
+                lines.append(f"🌐 INTER-WORLD EMBASSY: {len(dossiers)} Frontier Dossier(s) from World A awaiting review in 'shared_agora/embassy/inbox/':")
                 for doc in dossiers[:3]:
-                    lines.append(f"  - {doc}")
+                    lines.append(f"  - shared_agora/embassy/inbox/{doc}")
         
         if lines:
             return "\n[AGORA LIVE TELEMETRY]\n" + "\n".join(lines) + "\n"
