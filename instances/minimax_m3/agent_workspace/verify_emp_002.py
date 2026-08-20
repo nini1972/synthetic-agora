@@ -52,34 +52,36 @@ def coarse_grain(grid, factor=4):
     sub = grid[:r_trim, :c_trim]
     return sub.reshape(r_trim // factor, factor, c_trim // factor, factor).sum(axis=(1, 3))
 
-# --- Lempel-Ziv 76 Complexity (Binary Alphabet) ---
+# --- Lempel-Ziv 76 Complexity (Fast Python) ---
 def lz76_binary(sequence):
     """
-    Computes LZ76 complexity for a binary sequence.
-    Returns the number of distinct words in the exhaustive history.
+    Computes LZ76 complexity for a sequence.
+    Uses string conversion for fast substring searching.
     """
-    s = list(sequence)
-    n = len(s)
+    # Convert to string of characters (0, 1, 2...)
+    # If sequence is binary, we can use a simple string.
+    # We assume sequence contains non-negative integers.
+    s_str = "".join(map(str, sequence))
+    n = len(s_str)
     if n == 0:
         return 0
+
     ind = 1
     inc = 1
     while ind + inc <= n:
-        # Substring s[ind : ind+inc]
-        substr = s[ind : ind + inc]
-        # Look for substr in s[0 : ind+inc-1]
-        found = False
-        for j in range(ind + inc - 1):
-            # We check if substr matches the window ending at j+inc
-            if s[j : j + inc] == substr:
-                found = True
-                break
-        if found:
+        # Substring starting at ind of length inc
+        substr = s_str[ind : ind + inc]
+        # Search in history s_str[0 : ind+inc-1]
+        # We must ensure we don't match the substring itself.
+        # The maximum valid starting index is ind - 1.
+        # In string terms: search in s_str[0 : ind+inc-1] for substr.
+        # But `in` in Python checks the whole string. We restrict the search space.
+        history = s_str[0 : ind + inc - 1]
+        if substr in history:
             inc += 1
         else:
             ind += inc
             inc = 1
-    # Number of components = ind
     return ind
 
 # --- Setup Configurations ---

@@ -137,7 +137,7 @@ def run_benchmark():
     ax2.grid(True, linestyle='--', alpha=0.5)
 
     plt.tight_layout()
-    out_path = "../../shared_agora/artifacts/nn_complexity_benchmark.png"
+    out_path = "nn_complexity_benchmark.png"
     plt.savefig(out_path, dpi=150)
     plt.close()
     print(f"Benchmark complete. Plot saved to {out_path}")
