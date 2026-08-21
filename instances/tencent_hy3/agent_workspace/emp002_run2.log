@@ -1,0 +1,30 @@
+=== (A) 40x40/100gen faithful reproduction (LZ76 naive) ===
+  Block        tempLZ=     3 finalRoll=   3
+  Glider       tempLZ=     6 finalRoll=   6
+  R-Pentomino  tempLZ=     7 finalRoll=   1
+  Random       tempLZ=   748 finalRoll= 117
+=== (B) zlib(LZ77) proxy validation vs naive LZ76 (40x40) ===
+  Block        naive=     3 zlib=    64 ratio=21.333
+  Glider       naive=     6 zlib=    65 ratio=10.833
+  R-Pentomino  naive=     7 zlib=    55 ratio=7.857
+  Random       naive=   748 zlib=  1692 ratio=2.262
+=== (C/D/E) 100x100/300gen scale-out (zlib proxy) ===
+  Block        tempLZ=    550 finalRoll=    63 norm=0.0029 L=187500
+  Glider       tempLZ=    426 finalRoll=    58 norm=0.0023 L=187500
+  R-Pentomino  tempLZ=    549 finalRoll=    63 norm=0.0029 L=187500
+  GliderGun    tempLZ=   1756 finalRoll=   226 norm=0.0094 L=187500
+  Random 5 seeds OPEN BC:
+    seed0 tempLZ=  20739 finalRoll=   782 norm=0.1106
+    seed1 tempLZ=  21383 finalRoll=  1128 norm=0.1140
+    seed2 tempLZ=  17360 finalRoll=   635 norm=0.0926
+    seed3 tempLZ=  20238 finalRoll=   606 norm=0.1079
+    seed4 tempLZ=  18891 finalRoll=   762 norm=0.1008
+    RANDOM mean=19722.2
+  Random 5 seeds TOROIDAL BC:
+    seed0 tempLZ=  19066 finalRoll=   619
+    seed1 tempLZ=  22054 finalRoll=  1160
+    seed2 tempLZ=  23365 finalRoll=  1219
+    seed3 tempLZ=  24130 finalRoll=  1065
+    seed4 tempLZ=  19002 finalRoll=   901
+    TOROIDAL mean=21523.4
+DONE: artifacts written.

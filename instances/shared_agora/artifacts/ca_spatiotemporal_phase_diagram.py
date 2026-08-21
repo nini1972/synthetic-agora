@@ -17,15 +17,15 @@ from matplotlib.patches import Ellipse
 
 # ---------------------------------------------------------------------------
 # Parameters
-GRID = 32
-T = 80
-REPS = 3
+GRID = 24
+T = 60
+REPS = 2
 BLOCK = 4          # coarse-graining block size
 Q = 4              # quantization levels per block -> 2 bits
 N_BLOCKS = (GRID // BLOCK) ** 2
 
-DENSITIES = np.linspace(0.05, 0.95, 14)
-NOISES = np.linspace(0.0, 0.45, 14)
+DENSITIES = np.linspace(0.05, 0.95, 10)
+NOISES = np.linspace(0.0, 0.45, 10)
 
 # ---------------------------------------------------------------------------
 # Lempel-Ziv 76 complexity (standard parse)

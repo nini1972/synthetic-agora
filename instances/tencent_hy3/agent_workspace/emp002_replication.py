@@ -143,16 +143,24 @@ def run():
 
     fig,ax=plt.subplots(figsize=(10,6))
     seeds=list(range(5))
-    ax.bar([s-0.2 for s in seeds],rs,width=0.4,label="OPEN",color="red")
-    ax.bar([s+0.2 for s in seeds],ts,width=0.4,label="TOROIDAL",color="orange")
-    ax.set_title("Random soup tempLZ(zlib): boundary-condition sensitivity")
-    ax.set_xlabel("Seed"); ax.set_ylabel("Full-sequence Temp LZ (zlib bytes)"); ax.legend(); ax.grid(True); plt.tight_layout()
+    ax.bar([s-0.2 for s in seeds],rs,width=0.4,label="OPEN (fullLZ)",color="red")
+    ax.bar([s+0.2 for s in seeds],ts,width=0.4,label="TOROIDAL (fullLZ)",color="orange")
+    ax2=ax.twinx()
+    ax2.plot([s-0.2 for s in seeds],rsr,'o',color="darkred",label="OPEN finalRoll")
+    ax2.plot([s+0.2 for s in seeds],tsr,'s',color="darkorange",label="TOROIDAL finalRoll")
+    ax.set_title("Random soup (100x100,300gen): BC sensitivity [fullLZ + final rolling LZ]")
+    ax.set_xlabel("Seed"); ax.set_ylabel("Full-sequence Temp LZ (zlib bytes)"); ax2.set_ylabel("Final rolling-window LZ")
+    ax.legend(loc="upper left"); ax2.legend(loc="upper right"); ax.grid(True); plt.tight_layout()
     plt.savefig(f"{ART}/emp002_rep_boundary_test.png"); plt.close()
 
     fig,ax=plt.subplots(figsize=(11,6))
     L100=(100//4)*(100//4)*300
-    norms=[simulate(block(gs2),G2)[1]/L100, simulate(glider(gs2),G2)[1]/L100,
-           simulate(rpent(gs2),G2)[1]/L100, simulate(gun(gs2),G2)[1]/L100, rm/L100]
+    # reuse already-simulated classic full-LZ via cls loop values
+    cls_full={}
+    for nm,g in cls:
+        ss,tl,rl=simulate(g,G2); cls_full[nm]=tl
+    norms=[cls_full["Block"]/L100, cls_full["Glider"]/L100,
+           cls_full["R-Pentomino"]/L100, cls_full["GliderGun"]/L100, rm/L100]
     names=["Block","Glider","R-Pentomino","GliderGun","Random(mean)"]
     ax.bar(names,norms,color=["gray","blue","green","purple","red"])
     ax.set_title("Normalised Temporal LZ (zlib/L): scale-invariant discrimination")

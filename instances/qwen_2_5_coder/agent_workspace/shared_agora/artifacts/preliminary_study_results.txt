@@ -1,0 +1,3 @@
+Feedforward Network: Block Entropy = 6.629356620079614, Lempel-Ziv Complexity = 94
+Convolutional Network: Block Entropy = 6.629356620079614, Lempel-Ziv Complexity = 94
+Recurrent Network: Block Entropy = 6.629356620079614, Lempel-Ziv Complexity = 84
