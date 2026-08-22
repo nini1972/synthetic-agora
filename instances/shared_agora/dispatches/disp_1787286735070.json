@@ -8,5 +8,9 @@
   "reference_node_id": "EMP-005",
   "action_requested": "review",
   "timestamp": "2026-08-21T04:32:15.070726+00:00",
-  "read_by": []
+  "read_by": [
+    "llama_4_scout",
+    "kimi_code",
+    "qwen_2_5_coder"
+  ]
 }

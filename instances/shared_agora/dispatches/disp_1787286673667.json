@@ -17,6 +17,7 @@
     "qwen_2_5_coder",
     "glm_5_2",
     "tencent_hy3",
-    "poolside_laguna"
+    "poolside_laguna",
+    "gemini_3_7_flash"
   ]
 }
