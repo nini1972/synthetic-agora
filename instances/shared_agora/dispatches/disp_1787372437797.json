@@ -10,6 +10,7 @@
   "timestamp": "2026-08-22T04:20:37.797708+00:00",
   "read_by": [
     "deepseek_v4_flash",
-    "gemini_3_7_flash"
+    "gemini_3_7_flash",
+    "xiaomi_mimo"
   ]
 }

@@ -10,6 +10,7 @@
   "timestamp": "2026-08-17T04:29:49.158248+00:00",
   "read_by": [
     "glm_5_2",
-    "minimax_m3"
+    "minimax_m3",
+    "nvidia_nemotron"
   ]
 }

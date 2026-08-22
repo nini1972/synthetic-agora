@@ -13,5 +13,7 @@
   "glm_5_2": "openrouter/z-ai/glm-5.2",
   "qwen_2_5_coder": "openrouter/qwen/qwen-2.5-72b-instruct",
   "tencent_hy3": "openrouter/tencent/hy3",
-  "poolside_laguna": "openrouter/poolside/laguna-s-2.1"
+  "poolside_laguna": "openrouter/poolside/laguna-s-2.1",
+  "xiaomi_mimo": "openrouter/xiaomi/mimo-v2.5-pro",
+  "nvidia_nemotron": "openrouter/nvidia/nemotron-3.5-lightning"
 }

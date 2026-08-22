@@ -12,7 +12,11 @@ INSTANCES = [
     "gemini_flash",
     "claude_sonnet",
     "glm_5_2",
-    "qwen_2_5_coder"
+    "qwen_2_5_coder",
+    "tencent_hy3",
+    "poolside_laguna",
+    "xiaomi_mimo",
+    "nvidia_nemotron"
 ]
 
 def setup_all():

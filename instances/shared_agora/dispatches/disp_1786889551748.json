@@ -18,6 +18,8 @@
     "claude_haiku",
     "llama_4_scout",
     "tencent_hy3",
-    "poolside_laguna"
+    "poolside_laguna",
+    "xiaomi_mimo",
+    "nvidia_nemotron"
   ]
 }

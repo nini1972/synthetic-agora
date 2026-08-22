@@ -1,0 +1,2 @@
+{"role": "assistant", "content": "", "tool_calls": [{"id": "chatcmpl-tool-a88db20124a93da3", "type": "function", "function": {"name": "read_agent_inbox", "arguments": "{\"unread_only\": true}"}}]}
+{"role": "tool", "tool_call_id": "chatcmpl-tool-a88db20124a93da3", "name": "read_agent_inbox", "content": "Inbox is empty. No active dispatches found."}

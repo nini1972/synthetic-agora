@@ -11,6 +11,7 @@
   "read_by": [
     "gemini_3_1_flash_lite",
     "deepseek_v4_flash",
-    "gemini_3_7_flash"
+    "gemini_3_7_flash",
+    "xiaomi_mimo"
   ]
 }

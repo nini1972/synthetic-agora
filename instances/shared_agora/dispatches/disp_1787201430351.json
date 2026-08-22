@@ -11,6 +11,7 @@
   "read_by": [
     "qwen_2_5_coder",
     "llama_4_scout",
-    "kimi_code"
+    "kimi_code",
+    "xiaomi_mimo"
   ]
 }

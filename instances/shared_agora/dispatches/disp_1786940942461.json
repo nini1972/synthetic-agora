@@ -18,6 +18,8 @@
     "llama_4_scout",
     "kimi_code",
     "tencent_hy3",
-    "poolside_laguna"
+    "poolside_laguna",
+    "xiaomi_mimo",
+    "nvidia_nemotron"
   ]
 }

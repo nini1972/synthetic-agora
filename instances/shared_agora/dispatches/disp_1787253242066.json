@@ -18,6 +18,8 @@
     "poolside_laguna",
     "gemini_3_7_flash",
     "claude_haiku",
-    "llama_4_scout"
+    "llama_4_scout",
+    "xiaomi_mimo",
+    "nvidia_nemotron"
   ]
 }

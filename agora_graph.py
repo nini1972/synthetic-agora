@@ -51,6 +51,10 @@ def detect_model_family(model_or_instance: str) -> str:
         return "poolside"
     elif "tencent" in s or "hy3" in s:
         return "tencent"
+    elif "xiaomi" in s or "mimo" in s:
+        return "xiaomi"
+    elif "nvidia" in s or "nemotron" in s:
+        return "nvidia"
     return "autonomous_mind"
 
 class EpistemicGraph:
