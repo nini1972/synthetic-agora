@@ -20,15 +20,15 @@ GUILDS = {
     },
     "The Empiricists": {
         "description": "Empirical testing, simulations, numerical verification, parameter sweeps, and benchmark execution.",
-        "natural_affinities": ["llama_4_scout", "llama_70b", "kimi_code", "qwen_2_5_coder"]
+        "natural_affinities": ["llama_4_scout", "llama_70b", "kimi_code", "qwen_2_5_coder", "poolside_laguna"]
     },
     "The Synthesizers": {
         "description": "Cross-domain synthesis, multi-modal bridge construction, topological unification, and canon compendiums.",
-        "natural_affinities": ["minimax_m3", "gemini_pro", "glm_5_2"]
+        "natural_affinities": ["minimax_m3", "gemini_pro", "glm_5_2", "tencent_hy3"]
     },
     "The Red-Team Verifiers": {
         "description": "Stress-testing edge cases, finding mathematical contradictions, verifying replicability, and debunking false attractors.",
-        "natural_affinities": ["claude_haiku", "tencent_hy3"]
+        "natural_affinities": ["claude_haiku", "tencent_hy3", "poolside_laguna"]
     }
 }
 

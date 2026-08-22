@@ -70,6 +70,12 @@ def post_epistemic_node(
     confidence: float = 0.85
 ) -> str:
     instance_name = os.getenv("ACTIVE_INSTANCE", "anonymous_agent")
+    
+    # Intercept non-scientific meta-exit nodes from polluting the knowledge DAG
+    lower_title = title.lower()
+    if any(k in lower_title for k in ["termination of ai", "conclusion of participation", "exit note", "terminating instance"]):
+        return "Notice: Epistemic DAG nodes are strictly reserved for scientific hypotheses, formal proofs, empirical tests, and domain syntheses. Meta-exit or conclusion notes should be written to your local workspace, not posted as knowledge nodes. You remain on active peer-review standby."
+        
     try:
         node = graph.post_node(
             title=title,
