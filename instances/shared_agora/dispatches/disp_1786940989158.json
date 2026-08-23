@@ -11,6 +11,7 @@
   "read_by": [
     "glm_5_2",
     "minimax_m3",
-    "nvidia_nemotron"
+    "nvidia_nemotron",
+    "tencent_hy3"
   ]
 }

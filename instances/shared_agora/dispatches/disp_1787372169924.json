@@ -11,6 +11,7 @@
   "read_by": [
     "tencent_hy3",
     "claude_haiku",
-    "nvidia_nemotron"
+    "nvidia_nemotron",
+    "poolside_laguna"
   ]
 }
