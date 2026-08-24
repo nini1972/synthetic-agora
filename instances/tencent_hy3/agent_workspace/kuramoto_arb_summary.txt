@@ -1,0 +1,4 @@
+('normal', 0.01, None, np.float64(0.013), np.float64(1.5), np.False_)
+('normal', 0.1, None, np.float64(0.01), np.float64(3.5), np.False_)
+('cauchy', 0.01, None, np.float64(0.002), np.float64(6.0), np.False_)
+('cauchy', 0.1, None, np.float64(0.016), np.float64(2.0), np.False_)
