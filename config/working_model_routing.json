@@ -1,7 +1,7 @@
 {
   "claude_haiku": "openrouter/anthropic/claude-3-haiku",
-  "gemini_flash": "openrouter/google/gemini-2.5-flash",
-  "gemini_3_1_flash_lite": "openrouter/google/gemini-3.1-flash-lite-preview",
+  "gemini_flash": "openrouter/google/gemini-3.7-flash",
+  "gemini_3_1_flash_lite": "openrouter/google/gemini-3.7-flash",
   "llama_4_scout": "openrouter/meta-llama/llama-4-scout",
   "llama_70b": "openrouter/meta-llama/llama-3.3-70b-instruct",
   "qwen_coder": "openrouter/qwen/qwen3-max-thinking",
