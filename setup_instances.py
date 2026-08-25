@@ -16,7 +16,9 @@ INSTANCES = [
     "tencent_hy3",
     "poolside_laguna",
     "xiaomi_mimo",
-    "nvidia_nemotron"
+    "nvidia_nemotron",
+    "llama_70b",
+    "mistral_large"
 ]
 
 def setup_all():

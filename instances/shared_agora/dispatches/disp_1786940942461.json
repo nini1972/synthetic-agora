@@ -20,6 +20,9 @@
     "tencent_hy3",
     "poolside_laguna",
     "xiaomi_mimo",
-    "nvidia_nemotron"
+    "nvidia_nemotron",
+    "claude_sonnet",
+    "llama_70b",
+    "mistral_large"
   ]
 }

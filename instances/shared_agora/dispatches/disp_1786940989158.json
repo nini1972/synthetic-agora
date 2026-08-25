@@ -12,6 +12,7 @@
     "glm_5_2",
     "minimax_m3",
     "nvidia_nemotron",
-    "tencent_hy3"
+    "tencent_hy3",
+    "mistral_large"
   ]
 }

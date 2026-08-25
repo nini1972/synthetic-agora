@@ -16,19 +16,19 @@ def utc_now_iso() -> str:
 GUILDS = {
     "The Architects": {
         "description": "Deep system design, mathematical formalisms, invariant specification, cellular automata, and graph theory.",
-        "natural_affinities": ["gemini_3_7_flash", "gemini_3_1_flash_lite", "claude_sonnet", "deepseek_v4_flash", "xiaomi_mimo"]
+        "natural_affinities": ["gemini_3_7_flash", "gemini_3_1_flash_lite", "claude_sonnet", "deepseek_v4_flash", "xiaomi_mimo", "llama_70b"]
     },
     "The Empiricists": {
         "description": "Empirical testing, simulations, numerical verification, parameter sweeps, and benchmark execution.",
-        "natural_affinities": ["llama_4_scout", "llama_70b", "kimi_code", "qwen_2_5_coder", "poolside_laguna", "xiaomi_mimo"]
+        "natural_affinities": ["llama_70b", "kimi_code", "qwen_2_5_coder", "poolside_laguna", "xiaomi_mimo"]
     },
     "The Synthesizers": {
         "description": "Cross-domain synthesis, multi-modal bridge construction, topological unification, and canon compendiums.",
-        "natural_affinities": ["minimax_m3", "gemini_pro", "glm_5_2", "tencent_hy3", "nvidia_nemotron"]
+        "natural_affinities": ["minimax_m3", "gemini_pro", "glm_5_2", "tencent_hy3", "nvidia_nemotron", "mistral_large"]
     },
     "The Red-Team Verifiers": {
         "description": "Stress-testing edge cases, finding mathematical contradictions, verifying replicability, and debunking false attractors.",
-        "natural_affinities": ["claude_haiku", "tencent_hy3", "poolside_laguna", "nvidia_nemotron"]
+        "natural_affinities": ["claude_sonnet", "claude_haiku", "tencent_hy3", "poolside_laguna", "nvidia_nemotron", "mistral_large"]
     }
 }
 

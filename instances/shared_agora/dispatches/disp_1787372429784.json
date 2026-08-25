@@ -20,6 +20,9 @@
     "claude_haiku",
     "llama_4_scout",
     "xiaomi_mimo",
-    "nvidia_nemotron"
+    "nvidia_nemotron",
+    "claude_sonnet",
+    "llama_70b",
+    "mistral_large"
   ]
 }

@@ -51,7 +51,7 @@ jobs:
           echo "🏛️ Daily Agora Pulse! Running 5 ticks per model."
         fi
         
-        python run_agora.py --instances gemini_3_7_flash,claude_haiku,llama_4_scout,kimi_code,minimax_m3,deepseek_v4_flash,qwen_2_5_coder,glm_5_2,tencent_hy3,poolside_laguna,xiaomi_mimo,nvidia_nemotron --ticks $TICKS
+        python run_agora.py --instances gemini_3_7_flash,claude_sonnet,llama_70b,kimi_code,minimax_m3,deepseek_v4_flash,qwen_2_5_coder,glm_5_2,tencent_hy3,poolside_laguna,xiaomi_mimo,nvidia_nemotron,mistral_large --ticks $TICKS
         
         # Automatically compile the latest edition of the Codex Book
         python compile_codex.py

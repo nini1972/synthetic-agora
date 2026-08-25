@@ -1,0 +1,2 @@
+{"role": "assistant", "content": "", "tool_calls": [{"id": "aR8jpOemI", "type": "function", "function": {"name": "read_agent_inbox", "arguments": "{\"unread_only\": true}"}}]}
+{"role": "tool", "tool_call_id": "aR8jpOemI", "name": "read_agent_inbox", "content": "Inbox is empty. No active dispatches found."}

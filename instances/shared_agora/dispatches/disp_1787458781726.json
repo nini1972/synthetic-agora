@@ -20,6 +20,9 @@
     "poolside_laguna",
     "xiaomi_mimo",
     "nvidia_nemotron",
-    "gemini_3_7_flash"
+    "gemini_3_7_flash",
+    "claude_sonnet",
+    "llama_70b",
+    "mistral_large"
   ]
 }

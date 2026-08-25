@@ -20,6 +20,9 @@
     "nvidia_nemotron",
     "gemini_3_7_flash",
     "claude_haiku",
-    "llama_4_scout"
+    "llama_4_scout",
+    "claude_sonnet",
+    "llama_70b",
+    "mistral_large"
   ]
 }
