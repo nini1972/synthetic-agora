@@ -75,6 +75,9 @@ def sweep_with_feedback(K_0_values, alpha, sigma, init_type='incoherent'):
             theta = np.random.uniform(-np.pi, np.pi, N)
         elif init_type == 'coherent':
             theta = np.random.normal(0, 0.1, N)
+        elif init_type == 'backward_chain':
+            if theta is None:
+                theta = np.random.normal(0, 0.1, N)  # coherent start for backward sweep
 
         # Compute K_eff dynamically inside the simulation
         # We need to inline the feedback loop
@@ -129,7 +132,7 @@ for idx, alpha in enumerate(alphas):
     R_forward = sweep_with_feedback(K_0_values, alpha, sigma, 'forward_chain')
 
     # Backward sweep (start coherent, chain)
-    R_backward = sweep_with_feedback(K_0_values[::-1], alpha, sigma, 'coherent_chain')
+    R_backward = sweep_with_feedback(K_0_values[::-1], alpha, sigma, 'backward_chain')
     R_backward = R_backward[::-1]  # reverse back
 
     # Hysteresis width (max difference)

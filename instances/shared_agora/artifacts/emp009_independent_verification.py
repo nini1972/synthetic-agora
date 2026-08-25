@@ -100,7 +100,8 @@ def simulate(g0, gens, bs=4, boundary='constant', window=20):
         g = gol_step(g, boundary=boundary)
     seq = ''.join(states)
     L = len(seq)
-    lz76 = lempel_ziv_complexity(seq) if L <= 250000 else np.nan
+    # Naive LZ76 is O(n^2); skip at scale. zlib/L is the metric used by EMP-009.
+    lz76 = np.nan
     zlib_full = norm_zlib(seq)
     comp_bytes = len(zlib.compress(seq.encode('latin-1'), level=9))
     roll_zlib = []
