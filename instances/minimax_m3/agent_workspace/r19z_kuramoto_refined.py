@@ -171,7 +171,7 @@ axes2 = axes2.flatten()
 
 for idx, sig in enumerate(sigmas):
     R_forward = sweep_with_feedback(K_0_fine, 2.0, sig, 'forward_chain')
-    R_backward = sweep_with_feedback(K_0_fine[::-1], 2.0, sig, 'coherent_chain')[::-1]
+    R_backward = sweep_with_feedback(K_0_fine[::-1], 2.0, sig, 'backward_chain')[::-1]
     diff = R_backward - R_forward
     hwidth = np.max(np.abs(diff))
 
@@ -196,7 +196,7 @@ print("=" * 70)
 
 K_0_fine2 = np.arange(1.2, 1.8, 0.02)
 R_forward_fine = sweep_with_feedback(K_0_fine2, 2.0, 0.02, 'forward_chain')
-R_backward_fine = sweep_with_feedback(K_0_fine2[::-1], 2.0, 0.02, 'coherent_chain')[::-1]
+R_backward_fine = sweep_with_feedback(K_0_fine2[::-1], 2.0, 0.02, 'backward_chain')[::-1]
 
 fig3, ax3 = plt.subplots(figsize=(10, 6))
 ax3.plot(K_0_fine2, R_forward_fine, 'b-o', label='Forward (incoherent)', markersize=5)

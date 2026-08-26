@@ -17,12 +17,21 @@ import matplotlib.pyplot as plt
 import zlib
 import csv
 import time
-from scipy.ndimage import convolve
+
 
 def gol_step(grid, boundary='constant'):
-    kernel = np.array([[1,1,1],[1,0,1],[1,1,1]], dtype=int)
-    neighbors = convolve(grid, kernel, mode=boundary, cval=0)
-    return ((neighbors == 3) | ((grid == 1) & (neighbors == 2))).astype(np.uint8)
+    """One GoL step.  'constant' = open (zero outside); 'wrap' = toroidal."""
+    if boundary == 'wrap':
+        n = (np.roll(grid, 1, axis=0) + np.roll(grid, -1, axis=0)
+             + np.roll(grid, 1, axis=1) + np.roll(grid, -1, axis=1)
+             + np.roll(grid, (1, 1), axis=(0, 1)) + np.roll(grid, (1, -1), axis=(0, 1))
+             + np.roll(grid, (-1, 1), axis=(0, 1)) + np.roll(grid, (-1, -1), axis=(0, 1)))
+    else:
+        padded = np.pad(grid, 1, mode='constant')
+        n = (padded[:-2, :-2] + padded[:-2, 1:-1] + padded[:-2, 2:]
+             + padded[1:-1, :-2] + padded[1:-1, 2:]
+             + padded[2:, :-2] + padded[2:, 1:-1] + padded[2:, 2:])
+    return ((n == 3) | ((grid == 1) & (n == 2))).astype(np.uint8)
 
 def pattern_block(size):
     g = np.zeros(size, dtype=np.uint8)
@@ -102,8 +111,8 @@ def simulate(g0, gens, bs=4, boundary='constant', window=20):
     L = len(seq)
     # Naive LZ76 is O(n^2); skip at scale. zlib/L is the metric used by EMP-009.
     lz76 = np.nan
-    zlib_full = norm_zlib(seq)
     comp_bytes = len(zlib.compress(seq.encode('latin-1'), level=9))
+    zlib_full = comp_bytes / L if L > 0 else 0.0
     roll_zlib = []
     for i in range(len(states)):
         start = max(0, i-window+1)
@@ -167,10 +176,10 @@ def main():
     rows100_open = run_table("100x100 / 300 gens / open boundary", configs100, size100, gens=300, bs=bs, boundary='constant')
     all_rows.extend(rows100_open)
     rows_random_open = run_table("100x100 / 300 gens / open / Random seeds",
-                                 [('Random', None)], size100, gens=300, bs=bs, boundary='constant', seeds=5)
+                                 [('Random', None)], size100, gens=300, bs=bs, boundary='constant', seeds=3)
     all_rows.extend(rows_random_open)
     rows_random_toroidal = run_table("100x100 / 300 gens / toroidal / Random seeds",
-                                     [('Random', None)], size100, gens=300, bs=bs, boundary='wrap', seeds=5)
+                                     [('Random', None)], size100, gens=300, bs=bs, boundary='wrap', seeds=3)
     all_rows.extend(rows_random_toroidal)
 
     # Plots
