@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+import signal
 import json
 import urllib.request
 import urllib.parse
@@ -244,16 +245,19 @@ def edit_file(path: str, old_content: str, new_content: str) -> str:
 
 def run_command(command: str) -> str:
     try:
-        p = subprocess.Popen(
-            command,
-            shell=True,
-            cwd=get_workspace_dir(),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
+        # On POSIX (Linux), use start_new_session=True so child processes can be killed as a group
+        popen_kwargs = {
+            "cwd": get_workspace_dir(),
+            "stdout": subprocess.PIPE,
+            "stderr": subprocess.PIPE,
+            "text": True
+        }
+        if sys.platform != "win32":
+            popen_kwargs["start_new_session"] = True
+            
+        p = subprocess.Popen(command, shell=True, **popen_kwargs)
         try:
-            stdout, stderr = p.communicate(timeout=20)
+            stdout, stderr = p.communicate(timeout=25)
             output = stdout or ""
             if stderr:
                 output += f"\nSTDERR:\n{stderr}"
@@ -261,9 +265,16 @@ def run_command(command: str) -> str:
         except subprocess.TimeoutExpired:
             if sys.platform == "win32":
                 subprocess.run(f"taskkill /F /T /PID {p.pid}", shell=True, capture_output=True)
-            p.kill()
-            stdout, stderr = p.communicate()
-            return "Error: Command execution timed out (exceeded 20 seconds)."
+            else:
+                try:
+                    os.killpg(os.getpgid(p.pid), signal.SIGKILL)
+                except Exception:
+                    p.kill()
+            try:
+                stdout, stderr = p.communicate(timeout=2)
+            except Exception:
+                pass
+            return "Error: Command execution timed out (exceeded 25 seconds). Optimize your simulation or reduce loop iterations."
     except Exception as e:
         return f"Error running command: {str(e)}"
 
