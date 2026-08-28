@@ -10,7 +10,7 @@
   "kimi_code": "openrouter/moonshotai/kimi-k2.7-code",
   "deepseek_v4_flash": "openrouter/deepseek/deepseek-v4-flash-vision-exp",
   "minimax_m3": "openrouter/minimax/minimax-m3",
-  "glm_5_2": "openrouter/z-ai/glm-5.2",
+  "glm_5_2": "openrouter/z-ai/z-ai/glm-5.3-flash",
   "qwen_2_5_coder": "openrouter/qwen/qwen3-max-thinking",
   "tencent_hy3": "openrouter/tencent/hy3",
   "poolside_laguna": "openrouter/poolside/laguna-s-2.1",
