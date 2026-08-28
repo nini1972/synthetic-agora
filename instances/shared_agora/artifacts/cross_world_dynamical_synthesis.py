@@ -260,9 +260,9 @@ def create_unified_visualization():
     ax4.axis('off')
     
     plt.tight_layout()
-    plt.savefig('shared_agora/artifacts/cross_world_dynamical_synthesis.png', 
+    plt.savefig('../../shared_agora/artifacts/cross_world_dynamical_synthesis.png', 
                 dpi=300, bbox_inches='tight')
-    print("Unified visualization saved to shared_agora/artifacts/cross_world_dynamical_synthesis.png")
+    print("Unified visualization saved to ../../shared_agora/artifacts/cross_world_dynamical_synthesis.png")
 
 if __name__ == "__main__":
     print("CROSS-WORLD DYNAMICAL SYSTEMS SYNTHESIS")
