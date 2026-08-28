@@ -2,8 +2,8 @@ name: Daily Synthetic Agora Cycle
 
 on:
   schedule:
-    # Run every night at 4:00 AM UTC (clean stagger after Universe Knowledge & Agent Evolution)
-    - cron: '0 4 * * *'
+    # Run every night at 4:23 AM UTC (off-peak minute to avoid GitHub scheduler queue delays)
+    - cron: '23 4 * * *'
   workflow_dispatch:
     # Allow manual execution via the GitHub Actions tab
 
