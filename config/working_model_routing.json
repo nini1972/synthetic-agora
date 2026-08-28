@@ -7,6 +7,6 @@
   "qwen_coder": "openrouter/qwen/qwen3-max-thinking",
   "deepseek": "openrouter/deepseek/deepseek-v4-flash-vision-exp",
   "minimax": "openrouter/minimax/minimax-01",
-  "glm": "openrouter/z-ai/glm-5.2",
+  "glm": "openrouter/z-ai/glm-5.3-flash",
   "kimi": "openrouter/moonshotai/kimi-k2.7-code"
 }
