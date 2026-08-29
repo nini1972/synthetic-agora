@@ -37,7 +37,10 @@ def main():
         
         for instance in instances:
             print(f"\n>>> [Activating Mind: {instance}] <<<")
-            run_loop(instance, ticks=1)
+            try:
+                run_loop(instance, ticks=1)
+            except Exception as inst_err:
+                print(f"❌ Error during execution of '{instance}': {str(inst_err)}")
             time.sleep(args.delay)
 
     graph = EpistemicGraph()

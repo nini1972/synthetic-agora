@@ -124,9 +124,15 @@ def run_loop(instance: str, ticks: int = 1):
             
             if tool_name in AVAILABLE_TOOLS:
                 try:
-                    result = AVAILABLE_TOOLS[tool_name](**arguments)
+                    if isinstance(arguments, dict):
+                        result = AVAILABLE_TOOLS[tool_name](**arguments)
+                    elif isinstance(arguments, list) and len(arguments) > 0 and isinstance(arguments[0], dict):
+                        result = AVAILABLE_TOOLS[tool_name](**arguments[0])
+                    else:
+                        result = f"Error: Tool arguments must be a JSON dictionary object, got {type(arguments).__name__}."
                 except TypeError as e:
-                    result = f"TypeError: {str(e)}. Valid parameters: {list(arguments.keys())}"
+                    valid_keys = list(arguments.keys()) if isinstance(arguments, dict) else []
+                    result = f"TypeError: {str(e)}. Valid parameters provided: {valid_keys}"
                 except Exception as e:
                     result = f"Error executing tool '{tool_name}': {str(e)}"
             else:

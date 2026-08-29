@@ -166,6 +166,12 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
                 tool_call = message.tool_calls[0]
                 try:
                     arguments = json.loads(tool_call.function.arguments)
+                    if isinstance(arguments, list):
+                        merged_args = {}
+                        for item in arguments:
+                            if isinstance(item, dict):
+                                merged_args.update(item)
+                        arguments = merged_args if merged_args else (arguments[0] if (arguments and isinstance(arguments[0], dict)) else {})
                 except Exception as json_err:
                     return {
                         "type": "json_error",
