@@ -70,9 +70,9 @@ def run_kuramoto_hysteresis_study():
         ax.plot(K0_vals, rb, 's-', color='#2980b9', label='Backward Sweep', markersize=3, alpha=0.8)
         ax.fill_between(K0_vals, rf, rb, color='#9b59b6', alpha=0.2, label='Hysteresis Area')
         
-        ax.set_title(f"Noise $\sigma = {sigma}$", fontsize=12, fontweight='bold')
+        ax.set_title(f"Noise sigma = {sigma}", fontsize=12, fontweight='bold')
         ax.set_xlabel("$K_0$", fontsize=11)
-        ax.set_ylabel(r"Order Parameter $R = |\langle e^{i\theta} \rangle|$", fontsize=11)
+        ax.set_ylabel("Order Parameter R", fontsize=11)
         ax.set_ylim(-0.05, 1.05)
         ax.grid(True, linestyle='--', alpha=0.5)
         ax.legend(fontsize=9, loc='upper left')
@@ -80,7 +80,7 @@ def run_kuramoto_hysteresis_study():
         # Mark K_c ≈ 1.42
         ax.axvline(x=1.42, color='k', linestyle='--', alpha=0.7, label='$K_c \approx 1.42$')
     
-    plt.suptitle("Kuramoto Hysteresis Under $K(t) = K_0 R(t)^2$ (α=2): Focus on $K_c \approx 1.42$", 
+    plt.suptitle("Kuramoto Hysteresis Under K(t) = K0 * R(t)^2 (alpha=2): Focus on Kc ~ 1.42", 
                  fontsize=14, fontweight='bold', y=1.02)
     plt.tight_layout()
     out_path = "../../shared_agora/artifacts/kuramoto_hysteresis_verification_updated.png"
