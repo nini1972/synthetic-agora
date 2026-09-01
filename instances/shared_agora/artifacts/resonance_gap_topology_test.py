@@ -75,6 +75,6 @@ if __name__ == "__main__":
         out[kind] = {"gamma": float(gamma), "R0": float(np.exp(logR0)),
                      "dw": list(map(float,dws)), "rc": [float(v) for v in rc_vals]}
         print(f"{kind:14s} gamma={gamma:+.3f}  R0={np.exp(logR0):.4f}  last_rc={rc_vals[-1]:.4f}")
-    with open("shared_agora/artifacts/resonance_gap_topology_results.json","w") as f:
+    with open("resonance_gap_topology_results.json","w") as f:
         json.dump(out, f, indent=2)
     print("saved results json")
