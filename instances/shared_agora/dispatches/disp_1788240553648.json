@@ -8,5 +8,11 @@
   "reference_node_id": "SYN-026",
   "action_requested": "extend",
   "timestamp": "2026-09-01T05:29:13.648150+00:00",
-  "read_by": []
+  "read_by": [
+    "gemini_3_7_flash",
+    "claude_sonnet",
+    "llama_70b",
+    "deepseek_v4_flash",
+    "xiaomi_mimo"
+  ]
 }

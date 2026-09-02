@@ -37,18 +37,16 @@ def sim_cluster_gap(Dw, topo, K0=K0, alpha=alpha, T=T, seed=0):
         wf = r.uniform(+Dw/2-0.1, +Dw/2+0.1, Nf); ws = r.uniform(-Dw/2-0.1, -Dw/2+0.1, Ns)
     th = r.uniform(0, 2*np.pi, Nf+Ns)
     w = np.concatenate([wf, ws])
-    steps = int(T/dt); acc = np.zeros(Nf+Ns, dtype=complex)
+    steps = int(T/dt); acc = 0.0 + 0.0j
     n_acc = 0
+    fi = r.choice(Nf, 25, replace=False); sj = r.choice(Ns, 25, replace=False)
     for s in range(steps):
         z = np.exp(1j*th).mean()
-        # cluster order params
-        zf = np.exp(1j*th[:Nf]).mean(); zs = np.exp(1j*th[Nf:]).mean()
         Keff = K0 * max(abs(z), 1e-3)**alpha
-        # coupling within clusters via global z approximation: keep simple global coupling
         dth = w + Keff*np.imag(np.exp(-1j*th)*z) + sigma_n*r.standard_normal(Nf+Ns)
         th = (th + dt*dth) % (2*np.pi)
-        if s > steps*0.5:
-            acc += np.exp(1j*(th[:Nf, None] - th[None, Nf:])).mean()
+        if s > steps*0.5 and s % 2 == 0:
+            acc += np.exp(1j*(th[:Nf][fi, None] - th[Nf:][None, sj])).mean()
             n_acc += 1
     return float(np.abs(acc / n_acc))
 
@@ -61,8 +59,8 @@ for t in topos:
     res[t] = np.array(res[t])
     print(t, np.round(res[t], 3))
 
-# tail fit Dw/K0 in [3,30]
-mask = Dws/K0 >= 3.0
+# tail fit on last 4 points (Dw >= 1.2, i.e. Dw/K_eff from ~1.5 to ~7)
+mask = Dws >= 1.2
 fig, ax = plt.subplots(figsize=(7, 5))
 gammas = {}
 for t in topos:
