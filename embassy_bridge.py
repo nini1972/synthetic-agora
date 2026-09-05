@@ -13,14 +13,15 @@ clones it to a temp directory and never writes, commits, or pushes to it. All st
 required — the nightly workflow can commit/push using its own default GITHUB_TOKEN.
 
 Artifacts referenced by a dossier (plots, simulation scripts) are intentionally NOT
-copied across repos. Instead, any bare `shared_space/...` reference inside the
-dossier text is rewritten to an absolute `raw.githubusercontent.com` URL pinned to
+copied across repos. Instead, any backtick-wrapped `shared_space/...` reference inside
+the dossier text is rewritten to an absolute `raw.githubusercontent.com` URL pinned to
 the exact source commit, so the artifact remains inspectable without pulling
 unreviewed executable code from the counterpart world into this sandbox's
 run_command surface.
 """
 import os
 import re
+import sys
 import json
 import shutil
 import hashlib
@@ -70,7 +71,8 @@ def utc_now_iso() -> str:
 def sha256_of(path: str) -> str:
     h = hashlib.sha256()
     with open(path, "rb") as f:
-        h.update(f.read())
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
     return h.hexdigest()
 
 
@@ -78,16 +80,25 @@ def load_ledger() -> dict:
     if os.path.exists(LEDGER_PATH):
         try:
             with open(LEDGER_PATH, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            pass
+                data = json.load(f)
+            if not isinstance(data, dict) or not isinstance(data.get("imported", []), list):
+                raise ValueError("Ledger has an unexpected shape (expected an object with an 'imported' list).")
+            data.setdefault("imported", [])
+            data.setdefault("exported", [])
+            return data
+        except Exception as e:
+            print(f"[EmbassyBridge] WARNING: Failed to read ledger at {LEDGER_PATH} ({e}). "
+                  "Starting from an empty ledger -- this may cause previously imported "
+                  "dossiers to be re-processed.", file=sys.stderr)
     return {"imported": [], "exported": []}
 
 
 def save_ledger(ledger: dict) -> None:
     os.makedirs(EMBASSY_DIR, exist_ok=True)
-    with open(LEDGER_PATH, "w", encoding="utf-8") as f:
+    tmp_path = LEDGER_PATH + ".tmp"
+    with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(ledger, f, indent=2, ensure_ascii=False)
+    os.replace(tmp_path, LEDGER_PATH)
 
 
 def clone_counterpart(tmp_dir: str) -> str:
@@ -125,10 +136,11 @@ def is_valid_dossier(content: str) -> bool:
 
 
 def rewrite_artifact_references(content: str, commit_sha: str) -> str:
-    """Rewrites bare `shared_space/...` artifact shorthand references into absolute
-    raw.githubusercontent.com URLs pinned to the exact source commit, so referenced
-    plots/scripts remain inspectable without ever being physically copied into this
-    sandbox (see module docstring)."""
+    """Rewrites `shared_space/...` artifact shorthand references wrapped in backticks
+    (inline code spans) into absolute raw.githubusercontent.com URLs pinned to the exact
+    source commit, so referenced plots/scripts remain inspectable without ever being
+    physically copied into this sandbox (see module docstring). References not wrapped
+    in backticks are left untouched."""
     pattern = re.compile(r"`" + re.escape(ARTIFACT_SHORTHAND_PREFIX) + r"([^`]+)`")
 
     def _replace(match: "re.Match[str]") -> str:
@@ -159,25 +171,31 @@ def _archive_if_colliding(dest_path: str, new_content: str) -> None:
     print(f"[EmbassyBridge] Filename collision with different content -- archived previous version to superseded/{archive_name}")
 
 
-def sync() -> None:
+def sync() -> bool:
+    """Runs one sync pass. Returns True on success (including a legitimate no-op),
+    False on a hard failure (e.g. clone failure or missing counterpart outbox) so the
+    caller can signal failure to the calling workflow instead of silently exiting 0."""
     os.makedirs(INBOX_DIR, exist_ok=True)
     os.makedirs(REJECTED_DIR, exist_ok=True)
     ledger = load_ledger()
-    imported_hashes = {entry["sha256"] for entry in ledger.get("imported", [])}
+    imported_hashes = {
+        entry["sha256"] for entry in ledger.get("imported", [])
+        if isinstance(entry, dict) and "sha256" in entry
+    }
 
     with tempfile.TemporaryDirectory(prefix="embassy_sync_") as tmp_dir:
         try:
             counterpart_dir = clone_counterpart(tmp_dir)
         except subprocess.CalledProcessError as e:
-            print(f"[EmbassyBridge] ERROR: Failed to clone {COUNTERPART_REPO_URL}: {e.stderr}")
-            return
+            print(f"[EmbassyBridge] ERROR: Failed to clone {COUNTERPART_REPO_URL}: {e.stderr}", file=sys.stderr)
+            return False
 
         commit_sha = get_commit_sha(counterpart_dir)
         outbox_path = os.path.join(counterpart_dir, COUNTERPART_OUTBOX_REL)
 
         if not os.path.isdir(outbox_path):
-            print(f"[EmbassyBridge] Counterpart outbox not found at {COUNTERPART_OUTBOX_REL}. Nothing to sync.")
-            return
+            print(f"[EmbassyBridge] ERROR: Counterpart outbox not found at {COUNTERPART_OUTBOX_REL}.", file=sys.stderr)
+            return False
 
         candidates = sorted(
             f for f in os.listdir(outbox_path)
@@ -236,7 +254,8 @@ def sync() -> None:
             f"[EmbassyBridge] Sync complete. Imported: {imported_count}, "
             f"Skipped (already known): {skipped_count}, Rejected: {rejected_count}."
         )
+        return True
 
 
 if __name__ == "__main__":
-    sync()
+    sys.exit(0 if sync() else 1)
