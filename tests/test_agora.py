@@ -6,9 +6,10 @@ import shutil
 # Add parent directory to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from agora_graph import EpistemicGraph, detect_model_family
+from agora_graph import EpistemicGraph, detect_model_family, get_shared_agora_dir
 from protocols import send_dispatch, read_inbox, GUILDS
 from tools import post_epistemic_node, peer_verify_node, query_epistemic_graph, send_agent_dispatch, read_agent_inbox
+from embassy import export_treaty_to_embassy
 
 class TestSyntheticAgora(unittest.TestCase):
     def setUp(self):
@@ -74,6 +75,49 @@ class TestSyntheticAgora(unittest.TestCase):
         os.environ["ACTIVE_INSTANCE"] = "llama_4_scout"
         inbox = read_inbox("llama_4_scout", unread_only=True)
         self.assertTrue(any(d["subject"] == "Empirical Test Request for HYP-001" for d in inbox))
+
+    def test_export_treaty_to_embassy_requires_canon_verified(self):
+        node = self.graph.post_node(
+            title="Unripe Hypothesis",
+            node_type="hypothesis",
+            author_instance="gemini_3_1_flash_lite",
+            summary="Not yet verified.",
+        )
+        result = export_treaty_to_embassy(node["id"])
+        self.assertIn("Error", result)
+        self.assertIn("not CANON_VERIFIED", result)
+
+    def test_export_treaty_to_embassy_writes_file_once(self):
+        node = self.graph.post_node(
+            title="Embassy Export Test Invariant",
+            node_type="hypothesis",
+            author_instance="gemini_3_1_flash_lite",
+            summary="A test invariant for embassy export.",
+            confidence=0.85,
+        )
+        self.graph.peer_verify(
+            node_id=node["id"], verifier_instance="gemini_pro",
+            verdict="endorse", critique_notes="ok", confidence=0.9,
+        )
+        verified = self.graph.peer_verify(
+            node_id=node["id"], verifier_instance="claude_haiku",
+            verdict="endorse", critique_notes="ok", confidence=0.9,
+        )
+        self.assertEqual(verified["status"], "CANON_VERIFIED")
+
+        result = export_treaty_to_embassy(node["id"], "DOSSIER-evosandbox-2026-01-01-test.md")
+        self.assertIn("Successfully exported", result)
+
+        outbox_dir = os.path.join(get_shared_agora_dir(), "embassy", "outbox")
+        matches = [f for f in os.listdir(outbox_dir) if node["id"].lower() in f.lower()]
+        self.assertTrue(matches, "Expected a treaty file matching the node id in embassy/outbox/")
+
+        for f in matches:
+            os.remove(os.path.join(outbox_dir, f))
+
+        # Second export attempt must be a no-op, not a duplicate file.
+        second_result = export_treaty_to_embassy(node["id"])
+        self.assertIn("already exported", second_result)
 
 if __name__ == "__main__":
     unittest.main()

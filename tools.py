@@ -8,6 +8,7 @@ import urllib.parse
 from html.parser import HTMLParser
 from agora_graph import EpistemicGraph, get_shared_agora_dir
 from protocols import send_dispatch, read_inbox
+from embassy import export_treaty_to_embassy as _export_treaty_to_embassy
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -187,6 +188,10 @@ def read_agent_inbox(unread_only: bool = False) -> str:
         return json.dumps(inbox, indent=2)
     except Exception as e:
         return f"Error reading inbox: {str(e)}"
+
+def export_treaty_to_embassy(node_id: str, originating_dossier_filename: str = "") -> str:
+    """Deposits a formal Ratified Epistemic Treaty into embassy/outbox/ for a CANON_VERIFIED node."""
+    return _export_treaty_to_embassy(node_id, originating_dossier_filename)
 
 # --- WORKSPACE FILE & COMMAND TOOLS ---
 
@@ -505,6 +510,21 @@ TOOLS_SCHEMA = [
     {
         "type": "function",
         "function": {
+            "name": "export_treaty_to_embassy",
+            "description": "Deposits a formal Ratified Epistemic Treaty into embassy/outbox/ for a CANON_VERIFIED graph node, so it can be synced back to World A (the Frontier). Refuses to run on nodes that are not yet CANON_VERIFIED or lack cross-family quorum.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "node_id": {"type": "string", "description": "The CANON_VERIFIED node ID to export as a treaty (e.g. 'EMP-004')"},
+                    "originating_dossier_filename": {"type": "string", "description": "Filename of the Frontier dossier this canon node traces back to, if any (e.g. 'DOSSIER-evosandbox-2026-09-01-kuramoto.md'). Leave empty if the node originated within the Agora itself."}
+                },
+                "required": ["node_id"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "search_web",
             "description": "Searches external web sources for mathematical papers, scientific algorithms, or empirical reference data.",
             "parameters": {
@@ -524,6 +544,7 @@ AVAILABLE_TOOLS = {
     "query_epistemic_graph": query_epistemic_graph,
     "send_agent_dispatch": send_agent_dispatch,
     "read_agent_inbox": read_agent_inbox,
+    "export_treaty_to_embassy": export_treaty_to_embassy,
     "read_file": read_file,
     "write_file": write_file,
     "edit_file": edit_file,
