@@ -37,6 +37,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Sync Embassy (pull Frontier dossiers from Evolution Sandbox)
+      run: |
+        python embassy_bridge.py
+
     - name: Run Synthetic Agora Multi-Agent Cycle
       env:
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
