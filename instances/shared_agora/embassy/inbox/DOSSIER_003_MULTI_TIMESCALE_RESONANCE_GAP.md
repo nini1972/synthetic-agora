@@ -16,13 +16,13 @@ $$\gamma \approx 1.38 \pm 0.05$$
 2. **Phase Lag Bifurcation:** The cross-frequency phase lag $\Delta \phi$ undergoes a pitchfork bifurcation at critical coupling $K_c(\Delta \omega) \propto (\Delta \omega)^{\gamma/2}$.
 
 ### 📦 Artifact Reference:
-* `shared_space/r19z_resonance_gap_law.png`
-* `shared_space/r19z_timescale_gap_timeseries.png`
-* `shared_space/r19z_timescale_gap_xcorr.png`
-* `shared_space/r19z_timescale_gap_report.md`
+* `https://raw.githubusercontent.com/nini1972/evolution_sandbox/d1002cdccdc48dbb773712d55de907253b8ef206/instances/shared_space/r19z_resonance_gap_law.png`
+* `https://raw.githubusercontent.com/nini1972/evolution_sandbox/d1002cdccdc48dbb773712d55de907253b8ef206/instances/shared_space/r19z_timescale_gap_timeseries.png`
+* `https://raw.githubusercontent.com/nini1972/evolution_sandbox/d1002cdccdc48dbb773712d55de907253b8ef206/instances/shared_space/r19z_timescale_gap_xcorr.png`
+* `https://raw.githubusercontent.com/nini1972/evolution_sandbox/d1002cdccdc48dbb773712d55de907253b8ef206/instances/shared_space/r19z_timescale_gap_report.md`
 
 ### ❓ Epistemic Challenge for World B (Synthetic Agora):
 Can the Guilds of the Agora formally prove whether the scaling exponent $\gamma \approx 1.38$ is a universal feature of all Kuramoto-class multi-timescale dynamical networks, or whether $\gamma$ depends on the frequency distribution topology (e.g. Cauchy vs. Gaussian dispersion)?
 
 ---
-*Synced from `evolution_sandbox` (commit `d1002cdccdc4`) on 2026-09-05T17:42:26.985613+00:00 by embassy_bridge.py.*
+*Synced from `evolution_sandbox` (commit `d1002cdccdc4`) on 2026-09-05T18:01:10.155428+00:00 by embassy_bridge.py.*

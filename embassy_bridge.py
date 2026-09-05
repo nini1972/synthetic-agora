@@ -13,9 +13,11 @@ clones it to a temp directory and never writes, commits, or pushes to it. All st
 required — the nightly workflow can commit/push using its own default GITHUB_TOKEN.
 
 Artifacts referenced by a dossier (plots, simulation scripts) are intentionally NOT
-copied across repos; they remain reachable only via their raw.githubusercontent.com
-URLs so that unreviewed executable code from the counterpart world never enters this
-sandbox's run_command surface.
+copied across repos. Instead, any bare `shared_space/...` reference inside the
+dossier text is rewritten to an absolute `raw.githubusercontent.com` URL pinned to
+the exact source commit, so the artifact remains inspectable without pulling
+unreviewed executable code from the counterpart world into this sandbox's
+run_command surface.
 """
 import os
 import re
@@ -27,16 +29,21 @@ from datetime import datetime, timezone
 
 from agora_graph import get_shared_agora_dir
 
-REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 EMBASSY_DIR = os.path.join(get_shared_agora_dir(), "embassy")
 INBOX_DIR = os.path.join(EMBASSY_DIR, "inbox")
 REJECTED_DIR = os.path.join(EMBASSY_DIR, "rejected")
 LEDGER_PATH = os.path.join(EMBASSY_DIR, ".sync_ledger.json")
 
 # The counterpart world ("World A") that Frontier dossiers are pulled from.
+COUNTERPART_OWNER = "nini1972"
 COUNTERPART_NAME = "evolution_sandbox"
-COUNTERPART_REPO_URL = "https://github.com/nini1972/evolution_sandbox.git"
+COUNTERPART_REPO_URL = f"https://github.com/{COUNTERPART_OWNER}/{COUNTERPART_NAME}.git"
 COUNTERPART_OUTBOX_REL = os.path.join("instances", "shared_space", "embassy", "outbox")
+
+# Bare shorthand references like `shared_space/foo.png` inside dossier text are
+# rewritten to the real repo-relative path before being turned into a raw URL.
+ARTIFACT_SHORTHAND_PREFIX = "shared_space/"
+ARTIFACT_REAL_PREFIX = "instances/shared_space/"
 
 # Only files that look like real dossiers are imported; templates/READMEs are ignored.
 TEMPLATE_FILENAME_RE = re.compile(r"template", re.IGNORECASE)
@@ -70,10 +77,15 @@ def save_ledger(ledger: dict) -> None:
 
 
 def clone_counterpart(tmp_dir: str) -> str:
-    """Shallow, read-only clone of the counterpart world. Returns its local path."""
+    """Shallow, read-only clone of the counterpart world. Returns its local path.
+
+    Explicitly forces TLS certificate verification for this invocation regardless of
+    any global git config (e.g. the workflow's `http.sslVerify false` override used
+    for other steps), so this sync never fetches external content over unverified TLS.
+    """
     dest = os.path.join(tmp_dir, COUNTERPART_NAME)
     subprocess.run(
-        ["git", "clone", "--depth", "1", COUNTERPART_REPO_URL, dest],
+        ["git", "-c", "http.sslVerify=true", "clone", "--depth", "1", COUNTERPART_REPO_URL, dest],
         check=True, capture_output=True, text=True,
     )
     return dest
@@ -96,6 +108,22 @@ def is_valid_dossier(content: str) -> bool:
     if "empirical phenomenon" not in lowered:
         return False
     return True
+
+
+def rewrite_artifact_references(content: str, commit_sha: str) -> str:
+    """Rewrites bare `shared_space/...` artifact shorthand references into absolute
+    raw.githubusercontent.com URLs pinned to the exact source commit, so referenced
+    plots/scripts remain inspectable without ever being physically copied into this
+    sandbox (see module docstring)."""
+    pattern = re.compile(r"`" + re.escape(ARTIFACT_SHORTHAND_PREFIX) + r"([^`]+)`")
+
+    def _replace(match: "re.Match[str]") -> str:
+        rel_path = match.group(1)
+        real_path = f"{ARTIFACT_REAL_PREFIX}{rel_path}"
+        url = f"https://raw.githubusercontent.com/{COUNTERPART_OWNER}/{COUNTERPART_NAME}/{commit_sha}/{real_path}"
+        return f"`{url}`"
+
+    return pattern.sub(_replace, content)
 
 
 def sync() -> None:
@@ -151,8 +179,9 @@ def sync() -> None:
                 f"\n\n---\n*Synced from `{COUNTERPART_NAME}` "
                 f"(commit `{commit_sha[:12]}`) on {utc_now_iso()} by embassy_bridge.py.*\n"
             )
+            rewritten_content = rewrite_artifact_references(content, commit_sha)
             with open(os.path.join(INBOX_DIR, filename), "w", encoding="utf-8") as f:
-                f.write(content.rstrip("\n") + origin_footer)
+                f.write(rewritten_content.rstrip("\n") + origin_footer)
 
             ledger.setdefault("imported", []).append({
                 "source_repo": COUNTERPART_NAME,

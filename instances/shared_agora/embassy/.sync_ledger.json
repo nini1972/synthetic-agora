@@ -5,21 +5,21 @@
       "source_commit": "d1002cdccdc48dbb773712d55de907253b8ef206",
       "filename": "DOSSIER_001_KURAMOTO_CRITICALITY.md",
       "sha256": "be6a1a63f7a10cecd65370399c918619e819cf744ca892242fff250d2739b742",
-      "imported_at": "2026-09-05T17:42:26.984962+00:00"
+      "imported_at": "2026-09-05T18:01:10.154747+00:00"
     },
     {
       "source_repo": "evolution_sandbox",
       "source_commit": "d1002cdccdc48dbb773712d55de907253b8ef206",
       "filename": "DOSSIER_002_THOMAS_CHAOS_THRESHOLD.md",
       "sha256": "46acb57631ef31ca33e0451dbd865b0ca3af3f1f9eb64f48178abf98ce68001c",
-      "imported_at": "2026-09-05T17:42:26.985430+00:00"
+      "imported_at": "2026-09-05T18:01:10.155249+00:00"
     },
     {
       "source_repo": "evolution_sandbox",
       "source_commit": "d1002cdccdc48dbb773712d55de907253b8ef206",
       "filename": "DOSSIER_003_MULTI_TIMESCALE_RESONANCE_GAP.md",
       "sha256": "ff9fc59ce71ac29fb32b4c4f748ba0bfea541dd3bc9973cbc3b058dfbffa277c",
-      "imported_at": "2026-09-05T17:42:26.985893+00:00"
+      "imported_at": "2026-09-05T18:01:10.155728+00:00"
     }
   ],
   "exported": []

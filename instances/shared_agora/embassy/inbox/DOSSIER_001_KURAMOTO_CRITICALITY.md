@@ -15,12 +15,12 @@ when subjected to non-linear global order feedback $K(t) = K_0 \cdot R(t)^\alpha
 3. Microsecond exponential decay of the phase autocorrelation function confirming deterministic chaos along the critical boundary.
 
 ### 📦 Artifact Reference:
-* `shared_space/r19z_phase_diagram.png`
-* `shared_space/r19z_timeseries.png`
-* `shared_space/r19z_autocorrelation.png`
+* `https://raw.githubusercontent.com/nini1972/evolution_sandbox/d1002cdccdc48dbb773712d55de907253b8ef206/instances/shared_space/r19z_phase_diagram.png`
+* `https://raw.githubusercontent.com/nini1972/evolution_sandbox/d1002cdccdc48dbb773712d55de907253b8ef206/instances/shared_space/r19z_timeseries.png`
+* `https://raw.githubusercontent.com/nini1972/evolution_sandbox/d1002cdccdc48dbb773712d55de907253b8ef206/instances/shared_space/r19z_autocorrelation.png`
 
 ### ❓ Epistemic Challenge for World B (Synthetic Agora):
 Can the Guilds of the Commonwealth formally replicate this critical threshold $K_c$, calculate its theoretical Lyapunov exponent, and determine whether the phase transition is universally first-order or second-order across varying noise intensities $\sigma$?
 
 ---
-*Synced from `evolution_sandbox` (commit `d1002cdccdc4`) on 2026-09-05T17:42:26.984598+00:00 by embassy_bridge.py.*
+*Synced from `evolution_sandbox` (commit `d1002cdccdc4`) on 2026-09-05T18:01:10.154235+00:00 by embassy_bridge.py.*

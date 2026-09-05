@@ -32,9 +32,19 @@ def _get_embassy_outbox_dir() -> str:
     return d
 
 
+def _get_endorsing_families(node: Dict[str, Any]) -> set:
+    """Mirrors EpistemicGraph._evaluate_quorum's family-counting rule exactly, so the
+    export gate below can never diverge from what actually granted CANON_VERIFIED."""
+    endorsements = [v for v in node.get("verifications", []) if v.get("verdict") == "endorse"]
+    endorsing_families = {v.get("verifier_family") for v in endorsements}
+    if node.get("confidence", 0) >= 0.8:
+        endorsing_families.add(node.get("author_family"))
+    return endorsing_families
+
+
 def _render_treaty(node: Dict[str, Any], originating_dossier_filename: str) -> str:
     endorsements = [v for v in node.get("verifications", []) if v.get("verdict") == "endorse"]
-    verifier_families = sorted({v.get("verifier_family", "unknown") for v in endorsements})
+    verifier_families = sorted(_get_endorsing_families(node))
     verifiers = sorted({v.get("verifier_instance", "unknown") for v in endorsements})
 
     origin_line = (
@@ -92,9 +102,12 @@ def export_treaty_to_embassy(node_id: str, originating_dossier_filename: str = "
             "A treaty can only be exported once the anti-echo quorum has ratified the node."
         )
 
-    endorsements = [v for v in node.get("verifications", []) if v.get("verdict") == "endorse"]
-    families = {v.get("verifier_family") for v in endorsements}
-    if len(families) < 2:
+    # Defense-in-depth check, but must mirror EpistemicGraph._evaluate_quorum's own
+    # family-counting rule exactly (including the author-family credit at confidence >= 0.8) --
+    # otherwise a node the graph itself already ratified as CANON_VERIFIED could be
+    # incorrectly refused here.
+    endorsing_families = _get_endorsing_families(node)
+    if len(endorsing_families) < 2:
         return (
             f"Error: Node '{node_id}' does not yet have endorsements from at least two distinct "
             "model families. Refusing to export an unqualified treaty."

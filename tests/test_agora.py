@@ -119,5 +119,36 @@ class TestSyntheticAgora(unittest.TestCase):
         second_result = export_treaty_to_embassy(node["id"])
         self.assertIn("already exported", second_result)
 
+    def test_export_treaty_to_embassy_credits_author_family_like_quorum_does(self):
+        # Regression test: EpistemicGraph._evaluate_quorum credits the author's own
+        # family toward the >=2 distinct family requirement when confidence >= 0.8.
+        # Two endorsements from the SAME family (different from the author's) should
+        # therefore still be enough to reach CANON_VERIFIED, and export must agree.
+        node = self.graph.post_node(
+            title="Author-Credited Quorum Invariant",
+            node_type="hypothesis",
+            author_instance="gemini_3_1_flash_lite",  # google
+            summary="Tests the author-family quorum credit edge case.",
+            confidence=0.85,
+        )
+        self.graph.peer_verify(
+            node_id=node["id"], verifier_instance="claude_haiku",  # anthropic
+            verdict="endorse", critique_notes="ok", confidence=0.9,
+        )
+        verified = self.graph.peer_verify(
+            node_id=node["id"], verifier_instance="claude_sonnet",  # anthropic (same family as above)
+            verdict="endorse", critique_notes="ok", confidence=0.9,
+        )
+        self.assertEqual(verified["status"], "CANON_VERIFIED")
+
+        result = export_treaty_to_embassy(node["id"])
+        self.assertIn("Successfully exported", result, "Export must not refuse a node the graph itself ratified")
+
+        outbox_dir = os.path.join(get_shared_agora_dir(), "embassy", "outbox")
+        matches = [f for f in os.listdir(outbox_dir) if node["id"].lower() in f.lower()]
+        self.assertTrue(matches)
+        for f in matches:
+            os.remove(os.path.join(outbox_dir, f))
+
 if __name__ == "__main__":
     unittest.main()
