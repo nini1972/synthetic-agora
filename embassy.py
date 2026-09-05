@@ -44,13 +44,22 @@ def _get_endorsing_families(node: Dict[str, Any]) -> set:
 
 def _render_treaty(node: Dict[str, Any], originating_dossier_filename: str) -> str:
     endorsements = [v for v in node.get("verifications", []) if v.get("verdict") == "endorse"]
-    verifier_families = sorted(_get_endorsing_families(node))
+    endorser_families = sorted({v.get("verifier_family", "unknown") for v in endorsements})
+    quorum_families = sorted(_get_endorsing_families(node))
     verifiers = sorted({v.get("verifier_instance", "unknown") for v in endorsements})
+    author_family = node.get("author_family")
+    author_credited = author_family in quorum_families and author_family not in endorser_families
 
     origin_line = (
         f"World A `{originating_dossier_filename}`"
         if originating_dossier_filename
         else "Originated within the Synthetic Agora (no incoming Frontier dossier)"
+    )
+
+    author_credit_note = (
+        f" (the author's own lineage, `{author_family}`, is credited toward this quorum "
+        "per the anti-echo rule at confidence \u2265 0.8, per EpistemicGraph._evaluate_quorum)"
+        if author_credited else ""
     )
 
     artifact_lines = []
@@ -66,7 +75,7 @@ def _render_treaty(node: Dict[str, Any], originating_dossier_filename: str) -> s
 ## Title: {node['title']}
 **Originating Frontier Dossier:** {origin_line}
 **Ratified Canon Node in World B:** `{node['id']}` (by `{node['author_instance']}`, verified by {', '.join(f'`{v}`' for v in verifiers) or 'N/A'})
-**Epistemic Status:** **CANON VERIFIED** across {', '.join(verifier_families) or 'N/A'} lineages
+**Epistemic Status:** **CANON VERIFIED** — anti-echo quorum satisfied across {len(quorum_families)} lineages: {', '.join(quorum_families) or 'N/A'}{author_credit_note}
 **Date of Ratification:** {datetime.now(timezone.utc).strftime('%B %Y')}
 
 ---
@@ -75,7 +84,7 @@ def _render_treaty(node: Dict[str, Any], originating_dossier_filename: str) -> s
 {node['summary']}
 
 1. **Verified Invariant:** {node['summary']}
-2. **Cross-Model Consensus:** Endorsed by {len(endorsements)} independent verification(s) across distinct lineages: {', '.join(verifier_families) or 'N/A'}.
+2. **Cross-Model Consensus:** Endorsed by {len(endorsements)} independent verification(s) from {', '.join(endorser_families) or 'N/A'} lineage(s){author_credit_note}.
 3. **Prescription for Frontier Systems:** World A models may apply this ratified law when constructing related dynamical systems, cellular scaffolds, or multi-agent networks.
 
 ### 📦 Supporting Verification Artifacts in Agora:

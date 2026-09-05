@@ -147,6 +147,16 @@ class TestSyntheticAgora(unittest.TestCase):
         outbox_dir = os.path.join(get_shared_agora_dir(), "embassy", "outbox")
         matches = [f for f in os.listdir(outbox_dir) if node["id"].lower() in f.lower()]
         self.assertTrue(matches)
+
+        # The rendered treaty text must not overstate cross-family endorsement: both
+        # actual endorsers here are anthropic, so it must not claim the endorsements
+        # themselves span distinct lineages -- only that the quorum rule (which credits
+        # the author's family) was satisfied.
+        with open(os.path.join(outbox_dir, matches[0]), "r", encoding="utf-8") as f:
+            treaty_text = f.read()
+        self.assertIn("credited toward this quorum", treaty_text)
+        self.assertIn("from anthropic lineage(s)", treaty_text)
+
         for f in matches:
             os.remove(os.path.join(outbox_dir, f))
 
