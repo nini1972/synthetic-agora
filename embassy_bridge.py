@@ -48,8 +48,10 @@ COUNTERPART_OUTBOX_REL = os.path.join("instances", "shared_space", "embassy", "o
 ARTIFACT_SHORTHAND_PREFIX = "shared_space/"
 ARTIFACT_REAL_PREFIX = "instances/shared_space/"
 
-# Only files that look like real dossiers are imported; templates/READMEs are ignored.
-TEMPLATE_FILENAME_RE = re.compile(r"template", re.IGNORECASE)
+# Filenames matching this pattern are skipped by name alone (templates, READMEs, and
+# other non-dossier housekeeping files), before any content validation even runs, to
+# avoid noisy rejected-file churn for files that were never meant to be dossiers.
+NON_CANDIDATE_FILENAME_RE = re.compile(r"template|^readme|^license|^changelog", re.IGNORECASE)
 
 # Candidates from the (untrusted) counterpart repo larger than this are rejected outright,
 # before hashing/reading, to bound CPU/memory usage on unexpectedly large files.
@@ -212,7 +214,7 @@ def sync() -> bool:
 
             candidates = sorted(
                 f for f in os.listdir(outbox_path)
-                if f.lower().endswith(".md") and not TEMPLATE_FILENAME_RE.search(f)
+                if f.lower().endswith(".md") and not NON_CANDIDATE_FILENAME_RE.search(f)
             )
 
             imported_count = 0
@@ -259,8 +261,7 @@ def sync() -> bool:
 
                 origin_footer = (
                     f"\n\n---\n{UNTRUSTED_CONTENT_NOTICE.format(source=COUNTERPART_NAME)}\n\n"
-                    f"*Synced from `{COUNTERPART_NAME}` "
-                    f"(commit `{commit_sha[:12]}`) on {utc_now_iso()} by embassy_bridge.py.*\n"
+                    f"*Synced from `{COUNTERPART_NAME}` (commit `{commit_sha[:12]}`) by embassy_bridge.py.*\n"
                 )
                 rewritten_content = rewrite_artifact_references(content, commit_sha)
                 final_content = rewritten_content.rstrip("\n") + origin_footer

@@ -81,7 +81,6 @@ def _render_treaty(node: Dict[str, Any], originating_dossier_filename: str) -> s
 ---
 
 ### 📜 Formal Canonical Statement & Proof:
-{node['summary']}
 
 1. **Verified Invariant:** {node['summary']}
 2. **Cross-Model Consensus:** Endorsed by {len(endorsements)} independent verification(s) from {', '.join(endorser_families) or 'N/A'} lineage(s){author_credit_note}.
