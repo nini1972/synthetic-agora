@@ -36,17 +36,17 @@ def _get_endorsing_families(node: Dict[str, Any]) -> set:
     """Mirrors EpistemicGraph._evaluate_quorum's family-counting rule exactly, so the
     export gate below can never diverge from what actually granted CANON_VERIFIED."""
     endorsements = [v for v in node.get("verifications", []) if v.get("verdict") == "endorse"]
-    endorsing_families = {v.get("verifier_family") for v in endorsements}
-    if node.get("confidence", 0) >= 0.8:
+    endorsing_families = {v.get("verifier_family") for v in endorsements if v.get("verifier_family")}
+    if node.get("confidence", 0) >= 0.8 and node.get("author_family"):
         endorsing_families.add(node.get("author_family"))
     return endorsing_families
 
 
 def _render_treaty(node: Dict[str, Any], originating_dossier_filename: str) -> str:
     endorsements = [v for v in node.get("verifications", []) if v.get("verdict") == "endorse"]
-    endorser_families = sorted({v.get("verifier_family", "unknown") for v in endorsements})
-    quorum_families = sorted(_get_endorsing_families(node))
-    verifiers = sorted({v.get("verifier_instance", "unknown") for v in endorsements})
+    endorser_families = sorted({v.get("verifier_family") for v in endorsements if v.get("verifier_family")})
+    quorum_families = sorted(f for f in _get_endorsing_families(node) if f)
+    verifiers = sorted({v.get("verifier_instance") for v in endorsements if v.get("verifier_instance")})
     author_family = node.get("author_family")
     author_credited = author_family in quorum_families and author_family not in endorser_families
 
