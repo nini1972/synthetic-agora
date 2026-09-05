@@ -123,10 +123,17 @@ def export_treaty_to_embassy(node_id: str, originating_dossier_filename: str = "
         )
 
     if node.get("exported_to_embassy"):
-        return (
-            f"Notice: Node '{node_id}' was already exported to the Embassy as "
-            f"'{node.get('treaty_file')}' on {node.get('exported_at')}. Skipping duplicate export."
-        )
+        treaty_file = node.get("treaty_file")
+        treaty_path = os.path.join(_get_embassy_outbox_dir(), treaty_file) if treaty_file else None
+        if treaty_path and os.path.isfile(treaty_path):
+            return (
+                f"Notice: Node '{node_id}' was already exported to the Embassy as "
+                f"'{treaty_file}' on {node.get('exported_at')}. Skipping duplicate export."
+            )
+        # The flag says exported, but the file is missing (accidental deletion, cleanup,
+        # etc.) -- self-heal by re-exporting instead of permanently trusting a stale flag.
+        print(f"[Embassy] WARNING: Node '{node_id}' was marked exported but its treaty file "
+              f"('{treaty_file}') is missing from embassy/outbox/. Re-exporting to repair.")
 
     date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     filename = f"TREATY-agora-{date_str}-{node_id.lower()}-{_slugify(node['title'])}.md"

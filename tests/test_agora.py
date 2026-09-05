@@ -111,13 +111,55 @@ class TestSyntheticAgora(unittest.TestCase):
         outbox_dir = os.path.join(get_shared_agora_dir(), "embassy", "outbox")
         matches = [f for f in os.listdir(outbox_dir) if node["id"].lower() in f.lower()]
         self.assertTrue(matches, "Expected a treaty file matching the node id in embassy/outbox/")
+        self.assertEqual(len(matches), 1, "Expected exactly one treaty file for this node")
 
+        # Second export attempt, WITH the file still present, must be a true idempotent
+        # no-op -- it must not create a duplicate or second file.
+        second_result = export_treaty_to_embassy(node["id"])
+        self.assertIn("already exported", second_result)
+        matches_after = [f for f in os.listdir(outbox_dir) if node["id"].lower() in f.lower()]
+        self.assertEqual(matches_after, matches, "Re-export with file present must not alter or duplicate it")
+
+        for f in matches_after:
+            os.remove(os.path.join(outbox_dir, f))
+
+    def test_export_treaty_to_embassy_self_heals_when_file_missing(self):
+        # If the exported_to_embassy flag is set but the treaty file was deleted
+        # (accidental removal, cleanup, etc.), export must self-heal by re-creating
+        # the file rather than permanently trusting the stale flag.
+        node = self.graph.post_node(
+            title="Self-Healing Export Invariant",
+            node_type="hypothesis",
+            author_instance="gemini_3_1_flash_lite",
+            summary="Tests self-healing when the treaty file goes missing.",
+            confidence=0.85,
+        )
+        self.graph.peer_verify(
+            node_id=node["id"], verifier_instance="gemini_pro",
+            verdict="endorse", critique_notes="ok", confidence=0.9,
+        )
+        self.graph.peer_verify(
+            node_id=node["id"], verifier_instance="claude_haiku",
+            verdict="endorse", critique_notes="ok", confidence=0.9,
+        )
+
+        first_result = export_treaty_to_embassy(node["id"])
+        self.assertIn("Successfully exported", first_result)
+
+        outbox_dir = os.path.join(get_shared_agora_dir(), "embassy", "outbox")
+        matches = [f for f in os.listdir(outbox_dir) if node["id"].lower() in f.lower()]
+        self.assertTrue(matches)
         for f in matches:
             os.remove(os.path.join(outbox_dir, f))
 
-        # Second export attempt must be a no-op, not a duplicate file.
+        # File is now missing even though the node still says exported_to_embassy=True.
         second_result = export_treaty_to_embassy(node["id"])
-        self.assertIn("already exported", second_result)
+        self.assertIn("Successfully exported", second_result, "Must self-heal and recreate the missing file")
+
+        matches_after = [f for f in os.listdir(outbox_dir) if node["id"].lower() in f.lower()]
+        self.assertTrue(matches_after)
+        for f in matches_after:
+            os.remove(os.path.join(outbox_dir, f))
 
     def test_export_treaty_to_embassy_credits_author_family_like_quorum_does(self):
         # Regression test: EpistemicGraph._evaluate_quorum credits the author's own

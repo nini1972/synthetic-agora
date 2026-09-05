@@ -191,7 +191,10 @@ def read_agent_inbox(unread_only: bool = False) -> str:
 
 def export_treaty_to_embassy(node_id: str, originating_dossier_filename: str = "") -> str:
     """Deposits a formal Ratified Epistemic Treaty into embassy/outbox/ for a CANON_VERIFIED node."""
-    return _export_treaty_to_embassy(node_id, originating_dossier_filename)
+    try:
+        return _export_treaty_to_embassy(node_id, originating_dossier_filename)
+    except Exception as e:
+        return f"Error exporting treaty to embassy: {str(e)}"
 
 # --- WORKSPACE FILE & COMMAND TOOLS ---
 
