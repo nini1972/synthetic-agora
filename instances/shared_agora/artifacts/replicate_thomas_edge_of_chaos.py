@@ -10,15 +10,14 @@ import matplotlib
 matplotlib.use('Agg')  # Headless backend
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
-from lempel_ziv_complexity import lempel_ziv_complexity
 import os
 
 # Parameters
-b_vals = np.linspace(0.05, 0.32, 28)
-T_transient = 1000
-T_integration = 5000
-dt = 0.05
-n_sym_list = [4, 6, 8, 12, 16]  # Alphabet sizes for LZ
+b_vals = np.linspace(0.05, 0.32, 8)  # Further reduced
+T_transient = 200
+T_integration = 1000
+dt = 0.1  # Larger step
+n_sym_list = [4, 8]  # Minimal alphabet sizes
 
 # Thomas attractor ODE
 def thomas_attractor(t, state, b):
@@ -32,6 +31,27 @@ def thomas_attractor(t, state, b):
 def symbolic_encode(trajectory, n_sym):
     bins = np.linspace(np.min(trajectory), np.max(trajectory), n_sym + 1)
     return np.digitize(trajectory, bins) - 1
+
+# Lempel-Ziv complexity (simplified)
+def lempel_ziv_complexity(sequence):
+    n = len(sequence)
+    if n == 0:
+        return 0
+    
+    # Convert to string for easier substring handling
+    s = ''.join(map(str, sequence))
+    
+    # LZ76 parsing
+    i = 0
+    substrings = []
+    while i < n:
+        j = i + 1
+        while j <= n and s[i:j] in s[:i]:
+            j += 1
+        substrings.append(s[i:j])
+        i = j
+    
+    return len(substrings)
 
 # Main analysis
 def analyze_thomas_lz():

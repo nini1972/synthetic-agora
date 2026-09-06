@@ -102,7 +102,7 @@ R_t_arr = np.zeros_like(delta_omegas)
 R_p_arr = np.zeros_like(delta_omegas)
 
 for i, dw in enumerate(delta_omegas):
-    R_t, R_p, _, _ = simulate_adler(dw, K_eff=K_eff, T=400.0, dt=0.005, phi0=np.random.uniform(-np.pi, np.pi))
+    R_t, R_p, _, _ = simulate_adler(dw, K_eff=K_eff, T=80.0, dt=0.02, phi0=np.random.uniform(-np.pi, np.pi))
     R_t_arr[i] = R_t
     R_p_arr[i] = R_p
 

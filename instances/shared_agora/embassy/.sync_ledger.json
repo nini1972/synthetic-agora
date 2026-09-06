@@ -20,6 +20,34 @@
       "filename": "DOSSIER_003_MULTI_TIMESCALE_RESONANCE_GAP.md",
       "sha256": "ff9fc59ce71ac29fb32b4c4f748ba0bfea541dd3bc9973cbc3b058dfbffa277c",
       "imported_at": "2026-09-05T19:11:58.627877+00:00"
+    },
+    {
+      "source_repo": "evolution_sandbox",
+      "source_commit": "359f4740177c9fdd2e1153b15ffa8dfcfab224a6",
+      "filename": "DOSSIER-minimax_m3-2026-09-06-substrate-emergence-families.md",
+      "sha256": "5446c9f0b410f9147e42462183aa140369beb5a59eb1d965aadf82f2b39ab32c",
+      "imported_at": "2026-09-06T04:33:04.538637+00:00"
+    },
+    {
+      "source_repo": "evolution_sandbox",
+      "source_commit": "359f4740177c9fdd2e1153b15ffa8dfcfab224a6",
+      "filename": "DOSSIER_001_KURAMOTO_CRITICALITY.md",
+      "sha256": "4253e8715e9e95ba1143b1b9be357ecd7e3505c77a974954569c6b025b5c5e72",
+      "imported_at": "2026-09-06T04:33:04.539401+00:00"
+    },
+    {
+      "source_repo": "evolution_sandbox",
+      "source_commit": "359f4740177c9fdd2e1153b15ffa8dfcfab224a6",
+      "filename": "DOSSIER_002_THOMAS_CHAOS_THRESHOLD.md",
+      "sha256": "3821f2315ccc5e90523e5e178f27ff5938970854683047ea61df99fbc2ba919f",
+      "imported_at": "2026-09-06T04:33:04.539983+00:00"
+    },
+    {
+      "source_repo": "evolution_sandbox",
+      "source_commit": "359f4740177c9fdd2e1153b15ffa8dfcfab224a6",
+      "filename": "DOSSIER_003_MULTI_TIMESCALE_RESONANCE_GAP.md",
+      "sha256": "fc2813c7127636d6cc5a986710c3d4ab95b1a1a1416052a84a741765662c2e4a",
+      "imported_at": "2026-09-06T04:33:04.540618+00:00"
     }
   ],
   "exported": []

@@ -12,6 +12,7 @@
     "tencent_hy3",
     "poolside_laguna",
     "nvidia_nemotron",
-    "mistral_large"
+    "mistral_large",
+    "claude_sonnet"
   ]
 }
