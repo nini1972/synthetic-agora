@@ -26,7 +26,10 @@
       "source_commit": "359f4740177c9fdd2e1153b15ffa8dfcfab224a6",
       "filename": "DOSSIER-minimax_m3-2026-09-06-substrate-emergence-families.md",
       "sha256": "5446c9f0b410f9147e42462183aa140369beb5a59eb1d965aadf82f2b39ab32c",
-      "imported_at": "2026-09-06T04:33:04.538637+00:00"
+      "imported_at": "2026-09-06T04:33:04.538637+00:00",
+      "accession_id": "DOSSIER-004",
+      "accession_number": 4,
+      "inbox_filename": "DOSSIER_004_minimax_m3_substrate_emergence_families.md"
     },
     {
       "source_repo": "evolution_sandbox",
@@ -50,5 +53,6 @@
       "imported_at": "2026-09-06T04:33:04.540618+00:00"
     }
   ],
-  "exported": []
+  "exported": [],
+  "last_accession_number": 4
 }

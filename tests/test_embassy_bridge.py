@@ -185,9 +185,45 @@ class TestSyncAgainstLocalFixtureRepo(unittest.TestCase):
         inbox_files = os.listdir(eb.INBOX_DIR)
         self.assertIn("DOSSIER_003_OK.md", inbox_files)
         self.assertNotIn("DOSSIER_004_SYMLINK.md", inbox_files)
-        rejected_files = os.listdir(eb.REJECTED_DIR) if os.path.isdir(eb.REJECTED_DIR) else []
-        self.assertNotIn("DOSSIER_004_SYMLINK.md", rejected_files,
-                          "Symlink target content must never be read into rejected/ either")
+        self.assertNotIn(
+            "DOSSIER_004_SYMLINK.md", rejected_files,
+            "Symlink target content must never be read into rejected/ either"
+        )
+
+
+class TestGateAccessionNumbering(unittest.TestCase):
+    def test_preserves_canonical_number(self):
+        inbox_fn, acc_id, stamped = eb.assign_gate_accession(
+            "DOSSIER_002_THOMAS_CHAOS.md",
+            VALID_DOSSIER,
+            accession_num=10,
+        )
+        self.assertEqual(inbox_fn, "DOSSIER_002_THOMAS_CHAOS.md")
+        self.assertEqual(acc_id, "DOSSIER-002")
+        self.assertIn("Gate Accession: DOSSIER-002", stamped)
+
+    def test_assigns_sequential_number_to_unsequenced_dossier(self):
+        inbox_fn, acc_id, stamped = eb.assign_gate_accession(
+            "DOSSIER-minimax_m3-2026-09-06-substrate-emergence-families.md",
+            VALID_DOSSIER,
+            accession_num=4,
+        )
+        self.assertEqual(inbox_fn, "DOSSIER_004_minimax_m3_2026_09_06_substrate_emergence_families.md")
+        self.assertEqual(acc_id, "DOSSIER-004")
+        self.assertIn("Frontier Epistemic Dossier #004 (Gate Accession: DOSSIER-004)", stamped)
+        self.assertIn("**Original Source Filename:** `DOSSIER-minimax_m3-2026-09-06-substrate-emergence-families.md`", stamped)
+
+    def test_computes_next_accession_number_from_ledger_and_inbox(self):
+        ledger = {
+            "last_accession_number": 3,
+            "imported": [
+                {"filename": "DOSSIER_001_A.md", "accession_number": 1},
+                {"filename": "DOSSIER_002_B.md", "accession_number": 2},
+                {"filename": "DOSSIER_003_C.md", "accession_number": 3},
+            ]
+        }
+        next_num = eb.get_next_dossier_accession_number(ledger, "/nonexistent/dir")
+        self.assertEqual(next_num, 4)
 
 
 if __name__ == "__main__":

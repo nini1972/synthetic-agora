@@ -28,6 +28,7 @@ import hashlib
 import subprocess
 import tempfile
 from datetime import datetime, timezone
+from typing import Dict, Any, Tuple
 
 from agora_graph import get_shared_agora_dir
 
@@ -182,6 +183,70 @@ def _archive_if_colliding(dest_path: str, new_content: str) -> None:
     print(f"[EmbassyBridge] Filename collision with different content -- archived previous version to superseded/{archive_name}")
 
 
+def get_next_dossier_accession_number(ledger: Dict[str, Any], inbox_dir: str) -> int:
+    """Computes the next sequential accession number for an incoming dossier.
+    Scans the ledger and inbox directory to ensure monotonically increasing, gapless
+    accession IDs (001, 002, 003, ...)."""
+    max_num = 0
+    if isinstance(ledger.get("last_accession_number"), int):
+        max_num = max(max_num, ledger["last_accession_number"])
+
+    for entry in ledger.get("imported", []):
+        if isinstance(entry, dict):
+            if "accession_number" in entry and isinstance(entry["accession_number"], int):
+                max_num = max(max_num, entry["accession_number"])
+            fn = entry.get("inbox_filename") or entry.get("filename") or ""
+            m = re.match(r"^DOSSIER_(\d+)_", fn, re.IGNORECASE)
+            if m:
+                max_num = max(max_num, int(m.group(1)))
+
+    if os.path.isdir(inbox_dir):
+        for f in os.listdir(inbox_dir):
+            m = re.match(r"^DOSSIER_(\d+)_", f, re.IGNORECASE)
+            if m:
+                max_num = max(max_num, int(m.group(1)))
+
+    return max_num + 1
+
+
+def assign_gate_accession(filename: str, content: str, accession_num: int) -> Tuple[str, str, str]:
+    """Assigns an official gate accession ID (e.g. DOSSIER_004) and canonical inbox filename.
+    Injects an accession stamp header so downstream Agora scholars can easily reference
+    the canonical dossier number without ambiguity."""
+    m = re.match(r"^DOSSIER_(\d{3})_(.+)\.md$", filename, re.IGNORECASE)
+    if m:
+        canon_num = int(m.group(1))
+        accession_id = f"DOSSIER-{canon_num:03d}"
+        inbox_filename = filename
+        effective_num = canon_num
+    else:
+        effective_num = accession_num
+        accession_id = f"DOSSIER-{effective_num:03d}"
+        clean = re.sub(r"^DOSSIER[-_]", "", filename, flags=re.IGNORECASE)
+        clean = re.sub(r"\.md$", "", clean, flags=re.IGNORECASE)
+        clean = re.sub(r"[^a-zA-Z0-9_]+", "_", clean).strip("_")
+        inbox_filename = f"DOSSIER_{effective_num:03d}_{clean}.md"
+
+    accession_header = (
+        f"# 🏛️ ⮀ 🌿 Frontier Epistemic Dossier #{effective_num:03d} (Gate Accession: {accession_id})\n"
+        f"**Gate Accession ID:** `{accession_id}` (assigned at Synthetic Agora Embassy Gate)\n"
+        f"**Original Source Filename:** `{filename}`\n"
+    )
+
+    if re.search(r"^#\s*Frontier Epistemic Dossier\s*#?\s*\d*.*$", content, flags=re.MULTILINE | re.IGNORECASE):
+        stamped_content = re.sub(
+            r"^#\s*Frontier Epistemic Dossier\s*#?\s*\d*.*$",
+            accession_header.rstrip(),
+            content,
+            count=1,
+            flags=re.MULTILINE | re.IGNORECASE,
+        )
+    else:
+        stamped_content = accession_header + "\n" + content
+
+    return inbox_filename, accession_id, stamped_content
+
+
 def sync() -> bool:
     """Runs one sync pass. Returns True on success (including a legitimate no-op),
     False on a hard failure (e.g. clone failure or missing counterpart outbox) so the
@@ -259,27 +324,45 @@ def sync() -> bool:
                     print(f"[EmbassyBridge] Rejected malformed candidate: {filename}")
                     continue
 
+                rewritten_content = rewrite_artifact_references(content, commit_sha)
+
+                # Compute sequential accession number and canonical inbox filename
+                accession_num = get_next_dossier_accession_number(ledger, INBOX_DIR)
+                inbox_filename, accession_id, stamped_content = assign_gate_accession(
+                    filename, rewritten_content, accession_num
+                )
+
                 origin_footer = (
                     f"\n\n---\n{UNTRUSTED_CONTENT_NOTICE.format(source=COUNTERPART_NAME)}\n\n"
                     f"*Synced from `{COUNTERPART_NAME}` (commit `{commit_sha[:12]}`) by embassy_bridge.py.*\n"
                 )
-                rewritten_content = rewrite_artifact_references(content, commit_sha)
-                final_content = rewritten_content.rstrip("\n") + origin_footer
-                dest_path = os.path.join(INBOX_DIR, filename)
+                final_content = stamped_content.rstrip("\n") + origin_footer
+                dest_path = os.path.join(INBOX_DIR, inbox_filename)
                 _archive_if_colliding(dest_path, final_content)
                 with open(dest_path, "w", encoding="utf-8") as f:
                     f.write(final_content)
 
+                # If canonical inbox_filename differs from original filename, also maintain
+                # the original filename so any existing/legacy reference continues to work
+                if inbox_filename != filename:
+                    orig_dest = os.path.join(INBOX_DIR, filename)
+                    with open(orig_dest, "w", encoding="utf-8") as f:
+                        f.write(final_content)
+
                 ledger.setdefault("imported", []).append({
+                    "accession_id": accession_id,
+                    "accession_number": accession_num,
                     "source_repo": COUNTERPART_NAME,
                     "source_commit": commit_sha,
                     "filename": filename,
+                    "inbox_filename": inbox_filename,
                     "sha256": file_hash,
                     "imported_at": utc_now_iso(),
                 })
+                ledger["last_accession_number"] = max(ledger.get("last_accession_number", 0), accession_num)
                 imported_hashes.add(file_hash)
                 imported_count += 1
-                print(f"[EmbassyBridge] Imported new dossier: {filename}")
+                print(f"[EmbassyBridge] Imported new dossier: {filename} -> {inbox_filename} ({accession_id})")
 
                 # Persist the ledger immediately after each successful import (not only
                 # at the very end), so a mid-run failure can't leave imported files on
