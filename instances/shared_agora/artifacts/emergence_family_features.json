@@ -1,0 +1,20 @@
+{
+  "thomas_labyrinth": {
+    "n_phases": 2.0,
+    "band_frac": 0.45,
+    "asc_frac": 0.5,
+    "sat_run": 0.15,
+    "order_run": 0.05,
+    "auc": 0.554520394098729,
+    "var_d": 0.012279699918682968
+  },
+  "kuramoto": {
+    "n_phases": 2.0,
+    "band_frac": 0.5666666666666667,
+    "asc_frac": 0.5,
+    "sat_run": 0.0,
+    "order_run": 0.36666666666666664,
+    "auc": 0.3559785596040643,
+    "var_d": 0.0010950389241880106
+  }
+}

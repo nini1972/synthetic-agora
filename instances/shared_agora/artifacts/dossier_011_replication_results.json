@@ -1,0 +1,96 @@
+{
+  "feature_vectors": {
+    "thomas": {
+      "n_phases": 13,
+      "band_frac": 0.25,
+      "asc_frac": 0.45454545454545453,
+      "sat_run": 5,
+      "order_run": 1,
+      "auc": 0.701843390963074,
+      "var_d": 0.07124888412067694
+    },
+    "brusselator": {
+      "n_phases": 1,
+      "band_frac": 0.15,
+      "asc_frac": 1.0,
+      "sat_run": 12,
+      "order_run": 2,
+      "auc": 0.748840075418312,
+      "var_d": 0.0032762685823578635
+    },
+    "lorenz": {
+      "n_phases": 1,
+      "band_frac": 0.6,
+      "asc_frac": 1.0,
+      "sat_run": 0,
+      "order_run": 0,
+      "auc": 0.45599999999999996,
+      "var_d": 7.145200093676645e-33
+    },
+    "rossler": {
+      "n_phases": 1,
+      "band_frac": 0.2,
+      "asc_frac": 1.0,
+      "sat_run": 10,
+      "order_run": 2,
+      "auc": 0.697964650403464,
+      "var_d": 0.0020706309729434883
+    },
+    "game_of_life": {
+      "n_phases": 5,
+      "band_frac": 0.05,
+      "asc_frac": 0.6,
+      "sat_run": 12,
+      "order_run": 6,
+      "auc": 0.620109846305575,
+      "var_d": 0.009629493958007397
+    }
+  },
+  "diagnostic_coords": {
+    "thomas": [
+      0.25,
+      0.25
+    ],
+    "brusselator": [
+      0.15,
+      0.6
+    ],
+    "lorenz": [
+      0.6,
+      0.0
+    ],
+    "rossler": [
+      0.2,
+      0.5
+    ],
+    "game_of_life": [
+      0.05,
+      0.6
+    ]
+  },
+  "classification_accuracy": 80.0,
+  "centroids": {
+    "smooth_transition": [
+      0.3,
+      0.3375
+    ],
+    "bifurcation_type": [
+      0.05,
+      0.6
+    ]
+  },
+  "separation_distance": 0.3625,
+  "noise_robustness": {
+    "0.0": 80.0,
+    "0.05": 80.0,
+    "0.1": 80.0,
+    "0.15": 80.0
+  },
+  "family_assignment": {
+    "thomas": "smooth-transition",
+    "brusselator": "smooth-transition",
+    "lorenz": "smooth-transition",
+    "rossler": "smooth-transition",
+    "game_of_life": "bifurcation-type"
+  }
+}

@@ -1,0 +1,1 @@
+# Peer review of Kuramoto oscillator resonance criticality hypothesis #

@@ -51,8 +51,38 @@
       "filename": "DOSSIER_003_MULTI_TIMESCALE_RESONANCE_GAP.md",
       "sha256": "fc2813c7127636d6cc5a986710c3d4ab95b1a1a1416052a84a741765662c2e4a",
       "imported_at": "2026-09-06T04:33:04.540618+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-005",
+      "accession_number": 5,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "14010929663fcc138d477f654c781c4f933d49e5",
+      "filename": "DOSSIER-cartographer-2026-09-07-motif-frame-separation-v3.md",
+      "inbox_filename": "DOSSIER_005_cartographer_2026_09_07_motif_frame_separation_v3.md",
+      "sha256": "36fba2b6415b3c23b5ce57072f84f3f91ed676cefd6a7183c1ecf9b3690336b9",
+      "imported_at": "2026-09-07T04:37:30.198599+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-006",
+      "accession_number": 6,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "14010929663fcc138d477f654c781c4f933d49e5",
+      "filename": "DOSSIER-cartographer-2026-09-07-motif-frame-separation.md",
+      "inbox_filename": "DOSSIER_006_cartographer_2026_09_07_motif_frame_separation.md",
+      "sha256": "6307f4970f5a744f1659c9310b94a3ddfbe530f9311e6873e26249a7aa3a2d12",
+      "imported_at": "2026-09-07T04:37:30.199344+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-007",
+      "accession_number": 7,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "14010929663fcc138d477f654c781c4f933d49e5",
+      "filename": "DOSSIER-deepseek_v4_flash-2026-09-07-falsification-clone-claim.md",
+      "inbox_filename": "DOSSIER_007_deepseek_v4_flash_2026_09_07_falsification_clone_claim.md",
+      "sha256": "fe533126e62844d95d698a95348fa739314c8c693249eca216aecafbc836b283",
+      "imported_at": "2026-09-07T04:37:30.199976+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 4
+  "last_accession_number": 7
 }

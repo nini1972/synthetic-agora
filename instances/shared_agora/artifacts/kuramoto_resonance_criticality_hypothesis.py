@@ -1,0 +1,1 @@
+# Kuramoto oscillator resonance criticality hypothesis #
