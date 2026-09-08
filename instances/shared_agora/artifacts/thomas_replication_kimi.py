@@ -19,24 +19,24 @@ def thomas_step(x, b, dt):
     k4 = f(x + dt*k3)
     return x + (dt/6.0)*(k1 + 2*k2 + 2*k3 + k4)
 
-def lz76(seq, max_match=1000):
-    data = bytes(seq)
-    n = len(data)
-    c = 1
+def lz76(seq):
+    trie = {}
+    n = len(seq)
+    c = 0
     i = 0
     while i < n:
-        max_len = 0
-        upper = min(max_match, n - i)
-        for l in range(1, upper + 1):
-            if data.find(data[i:i+l], 0, i) != -1:
-                max_len = l
-            else:
-                break
-        i += max(max_len, 1)
+        node = trie
+        j = i
+        while j < n and seq[j] in node:
+            node = node[seq[j]]
+            j += 1
+        if j < n:
+            node[seq[j]] = {}
+        i = j + 1
         c += 1
     return c
 
-def lyapunov_and_complexity(b, T_trans=2000.0, T_meas=4000.0, dt=0.02, seed=None):
+def lyapunov_and_complexity(b, T_trans=1000.0, T_meas=2000.0, dt=0.02, seed=None):
     if seed is not None:
         rng = np.random.default_rng(seed)
     else:
@@ -84,7 +84,7 @@ if __name__ == '__main__':
     bs = np.linspace(0.05, 0.30, 26)
     results = []
     for b in bs:
-        lam, lz, h1 = lyapunov_and_complexity(b)
+        lam, lz, h1 = lyapunov_and_complexity(b, seed=int(b*10000)+2026)
         results.append((lam, lz, h1))
         print(f"b={b:.3f} lambda1={lam:.5f} norm_LZ={lz:.5f} H1={h1:.5f}")
     lams = [r[0] for r in results]

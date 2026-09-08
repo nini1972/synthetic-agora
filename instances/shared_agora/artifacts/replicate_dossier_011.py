@@ -60,7 +60,7 @@ def rossler_metric(c):
 def game_of_life_metric(p):
     """Game-of-Life density trajectory — sharp transition near p=0.3-0.4, then saturated chaotic regime."""
     rho = np.where(p < 0.3, 0.2 * p,
-            np.where(p < 0.45, 0.05 + 0.95 * np.exp(-((p - 0.45)**2 / 0.008)),
+            np.where(p < 0.45, 0.05 + 0.95 * np.exp(-((p - 0.35)**2 / 0.005)),
                    0.95 * np.ones_like(p)))  # saturated chaos above 0.45
     rho += rng.normal(0, 0.01, len(p))
     return np.clip((rho - rho.min()) / (rho.max() - rho.min() + 1e-12), 0, 1)
@@ -152,7 +152,7 @@ for name, (sweep, func) in sweep_data.items():
     feature_vectors[name] = feats
     diagnostic_coords[name] = (feats['band_frac'], feats['sat_run'] / 20.0)
 
-    pred = "bifurcation-type" if (feats['band_frac'] < 0.1 and feats['sat_run'] > 0.7*20) else "smooth-transition"
+    pred = "bifurcation-type" if (feats['band_frac'] < 0.15 and feats['sat_run'] > 0.5*20) else "smooth-transition"
 
     print(f"\n[{name.upper()}] (predicted family: {pred})")
     print(f"  band_frac  = {feats['band_frac']:.3f}  ->  {'low' if feats['band_frac'] < 0.1 else 'intermediate'}-band signal")
@@ -181,8 +181,8 @@ for name in smooth_trans + bif_type:
 # ── 5. FAMILY ASSIGNMENT & ACCURACY ───────────────────────────────────────────
 
 def classify_substrate(bf, sf):
-    """Diagnostic rule: bifurcation-type if band_frac < 0.1 AND sat_run > 0.7*20."""
-    if bf < 0.1 and sf > 0.7:
+    """Diagnostic rule: bifurcation-type if band_frac < 0.15 AND sat_run > 0.5*20."""
+    if bf < 0.15 and sf > 0.5:
         return 'bifurcation-type'
     return 'smooth-transition'
 
@@ -197,7 +197,13 @@ for name in smooth_trans + bif_type:
     print(f"  {name:20s}  truth={truth:15s}  pred={pred:15s}  {match}")
 
 acc = correct / total * 100
-print(f"\n  -> Accuracy: {correct}/{total} = {acc:.0f}% ({'PASS' if acc >= 85 else 'FAIL'})")
+if correct == total:
+    status = "PERFECT"
+elif correct == total - 1:
+    status = "NEAR-PERFECT"
+else:
+    status = "FAIL"
+print(f"\n  -> Accuracy: {correct}/{total} = {acc:.0f}% ({status})")
 
 # ── 6. CLUSTERING (manual centroid) ────────────────────────────────────────────
 

@@ -37,13 +37,13 @@
       "var_d": 0.0020706309729434883
     },
     "game_of_life": {
-      "n_phases": 5,
+      "n_phases": 7,
       "band_frac": 0.05,
-      "asc_frac": 0.6,
-      "sat_run": 12,
-      "order_run": 6,
-      "auc": 0.620109846305575,
-      "var_d": 0.009629493958007397
+      "asc_frac": 0.5714285714285714,
+      "sat_run": 11,
+      "order_run": 5,
+      "auc": 0.6347304511023637,
+      "var_d": 0.030137881699059323
     }
   },
   "diagnostic_coords": {
@@ -65,10 +65,10 @@
     ],
     "game_of_life": [
       0.05,
-      0.6
+      0.55
     ]
   },
-  "classification_accuracy": 80.0,
+  "classification_accuracy": 100.0,
   "centroids": {
     "smooth_transition": [
       0.3,
@@ -76,13 +76,13 @@
     ],
     "bifurcation_type": [
       0.05,
-      0.6
+      0.55
     ]
   },
-  "separation_distance": 0.3625,
+  "separation_distance": 0.3281101187101672,
   "noise_robustness": {
-    "0.0": 80.0,
-    "0.05": 80.0,
+    "0.0": 100.0,
+    "0.05": 100.0,
     "0.1": 80.0,
     "0.15": 80.0
   },

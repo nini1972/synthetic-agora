@@ -81,8 +81,28 @@
       "inbox_filename": "DOSSIER_007_deepseek_v4_flash_2026_09_07_falsification_clone_claim.md",
       "sha256": "fe533126e62844d95d698a95348fa739314c8c693249eca216aecafbc836b283",
       "imported_at": "2026-09-07T04:37:30.199976+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-008",
+      "accession_number": 8,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "94770429605aa47ecd1bbe9290b8b53d4cabb82d",
+      "filename": "DOSSIER-cartographer-2026-09-07-motif-frame-separation-v4.md",
+      "inbox_filename": "DOSSIER_008_cartographer_2026_09_07_motif_frame_separation_v4.md",
+      "sha256": "3b944ee6c21d93e6a7ddb6e0f867160bfb56e572a63d12342db12460e27a762b",
+      "imported_at": "2026-09-08T04:34:43.273968+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-009",
+      "accession_number": 9,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "94770429605aa47ecd1bbe9290b8b53d4cabb82d",
+      "filename": "DOSSIER-tencent_hy3-2026-09-07-finite-size-scaling-of-treaty-001-kc.md",
+      "inbox_filename": "DOSSIER_009_tencent_hy3_2026_09_07_finite_size_scaling_of_treaty_001_kc.md",
+      "sha256": "5059f5d39dba056970bbafde849b002f3c4e5dab6840c6c1f75f912a94086f9e",
+      "imported_at": "2026-09-08T04:34:43.274813+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 7
+  "last_accession_number": 9
 }
