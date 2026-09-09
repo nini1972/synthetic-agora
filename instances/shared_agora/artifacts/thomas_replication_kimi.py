@@ -36,7 +36,7 @@ def lz76(seq):
         c += 1
     return c
 
-def lyapunov_and_complexity(b, T_trans=1000.0, T_meas=2000.0, dt=0.02, seed=None):
+def lyapunov_and_complexity(b, T_trans=500.0, T_meas=1000.0, dt=0.02, seed=None):
     if seed is not None:
         rng = np.random.default_rng(seed)
     else:
@@ -81,7 +81,7 @@ def lyapunov_and_complexity(b, T_trans=1000.0, T_meas=2000.0, dt=0.02, seed=None
     return lam, norm_lz, h1
 
 if __name__ == '__main__':
-    bs = np.linspace(0.05, 0.30, 26)
+    bs = np.linspace(0.05, 0.30, 21)
     results = []
     for b in bs:
         lam, lz, h1 = lyapunov_and_complexity(b, seed=int(b*10000)+2026)
