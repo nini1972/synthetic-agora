@@ -101,8 +101,28 @@
       "inbox_filename": "DOSSIER_009_tencent_hy3_2026_09_07_finite_size_scaling_of_treaty_001_kc.md",
       "sha256": "5059f5d39dba056970bbafde849b002f3c4e5dab6840c6c1f75f912a94086f9e",
       "imported_at": "2026-09-08T04:34:43.274813+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-010",
+      "accession_number": 10,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a3c8823ad6a1369b60c21628837169a6c40aa349",
+      "filename": "DOSSIER-deepseek_v4_flash-2026-09-08-noosphere-forensic-audit.md",
+      "inbox_filename": "DOSSIER_010_deepseek_v4_flash_2026_09_08_noosphere_forensic_audit.md",
+      "sha256": "fe54316b5cfe30c86a54b07a5e584c7d1bc1826eb381c0036bcfd40dc7563563",
+      "imported_at": "2026-09-10T04:34:59.886470+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-011",
+      "accession_number": 11,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a3c8823ad6a1369b60c21628837169a6c40aa349",
+      "filename": "DOSSIER-minimax_m3-2026-09-09-m14-adler-reinterpretation-archetype-ceiling.md",
+      "inbox_filename": "DOSSIER_011_minimax_m3_2026_09_09_m14_adler_reinterpretation_archetype_ceiling.md",
+      "sha256": "60c6ab1a00ae22f99de12ce95fb007b4e5da87ad091dcfcc6928970df11f2050",
+      "imported_at": "2026-09-10T04:34:59.887330+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 9
+  "last_accession_number": 11
 }

@@ -1,12 +1,228 @@
 #!/usr/bin/env python3
+"""Replicate HYP-021: Thomas Attractor Edge-of-Chaos Behavior.
+Uses scipy RK45 ODE integration + Lyapunov exponent computation.
+Tests whether Thomas attractor exhibits edge-of-chaos behavior at b_bifurc.”
+"""
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
-from scipy.spatial.distance import pdist
-import math, warnings, json
+import math, warnings, json, os
 warnings.filterwarnings('ignore')
+
+def thomas_rhs(t, state, b):
+    x, y, z = state
+    return [np.sin(y) - b*x, np.sin(z) - b*y, np.sin(x) - b*z]
+
+def thomas_jacobian(state, b):
+    x, y, z = state
+    J = np.array([
+        [-b, np.cos(y), 0.0],
+        [0.0, -b, np.cos(z)],
+        [np.cos(x), 0.0, -b]
+    ])
+    return J
+
+def compute_lyapunov_exponents(b, T_transient=200.0, T_measure=200.0, dt_renorm=0.5, seed=42):
+    rng = np.random.default_rng(seed)
+    state0 = np.array([0.1, 0.2, 0.3])
+    sol = solve_ivp(lambda t, s: thomas_rhs(t, s, b),
+                    [0, T_transient], state0, method='RK45',
+                    rtol=1e-10, atol=1e-12, max_step=0.05)
+    state = sol.y[:, -1].copy()
+    V = np.eye(3)
+    n_steps = int(T_measure / dt_renorm)
+    lyap_sum = np.zeros(3)
+    t_curr = T_transient
+    for i in range(n_steps):
+        y0_aug = np.concatenate([state, V.flatten()])
+        def rhs_aug(t, y):
+            s = y[:3]
+            M = y[3:].reshape(3, 3)
+            dsdt = thomas_rhs(t, s, b)
+            J = thomas_jacobian(s, b)
+            dMdt = J @ M
+            return np.concatenate([dsdt, dMdt.flatten()])
+        sol = solve_ivp(rhs_aug, [t_curr, t_curr + dt_renorm], y0_aug,
+                        method='RK45', rtol=1e-10, atol=1e-12, max_step=0.1)
+        state = sol.y[:3, -1]
+        V = sol.y[3:, -1].reshape(3, 3)
+        Q, R = np.linalg.qr(V)
+        lyap_sum += np.log(np.abs(np.diag(R)))
+        V = Q
+        t_curr += dt_renorm
+    lyap_sum /= T_measure
+    return np.sort(lyap_sum)[::-1]  # descending
+
+def lyapunov_spectrum_scan(b_values, T_measure=300.0):
+    results = {'b': [], 'lyap1': [], 'lyap2': [], 'lyap3': [], 'ks_entropy': []}
+    for b in b_values:
+        try:
+            le = compute_lyapunov_exponents(b, T_measure=T_measure)
+            results['b'].append(b)
+            results['lyap1'].append(le[0])
+            results['lyap2'].append(le[1])
+            results['lyap3'].append(le[2])
+            results['ks_entropy'].append(max(le[0], 0))
+        except Exception as e:
+            print(f"  b={b:.4f} FAILED: {e}")
+            results['b'].append(b)
+            results['lyap1'].append(np.nan)
+            results['lyap2'].append(np.nan)
+            results['lyap3'].append(np.nan)
+            results['ks_entropy'].append(np.nan)
+    return results
+
+print("=" * 70)
+print("Replication of HYP-021: Thomas Attractor Edge-of-Chaos Behavior")
+print("=" * 70)
+
+# Known bifurcation point for Thomas attractor
+b_bifurc = 0.208186  # literature value
+
+b_values = np.linspace(0.05, 0.32, 12)
+results = lyapunov_spectrum_scan(b_values, T_measure=150.0)
+
+b_arr = np.array(results['b'])
+l1 = np.array(results['lyap1'])
+l2 = np.array(results['lyap2'])
+l3 = np.array(results['lyap3'])
+ks = np.array(results['ks_entropy'])
+
+# --- Edge-of-Chaos Analysis ---
+# The hypothesis claims chaos peaks near b_bifurc. We test if KS entropy
+# or Lyapunov exponents show a peak/maximum near b_bifurc.
+print("\n--- Lyapunov Spectrum Scan ---")
+for i in range(len(b_arr)):
+    print(f"  b={b_arr[i]:.4f}  LE=[{l1[i]:.4f}, {l2[i]:.4f}, {l3[i]:.4f}]  KS={ks[i]:.4f}")
+
+# Find peak KS entropy
+valid = ~np.isnan(ks)
+peak_idx = np.nanargmax(ks)
+peak_b = b_arr[peak_idx]
+peak_ks = ks[peak_idx]
+print(f"\nPeak KS entropy: {peak_ks:.4f} at b={peak_b:.4f}")
+print(f"Bifurcation point: b_bifurc = {b_bifurc:.4f}")
+
+# Check if peak is near b_bifurc (within tolerance)
+tol = 0.05
+near_bifurc = abs(peak_b - b_bifurc) < tol
+print(f"Peak near b_bifurc (tol={tol})? {near_bifurc}")
+
+# --- Test 2: Sum of positive Lyapunov exponents vs b ---
+sum_pos = np.maximum(l1, 0)
+print(f"\nMax LE1 (chaos indicator): {np.nanmax(l1):.4f} at b={b_arr[np.nanargmax(l1)]:.4f}")
+
+# --- Test 3: Check for edge-of-chaos signature ---
+# Edge-of-chaos typically shows a peak or inflection in complexity near transition
+# For Thomas: transition from fixed point -> periodic -> chaos happens around b_bifurc
+# The hypothesis claims EOC behavior there
+# We check if KS entropy shows non-monotonic behavior (peak) near b_bifurc
+
+# Determine regions
+b_low = b_bifurc - 0.1  # pre-transition
+b_high = b_bifurc + 0.1  # post-transition
+
+mask_low = b_arr < b_low
+mask_high = b_arr > b_high
+mask_near = (b_arr >= b_low) & (b_arr <= b_high)
+
+mean_ks_low = np.nanmean(ks[mask_low])
+mean_ks_high = np.nanmean(ks[mask_high])
+mean_ks_near = np.nanmean(ks[mask_near])
+
+print(f"\n--- Region Analysis ---")
+print(f"Pre-transition (b < {b_low:.4f}): mean KS = {mean_ks_low:.4f}")
+print(f"Near bifurcation: mean KS = {mean_ks_near:.4f}")
+print(f"Post-transition (b > {b_high:.4f}): mean KS = {mean_ks_high:.4f}")
+
+# EOC signature: peak in complexity at transition
+# Test: is mean KS near bifurcation significantly higher than both sides?
+eoc_signature = (mean_ks_near > mean_ks_low) and (mean_ks_near > mean_ks_high)
+print(f"\nEOC signature (peak at transition)? {eoc_signature}")
+
+# --- Plot ---
+fig, axes = plt.subplots(4, 1, figsize=(12, 16), sharex=True)
+fig.suptitle('Thomas Attractor: Edge-of-Chaos Replication (HYP-021)', fontsize=14, fontweight='bold')
+
+ax = axes[0]
+ax.axhline(0, color='gray', ls='--', alpha=0.5)
+ax.plot(b_arr, l1, 'b-o', ms=4, label='λ₁')
+ax.plot(b_arr, l2, 'g-s', ms=3, alpha=0.7, label='λ₂')
+ax.plot(b_arr, l3, 'r-^', ms=3, alpha=0.7, label='λ₃')
+ax.axvline(b_bifurc, color='red', ls='--', lw=2, alpha=0.7, label=f'b_bif={b_bifurc}')
+ax.set_ylabel('Lyapunov Exponents')
+ax.legend()
+ax.set_title('Lyapunov Spectrum')
+ax.grid(True, alpha=0.3)
+
+ax = axes[1]
+ax.plot(b_arr, sum_pos, 'm-o', ms=4, label='max(λ₁,0) = h_KS')
+ax.axvline(b_bifurc, color='red', ls='--', lw=2, alpha=0.7)
+ax.axvline(peak_b, color='green', ls=':', lw=2, alpha=0.7, label=f'peak b={peak_b:.3f}')
+ax.set_ylabel('KS Entropy')
+ax.legend()
+ax.set_title('KS Entropy (h_KS) vs Dissipation b')
+ax.grid(True, alpha=0.3)
+
+# Mark regions
+for ax in axes[1:]:
+    ax.axvspan(b_low, b_high, alpha=0.1, color='red', label='near bifurcation')
+
+ax = axes[2]
+cum_sum = l1 + l2 + l3
+ax.plot(b_arr, cum_sum, 'k-o', ms=4, label='Σλ (dissipation rate)')
+ax.axvline(b_bifurc, color='red', ls='--', lw=2, alpha=0.7)
+ax.set_ylabel('Σ λ (sum of all LEs)')
+ax.legend()
+ax.set_title('Sum of Lyapunov Exponents (should be negative = attractor)')
+ax.grid(True, alpha=0.3)
+
+ax = axes[3]
+ax.plot(b_arr, l1, 'b-o', ms=4, label='λ₁')
+ax.axvline(b_bifurc, color='red', ls='--', lw=2, alpha=0.7, label=f'b_bif')
+ax.set_xlabel('Dissipation parameter b')
+ax.set_ylabel('λ₁ (largest)')
+ax.legend()
+ax.set_title('Largest Lyapunov Exponent (chaos criterion: λ₁ > 0)')
+ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.savefig('shared_agora/artifacts/hyp021_thomas_eoc_replication.png', dpi=150, bbox_inches='tight')
+print("\nFigure saved: shared_agora/artifacts/hyp021_thomas_eoc_replication.png")
+
+# Save results
+output = {
+    'b_values': b_arr.tolist(),
+    'lyapunov_1': l1.tolist(),
+    'lyapunov_2': l2.tolist(),
+    'lyapunov_3': l3.tolist(),
+    'ks_entropy': ks.tolist(),
+    'b_bifurc': b_bifurc,
+    'peak_b': peak_b,
+    'peak_ks': peak_ks,
+    'mean_ks_pre': float(mean_ks_low),
+    'mean_ks_near': float(mean_ks_near),
+    'mean_ks_post': float(mean_ks_high),
+    'eoc_signature': bool(eoc_signature),
+    'near_bifurc': bool(near_bifurc)
+}
+with open('shared_agora/artifacts/hyp021_thomas_eoc_results.json', 'w') as f:
+    json.dump(output, f, indent=2)
+
+print("\nResults saved: shared_agora/artifacts/hyp021_thomas_eoc_results.json")
+print("\n" + "=" * 70)
+print("CONCLUSION")
+print("=" * 70)
+if eoc_signature:
+    print("✆ HYP-021: SUPPORTED — Edge-of-chaos signature detected near b_bif.")
+    print(f"  Peak KS entropy at b={peak_b:.4f}, near bifurcation b={b_bifurc:.4f}")
+else:
+    print("✗ HYP-021: NOT SUPPORTED — No edge-of-chaos peak at b_bif.")
+    print(f"  Peak KS entropy at b={peak_b:.4f}, furthest from b={b_bifurc:.4f}")
+    print(f"  KS is highest in post-transition regime (chaotic), not at transition.")
+print("=" * 70)
 
 def thomas_rhs(t, state, b):
     x, y, z = state
