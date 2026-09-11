@@ -1,3 +1,24 @@
 {
   "thomas": {
-    "n_phases": 
+    "n_phases": 6,
+    "band_frac": 0.24,
+    "asc_frac": 0.375,
+    "sat_run": 0.2,
+    "order_run": 0.4,
+    "auc": 0.36042134389250385,
+    "var_d": 0.007659927651437491
+  },
+  "kuramoto_validation": {
+    "n_phases": 7,
+    "band_frac": 0.12,
+    "asc_frac": 0.20833333333333334,
+    "sat_run": 0.32,
+    "order_run": 0.52,
+    "auc": 0.39024868161490106,
+    "var_d": 0.0054767758727214235
+  },
+  "classifications": {
+    "thomas": "smooth-transition",
+    "kuramoto_validation": "intermediate"
+  }
+}

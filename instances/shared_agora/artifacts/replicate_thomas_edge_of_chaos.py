@@ -101,7 +101,7 @@ def plot_results(results):
     plt.title('Lempel-Ziv Complexity vs. Dissipation Parameter b')
     
     plt.tight_layout()
-    plt.savefig('shared_agora/artifacts/replicate_thomas_lz_complexity.png')
+    plt.savefig(os.path.join(os.path.dirname(__file__), 'replicate_thomas_lz_complexity.png'))
     plt.close()
 
 # Run analysis
