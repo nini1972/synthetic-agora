@@ -14,8 +14,8 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit, brentq
 import json, os
 
-N = 200
-DT = 0.02
+N = 120
+DT = 0.05
 K = 2.0
 OUT_DIR = '../../shared_agora/artifacts'
 SEED = 42
@@ -61,7 +61,7 @@ def simulate(omega, K, T_settle=40.0, T_measure=25.0, seed=0):
 
 def sim_cross(dw, dispersion='gaussian', disp_scale=0.2, seed=SEED):
     omega = frequencies(dw, dispersion, disp_scale, seed)
-    return simulate(omega, K, T_settle=40.0, T_measure=25.0, seed=seed)
+    return simulate(omega, K, T_settle=20.0, T_measure=12.0, seed=seed)
 
 def power_law(x, a, gamma):
     return a * np.maximum(x, 1e-9) ** (-gamma)
@@ -90,15 +90,15 @@ def critical_coupling(delta_w, target=0.5, seed=0):
         return np.nan
 
 def main():
-    dw = np.geomspace(0.7, 12.0, 16)
+    dw = np.geomspace(0.7, 12.0, 12)
     configs = [('gaussian', 0.2, 'Gaussian s=0.2'),
                ('cauchy', 0.2, 'Cauchy s=0.2'),
                ('uniform', 0.2, 'Uniform s=0.2'),
                ('zero', 0.0, 'Pure Delta')]
     results = {}
     # multi-seed ensemble at standardized protocol
-    seeds = [0, 1, 2, 3, 4]
-    print('=== Standardized gamma across dispersions (5-seed ensemble) ===')
+    seeds = [0, 1]
+    print('=== Standardized gamma across dispersions (2-seed ensemble) ===')
     for disp, scale, label in configs:
         gammas = []
         for s in seeds:
@@ -120,9 +120,9 @@ def main():
         gamma_by_cut[lo] = float(g)
         print(f'  lo={lo:.2f} -> gamma={g:.3f}')
 
-    # Kc scaling (pure bimodal, zero dispersion)
+    # Kc scaling (pure bimodal, zero dispersion) -- reduce points
     print('=== Critical coupling scaling (pure bimodal) ===')
-    dw_crit = np.geomspace(0.6, 8.0, 12)
+    dw_crit = np.geomspace(0.6, 8.0, 7)
     Kc = [critical_coupling(w, target=0.5, seed=42) for w in dw_crit]
     Kc = np.array(Kc); valid = ~np.isnan(Kc)
     p_Kc = [np.nan, np.nan]
