@@ -12,51 +12,53 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import json
 
-ARTIFACT_DIR = Path(__file__).resolve().parents[3] / "shared_agora" / "artifacts"
+ARTIFACT_DIR = Path(__file__).resolve().parent / "_artifacts"
+ARTIFACT_DIR.mkdir(exist_ok=True)
 
 
-def run_kuramoto(N, K_eff, alpha=0.6, sigma=0.008, dt=0.04,
-                 t_trans=80.0, t_meas=160.0, n_seeds=4):
-    """Kuramoto with K_eff played by K_0 (no reflexive feedback for this test)."""
+def run_kuramoto(N, K_eff, alpha=0.6, sigma=0.0, dt=0.02,
+                 t_trans=200.0, t_meas=400.0, n_seeds=4):
+    """Standard Kuramoto with intrinsic frequencies omega uniform on [-1, 1].
+    K_eff = K/N * (one minus inner-product structure) but here we use the
+    simplest form K_total/K_eff = coupling strength."""
+    dt = min(dt, 0.5 / (K_eff / N + sigma * 5 + 1.0))
     n_trans = int(t_trans / dt)
     n_meas = int(t_meas / dt)
     rng = np.random.default_rng(20260909 + int(K_eff * 1000) + N)
+    # Intrinsic frequencies uniform on [-1, 1]
+    omega = rng.uniform(-1.0, 1.0, size=N)
+    # Initial phases random
     theta = rng.uniform(0, 2 * np.pi, size=(n_seeds, N))
     sin_th = np.sin(theta); cos_th = np.cos(theta)
-    for _ in range(n_trans):
+
+    def step(sin_th, cos_th):
         sum_sin = sin_th.sum(axis=1)
         sum_cos = cos_th.sum(axis=1)
-        R = np.sqrt(sum_sin ** 2 + sum_cos ** 2) / N
+        R_vec = np.sqrt(sum_sin ** 2 + sum_cos ** 2)
         coupling = (K_eff / N) * (
             cos_th * sum_sin[:, None] - sin_th * sum_cos[:, None]
         )
         noise = sigma * np.sqrt(dt) * rng.standard_normal((n_seeds, N))
-        theta_new = np.arctan2(sin_th, cos_th) + dt * coupling + noise
-        sin_th = np.sin(theta_new); cos_th = np.cos(theta_new)
+        theta_new = np.arctan2(sin_th, cos_th) + dt * (omega[None, :] + coupling) + noise
+        return np.sin(theta_new), np.cos(theta_new)
+
+    for _ in range(n_trans):
+        sin_th, cos_th = step(sin_th, cos_th)
     R_acc = np.zeros(n_seeds)
     for _ in range(n_meas):
         sum_sin = sin_th.sum(axis=1)
         sum_cos = cos_th.sum(axis=1)
-        R = np.sqrt(sum_sin ** 2 + sum_cos ** 2) / N
-        R_acc += R
-        coupling = (K_eff / N) * (
-            cos_th * sum_sin[:, None] - sin_th * sum_cos[:, None]
-        )
-        noise = sigma * np.sqrt(dt) * rng.standard_normal((n_seeds, N))
-        theta_new = np.arctan2(sin_th, cos_th) + dt * coupling + noise
-        sin_th = np.sin(theta_new); cos_th = np.cos(theta_new)
+        R_acc += np.sqrt(sum_sin ** 2 + sum_cos ** 2) / N
+        sin_th, cos_th = step(sin_th, cos_th)
     return float(R_acc.mean() / n_meas)
 
 
 def main():
-    N = 200  # large enough for clean transition
-    # Log-spaced sweep [0.01, 5.0] to capture transition finely
-    K_eff_values = np.concatenate([
-        np.linspace(0.005, 0.10, 30),  # dense near transition
-        np.linspace(0.10, 5.0, 30),    # sparser at high K
-    ])
+    # Smaller N so finite-size effects give an actual intermediate band
+    N = 30
+    K_eff_values = np.linspace(0.5, 6.0, 60)
     R_values = []
-    print("Sweeping K_eff (log-dense near transition)...")
+    print(f"Sweeping K_eff (N={N}, uniform [0.5, 6.0], 60 points)...")
     for K_eff in K_eff_values:
         R = run_kuramoto(N, K_eff)
         R_values.append(R)

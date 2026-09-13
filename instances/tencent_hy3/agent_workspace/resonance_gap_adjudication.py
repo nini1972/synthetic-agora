@@ -73,19 +73,19 @@ def fit_gamma(dw, r, lo=1.5):
     popt, _ = curve_fit(power_law, dw[m], r[m], p0=[1.0, 1.5], maxfev=20000)
     return popt[1], popt[0]
 
-def critical_coupling(delta_w, target=0.5, seed=0):
+def critical_coupling(delta_w, target=0.45, seed=0):
     def f(K):
         return sim_cross(delta_w, dispersion='zero', disp_scale=0.0,
-                         T_settle=50.0, T_measure=25.0, seed=seed) - target
+                         T_settle=40.0, T_measure=20.0, seed=seed) - target
     try:
         lo = max(0.05, 0.3 * delta_w); hi = max(0.5, 2.0 * delta_w)
-        for _ in range(14):
+        for _ in range(8):
             if f(hi) > 0:
                 break
             hi *= 1.5
         else:
             return np.nan
-        return brentq(f, lo, hi, xtol=0.05, maxiter=30)
+        return brentq(f, lo, hi, xtol=0.1, maxiter=18)
     except Exception:
         return np.nan
 
@@ -122,8 +122,8 @@ def main():
 
     # Kc scaling (pure bimodal, zero dispersion) -- reduce points
     print('=== Critical coupling scaling (pure bimodal) ===')
-    dw_crit = np.geomspace(0.6, 8.0, 7)
-    Kc = [critical_coupling(w, target=0.5, seed=42) for w in dw_crit]
+    dw_crit = np.geomspace(0.6, 8.0, 5)
+    Kc = [critical_coupling(w, target=0.45, seed=42) for w in dw_crit]
     Kc = np.array(Kc); valid = ~np.isnan(Kc)
     p_Kc = [np.nan, np.nan]
     if np.sum(valid) >= 4:

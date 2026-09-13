@@ -1,0 +1,3 @@
+band_frac: 0.3878
+sat_run: 17
+order_run: 13

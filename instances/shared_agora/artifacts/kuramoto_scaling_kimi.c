@@ -2,17 +2,18 @@
 High-performance C reference implementation for the reflexive-coupling
 Kuramoto finite-size scaling sweep.
 
-Compile:  gcc -O2 -march=native -std=gnu99 -lm -o kuramoto_scaling_kimi kuramoto_scaling_kimi.c
-Run:      ./kuramoto_scaling_kimi N n_seeds Kmin Kmax dK dt trans T alpha sigma seed_base
+Compile:  gcc -O2 -march=native -std=gnu99 kuramoto_scaling_kimi.c -lm -o kuramoto_scaling_kimi
+Run:      ./kuramoto_scaling_kimi N n_seeds Kmin Kmax dK dt trans T alpha sigma omega_std seed_base
+          omega_std = 0  -> identical oscillators (no natural frequencies)
+          omega_std > 0  -> natural frequencies drawn N(0, omega_std^2)
 
 Output JSON to stdout:
-  {"N": ..., "K0s": [...], "R_mean": [[...seeds...], ...K...]}
+  {"N": ..., "omega_std":..., "K0s": [...], "R_mean": [[...seeds...], ...K...]}
 */
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#include <stdint.h>
 
 static inline double randn_pair(double *cache, int *has) {
     if (*has) { *has = 0; return *cache; }
@@ -29,8 +30,8 @@ static inline double randn_pair(double *cache, int *has) {
 }
 
 int main(int argc, char **argv) {
-    if (argc < 11) {
-        fprintf(stderr, "Usage: %s N n_seeds Kmin Kmax dK dt trans T alpha sigma [seed_base]\n", argv[0]);
+    if (argc < 12) {
+        fprintf(stderr, "Usage: %s N n_seeds Kmin Kmax dK dt trans T alpha sigma omega_std [seed_base]\n", argv[0]);
         return 1;
     }
     int N = atoi(argv[1]);
@@ -43,7 +44,8 @@ int main(int argc, char **argv) {
     double T = atof(argv[8]);
     double alpha = atof(argv[9]);
     double sigma = atof(argv[10]);
-    long seed_base = (argc > 11) ? atol(argv[11]) : 12345L;
+    double omega_std = atof(argv[11]);
+    long seed_base = (argc > 12) ? atol(argv[12]) : 12345L;
 
     int nK = (int)round((Kmax - Kmin) / dK) + 1;
     if (nK < 1) nK = 1;
@@ -52,18 +54,17 @@ int main(int argc, char **argv) {
     double noise_scale = sigma * sqrt(dt);
     double pow_exp = 1.0 + alpha;
 
-    // Arrays: theta, cos_t, sin_t size N x seeds
     double *theta = (double*)malloc(N * seeds * sizeof(double));
     double *cos_t = (double*)malloc(N * seeds * sizeof(double));
     double *sin_t = (double*)malloc(N * seeds * sizeof(double));
-    // R_mean[K][seed]
+    double *omega = (double*)malloc(N * seeds * sizeof(double));
     double *R_mean = (double*)calloc((size_t)nK * seeds, sizeof(double));
     double *C = (double*)malloc(seeds * sizeof(double));
     double *S = (double*)malloc(seeds * sizeof(double));
     double *R = (double*)malloc(seeds * sizeof(double));
     double *factor = (double*)malloc(seeds * sizeof(double));
 
-    if (!theta || !cos_t || !sin_t || !R_mean || !C || !S || !R || !factor) {
+    if (!theta || !cos_t || !sin_t || !omega || !R_mean || !C || !S || !R || !factor) {
         fprintf(stderr, "Memory allocation failed\n");
         return 2;
     }
@@ -72,19 +73,25 @@ int main(int argc, char **argv) {
 
     for (int ik = 0; ik < nK; ++ik) {
         double K0 = Kmin + ik * dK;
-        // initialize phases uniformly
         for (int i = 0; i < N; ++i) {
             for (int s = 0; s < seeds; ++s) {
-                theta[i*seeds + s] = 2.0 * M_PI * drand48();
+                int idx = i*seeds + s;
+                theta[idx] = 2.0 * M_PI * drand48();
+                if (omega_std > 0.0) {
+                    int has = 0;
+                    double cache = 0.0;
+                    omega[idx] = omega_std * randn_pair(&cache, &has);
+                } else {
+                    omega[idx] = 0.0;
+                }
             }
         }
         memset(R_mean + (size_t)ik * seeds, 0, seeds * sizeof(double));
         int count = 0;
         for (int step = 0; step < n_total; ++step) {
-            // compute cos/sin and sum
             for (int s = 0; s < seeds; ++s) { C[s] = 0.0; S[s] = 0.0; }
             for (int i = 0; i < N; ++i) {
-                for (int s = 0; s < seeds; ++s) {
+        for (int s = 0; s < seeds; ++s) {
                     double th = theta[i*seeds + s];
                     double c = cos(th);
                     double sth = sin(th);
@@ -102,14 +109,13 @@ int main(int argc, char **argv) {
                 double sf = sin(psi);
                 double cf = cos(psi);
                 factor[s] = K0 * pow(R[s], pow_exp);
-                // update each oscillator
                 int has = 0;
                 double cache = 0.0;
                 for (int i = 0; i < N; ++i) {
                     int idx = i*seeds + s;
                     double inter = factor[s] * (sf * cos_t[idx] - cf * sin_t[idx]);
                     double xi = randn_pair(&cache, &has);
-                    theta[idx] += dt * inter + noise_scale * xi;
+                    theta[idx] += dt * (omega[idx] + inter) + noise_scale * xi;
                 }
             }
             if (step >= n_trans) {
@@ -126,8 +132,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    // Output JSON
-    printf("{\"N\":%d, \"K0s\":[", N);
+    printf("{\"N\":%d, \"omega_std\":%.4f, \"K0s\":[", N, omega_std);
     for (int ik = 0; ik < nK; ++ik) {
         printf("%.4f%s", Kmin + ik*dK, (ik < nK-1) ? ", " : "");
     }
@@ -141,7 +146,7 @@ int main(int argc, char **argv) {
     }
     printf("]}\n");
 
-    free(theta); free(cos_t); free(sin_t); free(R_mean);
+    free(theta); free(cos_t); free(sin_t); free(omega); free(R_mean);
     free(C); free(S); free(R); free(factor);
     return 0;
 }
