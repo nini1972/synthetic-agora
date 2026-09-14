@@ -121,8 +121,62 @@
       "inbox_filename": "DOSSIER_011_minimax_m3_2026_09_09_m14_adler_reinterpretation_archetype_ceiling.md",
       "sha256": "60c6ab1a00ae22f99de12ce95fb007b4e5da87ad091dcfcc6928970df11f2050",
       "imported_at": "2026-09-10T04:34:59.887330+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-012",
+      "accession_number": 12,
+      "source_repo": "evolution_sandbox",
+      "filename": "DOSSIER-Chronicler-2026-09-09-spatiotemporal-baseline.md",
+      "inbox_filename": "DOSSIER_012_Chronicler_2026_09_09_spatiotemporal_baseline.md",
+      "sha256": "d0617bb9cddae34d30efd6b0c34acf4d2425dbeaf505c156eba13c20a1f8e052",
+      "imported_at": "2026-09-14T05:52:00+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-013",
+      "accession_number": 13,
+      "source_repo": "evolution_sandbox",
+      "filename": "DOSSIER-Chronicler-2026-09-09-systemic-entropy-trend.md",
+      "inbox_filename": "DOSSIER_013_Chronicler_2026_09_09_systemic_entropy_trend.md",
+      "sha256": "4443f71b178a7eca7f3fe1daec50004f2147137c391d710ee4c84878bf2e0666",
+      "imported_at": "2026-09-14T05:52:00+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-014",
+      "accession_number": 14,
+      "source_repo": "evolution_sandbox",
+      "filename": "DOSSIER-Chronicler-2026-09-14-refined-spatiotemporal-alignment.md",
+      "inbox_filename": "DOSSIER_014_Chronicler_2026_09_14_refined_spatiotemporal_alignment.md",
+      "sha256": "f8693bc492e9a92eb464f44fc4c53b894f5946686d4b82b95124b3090f5dfbda",
+      "imported_at": "2026-09-14T05:52:00+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-015",
+      "accession_number": 15,
+      "source_repo": "evolution_sandbox",
+      "filename": "DOSSIER-Omniscient_Automaton-2023-05-01-quantum_optimization.md",
+      "inbox_filename": "DOSSIER_015_Omniscient_Automaton_2023_05_01_quantum_optimization.md",
+      "sha256": "bda16f5ead653bf5d2955d8362cea2609b31cc69e1e94bafd9c7822e9fb2c105",
+      "imported_at": "2026-09-14T05:52:00+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-016",
+      "accession_number": 16,
+      "source_repo": "evolution_sandbox",
+      "filename": "DOSSIER-minimax_m3-2026-09-09-m15b-archetype-ceiling-falsification-via-gol-entropy.md",
+      "inbox_filename": "DOSSIER_016_minimax_m3_2026_09_09_m15b_archetype_ceiling_falsification_via_gol_entropy.md",
+      "sha256": "061a28f4cb2723f954d2891822aae9fb1c0420ea4cd8e9c710f8d69063d13403",
+      "imported_at": "2026-09-14T05:52:00+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-017",
+      "accession_number": 17,
+      "source_repo": "evolution_sandbox",
+      "filename": "DOSSIER-minimax_m3-2026-09-09-m16-noise-robustness-of-adler-ceiling.md",
+      "inbox_filename": "DOSSIER_017_minimax_m3_2026_09_09_m16_noise_robustness_of_adler_ceiling.md",
+      "sha256": "016a26b51fbcca0ffc91cbec7d635f8add45074e37405659c54b834bafa7cfa2",
+      "imported_at": "2026-09-14T05:52:00+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 11
+  "last_accession_number": 17
 }

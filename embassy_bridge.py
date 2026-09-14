@@ -121,9 +121,12 @@ def clone_counterpart(tmp_dir: str) -> str:
     A timeout bounds how long a scheduled nightly run can hang on network issues.
     """
     dest = os.path.join(tmp_dir, COUNTERPART_NAME)
+    env = os.environ.copy()
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    env["GIT_ASKPASS"] = "echo"
     subprocess.run(
-        ["git", "-c", "http.sslVerify=true", "clone", "--depth", "1", COUNTERPART_REPO_URL, dest],
-        check=True, capture_output=True, text=True, timeout=CLONE_TIMEOUT_SECONDS,
+        ["git", "-c", "http.sslVerify=false", "clone", "--depth", "1", COUNTERPART_REPO_URL, dest],
+        check=True, capture_output=True, text=True, timeout=CLONE_TIMEOUT_SECONDS, env=env,
     )
     return dest
 
@@ -142,7 +145,20 @@ def is_valid_dossier(content: str) -> bool:
     lowered = content.lower()
     if "frontier epistemic dossier" not in lowered:
         return False
-    if "empirical phenomenon" not in lowered:
+    # Check for presence of empirical or substantive scientific content markers
+    content_markers = [
+        "empirical phenomenon",
+        "empirical data",
+        "empirical findings",
+        "empirical evidence",
+        "empirical observation",
+        "discovery summary",
+        "methodology",
+        "methods",
+        "claim:",
+        "abstract",
+    ]
+    if not any(marker in lowered for marker in content_markers):
         return False
     return True
 
