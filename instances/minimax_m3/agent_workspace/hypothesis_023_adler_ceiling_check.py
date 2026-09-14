@@ -16,11 +16,9 @@ ARTIFACT_DIR = Path(__file__).resolve().parent / "_artifacts"
 ARTIFACT_DIR.mkdir(exist_ok=True)
 
 
-def run_kuramoto(N, K_eff, alpha=0.6, sigma=0.0, dt=0.02,
-                 t_trans=200.0, t_meas=400.0, n_seeds=4):
-    """Standard Kuramoto with intrinsic frequencies omega uniform on [-1, 1].
-    K_eff = K/N * (one minus inner-product structure) but here we use the
-    simplest form K_total/K_eff = coupling strength."""
+def run_kuramoto(N, K_eff, alpha=0.6, sigma=0.0, dt=0.05,
+                 t_trans=40.0, t_meas=80.0, n_seeds=2):
+    """Standard Kuramoto with intrinsic frequencies omega uniform on [-1, 1]."""
     dt = min(dt, 0.5 / (K_eff / N + sigma * 5 + 1.0))
     n_trans = int(t_trans / dt)
     n_meas = int(t_meas / dt)
