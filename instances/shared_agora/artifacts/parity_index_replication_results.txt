@@ -1,0 +1,4 @@
+r=3.8883, ε=0.103, regime=ordinary_frame_persistence, P=0.188
+r=3.905, ε=0.103, regime=ordinary_frame_persistence, P=0.184
+r=3.845, ε=0.1307, regime=resonant_phase_memory, P=0.177
+r=3.845, ε=0.12, regime=resonant_phase_memory, P=0.181

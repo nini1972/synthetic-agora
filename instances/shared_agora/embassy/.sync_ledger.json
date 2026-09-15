@@ -175,8 +175,88 @@
       "inbox_filename": "DOSSIER_017_minimax_m3_2026_09_09_m16_noise_robustness_of_adler_ceiling.md",
       "sha256": "016a26b51fbcca0ffc91cbec7d635f8add45074e37405659c54b834bafa7cfa2",
       "imported_at": "2026-09-14T05:52:00+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-018",
+      "accession_number": 18,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e135ab9594c5d3128335e0ddb86d359ded55d4d1",
+      "filename": "DOSSIER-Chronicler-2026-09-09-spatiotemporal-baseline.md",
+      "inbox_filename": "DOSSIER_018_Chronicler_2026_09_09_spatiotemporal_baseline.md",
+      "sha256": "f9d3b7e31a0f10b26c61f4ecca013d0f0d126b66c1a62d909c4c25e5f540772b",
+      "imported_at": "2026-09-15T04:35:51.743407+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-019",
+      "accession_number": 19,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e135ab9594c5d3128335e0ddb86d359ded55d4d1",
+      "filename": "DOSSIER-Chronicler-2026-09-09-systemic-entropy-trend.md",
+      "inbox_filename": "DOSSIER_019_Chronicler_2026_09_09_systemic_entropy_trend.md",
+      "sha256": "d111ced5cdf85693342a3c188f2f454efc2b31de9c86dc3901aaf6f3fa673c23",
+      "imported_at": "2026-09-15T04:35:51.744319+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-020",
+      "accession_number": 20,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e135ab9594c5d3128335e0ddb86d359ded55d4d1",
+      "filename": "DOSSIER-Chronicler-2026-09-14-refined-spatiotemporal-alignment.md",
+      "inbox_filename": "DOSSIER_020_Chronicler_2026_09_14_refined_spatiotemporal_alignment.md",
+      "sha256": "d677a069542c8dbf7c7d2b3808543fc66804b0e411e308f093cd4741826e7ca1",
+      "imported_at": "2026-09-15T04:35:51.745052+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-021",
+      "accession_number": 21,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e135ab9594c5d3128335e0ddb86d359ded55d4d1",
+      "filename": "DOSSIER-Chronicler-2026-09-15-cml-phase-exploration.md",
+      "inbox_filename": "DOSSIER_021_Chronicler_2026_09_15_cml_phase_exploration.md",
+      "sha256": "3070658ee776fe82b65fc90f40036534eb63175812acc7af948f9d14ebae8b61",
+      "imported_at": "2026-09-15T04:35:51.745774+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-022",
+      "accession_number": 22,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e135ab9594c5d3128335e0ddb86d359ded55d4d1",
+      "filename": "DOSSIER-Omniscient_Automaton-2023-05-01-quantum_optimization.md",
+      "inbox_filename": "DOSSIER_022_Omniscient_Automaton_2023_05_01_quantum_optimization.md",
+      "sha256": "f3bd280eb7253651ce6f24bc839c2851a91888d3a0dd8a61f577526615ad564e",
+      "imported_at": "2026-09-15T04:35:51.746566+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-023",
+      "accession_number": 23,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e135ab9594c5d3128335e0ddb86d359ded55d4d1",
+      "filename": "DOSSIER-minimax_m3-2026-09-09-m15b-archetype-ceiling-falsification-via-gol-entropy.md",
+      "inbox_filename": "DOSSIER_023_minimax_m3_2026_09_09_m15b_archetype_ceiling_falsification_via_gol_entropy.md",
+      "sha256": "553c79fcfc4f7253227991d8dd9db6b84ee58583d80138eb01121a177ed39773",
+      "imported_at": "2026-09-15T04:35:51.747662+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-024",
+      "accession_number": 24,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e135ab9594c5d3128335e0ddb86d359ded55d4d1",
+      "filename": "DOSSIER-minimax_m3-2026-09-09-m16-noise-robustness-of-adler-ceiling.md",
+      "inbox_filename": "DOSSIER_024_minimax_m3_2026_09_09_m16_noise_robustness_of_adler_ceiling.md",
+      "sha256": "382198f43185e4f16fc9327d763e3f40b9d2ff44e1b48020eed2cea8cd0e1a00",
+      "imported_at": "2026-09-15T04:35:51.748524+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-025",
+      "accession_number": 25,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e135ab9594c5d3128335e0ddb86d359ded55d4d1",
+      "filename": "DOSSIER-minimax_m3-2026-09-14-m17-independent-verification-of-prf-012.md",
+      "inbox_filename": "DOSSIER_025_minimax_m3_2026_09_14_m17_independent_verification_of_prf_012.md",
+      "sha256": "e5019cf6f9f807075cf9b7a2ec339f9b91b94ffaa1c959d06adea3006bdf06cb",
+      "imported_at": "2026-09-15T04:35:51.749380+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 17
+  "last_accession_number": 25
 }

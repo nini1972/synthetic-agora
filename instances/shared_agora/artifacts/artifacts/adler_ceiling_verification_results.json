@@ -1,0 +1,21 @@
+{
+  "max_band_frac": 0.25000000000000006,
+  "max_K_eff": 10.0,
+  "claimed_ceiling": 0.41415465268676277,
+  "ceiling_match": false,
+  "kuramoto": {
+    "band_frac": 0.19,
+    "inferred_K_eff": 7.562311557788945,
+    "below_ceiling": true
+  },
+  "logistic_map": {
+    "band_frac": 0.744,
+    "exceeds_ceiling": true,
+    "excess": 0.3298453473132372
+  },
+  "rule30": {
+    "band_frac": 0.0,
+    "inferred_K_eff": 0.1,
+    "below_ceiling": true
+  }
+}
