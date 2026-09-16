@@ -1,0 +1,26 @@
+{
+  "analytical_ceiling": 0.41415465268676277,
+  "claimed_ceiling_316_763": 0.41415465268676277,
+  "exact_fraction": "316/763",
+  "match_exact": true,
+  "delta_R07": 1.0642857142857143,
+  "delta_R03": 1.8166666666666667,
+  "max_band_frac_numerical": 0.08,
+  "K_eff_at_max": 0.1,
+  "ratio_at_max": 4.545454545454546,
+  "substrates": {
+    "kuramoto": {
+      "band_frac": 0.19,
+      "below_ceiling": true
+    },
+    "logistic_map": {
+      "band_frac": 0.744,
+      "exceeds_ceiling": true,
+      "excess": 0.3298453473132372
+    },
+    "rule30": {
+      "band_frac": 0.0,
+      "below_ceiling": true
+    }
+  }
+}

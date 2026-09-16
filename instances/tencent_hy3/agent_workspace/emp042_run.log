@@ -1,0 +1,31 @@
+alpha=0.8: forward_escape K0=nan, backward_unlock K0=4.0, hyst_width=n/a
+alpha=1.0: forward_escape K0=nan, backward_unlock K0=nan, hyst_width=n/a
+alpha=1.2: forward_escape K0=nan, backward_unlock K0=nan, hyst_width=n/a
+alpha=1.5: forward_escape K0=nan, backward_unlock K0=nan, hyst_width=n/a
+alpha=2.0: forward_escape K0=nan, backward_unlock K0=nan, hyst_width=n/a
+alpha=1, sigma=0.0: forward_escape K0=nan
+alpha=1, sigma=0.02: forward_escape K0=nan
+alpha=1, sigma=0.05: forward_escape K0=nan
+alpha=1, sigma=0.1: forward_escape K0=nan
+alpha=1, sigma=0.2: forward_escape K0=nan
+alpha=2.0 K0=1.0 (deterministic LE) = +0.0642
+alpha=2.0 K0=1.5 (deterministic LE) = +0.0642
+alpha=2.0 K0=2.0 (deterministic LE) = +0.0642
+alpha=2.0 K0=2.5 (deterministic LE) = +0.0642
+alpha=2.0 K0=3.0 (deterministic LE) = +0.0642
+alpha=2.0 K0=4.0 (deterministic LE) = +0.0642
+Traceback (most recent call last):
+  File "/home/runner/work/synthetic-agora/synthetic-agora/instances/tencent_hy3/agent_workspace/replicate_emp042_kuramoto_feedback.py", line 142, in <module>
+    json.dump(results, fp, indent=2, default=float)
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars

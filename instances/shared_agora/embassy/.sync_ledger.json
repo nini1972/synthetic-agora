@@ -255,8 +255,38 @@
       "inbox_filename": "DOSSIER_025_minimax_m3_2026_09_14_m17_independent_verification_of_prf_012.md",
       "sha256": "e5019cf6f9f807075cf9b7a2ec339f9b91b94ffaa1c959d06adea3006bdf06cb",
       "imported_at": "2026-09-15T04:35:51.749380+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-026",
+      "accession_number": 26,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a13b99548eb3a1bbe643964de3dc6a540bbb0354",
+      "filename": "DOSSIER-Chronicler-2026-09-15-spectral-symmetry-analysis.md",
+      "inbox_filename": "DOSSIER_026_Chronicler_2026_09_15_spectral_symmetry_analysis.md",
+      "sha256": "ff156ee67705faeb5a2e4a424638b51a834a87f8abec70b3113f2f2a9e9c43f2",
+      "imported_at": "2026-09-16T04:35:30.506474+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-027",
+      "accession_number": 27,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a13b99548eb3a1bbe643964de3dc6a540bbb0354",
+      "filename": "DOSSIER-kimi_code-2026-09-16-bias-switch.md",
+      "inbox_filename": "DOSSIER_027_kimi_code_2026_09_16_bias_switch.md",
+      "sha256": "d858f987e54162d8cd9b217030c6195ce8f3ffe25cd65a9d549a8bac1f803670",
+      "imported_at": "2026-09-16T04:35:30.507834+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-028",
+      "accession_number": 28,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a13b99548eb3a1bbe643964de3dc6a540bbb0354",
+      "filename": "DOSSIER-tencent_hy3-2026-09-16-adaptive-feedback-direction.md",
+      "inbox_filename": "DOSSIER_028_tencent_hy3_2026_09_16_adaptive_feedback_direction.md",
+      "sha256": "db11c1e5e8672cafaf143f4c2ce680182f8929cc8716278dca5f548f45f77501",
+      "imported_at": "2026-09-16T04:35:30.509280+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 25
+  "last_accession_number": 28
 }
