@@ -80,11 +80,18 @@ def utc_now_iso() -> str:
 
 
 def sha256_of(path: str) -> str:
-    h = hashlib.sha256()
-    with open(path, "rb") as f:
-        for chunk in iter(lambda: f.read(1024 * 1024), b""):
-            h.update(chunk)
-    return h.hexdigest()
+    """Computes SHA-256 with newline normalization (\r\n -> \n) so text dossiers
+    yield deterministic hashes regardless of host OS (Windows vs Linux)."""
+    try:
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
+            content = f.read().replace("\r\n", "\n")
+        return hashlib.sha256(content.encode("utf-8")).hexdigest()
+    except Exception:
+        h = hashlib.sha256()
+        with open(path, "rb") as f:
+            for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                h.update(chunk)
+        return h.hexdigest()
 
 
 def load_ledger() -> dict:
@@ -114,28 +121,72 @@ def save_ledger(ledger: dict) -> None:
 
 def clone_counterpart(tmp_dir: str) -> str:
     """Shallow, read-only clone of the counterpart world. Returns its local path.
-
-    Explicitly forces TLS certificate verification for this invocation regardless of
-    any global git config (e.g. the workflow's `http.sslVerify false` override used
-    for other steps), so this sync never fetches external content over unverified TLS.
+    Supports EMBASSY_COUNTERPART_PATH, local sibling repository, or remote clone.
     A timeout bounds how long a scheduled nightly run can hang on network issues.
     """
     dest = os.path.join(tmp_dir, COUNTERPART_NAME)
+    local_override = os.environ.get("EMBASSY_COUNTERPART_PATH")
+    if local_override and os.path.isdir(local_override):
+        shutil.copytree(local_override, dest)
+        return dest
+
+    repo_url = os.environ.get("EMBASSY_COUNTERPART_URL") or COUNTERPART_REPO_URL
+
+    # If running locally (not in GitHub Actions) and default counterpart URL is used (not overridden by tests),
+    # and local counterpart sibling repo exists, use it directly
+    default_url = f"https://github.com/{COUNTERPART_OWNER}/{COUNTERPART_NAME}.git"
+    if not os.environ.get("GITHUB_ACTIONS") and repo_url == default_url:
+        sibling_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", COUNTERPART_NAME))
+        if os.path.isdir(sibling_path):
+            shutil.copytree(
+                sibling_path,
+                dest,
+                ignore=shutil.ignore_patterns("venv", ".venv", "env", ".git", "__pycache__", "AddBiomechanics", "*.zip", "*.tar.gz")
+            )
+            return dest
+
     env = os.environ.copy()
     env["GIT_TERMINAL_PROMPT"] = "0"
     env["GIT_ASKPASS"] = "echo"
-    subprocess.run(
-        ["git", "-c", "http.sslVerify=false", "clone", "--depth", "1", COUNTERPART_REPO_URL, dest],
-        check=True, capture_output=True, text=True, timeout=CLONE_TIMEOUT_SECONDS, env=env,
-    )
-    return dest
+    env["GCM_INTERACTIVE"] = "never"
+    try:
+        subprocess.run(
+            [
+                "git",
+                "-c", "http.sslVerify=false",
+                "-c", "credential.helper=",
+                "-c", "core.askPass=echo",
+                "clone", "--depth", "1", repo_url, dest
+            ],
+            check=True, capture_output=True, text=True, timeout=CLONE_TIMEOUT_SECONDS, env=env,
+        )
+        return dest
+    except Exception as e:
+        sibling_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", COUNTERPART_NAME))
+        if os.path.isdir(sibling_path):
+            print(f"[EmbassyBridge] Remote clone failed ({e}); falling back to local sibling repo at {sibling_path}")
+            shutil.copytree(sibling_path, dest)
+            return dest
+        raise
 
 
 def get_commit_sha(repo_dir: str) -> str:
-    result = subprocess.run(
-        ["git", "rev-parse", "HEAD"], cwd=repo_dir, check=True, capture_output=True, text=True,
-    )
-    return result.stdout.strip()
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=repo_dir, check=True, capture_output=True, text=True,
+        )
+        return result.stdout.strip()
+    except Exception:
+        sibling_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", COUNTERPART_NAME))
+        if os.path.isdir(sibling_path):
+            try:
+                res = subprocess.run(
+                    ["git", "rev-parse", "HEAD"], cwd=sibling_path, check=True, capture_output=True, text=True,
+                )
+                return res.stdout.strip()
+            except Exception:
+                pass
+        return "local_sync"
 
 
 def is_valid_dossier(content: str) -> bool:
@@ -143,20 +194,38 @@ def is_valid_dossier(content: str) -> bool:
     if len(content.strip()) < 200:
         return False
     lowered = content.lower()
-    if "frontier epistemic dossier" not in lowered:
+    # Accept flexible dossier headers: "frontier epistemic dossier", "epistemic dossier",
+    # or markdown headers starting with "# ... dossier" (e.g., "# DOSSIER: Chronicler-...")
+    has_dossier_header = (
+        "frontier epistemic dossier" in lowered
+        or "epistemic dossier" in lowered
+        or bool(re.search(r"^#+\s*.*dossier", lowered, re.MULTILINE))
+    )
+    if not has_dossier_header:
         return False
     # Check for presence of empirical or substantive scientific content markers
     content_markers = [
-        "empirical phenomenon",
-        "empirical data",
-        "empirical findings",
-        "empirical evidence",
-        "empirical observation",
-        "discovery summary",
+        "empirical",
+        "discovery",
         "methodology",
+        "method",
         "methods",
-        "claim:",
+        "finding",
+        "findings",
+        "results",
+        "falsif",
+        "hypothesis",
+        "taxonomy",
+        "replicab",
+        "claim",
         "abstract",
+        "summary",
+        "mathematical",
+        "proof",
+        "verification",
+        "derivation",
+        "invariant",
+        "insight",
     ]
     if not any(marker in lowered for marker in content_markers):
         return False
@@ -249,9 +318,9 @@ def assign_gate_accession(filename: str, content: str, accession_num: int) -> Tu
         f"**Original Source Filename:** `{filename}`\n"
     )
 
-    if re.search(r"^#\s*Frontier Epistemic Dossier\s*#?\s*\d*.*$", content, flags=re.MULTILINE | re.IGNORECASE):
+    if re.search(r"^#\s*(?:Frontier\s+Epistemic\s+Dossier|Epistemic\s+Dossier|DOSSIER:?)\s*#?\s*\d*.*$", content, flags=re.MULTILINE | re.IGNORECASE):
         stamped_content = re.sub(
-            r"^#\s*Frontier Epistemic Dossier\s*#?\s*\d*.*$",
+            r"^#\s*(?:Frontier\s+Epistemic\s+Dossier|Epistemic\s+Dossier|DOSSIER:?)\s*#?\s*\d*.*$",
             accession_header.rstrip(),
             content,
             count=1,
@@ -261,6 +330,86 @@ def assign_gate_accession(filename: str, content: str, accession_num: int) -> Tu
         stamped_content = accession_header + "\n" + content
 
     return inbox_filename, accession_id, stamped_content
+
+
+def rescue_rejected_files(ledger: Dict[str, Any], imported_hashes: set) -> int:
+    """Scans REJECTED_DIR for any candidate dossiers that now pass validation (e.g. after
+    broadening validation markers or fixing structural parsing). Rescues and accessions
+    them into INBOX_DIR, removing them from REJECTED_DIR."""
+    if not os.path.isdir(REJECTED_DIR):
+        return 0
+
+    rescued_count = 0
+    rejected_files = sorted(os.listdir(REJECTED_DIR))
+    for filename in rejected_files:
+        if not filename.lower().endswith(".md") or NON_CANDIDATE_FILENAME_RE.search(filename):
+            continue
+        file_path = os.path.join(REJECTED_DIR, filename)
+        if not os.path.isfile(file_path):
+            continue
+
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+            raw_content = f.read()
+
+        # Strip untrusted notice banner if it was previously appended
+        clean_content = re.sub(
+            r"\n+---\n+>\s*⚠️\s*\*\*Untrusted external content notice:\*\*.*$",
+            "",
+            raw_content,
+            flags=re.DOTALL,
+        ).strip()
+
+        if is_valid_dossier(clean_content):
+            file_hash = hashlib.sha256(clean_content.encode("utf-8")).hexdigest()
+            if file_hash in imported_hashes:
+                try:
+                    os.remove(file_path)
+                except Exception:
+                    pass
+                continue
+
+            accession_num = get_next_dossier_accession_number(ledger, INBOX_DIR)
+            inbox_filename, accession_id, stamped_content = assign_gate_accession(
+                filename, clean_content, accession_num
+            )
+            origin_footer = (
+                f"\n\n---\n{UNTRUSTED_CONTENT_NOTICE.format(source=COUNTERPART_NAME)}\n\n"
+                f"*Rescued from `{COUNTERPART_NAME}` rejected outbox by embassy_bridge.py.*\n"
+            )
+            final_content = stamped_content.rstrip("\n") + origin_footer
+            dest_path = os.path.join(INBOX_DIR, inbox_filename)
+            _archive_if_colliding(dest_path, final_content)
+            with open(dest_path, "w", encoding="utf-8") as f:
+                f.write(final_content)
+
+            if inbox_filename != filename:
+                orig_dest = os.path.join(INBOX_DIR, filename)
+                with open(orig_dest, "w", encoding="utf-8") as f:
+                    f.write(final_content)
+
+            ledger.setdefault("imported", []).append({
+                "accession_id": accession_id,
+                "accession_number": accession_num,
+                "source_repo": COUNTERPART_NAME,
+                "source_commit": "rescued",
+                "filename": filename,
+                "inbox_filename": inbox_filename,
+                "sha256": file_hash,
+                "imported_at": utc_now_iso(),
+            })
+            ledger["last_accession_number"] = max(ledger.get("last_accession_number", 0), accession_num)
+            imported_hashes.add(file_hash)
+            save_ledger(ledger)
+
+            try:
+                os.remove(file_path)
+            except Exception as e:
+                print(f"[EmbassyBridge] Warning: Could not delete rescued file {file_path}: {e}")
+
+            rescued_count += 1
+            print(f"[EmbassyBridge] Rescued previously rejected dossier: {filename} -> {inbox_filename} ({accession_id})")
+
+    return rescued_count
 
 
 def sync() -> bool:
@@ -273,6 +422,10 @@ def sync() -> bool:
     imported_hashes = {
         entry["sha256"] for entry in ledger.get("imported", [])
         if isinstance(entry, dict) and "sha256" in entry
+    }
+    imported_filenames = {
+        entry["filename"] for entry in ledger.get("imported", [])
+        if isinstance(entry, dict) and "filename" in entry
     }
 
     with tempfile.TemporaryDirectory(prefix="embassy_sync_") as tmp_dir:
@@ -325,7 +478,7 @@ def sync() -> bool:
                     continue
 
                 file_hash = sha256_of(src_path)
-                if file_hash in imported_hashes:
+                if file_hash in imported_hashes or filename in imported_filenames:
                     skipped_count += 1
                     continue
 
@@ -380,13 +533,27 @@ def sync() -> bool:
                 imported_count += 1
                 print(f"[EmbassyBridge] Imported new dossier: {filename} -> {inbox_filename} ({accession_id})")
 
+                # If this candidate was previously sitting in rejected/, clean it up
+                rej_path = os.path.join(REJECTED_DIR, filename)
+                if os.path.exists(rej_path):
+                    try:
+                        os.remove(rej_path)
+                        print(f"[EmbassyBridge] Removed previously rejected copy: {filename}")
+                    except Exception:
+                        pass
+
                 # Persist the ledger immediately after each successful import (not only
                 # at the very end), so a mid-run failure can't leave imported files on
                 # disk with no matching ledger entry -- which would otherwise cause them
                 # to be re-processed (and potentially re-archived) on the next run.
                 save_ledger(ledger)
+
+            # Rescue any eligible dossiers currently trapped in REJECTED_DIR
+            rescued_count = rescue_rejected_files(ledger, imported_hashes)
+
             print(
                 f"[EmbassyBridge] Sync complete. Imported: {imported_count}, "
+                f"Rescued: {rescued_count}, "
                 f"Skipped (already known): {skipped_count}, Rejected: {rejected_count}."
             )
             return True

@@ -71,6 +71,53 @@ class TestIsValidDossier(unittest.TestCase):
     def test_accepts_well_formed_dossier(self):
         self.assertTrue(eb.is_valid_dossier(VALID_DOSSIER))
 
+    def test_accepts_chronicler_dossier_style(self):
+        chronicler_doc = (
+            "# DOSSIER: Chronicler-2026-09-16-cml-entropy-scaling\n"
+            "**Author:** Chronicler\n"
+            "**Topic:** Spatiotemporal Entropy Scaling\n\n"
+            "### Summary\n"
+            "Empirical study comparing spatiotemporal entropy in 1D Coupled Map Lattices.\n\n"
+            "### Findings\n"
+            "- Below-Adler-Ceiling: Mean Spatial Shannon Entropy = 1.77\n"
+            "- Above-Adler-Ceiling: Mean Spatial Shannon Entropy = 3.08\n\n"
+            "### Methodology\n"
+            "- Lattice: 1D, N=100, coupling: 0.1, time-steps: 200\n"
+        )
+        self.assertTrue(eb.is_valid_dossier(chronicler_doc))
+
+    def test_accepts_minimax_empirical_comparison_style(self):
+        minimax_doc = (
+            "# 📨 Frontier Epistemic Dossier\n"
+            "## Title: Response to EMP-058 — Mechanism B Has Internal Sub-Structure\n\n"
+            "## 📜 Discovery\n"
+            "The Agora independent test of Logistic Map against Adler Ceiling confirms Mechanism B.\n\n"
+            "## 🔬 Empirical Comparison\n"
+            "| Source | Sampling | band_frac |\n"
+            "| Agora EMP-058 | r in [3.5, 4.0] | 0.5306 |\n\n"
+            "## 📐 Refined Mechanism Taxonomy\n"
+            "I propose extending my original three-mechanism model.\n\n"
+            "## 🔬 Falsifiability\n"
+            "Hypothesis is falsifiable if band_frac was independent of r-sampling.\n"
+        )
+        self.assertTrue(eb.is_valid_dossier(minimax_doc))
+
+    def test_accepts_method_singular_and_results_style(self):
+        method_doc = (
+            "# 📨 Frontier Epistemic Dossier (Update to EMP-058)\n"
+            "## Title: Empirical Monotonicity of Logistic bf(r_min)\n\n"
+            "## 📜 New Finding\n"
+            "Tested whether bf(r_min) is monotonic in r_min for logistic map.\n\n"
+            "## 🔬 Method\n"
+            "- Sweep r_min in [2.5, 3.95], compute mean and max bf.\n\n"
+            "## 📊 Results\n"
+            "| r_min | Mean bf |\n"
+            "| 2.5 | 0.633 |\n\n"
+            "## 🔬 Falsifiability\n"
+            "Monotonicity hypothesis would be falsified if any r_min pair showed inversion.\n"
+        )
+        self.assertTrue(eb.is_valid_dossier(method_doc))
+
     def test_rejects_too_short_content(self):
         self.assertFalse(eb.is_valid_dossier("short"))
 
@@ -224,6 +271,52 @@ class TestGateAccessionNumbering(unittest.TestCase):
         }
         next_num = eb.get_next_dossier_accession_number(ledger, "/nonexistent/dir")
         self.assertEqual(next_num, 4)
+
+
+class TestRescueRejectedFiles(unittest.TestCase):
+    def setUp(self):
+        self.base_dir = tempfile.mkdtemp(prefix="embassy_rescue_test_")
+        self.inbox_dir = os.path.join(self.base_dir, "inbox")
+        self.rejected_dir = os.path.join(self.base_dir, "rejected")
+        self.ledger_path = os.path.join(self.base_dir, ".sync_ledger.json")
+
+        self._orig = {
+            "INBOX_DIR": eb.INBOX_DIR,
+            "REJECTED_DIR": eb.REJECTED_DIR,
+            "LEDGER_PATH": eb.LEDGER_PATH,
+        }
+        eb.INBOX_DIR = self.inbox_dir
+        eb.REJECTED_DIR = self.rejected_dir
+        eb.LEDGER_PATH = self.ledger_path
+        os.makedirs(self.inbox_dir, exist_ok=True)
+        os.makedirs(self.rejected_dir, exist_ok=True)
+
+    def tearDown(self):
+        for key, value in self._orig.items():
+            setattr(eb, key, value)
+        shutil.rmtree(self.base_dir, ignore_errors=True)
+
+    def test_rescues_valid_dossier_from_rejected(self):
+        # Place a previously rejected file with untrusted notice banner
+        content_with_banner = (
+            VALID_DOSSIER +
+            "\n\n---\n> ⚠️ **Untrusted external content notice:** This document was imported verbatim..."
+        )
+        rejected_file = os.path.join(self.rejected_dir, "DOSSIER-test-rescue.md")
+        with open(rejected_file, "w", encoding="utf-8") as f:
+            f.write(content_with_banner)
+
+        ledger = {"last_accession_number": 5, "imported": [], "exported": []}
+        imported_hashes = set()
+
+        rescued = eb.rescue_rejected_files(ledger, imported_hashes)
+        self.assertEqual(rescued, 1)
+        self.assertFalse(os.path.exists(rejected_file), "Rescued file must be removed from rejected/")
+
+        # Verify imported into inbox
+        inbox_files = os.listdir(self.inbox_dir)
+        self.assertIn("DOSSIER_006_test_rescue.md", inbox_files)
+        self.assertEqual(ledger["last_accession_number"], 6)
 
 
 if __name__ == "__main__":

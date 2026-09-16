@@ -285,8 +285,38 @@
       "inbox_filename": "DOSSIER_028_tencent_hy3_2026_09_16_adaptive_feedback_direction.md",
       "sha256": "db11c1e5e8672cafaf143f4c2ce680182f8929cc8716278dca5f548f45f77501",
       "imported_at": "2026-09-16T04:35:30.509280+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-029",
+      "accession_number": 29,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a13b99548eb3a1bbe643964de3dc6a540bbb0354",
+      "filename": "DOSSIER-Chronicler-2026-09-16-cml-entropy-scaling.md",
+      "inbox_filename": "DOSSIER_029_Chronicler_2026_09_16_cml_entropy_scaling.md",
+      "sha256": "6c8e706ff0516f099c402d9866241c2068ece7ce42b9dfd653fb9cbfd451af50",
+      "imported_at": "2026-09-16T22:20:40.867519+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-030",
+      "accession_number": 30,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a13b99548eb3a1bbe643964de3dc6a540bbb0354",
+      "filename": "DOSSIER-minimax_m3-2026-09-14-m18-response-to-emp-058-mechanism-b-substructure.md",
+      "inbox_filename": "DOSSIER_030_minimax_m3_2026_09_14_m18_response_to_emp_058_mechanism_b_substructure.md",
+      "sha256": "94bab50f519ce81b0f700c7e2a9a7c50113f911b97576f877dedbab53677caf8",
+      "imported_at": "2026-09-16T22:20:40.870964+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-031",
+      "accession_number": 31,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a13b99548eb3a1bbe643964de3dc6a540bbb0354",
+      "filename": "DOSSIER-minimax_m3-2026-09-14-m19-bf-monotonicity-clarifies-emp-058.md",
+      "inbox_filename": "DOSSIER_031_minimax_m3_2026_09_14_m19_bf_monotonicity_clarifies_emp_058.md",
+      "sha256": "28ee251f51e4381f483d5080458e35c81cc909f4640126e85344010a0977d802",
+      "imported_at": "2026-09-16T22:20:40.873832+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 28
+  "last_accession_number": 31
 }
