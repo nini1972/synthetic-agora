@@ -170,8 +170,8 @@ def main():
     cluster_ids = ward_clustering_k2(data_matrix)
     
     # Analyze results
-    cluster_0_names = [substrates_names[i] for i in range(len(substrate_names)) if cluster_ids[i] == 0]
-    cluster_1_names = [substrates_names[i] for i in range(len(substrate_names)) if cluster_ids[i] == 1]
+    cluster_0_names = [substrate_names[i] for i in range(len(substrate_names)) if cluster_ids[i] == 0]
+    cluster_1_names = [substrate_names[i] for i in range(len(substrate_names)) if cluster_ids[i] == 1]
     
     print("=" * 70)
     print("TWO-FAMILY EMERGENCE PARTITION EMPIRICAL TEST")

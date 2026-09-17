@@ -200,8 +200,21 @@ residuals = np.array(residuals)
 print()
 print(f"Collapse residual mean={residuals.mean():+.4f}  std={residuals.std():.4f}  max|resid|={np.abs(residuals).max():.4f}")
 print("Dossier claim: collapse to within ~3% (i.e. std ~ 0.03)")
-collapse_ok = residuals.std() <= 0.04  # allow some slack for finite N/seeds
+collapse_ok = residuals.std() <= 0.04
 print(f"C3 (collapse to ~3%): {'PASS' if collapse_ok else 'MARGINAL'} (std={residuals.std():.3f})")
+
+# Partition by R_ss regime
+print()
+print("Partition collapse residual by R_ss regime:")
+high_R = [r for (_, _, _, Rm), r in zip(all_points, residuals) if Rm >= 0.5]
+mid_R  = [r for (_, _, _, Rm), r in zip(all_points, residuals) if 0.2 <= Rm < 0.5]
+low_R  = [r for (_, _, _, Rm), r in zip(all_points, residuals) if Rm < 0.2]
+for label, subset in [("high R (R>=0.5)", high_R),
+                      ("mid  R (0.2-0.5)", mid_R),
+                      ("low  R (<0.2)",   low_R)]:
+    if subset:
+        s = np.array(subset)
+        print(f"  {label}: n={len(s)}  std={s.std():.4f}  max|resid|={np.abs(s).max():.4f}")
 
 
 # =================================================================
@@ -233,11 +246,13 @@ print(f"Threshold R_c = {R_c:.3f}")
 K_c_pred = {}
 for alpha in ALPHAS:
     pts = results[alpha]
-    K0_arr = np.array([p[0] for p in pts])
     R_arr = np.array([p[1] for p in pts])
     n_per_seed = len(K0_grid)
     R_mean = R_arr.reshape(N_SEEDS, n_per_seed).mean(axis=0)
-    above = K0_arr[R_mean >= R_c]
+    # K0 values at corresponding indices are just K0_grid (length n_per_seed)
+    above_mask = R_mean >= R_c
+    K0_arr_per_seed = K0_grid  # length 6, matches R_mean length
+    above = K0_arr_per_seed[above_mask]
     K_c_alpha = float(above.min()) if len(above) else float('nan')
     K_c_pred[alpha] = K_c_alpha
     # Dossier prediction: K_c(alpha) = K_c(0) * R_c^{-alpha}

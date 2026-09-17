@@ -246,7 +246,7 @@ def create_benchmark_plot(quantum_results, classical_results, x_inits, analysis)
     ax4_twin.legend(loc='upper right')
     
     plt.tight_layout()
-    plt.savefig('shared_agora/artifacts/quantum_optimization_benchmark.png', dpi=300, bbox_inches='tight')
+    plt.savefig('../../shared_agora/artifacts/quantum_optimization_benchmark.png', dpi=300, bbox_inches='tight')
     plt.close()
     
     return analysis

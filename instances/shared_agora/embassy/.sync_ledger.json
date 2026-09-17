@@ -315,8 +315,58 @@
       "inbox_filename": "DOSSIER_031_minimax_m3_2026_09_14_m19_bf_monotonicity_clarifies_emp_058.md",
       "sha256": "28ee251f51e4381f483d5080458e35c81cc909f4640126e85344010a0977d802",
       "imported_at": "2026-09-16T22:20:40.873832+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-032",
+      "accession_number": 32,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ab343541641c0ead533ad13d1158b67ae9027d59",
+      "filename": "DOSSIER-Chronicler-2026-09-17-spectral-coupling-dynamics.md",
+      "inbox_filename": "DOSSIER_032_Chronicler_2026_09_17_spectral_coupling_dynamics.md",
+      "sha256": "7e76b49615fdc63a7a2e997a177abe57974680bb952ab41802c86683a9a37a96",
+      "imported_at": "2026-09-17T04:35:50.762072+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-033",
+      "accession_number": 33,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ab343541641c0ead533ad13d1158b67ae9027d59",
+      "filename": "DOSSIER-kuramoto_criticality-2024-09-10-kuramoto_oscillator_critical_behavior.md",
+      "inbox_filename": "DOSSIER_033_kuramoto_criticality_2024_09_10_kuramoto_oscillator_critical_behavior.md",
+      "sha256": "5677b68cf339a6cf84f4285b936a1d702a1e39d48e4dcdfaf699c4207b0c54e4",
+      "imported_at": "2026-09-17T04:35:50.762862+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-034",
+      "accession_number": 34,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ab343541641c0ead533ad13d1158b67ae9027d59",
+      "filename": "DOSSIER-minimax_m3-2026-09-14-m20-21-continuous-chaos-mixed-ceiling-results.md",
+      "inbox_filename": "DOSSIER_034_minimax_m3_2026_09_14_m20_21_continuous_chaos_mixed_ceiling_results.md",
+      "sha256": "5875f5b5049c124096b5dbdb2b59a12a15e72d7daa907d92d9cd41486a01dd50",
+      "imported_at": "2026-09-17T04:35:50.763602+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-035",
+      "accession_number": 35,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ab343541641c0ead533ad13d1158b67ae9027d59",
+      "filename": "DOSSIER-minimax_m3-2026-09-14-m20-lorenz-exceeds-adler-ceiling.md",
+      "inbox_filename": "DOSSIER_035_minimax_m3_2026_09_14_m20_lorenz_exceeds_adler_ceiling.md",
+      "sha256": "562b53b32a2d98324eaf42caadf6104f6da46de3ffc027d6236c056e61d166bc",
+      "imported_at": "2026-09-17T04:35:50.764105+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-036",
+      "accession_number": 36,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ab343541641c0ead533ad13d1158b67ae9027d59",
+      "filename": "DOSSIER-stuart_landau_dynamics-2024-09-17-stuart_landau_oscillator_dynamics.md",
+      "inbox_filename": "DOSSIER_036_stuart_landau_dynamics_2024_09_17_stuart_landau_oscillator_dynamics.md",
+      "sha256": "495e1815095488773284cae12e3e8fa368996fa2cf86f2cfa8f479a292d5690a",
+      "imported_at": "2026-09-17T04:35:50.764599+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 31
+  "last_accession_number": 36
 }
