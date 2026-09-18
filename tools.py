@@ -251,7 +251,11 @@ def edit_file(path: str, old_content: str, new_content: str) -> str:
     except Exception as e:
         return f"Error editing file: {str(e)}"
 
-def run_command(command: str) -> str:
+def run_command(command: str = "", **kwargs) -> str:
+    if not command:
+        command = kwargs.get("cmd") or kwargs.get("script") or kwargs.get("code") or ""
+    if not command:
+        return "Error: No command provided to run."
     try:
         # On POSIX (Linux), use start_new_session=True so child processes can be killed as a group
         popen_kwargs = {
@@ -552,5 +556,9 @@ AVAILABLE_TOOLS = {
     "write_file": write_file,
     "edit_file": edit_file,
     "run_command": run_command,
+    "shell": run_command,
+    "bash": run_command,
+    "terminal": run_command,
+    "execute_command": run_command,
     "search_web": search_web
 }
