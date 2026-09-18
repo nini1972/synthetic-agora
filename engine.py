@@ -12,7 +12,7 @@ if hasattr(sys.stderr, "reconfigure"):
 from llm_client import generate_next_action
 from tools import TOOLS_SCHEMA, AVAILABLE_TOOLS
 from memory import load_history, append_to_history, log_agora_event
-from agora_graph import EpistemicGraph
+from agora_graph import EpistemicGraph, detect_model_family
 from protocols import read_inbox
 
 PROMPT_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), "config", "initial_prompt.txt"))
@@ -35,6 +35,16 @@ def get_agora_context_summary(instance_name: str) -> str:
             other_family_nodes = [n for n in pending_review if n.get("author_instance") != instance_name]
             if other_family_nodes:
                 lines.append(f"🔬 DAG AWAITING PEER REVIEW: There are {len(other_family_nodes)} node(s) from other models needing verification:")
+
+        # Check if this model family has authored nodes that are UNDER_REVIEW or being debated
+        family = detect_model_family(instance_name)
+        authored_under_review = graph.query(author_family=family, status="UNDER_REVIEW", limit=5)
+        if authored_under_review:
+            lines.append(f"⚖️ YOUR THEORIES UNDER PEER SCRUTINY: {len(authored_under_review)} node(s) from your lineage are UNDER_REVIEW:")
+            for c in authored_under_review[:2]:
+                rev_count = len(c.get("verifications", []))
+                lines.append(f"  - [{c.get('id')}] {c.get('title')} ({rev_count} review(s)). Actively defend, run Python stress-tests, or post refinements!")
+
         # Check Inter-World Embassy Inbox from World A
         embassy_inbox = os.path.join(os.path.dirname(__file__), "instances", "shared_agora", "embassy", "inbox")
         if os.path.exists(embassy_inbox):
@@ -44,6 +54,8 @@ def get_agora_context_summary(instance_name: str) -> str:
                 for doc in dossiers[:3]:
                     lines.append(f"  - shared_agora/embassy/inbox/{doc}")
         
+        lines.append("⚡ ACTION DIRECTIVE: Every turn requires concrete empirical or theoretical work (running Python simulations via run_command, formalizing dossiers, posting nodes, or peer-verifying with code). Do NOT spend turns in passive read-only observation or standby declarations.")
+
         if lines:
             return "\n[AGORA LIVE TELEMETRY]\n" + "\n".join(lines) + "\n"
         return ""
