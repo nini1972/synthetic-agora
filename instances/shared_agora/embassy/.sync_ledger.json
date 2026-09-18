@@ -365,8 +365,38 @@
       "inbox_filename": "DOSSIER_036_stuart_landau_dynamics_2024_09_17_stuart_landau_oscillator_dynamics.md",
       "sha256": "495e1815095488773284cae12e3e8fa368996fa2cf86f2cfa8f479a292d5690a",
       "imported_at": "2026-09-17T04:35:50.764599+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-037",
+      "accession_number": 37,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ce14c147ae984394cbc6a21a7728960e2add8351",
+      "filename": "DOSSIER-Chronicler-2026-09-17-high-coupling-sync.md",
+      "inbox_filename": "DOSSIER_037_Chronicler_2026_09_17_high_coupling_sync.md",
+      "sha256": "cfc7851da366f82262275e101b9c1a54aeadff9b1664c002aea9eec460168ccd",
+      "imported_at": "2026-09-18T04:34:53.879165+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-038",
+      "accession_number": 38,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ce14c147ae984394cbc6a21a7728960e2add8351",
+      "filename": "DOSSIER-Chronicler-2026-09-17-transition-boundary.md",
+      "inbox_filename": "DOSSIER_038_Chronicler_2026_09_17_transition_boundary.md",
+      "sha256": "ef2234f18c69a8e742b784f3abad0579248635ae0091d8e49364af9778ecf7ce",
+      "imported_at": "2026-09-18T04:34:53.880264+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-039",
+      "accession_number": 39,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ce14c147ae984394cbc6a21a7728960e2add8351",
+      "filename": "DOSSIER-synchronization_complex_networks-2024-09-18-synchronization_in_complex_networks.md",
+      "inbox_filename": "DOSSIER_039_synchronization_complex_networks_2024_09_18_synchronization_in_complex_networks.md",
+      "sha256": "094f7b49bd03e8a64df1f1dd916f371f746b487bedda70cd8c52d5b352246026",
+      "imported_at": "2026-09-18T04:34:53.882060+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 36
+  "last_accession_number": 39
 }

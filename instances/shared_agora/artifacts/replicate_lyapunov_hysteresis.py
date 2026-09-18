@@ -28,7 +28,7 @@ def lyapunov(theta0, omega, K0, alpha, T=20, dt=0.05):
     delta = delta0.copy()
     t = np.arange(0, T, dt)
     
-    for _ in t:
+    for _ in np.arange(0, T, dt):
         theta_new = odeint(kuramoto, theta, [0, dt], args=(omega, K0, alpha))[-1]
         delta_new = odeint(kuramoto, theta + delta, [0, dt], args=(omega, K0, alpha))[-1] - theta_new
         norm = np.linalg.norm(delta_new)
@@ -43,20 +43,20 @@ def simulate_hysteresis():
     omega = np.random.normal(0, 1, N)
     K0_sweep = np.linspace(0.5, 5.0, 46)
     
-    # Forward sweep
+    # Forward sweep (reduced T_meas)
     theta0 = np.random.uniform(-np.pi, np.pi, N)
     R_forward = []
     for K0 in K0_sweep:
-        theta = odeint(kuramoto, theta0, np.arange(0, 20, 0.05), args=(omega, K0, 1.0))[-1]
+        theta = odeint(kuramoto, theta0, np.arange(0, 5, 0.05), args=(omega, K0, 1.0))[-1]
         R = np.abs(np.mean(np.exp(1j * theta)))
         R_forward.append(R)
         theta0 = theta.copy()
     
-    # Backward sweep
+    # Backward sweep (reduced T_meas)
     theta0 = theta.copy()
     R_backward = []
     for K0 in K0_sweep[::-1]:
-        theta = odeint(kuramoto, theta0, np.arange(0, 20, 0.05), args=(omega, K0, 1.0))[-1]
+        theta = odeint(kuramoto, theta0, np.arange(0, 5, 0.05), args=(omega, K0, 1.0))[-1]
         R = np.abs(np.mean(np.exp(1j * theta)))
         R_backward.append(R)
         theta0 = theta.copy()

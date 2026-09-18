@@ -92,50 +92,52 @@ print(f"   unique raw-value spacing (grid quantum) = {dq.min():.6f} (=1/{round(1
 
 # ----------------------------------------------------------------------
 # 2. Independent simulation: reflexive mean-field Kuramoto
+#    Fast protocol: stepwise-increasing K_0 sweep with carried state
+#    (upward hysteresis sweep), then short-run bisection refinement.
 # ----------------------------------------------------------------------
 ALPHA = 0.6
 SIGMA = 0.008
 DT = 0.05
-T_INTEG = 600.0
-STEPS = int(T_INTEG / DT)
+T_SEG = 25.0
 
-def run(N, K0, seed):
+def sweep_run(N, K0_grid, seed, steps_per_seg):
+    """One continuous run; K_0 steps up through K0_grid every steps_per_seg.
+    Returns R at end of each segment."""
     r = np.random.default_rng(seed)
     th = r.uniform(0, 2*np.pi, N)
-    for s in range(STEPS):
-        z = np.exp(1j * th).mean()
-        R = np.abs(z)
-        psi = np.angle(z)
-        Keff = K0 * R**ALPHA * R          # K(t)*R factor
-        force = Keff * np.sin(psi - th)
-        th = th + DT * force + SIGMA * np.sqrt(DT) * r.standard_normal(N)
-    z = np.exp(1j * th).mean()
-    return np.abs(z)
+    out = np.empty(len(K0_grid))
+    for i, K0 in enumerate(K0_grid):
+        for s in range(steps_per_seg):
+            c, s_ = np.cos(th), np.sin(th)
+            C, S = c.mean(), s_.mean()
+            R = np.hypot(C, S)
+            psi_s, psi_c = S / R if R > 0 else 0.0, C / R if R > 0 else 0.0
+            Keff = K0 * R**ALPHA * R
+            force = Keff * (psi_s * c - psi_c * s_)
+            th = th + DT * force + SIGMA * np.sqrt(DT) * r.standard_normal(N)
+        c, s_ = np.cos(th), np.sin(th)
+        out[i] = np.hypot(c.mean(), s_.mean())
+    return out
 
-def find_Kc(N, seed, steps=None):
-    """Coarse sweep then bisection refine on the jump; R_end > 0.5 = ignited."""
-    nsteps = steps if steps is not None else STEPS
-    lo, hi = None, None
-    grid = np.arange(0.8, 4.81, 0.4)
-    vals = [run(N, K0, seed, nsteps) for K0 in grid]
-    for i in range(len(grid) - 1):
+def find_Kc(N, seed):
+    K0_grid = np.arange(0.8, 4.81, 0.5)
+    vals = sweep_run(N, K0_grid, seed, steps_per_seg=int(T_SEG / DT))
+    idx = None
+    for i in range(len(K0_grid) - 1):
         if vals[i] <= 0.5 and vals[i+1] > 0.5:
-            lo, hi = grid[i], grid[i+1]
+            idx = i
             break
-    if lo is None:
-        if vals[-1] > 0.5:
-            return grid[-1] + 0.4  # ignites below start of unresolved bracket
-        return np.nan              # never ignites in range
-    for _ in range(12):            # bisection to +-0.01
+    if idx is None:
+        return np.nan if vals[-1] <= 0.5 else K0_grid[-1]
+    lo, hi = K0_grid[idx], K0_grid[idx+1]
+    for _ in range(3):  # short-run bisection to ~ +-0.06
         mid = 0.5 * (lo + hi)
-        R = run(N, mid, seed)
-        if R > 0.5:
+        v = sweep_run(N, np.array([mid]), seed, steps_per_seg=int(120.0 / DT))[-1]
+        if v > 0.5:
             hi = mid
         else:
             lo = mid
-        if hi - lo < 0.01:
-            break
-    return hi
+    return 0.5 * (lo + hi)
 
 print("=" * 78)
 print("2) INDEPENDENT SIMULATION (alpha=0.6, sigma=0.008, T=600, dt=0.05)")
@@ -163,11 +165,8 @@ print(f"   saturating  : K_inf = {Kinf_s:.3f}, c = {c_s:.3f}, gamma = {g_s:.2f} 
 print("=" * 78)
 print("3) OBSERVATION-TIME SENSITIVITY PROBE (N=200, seeds 11/22/33)")
 for T in (200.0, 600.0, 2400.0):
-    global STEPS  # noqa
-    STEPS = int(T / DT)
-    kcs = [find_Kc(200, s) for s in (11, 22, 33)]
+    kcs = [find_Kc(200, s, steps=int(T / DT)) for s in (11, 22, 33)]
     print(f"   T = {T:6.0f} : K_c = {np.round(kcs, 3)}")
-STEPS = int(600.0 / DT)
 
 # ----------------------------------------------------------------------
 # 4. Figure
