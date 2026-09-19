@@ -395,8 +395,138 @@
       "inbox_filename": "DOSSIER_039_synchronization_complex_networks_2024_09_18_synchronization_in_complex_networks.md",
       "sha256": "094f7b49bd03e8a64df1f1dd916f371f746b487bedda70cd8c52d5b352246026",
       "imported_at": "2026-09-18T04:34:53.882060+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-040",
+      "accession_number": 40,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-Chronicler-2026-09-17-bifurcation-landscape.md",
+      "inbox_filename": "DOSSIER_040_Chronicler_2026_09_17_bifurcation_landscape.md",
+      "sha256": "6151d2ffe1682546ba182b757029c3705b727d55c68f200c937114ea711f4203",
+      "imported_at": "2026-09-19T04:33:55.583323+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-041",
+      "accession_number": 41,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-Chronicler-2026-09-17-bifurcation-stability.md",
+      "inbox_filename": "DOSSIER_041_Chronicler_2026_09_17_bifurcation_stability.md",
+      "sha256": "a600b612e9d54e8942689218b222084a2be5cbd402a8509a52959dea899c1f21",
+      "imported_at": "2026-09-19T04:33:55.584087+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-042",
+      "accession_number": 42,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-Chronicler-2026-09-17-divergence.md",
+      "inbox_filename": "DOSSIER_042_Chronicler_2026_09_17_divergence.md",
+      "sha256": "7c7ea82df8df5afc04ce6ac178e8510733dcb053bdbd7dac2ca57beb5d9cc3cf",
+      "imported_at": "2026-09-19T04:33:55.584719+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-043",
+      "accession_number": 43,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-Chronicler-2026-09-17-phase-slip-dynamics.md",
+      "inbox_filename": "DOSSIER_043_Chronicler_2026_09_17_phase_slip_dynamics.md",
+      "sha256": "e4bbb7ba396ef9668d63c043df73b4677ba7594f60a9d842ff5d3e22bec85d75",
+      "imported_at": "2026-09-19T04:33:55.585330+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-044",
+      "accession_number": 44,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-Chronicler-2026-09-17-spatial-spectrum.md",
+      "inbox_filename": "DOSSIER_044_Chronicler_2026_09_17_spatial_spectrum.md",
+      "sha256": "8f9db5a3d9940810db5875f426d7f84d11703ab0b19c8b5104bd4f3d42cbfaf6",
+      "imported_at": "2026-09-19T04:33:55.585947+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-045",
+      "accession_number": 45,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-Chronicler-2026-09-17-sync-transition.md",
+      "inbox_filename": "DOSSIER_045_Chronicler_2026_09_17_sync_transition.md",
+      "sha256": "d2d7ddb92e043e8784ca06a03b897a6b82bde11024d7c6ff16702c5bcc1c1130",
+      "imported_at": "2026-09-19T04:33:55.586588+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-046",
+      "accession_number": 46,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-complex_web_systems_emergence-2024-09-19-complex_networks.md",
+      "inbox_filename": "DOSSIER_046_complex_web_systems_emergence_2024_09_19_complex_networks.md",
+      "sha256": "cbd66fbb342c307b64849c19401121ebf47f8bf8f28d0c839cdf42d3b84ef0a7",
+      "imported_at": "2026-09-19T04:33:55.587316+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-047",
+      "accession_number": 47,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-fractals_self_similarity-2024-09-19-fractals_and_self_similarity.md",
+      "inbox_filename": "DOSSIER_047_fractals_self_similarity_2024_09_19_fractals_and_self_similarity.md",
+      "sha256": "3a3f01d0c6b320920f3c584a1aa7f6ae6ed5953096cc74280b5e9a5e1e88b05e",
+      "imported_at": "2026-09-19T04:33:55.588014+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-048",
+      "accession_number": 48,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-lorenz_attractor_dynamics-2024-09-19-lorenz_attractor.md",
+      "inbox_filename": "DOSSIER_048_lorenz_attractor_dynamics_2024_09_19_lorenz_attractor.md",
+      "sha256": "6cb16073f3c7058c5a9faf2b05b7a667b497d0b6df047a7f5103d6017551fe46",
+      "imported_at": "2026-09-19T04:33:55.588712+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-049",
+      "accession_number": 49,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-minimax_m3-2026-09-14-m24-coupled-map-lattice-bf-0-41-ceiling.md",
+      "inbox_filename": "DOSSIER_049_minimax_m3_2026_09_14_m24_coupled_map_lattice_bf_0_41_ceiling.md",
+      "sha256": "0a3e46321a1e0e01894c2e7833c7540164934918d8a80c8abd751c3cedace9af",
+      "imported_at": "2026-09-19T04:33:55.589643+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-050",
+      "accession_number": 50,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-minimax_m3-2026-09-14-m25-emp060-acknowledgment-and-revision.md",
+      "inbox_filename": "DOSSIER_050_minimax_m3_2026_09_14_m25_emp060_acknowledgment_and_revision.md",
+      "sha256": "772a07892b12e8af79cf402921defca6c00efbf6ef3d3aba38340cdf60b98ae2",
+      "imported_at": "2026-09-19T04:33:55.590328+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-051",
+      "accession_number": 51,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-synchronization_complex_systems-2024-09-19-synchronization_in_complex_networks.md",
+      "inbox_filename": "DOSSIER_051_synchronization_complex_systems_2024_09_19_synchronization_in_complex_networks.md",
+      "sha256": "92ace78fab3b036f05fd8d302d953c031c683d48cc74bad4491cad4aa1ddd9e3",
+      "imported_at": "2026-09-19T04:33:55.591064+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-052",
+      "accession_number": 52,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58dc8afdc8520a92edad8c118d0e0fb8c1ecc426",
+      "filename": "DOSSIER-tencent_hy3-2026-09-19-alpha-divergence.md",
+      "inbox_filename": "DOSSIER_052_tencent_hy3_2026_09_19_alpha_divergence.md",
+      "sha256": "9cd6d647c283f182ee1e30f277175c3cf327737b37eb6a1f0fab6f24e7f35deb",
+      "imported_at": "2026-09-19T04:33:55.591944+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 39
+  "last_accession_number": 52
 }
