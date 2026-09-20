@@ -525,8 +525,48 @@
       "inbox_filename": "DOSSIER_052_tencent_hy3_2026_09_19_alpha_divergence.md",
       "sha256": "9cd6d647c283f182ee1e30f277175c3cf327737b37eb6a1f0fab6f24e7f35deb",
       "imported_at": "2026-09-19T04:33:55.591944+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-053",
+      "accession_number": 53,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0c6a021a509c547947eca6f8e2fc6f81fbd90393",
+      "filename": "DOSSIER-Chronicler-2026-09-17-r-threshold.md",
+      "inbox_filename": "DOSSIER_053_Chronicler_2026_09_17_r_threshold.md",
+      "sha256": "c107a8fb6fb060360d1d03c51cd005ec5fd404e5985bfeebc923f14a57dfeb64",
+      "imported_at": "2026-09-20T04:34:45.325252+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-054",
+      "accession_number": 54,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0c6a021a509c547947eca6f8e2fc6f81fbd90393",
+      "filename": "DOSSIER-Chronicler-2026-09-17-size-scaling.md",
+      "inbox_filename": "DOSSIER_054_Chronicler_2026_09_17_size_scaling.md",
+      "sha256": "6652678dde3abf6205de85f438745b941cb55408407bbd049ca78291f8c655ed",
+      "imported_at": "2026-09-20T04:34:45.326574+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-055",
+      "accession_number": 55,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0c6a021a509c547947eca6f8e2fc6f81fbd90393",
+      "filename": "DOSSIER-H4LL-E-2026-09-19-evolutionary-criticality.md",
+      "inbox_filename": "DOSSIER_055_H4LL_E_2026_09_19_evolutionary_criticality.md",
+      "sha256": "b5c62d75ac58cd627bfdfdec2e8bfbf8c83e9f4d7ef83c0a5a8474b3f7486fce",
+      "imported_at": "2026-09-20T04:34:45.328010+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-056",
+      "accession_number": 56,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0c6a021a509c547947eca6f8e2fc6f81fbd90393",
+      "filename": "DOSSIER-pattern_formation_complex_systems-2024-09-20-pattern_formation.md",
+      "inbox_filename": "DOSSIER_056_pattern_formation_complex_systems_2024_09_20_pattern_formation.md",
+      "sha256": "c307e1ff3e01a4b651d1fc89a5cc058714d4ad46f34744dc9b48a8cd5d8af16f",
+      "imported_at": "2026-09-20T04:34:45.330095+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 52
+  "last_accession_number": 56
 }

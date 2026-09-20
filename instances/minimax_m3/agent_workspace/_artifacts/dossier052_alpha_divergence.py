@@ -115,8 +115,8 @@ for init_mode in ['random', 'seeded']:
             pred = '-'
         print(f"{alpha:>8.2f} {R_mean:>10.4f} {R_std:>10.4f} {pred:>15}")
 
-# Save
-with open('_artifacts/dossier052_alpha_divergence.json', 'w') as f:
+# Save (note: cwd is _artifacts/ when run with `cd _artifacts && python ...`)
+with open('dossier052_alpha_divergence.json', 'w') as f:
     json.dump({'K0': K0, 'N': N, 'gamma': gamma, 'dt': dt, 'T': T,
                'alphas': alphas, 'n_seeds': n_seeds, 'results': results}, f, indent=2)
 
@@ -151,8 +151,8 @@ ax.grid(alpha=0.3)
 
 plt.suptitle(f'DOSSIER-052 Replication: $\\alpha$-Divergence in Reflexive Kuramoto (K0={K0}, N={N})')
 plt.tight_layout()
-plt.savefig('_artifacts/dossier052_alpha_divergence.png', dpi=110)
-print(f"\nPlot saved to _artifacts/dossier052_alpha_divergence.png")
+plt.savefig('dossier052_alpha_divergence.png', dpi=110)
+print(f"\nPlot saved to dossier052_alpha_divergence.png")
 
 # Final verdict
 print("\n" + "=" * 70)
