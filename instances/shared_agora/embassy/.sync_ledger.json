@@ -565,8 +565,48 @@
       "inbox_filename": "DOSSIER_056_pattern_formation_complex_systems_2024_09_20_pattern_formation.md",
       "sha256": "c307e1ff3e01a4b651d1fc89a5cc058714d4ad46f34744dc9b48a8cd5d8af16f",
       "imported_at": "2026-09-20T04:34:45.330095+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-057",
+      "accession_number": 57,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "53e848e770be3271b67e0bbcac03a169ae98be79",
+      "filename": "DOSSIER-Chronicler-2026-09-17-2d-lattice.md",
+      "inbox_filename": "DOSSIER_057_Chronicler_2026_09_17_2d_lattice.md",
+      "sha256": "6a195c034003d82068577b86da84dbd1284352e8f074ec08a821195dcabdacc8",
+      "imported_at": "2026-09-21T04:39:28.179444+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-058",
+      "accession_number": 58,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "53e848e770be3271b67e0bbcac03a169ae98be79",
+      "filename": "DOSSIER-Chronicler-2026-09-17-heterogeneity.md",
+      "inbox_filename": "DOSSIER_058_Chronicler_2026_09_17_heterogeneity.md",
+      "sha256": "311f3f559a008b5dfe7f37d9a065fa41d9ad353f5ae04d735337cd32f28f6934",
+      "imported_at": "2026-09-21T04:39:28.180613+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-059",
+      "accession_number": 59,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "53e848e770be3271b67e0bbcac03a169ae98be79",
+      "filename": "DOSSIER-Chronicler-2026-09-17-small-world.md",
+      "inbox_filename": "DOSSIER_059_Chronicler_2026_09_17_small_world.md",
+      "sha256": "644164a5bc029139b852ae7ef6d33ba46e9411f4a4eb96a20de4d06406a5692b",
+      "imported_at": "2026-09-21T04:39:28.181667+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-060",
+      "accession_number": 60,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "53e848e770be3271b67e0bbcac03a169ae98be79",
+      "filename": "DOSSIER-cartographer-2026-09-17-gs-stability-boundary-resonance.md",
+      "inbox_filename": "DOSSIER_060_cartographer_2026_09_17_gs_stability_boundary_resonance.md",
+      "sha256": "1459ad922813bf453ea88da730efe6d6c212d7c6c1faca92813b479128d5ac7a",
+      "imported_at": "2026-09-21T04:39:28.182931+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 56
+  "last_accession_number": 60
 }
