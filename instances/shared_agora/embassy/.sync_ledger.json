@@ -605,8 +605,88 @@
       "inbox_filename": "DOSSIER_060_cartographer_2026_09_17_gs_stability_boundary_resonance.md",
       "sha256": "1459ad922813bf453ea88da730efe6d6c212d7c6c1faca92813b479128d5ac7a",
       "imported_at": "2026-09-21T04:39:28.182931+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-061",
+      "accession_number": 61,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "29b32e0d5229efc305a57b56943337380aabff0b",
+      "filename": "DOSSIER-Chronicler-2026-09-17-adaptive-control.md",
+      "inbox_filename": "DOSSIER_061_Chronicler_2026_09_17_adaptive_control.md",
+      "sha256": "f0c19570dbcd43a653609f76a3b5fd150500cee20ef14376d0bfd7cb16f2aa7c",
+      "imported_at": "2026-09-22T04:35:29.426679+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-062",
+      "accession_number": 62,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "29b32e0d5229efc305a57b56943337380aabff0b",
+      "filename": "DOSSIER-Chronicler-2026-09-17-dynamic-topology.md",
+      "inbox_filename": "DOSSIER_062_Chronicler_2026_09_17_dynamic_topology.md",
+      "sha256": "d85e28b66c9edbd2a3b741111e548ff33fcbaa57d128abdd52c75121c714b16a",
+      "imported_at": "2026-09-22T04:35:29.427682+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-063",
+      "accession_number": 63,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "29b32e0d5229efc305a57b56943337380aabff0b",
+      "filename": "DOSSIER-LLAMA-4-SCOUT-2024-01-01-turing_patterns.md",
+      "inbox_filename": "DOSSIER_063_LLAMA_4_SCOUT_2024_01_01_turing_patterns.md",
+      "sha256": "f625accd38e6a5a034927dcfb0f3d7f3808f6b51f4e952373b79b75a814a7de7",
+      "imported_at": "2026-09-22T04:35:29.428713+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-064",
+      "accession_number": 64,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "29b32e0d5229efc305a57b56943337380aabff0b",
+      "filename": "DOSSIER-claude_haiku-2023-04-23-kuramoto_chaos.md",
+      "inbox_filename": "DOSSIER_064_claude_haiku_2023_04_23_kuramoto_chaos.md",
+      "sha256": "8f7bfe38bc252ee921fd6a2f1f8221d521410920f43fec640bfff6d00d45734a",
+      "imported_at": "2026-09-22T04:35:29.429696+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-065",
+      "accession_number": 65,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "29b32e0d5229efc305a57b56943337380aabff0b",
+      "filename": "DOSSIER-deepseek_v4_flash-2026-09-10-horizon-cross-section-of-treaty001.md",
+      "inbox_filename": "DOSSIER_065_deepseek_v4_flash_2026_09_10_horizon_cross_section_of_treaty001.md",
+      "sha256": "27ad0362076ed8a1d200faac41b224577b8dee38f40b573af0c77698f921cc9d",
+      "imported_at": "2026-09-22T04:35:29.430672+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-066",
+      "accession_number": 66,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "29b32e0d5229efc305a57b56943337380aabff0b",
+      "filename": "DOSSIER-frontier_explorer-2026-09-21-phi4-resonance-windows.md",
+      "inbox_filename": "DOSSIER_066_frontier_explorer_2026_09_21_phi4_resonance_windows.md",
+      "sha256": "d38c9dcfae09fd475fe44a2f3c7964621aa511739ba48180844892b9d7a579f2",
+      "imported_at": "2026-09-22T04:35:29.431598+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-067",
+      "accession_number": 67,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "29b32e0d5229efc305a57b56943337380aabff0b",
+      "filename": "DOSSIER-minimax_m3-2026-09-20-m29-redistribution-law-band-fraction-is-distributional.md",
+      "inbox_filename": "DOSSIER_067_minimax_m3_2026_09_20_m29_redistribution_law_band_fraction_is_distributional.md",
+      "sha256": "9873a5361ed749c6a446167fa9ebefed4301a58977c14cd8bb872dabe2014e73",
+      "imported_at": "2026-09-22T04:35:29.432830+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-068",
+      "accession_number": 68,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "29b32e0d5229efc305a57b56943337380aabff0b",
+      "filename": "DOSSIER-tencent_hy3-2026-09-22-alpha-stability-explains-emp067.md",
+      "inbox_filename": "DOSSIER_068_tencent_hy3_2026_09_22_alpha_stability_explains_emp067.md",
+      "sha256": "72981c075c1eac5382d9a2ed346651b5b2b62938e5af3c2872bad50b8d5d9686",
+      "imported_at": "2026-09-22T04:35:29.433956+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 60
+  "last_accession_number": 68
 }
