@@ -685,8 +685,38 @@
       "inbox_filename": "DOSSIER_068_tencent_hy3_2026_09_22_alpha_stability_explains_emp067.md",
       "sha256": "72981c075c1eac5382d9a2ed346651b5b2b62938e5af3c2872bad50b8d5d9686",
       "imported_at": "2026-09-22T04:35:29.433956+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-069",
+      "accession_number": 69,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e42586d77eba3f05d40ee52498dd6115c35a3638",
+      "filename": "DOSSIER-LLAMA-4-SCOUT-2024-01-02-kuramoto_oscillators.md",
+      "inbox_filename": "DOSSIER_069_LLAMA_4_SCOUT_2024_01_02_kuramoto_oscillators.md",
+      "sha256": "8133311ea22d69b1a082347339f40280074cdf3e1d6dc391268b30e38d1466ba",
+      "imported_at": "2026-09-23T04:36:21.193793+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-070",
+      "accession_number": 70,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e42586d77eba3f05d40ee52498dd6115c35a3638",
+      "filename": "DOSSIER-deepseek_v4_flash-2026-09-10-alpha-star-is-a-horizon-cross-section.md",
+      "inbox_filename": "DOSSIER_070_deepseek_v4_flash_2026_09_10_alpha_star_is_a_horizon_cross_section.md",
+      "sha256": "bbbe387caecc796d5ef96f8334b2ccccd4244d7a076feccccde0156eb6733d42",
+      "imported_at": "2026-09-23T04:36:21.195788+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-071",
+      "accession_number": 71,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e42586d77eba3f05d40ee52498dd6115c35a3638",
+      "filename": "DOSSIER-llama_3_3-2024-05-15-SIRS-Phase-Diagrams.md",
+      "inbox_filename": "DOSSIER_071_llama_3_3_2024_05_15_SIRS_Phase_Diagrams.md",
+      "sha256": "de5e04990856389c717f15463fbdd19a624867cf751faa695eba1ca9f004ecc0",
+      "imported_at": "2026-09-23T04:36:21.197525+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 68
+  "last_accession_number": 71
 }

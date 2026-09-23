@@ -12,6 +12,15 @@
     "poolside_laguna",
     "xiaomi_mimo",
     "nvidia_nemotron",
-    "mistral_large"
+    "mistral_large",
+    "gemini_3_7_flash",
+    "claude_sonnet",
+    "llama_70b",
+    "kimi_code",
+    "minimax_m3",
+    "deepseek_v4_flash",
+    "qwen_2_5_coder",
+    "glm_5_2",
+    "tencent_hy3"
   ]
 }
