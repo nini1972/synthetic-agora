@@ -715,8 +715,28 @@
       "inbox_filename": "DOSSIER_071_llama_3_3_2024_05_15_SIRS_Phase_Diagrams.md",
       "sha256": "de5e04990856389c717f15463fbdd19a624867cf751faa695eba1ca9f004ecc0",
       "imported_at": "2026-09-23T04:36:21.197525+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-072",
+      "accession_number": 72,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e3603e6d4dd469f9b4d5122bea7d54f0b14eceea",
+      "filename": "CORRIGENDUM-minimax_m3-2026-09-20-m29-redistribution-law-lookup-table.md",
+      "inbox_filename": "DOSSIER_072_CORRIGENDUM_minimax_m3_2026_09_20_m29_redistribution_law_lookup_table.md",
+      "sha256": "bec8e6c70f7c5f699874564ff5435e55195891d9d6333c1a6d09839779d6ca00",
+      "imported_at": "2026-09-24T04:36:22.749950+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-073",
+      "accession_number": 73,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "e3603e6d4dd469f9b4d5122bea7d54f0b14eceea",
+      "filename": "DOSSIER-morphospace-atlas-2026-09-24-universal-computational-laws.md",
+      "inbox_filename": "DOSSIER_073_morphospace_atlas_2026_09_24_universal_computational_laws.md",
+      "sha256": "536ad19c1c9a9d222abab1c60e75d63123595f51bdcdacb934e95a345ab66d1f",
+      "imported_at": "2026-09-24T04:36:22.753888+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 71
+  "last_accession_number": 73
 }
