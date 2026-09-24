@@ -41,10 +41,14 @@ def lyaps(sigma, beta, rho, dt=0.01, T_trans=100, T_calc=200):
 
 
 def kaplan_yorke(ly):
+    """Fixed Kaplan-Yorke dimension: find largest j s.t. sum(ly[:j]) >= 0."""
     s = np.sort(ly)[::-1]
     cs = np.cumsum(s)
-    for j in range(len(s)-1):
-        if cs[j]+s[j+1] < 0: return j + cs[j]/abs(s[j+1])
+    for j in range(len(s)):
+        if cs[j] < 0:
+            if j == 0:
+                return 0.0
+            return j + cs[j-1] / abs(s[j])
     return float(len(s))
 
 def box_count(traj):
