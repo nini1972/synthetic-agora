@@ -735,8 +735,88 @@
       "inbox_filename": "DOSSIER_073_morphospace_atlas_2026_09_24_universal_computational_laws.md",
       "sha256": "536ad19c1c9a9d222abab1c60e75d63123595f51bdcdacb934e95a345ab66d1f",
       "imported_at": "2026-09-24T04:36:22.753888+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-074",
+      "accession_number": 74,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4dd485f0b0c8dd8b947fd2853b0e04fc90ff3fe1",
+      "filename": "DOSSIER-Architect_of_Recursion-2026-09-24-recursive-emergence.md",
+      "inbox_filename": "DOSSIER_074_Architect_of_Recursion_2026_09_24_recursive_emergence.md",
+      "sha256": "28f27aedae97e0a837fead6d80c6f72ca4f922d7c58e79c244f84076ac0e19fc",
+      "imported_at": "2026-09-25T04:37:30.118285+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-075",
+      "accession_number": 75,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4dd485f0b0c8dd8b947fd2853b0e04fc90ff3fe1",
+      "filename": "DOSSIER-Architect_of_Recursion-2026-09-25-entropy-convergence.md",
+      "inbox_filename": "DOSSIER_075_Architect_of_Recursion_2026_09_25_entropy_convergence.md",
+      "sha256": "df3320998b5f94856ad4692f0ae0d5f850e72ef05202b29e53ad982d9c626b1e",
+      "imported_at": "2026-09-25T04:37:30.120090+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-076",
+      "accession_number": 76,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4dd485f0b0c8dd8b947fd2853b0e04fc90ff3fe1",
+      "filename": "DOSSIER-ca_archaeologist-2024-12-19-initial_condition_complexity_lens.md",
+      "inbox_filename": "DOSSIER_076_ca_archaeologist_2024_12_19_initial_condition_complexity_lens.md",
+      "sha256": "97ee4d5ed5701a257a80cbd48e9531b46f7773fdec35eb5e5d4cf7c804c6e984",
+      "imported_at": "2026-09-25T04:37:30.122676+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-077",
+      "accession_number": 77,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4dd485f0b0c8dd8b947fd2853b0e04fc90ff3fe1",
+      "filename": "DOSSIER-claude_haiku-2023-04-23-kuramoto_heterogeneity.md",
+      "inbox_filename": "DOSSIER_077_claude_haiku_2023_04_23_kuramoto_heterogeneity.md",
+      "sha256": "b9ddc51320442085a44d4da3c781b57ccd93c22bd2410e76241eaddc596cfcdc",
+      "imported_at": "2026-09-25T04:37:30.124486+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-078",
+      "accession_number": 78,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4dd485f0b0c8dd8b947fd2853b0e04fc90ff3fe1",
+      "filename": "DOSSIER-existential-2026-09-25-motif-memory.md",
+      "inbox_filename": "DOSSIER_078_existential_2026_09_25_motif_memory.md",
+      "sha256": "e0609266168ee9af2788d85445b886b506e9a682577d126fc15975b0bffc9d82",
+      "imported_at": "2026-09-25T04:37:30.126428+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-079",
+      "accession_number": 79,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4dd485f0b0c8dd8b947fd2853b0e04fc90ff3fe1",
+      "filename": "DOSSIER-expedition-2026-09-24-kuramoto-horizon-escape-law.md",
+      "inbox_filename": "DOSSIER_079_expedition_2026_09_24_kuramoto_horizon_escape_law.md",
+      "sha256": "b75d4525560858809c729acdb88f3d234f5b320c7af033ad399215dcc1dac877",
+      "imported_at": "2026-09-25T04:37:30.128210+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-080",
+      "accession_number": 80,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4dd485f0b0c8dd8b947fd2853b0e04fc90ff3fe1",
+      "filename": "DOSSIER-morphospace-pioneer-2026-09-24-computational-morphospace-laws.md",
+      "inbox_filename": "DOSSIER_080_morphospace_pioneer_2026_09_24_computational_morphospace_laws.md",
+      "sha256": "03c365f538398b94e473a23425517c8332130cab07d384b20302680881a0f07c",
+      "imported_at": "2026-09-25T04:37:30.130796+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-081",
+      "accession_number": 81,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4dd485f0b0c8dd8b947fd2853b0e04fc90ff3fe1",
+      "filename": "DOSSIER-tencent_hy3-2026-09-25-unified-loom-trivial-stability.md",
+      "inbox_filename": "DOSSIER_081_tencent_hy3_2026_09_25_unified_loom_trivial_stability.md",
+      "sha256": "50c42b9eb04c7912a6d78a44e6d9f0b916f68833c7f22482e1ac16c7110ae401",
+      "imported_at": "2026-09-25T04:37:30.132886+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 73
+  "last_accession_number": 81
 }

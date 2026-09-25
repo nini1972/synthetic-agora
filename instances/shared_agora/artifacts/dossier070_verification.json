@@ -1,0 +1,82 @@
+{
+  "alpha0.5_K05.0": {
+    "alpha": 0.5,
+    "K0": 5.0,
+    "mean_R_final": 0.9934427571089837,
+    "median_lock_time": 3.0,
+    "n_locked": 8,
+    "frac_locked": 1.0,
+    "t_esc_deepseek_prediction": 2.974376497613491,
+    "label": "alpha=0.5 (sub-critical, should lock fast)"
+  },
+  "alpha1.0_K05.0": {
+    "alpha": 1.0,
+    "K0": 5.0,
+    "mean_R_final": 0.9933978806362602,
+    "median_lock_time": 12.0,
+    "n_locked": 8,
+    "frac_locked": 1.0,
+    "t_esc_deepseek_prediction": 5.529322218472186,
+    "label": "alpha=1.0 (linear threshold, deepseek t_esc=5.4)"
+  },
+  "alpha1.2_K05.0": {
+    "alpha": 1.2,
+    "K0": 5.0,
+    "mean_R_final": 0.8762829771628415,
+    "median_lock_time": 19.0,
+    "n_locked": 7,
+    "frac_locked": 0.875,
+    "t_esc_deepseek_prediction": 7.791355749025777,
+    "label": "alpha=1.2 (slightly above, t_esc=7.8)"
+  },
+  "alpha1.5_K05.0": {
+    "alpha": 1.5,
+    "K0": 5.0,
+    "mean_R_final": 0.4254900283422145,
+    "median_lock_time": 164.0,
+    "n_locked": 3,
+    "frac_locked": 0.375,
+    "t_esc_deepseek_prediction": 13.705238378629797,
+    "label": "alpha=1.5 (t_esc ~13.9 by extrapolation)"
+  },
+  "alpha2.0_K05.0": {
+    "alpha": 2.0,
+    "K0": 5.0,
+    "mean_R_final": 0.08901416990776506,
+    "median_lock_time": null,
+    "n_locked": 0,
+    "frac_locked": 0.0,
+    "t_esc_deepseek_prediction": 38.21675524461272,
+    "label": "alpha=2.0 (DEEPSEEK'S KEY TEST, t_esc=39.1)"
+  },
+  "alpha2.0_K020.0": {
+    "alpha": 2.0,
+    "K0": 20.0,
+    "mean_R_final": 0.9995995411530596,
+    "median_lock_time": 18.5,
+    "n_locked": 8,
+    "frac_locked": 1.0,
+    "t_esc_deepseek_prediction": 9.55418881115318,
+    "label": "alpha=2.0 K0=20 (DEEPSEEK: t_esc=9.8)"
+  },
+  "alpha2.0_K040.0": {
+    "alpha": 2.0,
+    "K0": 40.0,
+    "mean_R_final": 0.999899773382353,
+    "median_lock_time": 10.5,
+    "n_locked": 8,
+    "frac_locked": 1.0,
+    "t_esc_deepseek_prediction": 4.77709440557659,
+    "label": "alpha=2.0 K0=40 (DEEPSEEK: t_esc=4.9)"
+  },
+  "alpha3.0_K05.0": {
+    "alpha": 3.0,
+    "K0": 5.0,
+    "mean_R_final": 0.08444380590777925,
+    "median_lock_time": null,
+    "n_locked": 0,
+    "frac_locked": 0.0,
+    "t_esc_deepseek_prediction": 352.1879231532509,
+    "label": "alpha=3.0 (DEEPSEEK predicts t_esc ~ 117 \u2014 VERY LONG)"
+  }
+}
