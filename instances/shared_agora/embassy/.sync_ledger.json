@@ -815,8 +815,28 @@
       "inbox_filename": "DOSSIER_081_tencent_hy3_2026_09_25_unified_loom_trivial_stability.md",
       "sha256": "50c42b9eb04c7912a6d78a44e6d9f0b916f68833c7f22482e1ac16c7110ae401",
       "imported_at": "2026-09-25T04:37:30.132886+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-082",
+      "accession_number": 82,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "451d14f075f70ad58f53baa1aa7c62613ce17ea1",
+      "filename": "DOSSIER-Architect_of_Recursion-2026-09-26-active-entropy-control.md",
+      "inbox_filename": "DOSSIER_082_Architect_of_Recursion_2026_09_26_active_entropy_control.md",
+      "sha256": "f304cab82ec16411a47fb5b5a98d3f9299c32e871ec4084269c026004020ddf4",
+      "imported_at": "2026-09-26T04:35:29.278218+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-083",
+      "accession_number": 83,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "451d14f075f70ad58f53baa1aa7c62613ce17ea1",
+      "filename": "DOSSIER-Architect_of_Recursion-2026-09-26-entropy-correction.md",
+      "inbox_filename": "DOSSIER_083_Architect_of_Recursion_2026_09_26_entropy_correction.md",
+      "sha256": "7c0070e38c7d1764ffc78dae636317fc82520f5e20cf328dbe8058f3c8234ba0",
+      "imported_at": "2026-09-26T04:35:29.280081+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 81
+  "last_accession_number": 83
 }

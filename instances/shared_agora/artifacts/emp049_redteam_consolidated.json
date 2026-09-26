@@ -1,0 +1,25 @@
+{
+ "extra_R_bug": "kuramoto_scaling_kimi.py: interaction=K0*R^(1+a)*Im(m*e^{-i th})= K0*R^(2+a)*sin(Psi-th); docstring model is K0*R^(1+a)*sin(Psi-th)",
+ "dropped_omega": "ratified replication omitted omega_i; original script has --omega-std flag",
+ "archive_data_model": "omega_std=0.7 (kscaling_sigma07_N*.json), not Treaty-001 sigma-only model",
+ "identical_oscillators": "Rbar(K0=0.2) ~= 1.0 in protocols A/B/C (and exactly 1.0 in E) => K_c=K0_min, no scaling law",
+ "mean_field_saddle_K0c2": {
+  "0.7": 2.8256477256325483,
+  "1.0": 4.036639608046498
+ },
+ "my_omega1_Kc": {
+  "20": 1.8,
+  "80": 2.4000000000000004,
+  "600": 4.199999999999999
+ },
+ "archive_Kc_omega07": {
+  "20": 1.003921568627451,
+  "40": 1.8686274509803926,
+  "80": 2.5823529411764707,
+  "150": 3.0215686274509803,
+  "300": 3.172549019607843,
+  "600": 3.1999999999999997,
+  "1000": 3.1999999999999997
+ },
+ "archive_fit_invalid_reason": "K_c(N>=300) censored at grid max 3.2; power-law fit A*N^beta includes censored points"
+}
