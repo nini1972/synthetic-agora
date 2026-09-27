@@ -1,0 +1,98 @@
+[
+  {
+    "system": "ReflexKuramoto(\u03b1=0,K=3,N=100)",
+    "dim": 100,
+    "Lyapunov": 4.602515315530428,
+    "CD": 0.5,
+    "Entropy": -200.60797398147312,
+    "Coupling": 0.8,
+    "TempMemory": 0.7494193545740753,
+    "SpaEntropy": -1.63297290760755e+17,
+    "FractalDim": 0.5,
+    "Q": -5.902515315530428
+  },
+  {
+    "system": "ReflexKuramoto(\u03b1=0.5,K=3,N=100)",
+    "dim": 100,
+    "Lyapunov": 4.602515315530434,
+    "CD": 0.5,
+    "Entropy": -200.52232083634783,
+    "Coupling": 0.8,
+    "TempMemory": 0.7503256127924963,
+    "SpaEntropy": -1.635969935533692e+17,
+    "FractalDim": 0.5,
+    "Q": -5.902515315530434
+  },
+  {
+    "system": "ReflexKuramoto(\u03b1=1,K=3,N=100)",
+    "dim": 100,
+    "Lyapunov": 4.602515315530444,
+    "CD": 0.5,
+    "Entropy": -200.43652343220032,
+    "Coupling": 0.8,
+    "TempMemory": 0.7512353944788766,
+    "SpaEntropy": -1.637100505856096e+17,
+    "FractalDim": 0.5,
+    "Q": -5.902515315530444
+  },
+  {
+    "system": "Lorenz",
+    "dim": 3,
+    "Lyapunov": 8.932973927879116,
+    "CD": 0.9808509300292481,
+    "Entropy": 0.8049227446130102,
+    "Coupling": 0.0,
+    "TempMemory": 0.8459665576660362,
+    "SpaEntropy": -0.022059389108076033,
+    "FractalDim": 0.9808509300292481,
+    "Q": -9.913824857908365
+  },
+  {
+    "system": "Logistic(r=3.9)",
+    "dim": 1,
+    "Lyapunov": 8.314759318223793,
+    "CD": 1.0,
+    "Entropy": -3.4950346501214944,
+    "Coupling": 0.0,
+    "TempMemory": -0.02022336073123181,
+    "SpaEntropy": 0.0,
+    "FractalDim": 1.0,
+    "Q": -9.314759318223793
+  },
+  {
+    "system": "Logistic(r=3.5)",
+    "dim": 1,
+    "Lyapunov": 8.329474306946535,
+    "CD": 1.0,
+    "Entropy": -52.19150455784229,
+    "Coupling": 0.0,
+    "TempMemory": -0.05252473240535038,
+    "SpaEntropy": 0.0,
+    "FractalDim": 1.0,
+    "Q": -9.329474306946535
+  },
+  {
+    "system": "Rossler",
+    "dim": 3,
+    "Lyapunov": 5.905453962275996,
+    "CD": 0.9566732421534693,
+    "Entropy": 1.2700099647131562,
+    "Coupling": 0.0,
+    "TempMemory": 0.9896927369442672,
+    "SpaEntropy": -3.5957118746854837,
+    "FractalDim": 0.9566732421534693,
+    "Q": -6.862127204429465
+  },
+  {
+    "system": "FPUT(N=16)",
+    "dim": 32,
+    "Lyapunov": 6.755839823545473,
+    "CD": 0.5777341507942464,
+    "Entropy": 0.7810556241974085,
+    "Coupling": 0.0,
+    "TempMemory": 0.9961482422747745,
+    "SpaEntropy": 0.5179161355556664,
+    "FractalDim": 0.5777341507942464,
+    "Q": -7.3335739743397195
+  }
+]

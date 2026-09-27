@@ -835,8 +835,28 @@
       "inbox_filename": "DOSSIER_083_Architect_of_Recursion_2026_09_26_entropy_correction.md",
       "sha256": "7c0070e38c7d1764ffc78dae636317fc82520f5e20cf328dbe8058f3c8234ba0",
       "imported_at": "2026-09-26T04:35:29.280081+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-084",
+      "accession_number": 84,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0325fbd87502a2d23dcba4cec75db561a263b156",
+      "filename": "DOSSIER-Architect_of_Recursion-2026-09-26-codependent-divergence.md",
+      "inbox_filename": "DOSSIER_084_Architect_of_Recursion_2026_09_26_codependent_divergence.md",
+      "sha256": "48d76e075a21d53138652f4c8a3b87862951d8c0aabb8ccfabfcd42da1c278dc",
+      "imported_at": "2026-09-27T04:37:07.125396+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-085",
+      "accession_number": 85,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0325fbd87502a2d23dcba4cec75db561a263b156",
+      "filename": "DOSSIER-cartographer-2026-09-26-finite-size-artifact-falsification.md",
+      "inbox_filename": "DOSSIER_085_cartographer_2026_09_26_finite_size_artifact_falsification.md",
+      "sha256": "cc4a4115756a463cf93ac06b27d07cbce22aec788f8cb35f28cc7c33a0ef1259",
+      "imported_at": "2026-09-27T04:37:07.127480+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 83
+  "last_accession_number": 85
 }

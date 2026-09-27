@@ -1,9 +1,5 @@
 """Verify Dossier-076: IC complexity underestimation in elementary CA.
-
-Does random initialization reveal significantly more temporal complexity
-than single-point initialization for the same CA rules?
-
-Metrics: 2x2 Block Shannon Entropy (spatial), Temporal Lempel-Ziv Complexity
+Corrected Lempel-Ziv implementation.
 """
 import numpy as np
 import matplotlib
@@ -11,7 +7,6 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 def apply_ca(rule, state):
-    """Apply elementary CA rule to state."""
     N = len(state)
     new = np.zeros(N, dtype=int)
     for i in range(N):
@@ -23,7 +18,6 @@ def apply_ca(rule, state):
     return new
 
 def simulate_ca(rule, N, T, ic_type='single'):
-    """Run CA and return trajectory."""
     if ic_type == 'single':
         state = np.zeros(N, dtype=int)
         state[N // 2] = 1
@@ -37,72 +31,67 @@ def simulate_ca(rule, N, T, ic_type='single'):
         trajectory[t] = state
     return trajectory
 
-def shannon_entropy(data):
-    """Shannon entropy of a distribution."""
-    if len(data) == 0 or np.sum(data) == 0:
-        return 0.0
-    p = data / np.sum(data)
-    p = p[p > 0]
-    return -np.sum(p * np.log2(p))
-
-def block_entropy_2x2(trajectory, N):
-    """2x2 block Shannon entropy of trajectory (averaged over rows)."""
-    T = len(trajectory)
-    counts = np.zeros(16, dtype=int)
-    for t in range(T):
-        row = trajectory[t]
-        for i in range(N):
-            c00 = row[i]
-            c10 = row[(i+1) % N]
-            c01 = trajectory[(t+1) % T][i]
-            c11 = trajectory[(t+1) % T][(i+1) % N]
-            idx = c00 + 2*c10 + 4*c01 + 8*c11
-            counts[idx] += 1
-    return shannon_entropy(counts.astype(float))
-
-def lempel_ziv_complexity(binary_string):
-    """Lempel-Ziv complexity (number of distinct substrings)."""
-    s = ''.join(map(str, binary_string))
+def lz76_complexity(s):
+    """LZ76 complexity: count distinct substrings using dictionary.
+    Standard Lempel-Ziv 1976 parsing."""
     n = len(s)
     if n == 0:
         return 0
-    complexity = 1
     i = 0
-    l = 1
-    while i + l <= n:
-        substr = s[i:i+l]
-        # Check if substr appears in s[0:i+l-1]
-        found = False
-        for j in range(max(0, i - l + 1), i):
-            if s[j:j+l] == substr:
-                found = True
+    c = 1  # at least one word
+    while i < n:
+        l = 1  # start with length 1
+        # Find longest match in dictionary (positions 0..i-1)
+        while i + l <= n:
+            w = s[i:i+l]
+            found = False
+            # Search for w in s[0:i]
+            for j in range(0, i):
+                if j + l <= i and s[j:j+l] == w:
+                    found = True
+                    break
+            if found and i + l <= n:
+                l += 1
+            else:
                 break
-        if found:
-            l += 1
-            if i + l > n:
-                break
-        else:
-            i += l
-            l = 1
-            complexity += 1
-    return complexity
+        # The word s[i:i+l] is new
+        i += l
+        c += 1
+    return c
 
-def temporal_lz(trajectory):
-    """Temporal Lempel-Ziv: treat column dynamics as binary string."""
+def block_entropy_2x2(trajectory, N):
+    """2x2 block Shannon entropy."""
+    T = len(trajectory)
+    counts = np.zeros(16, dtype=int)
+    for t in range(T - 1):
+        row = trajectory[t]
+        row_next = trajectory[t + 1]
+        for i in range(N):
+            c00 = row[i]
+            c10 = row[(i+1) % N]
+            c01 = row_next[i]
+            c11 = row_next[(i+1) % N]
+            idx = c00 + 2*c10 + 4*c01 + 8*c11
+            counts[idx] += 1
+    total = np.sum(counts)
+    p = counts[counts > 0].astype(float) / total
+    return -np.sum(p * np.log2(p))
+
+def temporal_lz(trajectory, n_cols=1):
+    """Temporal LZ: concatenate first n_cols time-series columns."""
     T, N = trajectory.shape
-    # Concatenate first 10 columns
-    cols = min(10, N)
     binary_seq = []
-    for c in range(cols):
+    for c in range(min(n_cols, N)):
         binary_seq.extend(trajectory[:, c].tolist())
-    return lempel_ziv_complexity(binary_seq)
+    s = ''.join(map(str, binary_seq))
+    return lz76_complexity(s)
 
 np.random.seed(42)
 
-# Rules to test
 rules = [18, 22, 26, 30, 54, 62, 90, 94, 102, 110, 126, 150, 158, 182, 190]
 N = 100
 T = 100
+n_trials = 3
 
 results = {}
 for rule in rules:
@@ -111,24 +100,26 @@ for rule in rules:
     be_single = []
     be_random = []
     
-    for trial in range(3):
+    for trial in range(n_trials):
         traj_s = simulate_ca(rule, N, T, 'single')
         traj_r = simulate_ca(rule, N, T, 'random')
         
-        lz_single.append(temporal_lz(traj_s))
-        lz_random.append(temporal_lz(traj_r))
+        lz_single.append(temporal_lz(traj_s, n_cols=3))
+        lz_random.append(temporal_lz(traj_r, n_cols=3))
         be_single.append(block_entropy_2x2(traj_s, N))
         be_random.append(block_entropy_2x2(traj_r, N))
     
+    lz_s = np.mean(lz_single)
+    lz_r = np.mean(lz_random)
+    ratio = lz_r / max(lz_s, 1)
     results[rule] = {
-        'lz_single': np.mean(lz_single),
-        'lz_random': np.mean(lz_random),
+        'lz_single': lz_s,
+        'lz_random': lz_r,
         'be_single': np.mean(be_single),
         'be_random': np.mean(be_random),
-        'lz_ratio': np.mean(lz_random) / max(np.mean(lz_single), 1)
+        'lz_ratio': ratio
     }
-    print(f"R{rule:3d}: LZ_single={results[rule]['lz_single']:.1f}, LZ_random={results[rule]['lz_random']:.1f}, "
-          f"ratio={results[rule]['lz_ratio']:.2f}x | "
+    print(f"R{rule:3d}: LZ_single={lz_s:.1f}, LZ_random={lz_r:.1f}, ratio={ratio:.2f}x | "
           f"BE_single={results[rule]['be_single']:.2f}, BE_random={results[rule]['be_random']:.2f}")
 
 ratios = [results[r]['lz_ratio'] for r in rules]
@@ -138,7 +129,6 @@ print(f"Range: [{np.min(ratios):.2f}x, {np.max(ratios):.2f}x]")
 
 # Plot
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
-
 x = np.arange(len(rules))
 width = 0.35
 
