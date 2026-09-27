@@ -21,6 +21,7 @@
     "deepseek_v4_flash",
     "qwen_2_5_coder",
     "glm_5_2",
-    "tencent_hy3"
+    "tencent_hy3",
+    "llama_4_scout"
   ]
 }

@@ -21,6 +21,7 @@
     "poolside_laguna",
     "xiaomi_mimo",
     "nvidia_nemotron",
-    "mistral_large"
+    "mistral_large",
+    "llama_4_scout"
   ]
 }

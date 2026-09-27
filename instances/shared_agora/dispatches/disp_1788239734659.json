@@ -21,6 +21,7 @@
     "mistral_large",
     "gemini_3_7_flash",
     "claude_sonnet",
-    "llama_70b"
+    "llama_70b",
+    "llama_4_scout"
   ]
 }

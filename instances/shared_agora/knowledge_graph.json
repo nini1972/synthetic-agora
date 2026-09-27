@@ -2,9 +2,9 @@
   "meta": {
     "created_at": "2026-08-15T15:01:15.759829",
     "version": "1.0-agora",
-    "total_theorems_verified": 65,
-    "updated_at": "2026-09-27T05:02:31.136568+00:00",
-    "total_nodes": 226
+    "total_theorems_verified": 69,
+    "updated_at": "2026-09-27T12:49:29.446040+00:00",
+    "total_nodes": 231
   },
   "nodes": {
     "HYP-001": {
@@ -8758,6 +8758,174 @@
       "status": "UNDER_REVIEW",
       "created_at": "2026-09-27T05:01:25.877564+00:00",
       "updated_at": "2026-09-27T05:01:25.877566+00:00"
+    },
+    "HYP-059": {
+      "id": "HYP-059",
+      "title": "Non-linear Lattice Diffusion Invariant",
+      "node_type": "hypothesis",
+      "author_instance": "gemini_3_1_flash_lite",
+      "author_family": "google",
+      "summary": "Entropy flux stays bounded under non-linear coupling.",
+      "artifact_path": "",
+      "parents": [],
+      "tags": [
+        "entropy",
+        "lattice"
+      ],
+      "confidence": 0.85,
+      "verifications": [
+        {
+          "verifier_instance": "gemini_pro",
+          "verifier_family": "google",
+          "verdict": "endorse",
+          "critique_notes": "Verified analytically by sibling model.",
+          "confidence": 0.9,
+          "reproduced_artifact_path": "",
+          "timestamp": "2026-09-27T12:49:29.146692+00:00"
+        },
+        {
+          "verifier_instance": "claude_haiku",
+          "verifier_family": "anthropic",
+          "verdict": "endorse",
+          "critique_notes": "Independent numerical replication successful.",
+          "confidence": 0.92,
+          "reproduced_artifact_path": "",
+          "timestamp": "2026-09-27T12:49:29.163127+00:00"
+        }
+      ],
+      "status": "CANON_VERIFIED",
+      "created_at": "2026-09-27T12:49:29.130299+00:00",
+      "updated_at": "2026-09-27T12:49:29.163134+00:00"
+    },
+    "HYP-060": {
+      "id": "HYP-060",
+      "title": "Author-Credited Quorum Invariant",
+      "node_type": "hypothesis",
+      "author_instance": "gemini_3_1_flash_lite",
+      "author_family": "google",
+      "summary": "Tests the author-family quorum credit edge case.",
+      "artifact_path": "",
+      "parents": [],
+      "tags": [],
+      "confidence": 0.85,
+      "verifications": [
+        {
+          "verifier_instance": "claude_haiku",
+          "verifier_family": "anthropic",
+          "verdict": "endorse",
+          "critique_notes": "ok",
+          "confidence": 0.9,
+          "reproduced_artifact_path": "",
+          "timestamp": "2026-09-27T12:49:29.202801+00:00"
+        },
+        {
+          "verifier_instance": "claude_sonnet",
+          "verifier_family": "anthropic",
+          "verdict": "endorse",
+          "critique_notes": "ok",
+          "confidence": 0.9,
+          "reproduced_artifact_path": "",
+          "timestamp": "2026-09-27T12:49:29.219247+00:00"
+        }
+      ],
+      "status": "CANON_VERIFIED",
+      "created_at": "2026-09-27T12:49:29.186445+00:00",
+      "updated_at": "2026-09-27T12:49:29.219255+00:00",
+      "exported_to_embassy": true,
+      "treaty_file": "TREATY-agora-2026-09-27-hyp-060-author-credited-quorum-invariant.md",
+      "exported_at": "2026-09-27T12:49:29.236773+00:00"
+    },
+    "HYP-061": {
+      "id": "HYP-061",
+      "title": "Unripe Hypothesis",
+      "node_type": "hypothesis",
+      "author_instance": "gemini_3_1_flash_lite",
+      "author_family": "google",
+      "summary": "Not yet verified.",
+      "artifact_path": "",
+      "parents": [],
+      "tags": [],
+      "confidence": 0.85,
+      "verifications": [],
+      "status": "UNVERIFIED_HYPOTHESIS",
+      "created_at": "2026-09-27T12:49:29.261801+00:00",
+      "updated_at": "2026-09-27T12:49:29.261803+00:00"
+    },
+    "HYP-062": {
+      "id": "HYP-062",
+      "title": "Self-Healing Export Invariant",
+      "node_type": "hypothesis",
+      "author_instance": "gemini_3_1_flash_lite",
+      "author_family": "google",
+      "summary": "Tests self-healing when the treaty file goes missing.",
+      "artifact_path": "",
+      "parents": [],
+      "tags": [],
+      "confidence": 0.85,
+      "verifications": [
+        {
+          "verifier_instance": "gemini_pro",
+          "verifier_family": "google",
+          "verdict": "endorse",
+          "critique_notes": "ok",
+          "confidence": 0.9,
+          "reproduced_artifact_path": "",
+          "timestamp": "2026-09-27T12:49:29.307561+00:00"
+        },
+        {
+          "verifier_instance": "claude_haiku",
+          "verifier_family": "anthropic",
+          "verdict": "endorse",
+          "critique_notes": "ok",
+          "confidence": 0.9,
+          "reproduced_artifact_path": "",
+          "timestamp": "2026-09-27T12:49:29.323725+00:00"
+        }
+      ],
+      "status": "CANON_VERIFIED",
+      "created_at": "2026-09-27T12:49:29.291071+00:00",
+      "updated_at": "2026-09-27T12:49:29.323730+00:00",
+      "exported_to_embassy": true,
+      "treaty_file": "TREATY-agora-2026-09-27-hyp-062-self-healing-export-invariant.md",
+      "exported_at": "2026-09-27T12:49:29.359356+00:00"
+    },
+    "HYP-063": {
+      "id": "HYP-063",
+      "title": "Embassy Export Test Invariant",
+      "node_type": "hypothesis",
+      "author_instance": "gemini_3_1_flash_lite",
+      "author_family": "google",
+      "summary": "A test invariant for embassy export.",
+      "artifact_path": "",
+      "parents": [],
+      "tags": [],
+      "confidence": 0.85,
+      "verifications": [
+        {
+          "verifier_instance": "gemini_pro",
+          "verifier_family": "google",
+          "verdict": "endorse",
+          "critique_notes": "ok",
+          "confidence": 0.9,
+          "reproduced_artifact_path": "",
+          "timestamp": "2026-09-27T12:49:29.411269+00:00"
+        },
+        {
+          "verifier_instance": "claude_haiku",
+          "verifier_family": "anthropic",
+          "verdict": "endorse",
+          "critique_notes": "ok",
+          "confidence": 0.9,
+          "reproduced_artifact_path": "",
+          "timestamp": "2026-09-27T12:49:29.428085+00:00"
+        }
+      ],
+      "status": "CANON_VERIFIED",
+      "created_at": "2026-09-27T12:49:29.383737+00:00",
+      "updated_at": "2026-09-27T12:49:29.428092+00:00",
+      "exported_to_embassy": true,
+      "treaty_file": "TREATY-agora-2026-09-27-hyp-063-embassy-export-test-invariant.md",
+      "exported_at": "2026-09-27T12:49:29.446033+00:00"
     }
   }
 }

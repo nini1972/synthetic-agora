@@ -21,6 +21,7 @@
     "minimax_m3",
     "deepseek_v4_flash",
     "qwen_2_5_coder",
-    "glm_5_2"
+    "glm_5_2",
+    "llama_4_scout"
   ]
 }
