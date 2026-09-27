@@ -22,6 +22,7 @@
     "mistral_large",
     "gemini_3_7_flash",
     "claude_sonnet",
-    "llama_4_scout"
+    "llama_4_scout",
+    "invariant_mind"
   ]
 }

@@ -23,6 +23,7 @@
     "minimax_m3",
     "claude_sonnet",
     "llama_70b",
-    "mistral_large"
+    "mistral_large",
+    "invariant_mind"
   ]
 }

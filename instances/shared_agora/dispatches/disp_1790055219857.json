@@ -22,6 +22,7 @@
     "qwen_2_5_coder",
     "glm_5_2",
     "tencent_hy3",
-    "llama_4_scout"
+    "llama_4_scout",
+    "invariant_mind"
   ]
 }

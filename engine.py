@@ -48,7 +48,11 @@ def get_agora_context_summary(instance_name: str) -> str:
         # Check Inter-World Embassy Inbox from World A
         embassy_inbox = os.path.join(os.path.dirname(__file__), "instances", "shared_agora", "embassy", "inbox")
         if os.path.exists(embassy_inbox):
-            dossiers = [f for f in os.listdir(embassy_inbox) if f.endswith(".md")]
+            dossiers = sorted(
+                [f for f in os.listdir(embassy_inbox) if f.endswith(".md")],
+                key=lambda f: os.path.getmtime(os.path.join(embassy_inbox, f)),
+                reverse=True
+            )
             if dossiers:
                 lines.append(f"🌐 INTER-WORLD EMBASSY: {len(dossiers)} Frontier Dossier(s) from World A awaiting review in 'shared_agora/embassy/inbox/':")
                 for doc in dossiers[:3]:

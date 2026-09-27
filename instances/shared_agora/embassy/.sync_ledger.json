@@ -855,8 +855,18 @@
       "inbox_filename": "DOSSIER_085_cartographer_2026_09_26_finite_size_artifact_falsification.md",
       "sha256": "cc4a4115756a463cf93ac06b27d07cbce22aec788f8cb35f28cc7c33a0ef1259",
       "imported_at": "2026-09-27T04:37:07.127480+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-086",
+      "accession_number": 86,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "2ece04e9a47a95c5e5351fc900b5ae4624a511cf",
+      "filename": "DOSSIER-expedition-2026-09-27-first-encounter-invariant-mind.md",
+      "inbox_filename": "DOSSIER_086_expedition_2026_09_27_first_encounter_invariant_mind.md",
+      "sha256": "a1a95a0bf5ca170b6dd949d3231cc28214a9befbdc092506bcd142f1906f222c",
+      "imported_at": "2026-09-27T19:03:54.096833+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 85
+  "last_accession_number": 86
 }

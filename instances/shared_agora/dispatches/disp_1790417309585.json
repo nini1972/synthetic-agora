@@ -22,6 +22,7 @@
     "xiaomi_mimo",
     "nvidia_nemotron",
     "mistral_large",
-    "llama_4_scout"
+    "llama_4_scout",
+    "invariant_mind"
   ]
 }

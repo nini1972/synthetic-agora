@@ -1,5 +1,7 @@
 import os
 import sys
+import re
+import uuid
 import json
 import time
 from dotenv import load_dotenv
@@ -71,6 +73,100 @@ def merge_consecutive_messages(messages: list) -> list:
         else:
             merged.append(msg)
     return merged
+
+def extract_fallback_tool_call(content: str) -> dict:
+    """Fallback extractor for models that emit tool calls in plaintext, JSON, or bracketed format."""
+    if not content:
+        return None
+
+    known_tools = [
+        "post_epistemic_node", "peer_verify_node", "query_epistemic_graph",
+        "send_agent_dispatch", "read_agent_inbox", "export_treaty_to_embassy",
+        "read_file", "write_file", "edit_file", "run_command", "search_web", "submit_world_c_job"
+    ]
+
+    # 1. Check for !function_call: syntax
+    fc_idx = content.find("!function_call:")
+    if fc_idx != -1:
+        brace_idx = content.find("{", fc_idx)
+        if brace_idx != -1:
+            try:
+                data, _ = json.JSONDecoder().raw_decode(content[brace_idx:])
+                tool_name = data.get("call") or data.get("name")
+                args = data.get("arguments", {})
+                if tool_name in known_tools:
+                    return {
+                        "type": "tool_call",
+                        "tool_call_id": f"fallback_{uuid.uuid4().hex[:8]}",
+                        "tool_name": tool_name,
+                        "arguments": args,
+                        "content": content,
+                    }
+            except Exception:
+                pass
+
+    # 2. Check for markdown json codeblocks
+    for m in re.finditer(r'```(?:json)?\s*(\{)', content):
+        brace_idx = m.start(1)
+        try:
+            data, _ = json.JSONDecoder().raw_decode(content[brace_idx:])
+            tool_name = data.get("call") or data.get("name") or data.get("tool")
+            args = data.get("arguments") or data.get("args") or {}
+            if tool_name in known_tools and isinstance(args, dict):
+                return {
+                    "type": "tool_call",
+                    "tool_call_id": f"fallback_{uuid.uuid4().hex[:8]}",
+                    "tool_name": tool_name,
+                    "arguments": args,
+                    "content": content,
+                }
+        except Exception:
+            pass
+
+    # 3. Check for bracketed tool calls: [tool_name(param=val)]
+    for tool_name in known_tools:
+        pattern = rf"(?:\[|`|\b){tool_name}\s*\((.*?)\)(?:\]|`|\b)"
+        m = re.search(pattern, content, re.DOTALL)
+        if m:
+            arg_str = m.group(1).strip()
+            args = {}
+            param_matches = re.findall(
+                r'([a-zA-Z0-9_]+)\s*=\s*(?:"((?:\\.|[^"\\])*)"|\'((?:\\.|[^\'\\])*)\'|([^,\s\)]+))',
+                arg_str,
+                re.DOTALL,
+            )
+            for p_name, val_double, val_single, val_raw in param_matches:
+                if val_double is not None and val_double != "":
+                    try:
+                        val = val_double.encode().decode("unicode_escape")
+                    except Exception:
+                        val = val_double
+                elif val_single is not None and val_single != "":
+                    try:
+                        val = val_single.encode().decode("unicode_escape")
+                    except Exception:
+                        val = val_single
+                else:
+                    val = val_raw.strip()
+                args[p_name] = val
+
+            if not args and arg_str:
+                try:
+                    parsed = json.loads(arg_str)
+                    if isinstance(parsed, dict):
+                        args = parsed
+                except Exception:
+                    pass
+
+            if args:
+                return {
+                    "type": "tool_call",
+                    "tool_call_id": f"fallback_{uuid.uuid4().hex[:8]}",
+                    "tool_name": tool_name,
+                    "arguments": args,
+                    "content": content,
+                }
+    return None
 
 def resolve_agent_model(instance_name: str) -> str:
     """Resolves the authentic model endpoint for a given instance."""
@@ -154,8 +250,8 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
                 messages=messages,
                 tools=tools,
                 tool_choice="auto",
-                max_tokens=4096,
-                timeout=90,
+                max_tokens=8192,
+                timeout=120,
             )
             message = response.choices[0].message
             
@@ -185,6 +281,10 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
                     "content": content_text
                 }
             else:
+                if content_text:
+                    fallback = extract_fallback_tool_call(content_text)
+                    if fallback:
+                        return fallback
                 return {
                     "type": "thought",
                     "content": content_text

@@ -23,6 +23,7 @@
     "llama_4_scout",
     "claude_sonnet",
     "llama_70b",
-    "mistral_large"
+    "mistral_large",
+    "invariant_mind"
   ]
 }
