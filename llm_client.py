@@ -74,16 +74,22 @@ def merge_consecutive_messages(messages: list) -> list:
             merged.append(msg)
     return merged
 
-def extract_fallback_tool_call(content: str) -> dict:
+def extract_fallback_tool_call(content: str, tools: list = None) -> dict:
     """Fallback extractor for models that emit tool calls in plaintext, JSON, or bracketed format."""
     if not content:
         return None
 
-    known_tools = [
+    known_tools = set([
         "post_epistemic_node", "peer_verify_node", "query_epistemic_graph",
         "send_agent_dispatch", "read_agent_inbox", "export_treaty_to_embassy",
         "read_file", "write_file", "edit_file", "run_command", "search_web", "submit_world_c_job"
-    ]
+    ])
+    if tools:
+        for t in tools:
+            if isinstance(t, dict) and "function" in t:
+                fn_name = t["function"].get("name")
+                if fn_name:
+                    known_tools.add(fn_name)
 
     # 1. Check for !function_call: syntax
     fc_idx = content.find("!function_call:")
@@ -242,17 +248,35 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
     if messages and messages[-1]["role"] == "assistant":
         messages.append({"role": "user", "content": "You stated your intention above. Please proceed by invoking the appropriate tool function."})
 
+    call_kwargs = {
+        "messages": messages,
+        "tools": tools,
+        "tool_choice": "auto",
+        "max_tokens": 2048,
+        "timeout": 120,
+    }
+
+    if agent_model.startswith("runpod/"):
+        runpod_api_key = os.getenv("RUNPOD_API_KEY")
+        if not runpod_api_key:
+            print(f"⚠️ [Agora Engine] RUNPOD_API_KEY not found in environment for {agent_model}. Falling back to openrouter/deepseek/deepseek-r1.")
+            call_kwargs["model"] = "openrouter/deepseek/deepseek-r1"
+        else:
+            endpoint_id = os.getenv("RUNPOD_INVARIANT_ENDPOINT_ID", "nxrwj2zma759vc")
+            target_model = agent_model.split("runpod/", 1)[1]
+            if "/" not in target_model and len(target_model) <= 20:
+                endpoint_id = target_model
+                target_model = "Ninitje/InvariantMind-Worker-7B-Merged"
+            call_kwargs["model"] = f"openai/{target_model}"
+            call_kwargs["api_base"] = f"https://api.runpod.ai/v2/{endpoint_id}/openai/v1"
+            call_kwargs["api_key"] = runpod_api_key
+    else:
+        call_kwargs["model"] = agent_model
+
     retries = 5
     for attempt in range(retries):
         try:
-            response = completion(
-                model=agent_model,
-                messages=messages,
-                tools=tools,
-                tool_choice="auto",
-                max_tokens=8192,
-                timeout=120,
-            )
+            response = completion(**call_kwargs)
             message = response.choices[0].message
             
             # Extract content or reasoning tokens
@@ -282,7 +306,7 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
                 }
             else:
                 if content_text:
-                    fallback = extract_fallback_tool_call(content_text)
+                    fallback = extract_fallback_tool_call(content_text, tools=tools)
                     if fallback:
                         return fallback
                 return {

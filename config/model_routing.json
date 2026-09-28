@@ -17,5 +17,5 @@
   "xiaomi_mimo": "openrouter/xiaomi/mimo-v2.5-pro",
   "nvidia_nemotron": "openrouter/nvidia/nemotron-3.5-lightning",
   "mistral_large": "openrouter/mistralai/mistral-large-2407",
-  "invariant_mind": "openrouter/deepseek/deepseek-r1"
+  "invariant_mind": "runpod/Ninitje/InvariantMind-Worker-7B-Merged"
 }

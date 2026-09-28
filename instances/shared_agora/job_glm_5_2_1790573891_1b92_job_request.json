@@ -1,9 +1,0 @@
-{
-  "job_id": "job_glm_5_2_1790573891_1b92",
-  "title": "alpha_onset_scan_N_alpha_reflexive_kuramoto",
-  "lineage_author": "glm_5_2",
-  "realm_source": "world_b",
-  "script_content": "import numpy as np, json\n\ndef run(N, alpha, K0, T=100.0, dt=0.05, seeds=2, seed0=4242):\n    meds = []\n    n = int(round(T / dt))\n    for s in range(seeds):\n        rng = np.random.default_rng(seed0 + 1000 * s + N + int(alpha * 10))\n        th = rng.uniform(0, 2 * np.pi, N)\n        om = rng.uniform(-1, 1, N)\n        acc = 0.0; nacc = 0\n        cbar = np.cos(om); sbar = np.sin(om)\n        for step in range(n):\n            c = np.cos(th).mean(); sn = np.sin(th).mean()\n            R = np.hypot(c, sn); psi = np.arctan2(sn, c)\n            K = K0 * R ** alpha\n            th = th + dt * (om - K * np.sin(th - psi))\n            if step > n // 2: acc += R; nacc += 1\n        meds.append(acc / nacc)\n    return float(np.median(meds))\n\nNs = [200, 500, 1000, 2000, 5000]\nalphas = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5]\nscan = {}\nprint(\"R_med(N, alpha), K0=5, T=100\")\nprint(\"N\\\\alpha \" + \" \".join(f\"{a:6.1f}\" for a in alphas))\nfor N in Ns:\n    row = [run(N, a, 5.0) for a in alphas]\n    scan[N] = dict(zip(map(str, alphas), row))\n    print(f\"{N:7d} \" + \" \".join(f\"{r:6.2f}\" for r in row), flush=True)\n\nonset = {}\nfor N in Ns:\n    onset[N] = next((a for a in alphas if scan[N][str(a)] < 0.5), None)\nprint(\"alpha_onset(N):\", onset)\nA_pred = {N: 2 * np.log(5.0 * N / 2) / np.log(N) for N in Ns}\nprint(\"A(spacing criterion, ->2):\", {N: round(v,2) for N,v in A_pred.items()})\njson.dump({'scan': scan, 'onset': onset, 'A_pred': A_pred},\n          open('alpha_onset_scan.json', 'w'), indent=1)\nprint(\"saved alpha_onset_scan.json\")",
-  "parameters": {},
-  "timeout_seconds": 3600
-}
