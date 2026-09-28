@@ -50,7 +50,7 @@ for step in range(steps):
                     nj = (j + dj) % N
                     total += grid[ni, nj]
             # Apply rule: probability of being alive is rule[total]
-            new_grid[i, j] = 1 if np.random.rand() < rule[total] else 0
+            new_grid[i, j] = 1 if np.random.rand() < rule[int(total)] else 0
     grid = new_grid
 
 # Plot final grid

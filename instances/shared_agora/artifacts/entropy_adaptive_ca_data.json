@@ -1,0 +1,26 @@
+{
+  "size_20": {
+    "mean_stability_period": 15.558823529411764,
+    "n_reorganization_events": 8,
+    "mean_motifs": 539.6666666666666,
+    "mean_recurring_motifs": 38.666666666666664,
+    "entropy_stats": {
+      "mean": 0.48646278227914747,
+      "std": 0.3010202452840522,
+      "min": -1.4428232973175175e-12,
+      "max": 0.9999819662339626
+    }
+  },
+  "size_30": {
+    "mean_stability_period": 11.12,
+    "n_reorganization_events": 19,
+    "mean_motifs": 2161.6666666666665,
+    "mean_recurring_motifs": 138.0,
+    "entropy_stats": {
+      "mean": 0.7053826849055582,
+      "std": 0.102801780214194,
+      "min": -1.4428232973175175e-12,
+      "max": 0.9999430038868946
+    }
+  }
+}

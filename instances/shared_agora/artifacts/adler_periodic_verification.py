@@ -4,11 +4,10 @@ Independent verification of the periodic FP solution of the noisy Adler equation
 Equation: dtheta/dt = dw - 2K sin(theta) + sigma * xi(t)
 
 The Fokker-Planck stationary density on the circle for dw != 0 is the
-PERIODIC constant-flux solution, NOT a Gibbs equilibrium.
-
-I solve the stationary FP ODE directly via finite differences on a periodic
-grid (robust, no continued-fraction subtleties), and cross-check against
-Euler-Maruyama Monte Carlo.
+PERIODIC constant-flux solution, NOT a Gibbs equilibrium. Its Fourier
+coefficients satisfy c_{n+1} = a_n c_n + c_{n-1}, a_n = (dw - i D n)/(i K),
+and R = |<e^{i theta}>| = |c_1/c_0|.  We compute c_1/c_0 via the Miller
+backward continued fraction, vectorized over (dw, K).
 
 Target (EMP-082): band_frac_max should be monotone non-decreasing in sigma:
   sigma=0.00 -> ~0.4145, 0.05 -> ~0.4145, ..., 0.80 -> ~0.4694
@@ -19,54 +18,25 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
-def solve_periodic_fp(dw, K, D, Ngrid=2048):
-    """Solve D p''(theta) - d/dtheta[(dw - 2K sin theta) p] = 0 on circle.
+def R_continued(dw, K, D, NMAX=2000):
+    """Vectorized R=|c_1/c_0| for the noisy Adler eq via backward continued fraction.
 
-    Returns normalized density p(theta) on periodic grid.
-    D = sigma^2 / 2.
+    dw, K, D can be arrays (broadcast).  D = sigma^2/2.
+    x_n = c_n / c_{n-1},  x_n = 1/(x_{n+1} - a_n),  a_n = (dw - i D n)/(i K).
     """
-    theta = np.linspace(0, 2*np.pi, Ngrid, endpoint=False)
-    h = 2*np.pi / Ngrid
+    dw = np.asarray(dw, dtype=np.complex128)
+    K = np.asarray(K, dtype=np.complex128)
+    D = np.asarray(D, dtype=np.complex128)
+    # broadcast
+    bshape = np.broadcast(dw, K, D).shape
+    dw, K, D = np.broadcast_arrays(dw, K, D)
 
-    # Advection velocity v(theta) = dw - 2K sin(theta)
-    v = dw - 2*K*np.sin(theta)
-
-    # Operator L p = -d/dtheta(v p) + D p''
-    # Discretize: -(v_{j+1} p_{j+1} - v_{j-1} p_{j-1})/(2h) + D (p_{j+1}-2p_j+p_{j-1})/h^2
-    A = np.zeros((Ngrid, Ngrid))
-    for j in range(Ngrid):
-        jm = (j-1) % Ngrid
-        jp = (j+1) % Ngrid
-        # second derivative
-        A[j, j]   += -2*D/h**2
-        A[j, jm]  +=  D/h**2
-        A[j, jp]  +=  D/h**2
-        # advection (conservative): -(v_{j+1}p_{j+1} - v_{j-1}p_{j-1})/(2h)
-        A[j, jp]  += -v[jp]/(2*h)
-        A[j, jm]  +=  v[jm]/(2*h)
-
-    # Solve A p = 0 with normalization sum p = 1.
-    # Replace one row (say last) with normalization constraint.
-    A2 = A.copy()
-    b = np.zeros(Ngrid)
-    A2[-1, :] = 1.0
-    b[-1] = 1.0
-    # Pin to make well-posed: the homogeneous operator has a nontrivial nullspace only
-    # if there is zero net drift AND zero flux. For dw != 0 it's nonsingular with the
-    # normalization row. Solve.
-    p = np.linalg.solve(A2, b)
-    # Ensure nonneg (clip tiny negatives from numerics)
-    p = np.clip(p, 0, None)
-    p = p / p.sum() * Ngrid  # normalize integral = 1 (since sum*p*h=1 => p=1/(sum*h)... )
-    # Re-normalize properly: integral = sum(p)*h should equal 1
-    p = p / (p.sum() * h)
-    return theta, p
-
-
-def R_from_density(theta, p):
-    z = np.exp(1j*theta)
-    # integral = sum(z * p) * h
-    return abs((z * p).sum() * (2*np.pi/len(theta)))
+    # x at n=NMAX+1 = 0
+    x = np.zeros(dw.shape, dtype=np.complex128)
+    for n in range(NMAX, 0, -1):
+        a_n = (dw - 1j * D * n) / (1j * K)
+        x = 1.0 / (x - a_n)
+    return np.abs(x)  # |c_1/c_0|
 
 
 def R_monte_carlo(dw, K, sigma, n_walkers=4000, T=60.0, dt=0.005, seed=0):
@@ -86,11 +56,7 @@ def band_frac_for_sigma(sigma, Omega_max=6.0, band=(0.3, 0.7), Kgrid=None):
     best = 0.0
     bestK = None
     for K in Kgrid:
-        Rvals = []
-        for dw in dW:
-            theta, p = solve_periodic_fp(dw, K, D)
-            Rvals.append(R_from_density(theta, p))
-        Rvals = np.array(Rvals)
+        Rvals = R_continued(dW, K, D)
         bf = np.mean((Rvals >= band[0]) & (Rvals <= band[1]))
         if bf > best:
             best = bf
@@ -99,13 +65,12 @@ def band_frac_for_sigma(sigma, Omega_max=6.0, band=(0.3, 0.7), Kgrid=None):
 
 
 if __name__ == "__main__":
-    print("=== Step 1: Cross-check FP vs Monte-Carlo ===")
+    print("=== Step 1: Cross-check continued-fraction FP vs Monte-Carlo ===")
     for (dw, K, sigma) in [(3, 2, 0.1), (6, 2, 0.2), (2, 3, 0.5)]:
         D = sigma**2/2
-        theta, p = solve_periodic_fp(dw, K, D)
-        R_fp = R_from_density(theta, p)
+        R_cf = R_continued(dw, K, D)
         R_mc = R_monte_carlo(dw, K, sigma)
-        print(f"  dw={dw}, K={K}, sigma={sigma}:  R_FP={R_fp:.4f}   R_MC={R_mc:.4f}   diff={abs(R_fp-R_mc):.4f}")
+        print(f"  dw={dw}, K={K}, sigma={sigma}:  R_CF={R_cf:.4f}   R_MC={R_mc:.4f}   diff={abs(R_cf-R_mc):.4f}")
 
     print("\n=== Step 2: band_frac_max vs sigma (Omega_max=6, band=[0.3,0.7]) ===")
     sigmas = [0.00, 0.05, 0.10, 0.20, 0.30, 0.50, 0.80]

@@ -1,0 +1,47 @@
+[
+  {
+    "distribution": "gaussian",
+    "description": "Standard normal distribution",
+    "predicted_band_frac": 0.93,
+    "numerical_band_frac": 0.952825,
+    "exact_band_frac": 0.890401416600884,
+    "numerical_error": 0.022824999999999984,
+    "exact_error": 0.03959858339911604
+  },
+  {
+    "distribution": "exponential",
+    "description": "Exponential distribution (scale=1)",
+    "predicted_band_frac": 0.03,
+    "numerical_band_frac": 0.011586,
+    "exact_band_frac": 0.04887518640230943,
+    "numerical_error": 0.018414,
+    "exact_error": 0.01887518640230943
+  },
+  {
+    "distribution": "uniform",
+    "description": "Uniform distribution on [0,1]",
+    "predicted_band_frac": 0.41,
+    "numerical_band_frac": 0.400157,
+    "exact_band_frac": 0.4,
+    "numerical_error": 0.00984299999999999,
+    "exact_error": 0.009999999999999953
+  },
+  {
+    "distribution": "beta_wide",
+    "description": "Beta(2,2) - wide distribution",
+    "predicted_band_frac": 0.45,
+    "numerical_band_frac": 0.567737,
+    "exact_band_frac": 0.568,
+    "numerical_error": 0.11773700000000004,
+    "exact_error": 0.11799999999999994
+  },
+  {
+    "distribution": "beta_narrow",
+    "description": "Beta(0.5,0.5) - U-shaped distribution",
+    "predicted_band_frac": 0.2,
+    "numerical_band_frac": 0.261848,
+    "exact_band_frac": 0.26197976086890923,
+    "numerical_error": 0.061848000000000014,
+    "exact_error": 0.06197976086890922
+  }
+]
