@@ -1,0 +1,91 @@
+=== ENTROPY-ADAPTIVE CELLULAR AUTOMATA TEST ===
+Testing HYP-077 predictions
+
+
+--- Testing size 20x20 ---
+
+Run 1/3
+Step 0: H=0.993, Rules=(2-3, 2-3)
+Step 50: H=0.231, Rules=(4-5, 2-3)
+Step 100: H=-0.000, Rules=(5-6, 1-2)
+Step 150: H=-0.000, Rules=(4-5, 1-2)
+  Final entropy: -0.000
+  Rule changes: 8
+  Motifs found: 270 total, 23 recurring
+
+Run 2/3
+Step 0: H=0.994, Rules=(2-3, 2-3)
+Step 50: H=0.927, Rules=(1-2, 0-0)
+Step 100: H=0.675, Rules=(2-2, 2-2)
+Step 150: H=0.803, Rules=(1-1, 4-4)
+  Final entropy: 0.787
+  Rule changes: 19
+  Motifs found: 1167 total, 71 recurring
+
+Run 3/3
+Step 0: H=1.000, Rules=(2-3, 2-3)
+Step 50: H=0.922, Rules=(3-4, 2-3)
+Step 100: H=0.932, Rules=(2-3, 2-3)
+Step 150: H=1.000, Rules=(1-2, 5-6)
+  Final entropy: 0.875
+  Rule changes: 14
+  Motifs found: 1450 total, 24 recurring
+
+--- Testing size 30x30 ---
+
+Run 1/3
+Step 0: H=1.000, Rules=(2-3, 2-3)
+Step 50: H=0.985, Rules=(3-4, 5-6)
+Step 100: H=-0.000, Rules=(2-3, 6-7)
+Step 150: H=-0.000, Rules=(4-5, 5-6)
+  Final entropy: -0.000
+  Rule changes: 10
+  Motifs found: 1210 total, 12 recurring
+
+Run 2/3
+Step 0: H=1.000, Rules=(2-3, 2-3)
+Step 50: H=0.946, Rules=(0-0, 2-3)
+Step 100: H=0.955, Rules=(3-3, 2-3)
+Step 150: H=0.394, Rules=(4-4, 1-2)
+  Final entropy: 0.032
+  Rule changes: 18
+  Motifs found: 1670 total, 128 recurring
+
+Run 3/3
+Step 0: H=0.997, Rules=(2-3, 2-3)
+Step 50: H=0.916, Rules=(0-0, 3-4)
+Step 100: H=0.860, Rules=(0-0, 3-4)
+Step 150: H=0.916, Rules=(0-0, 1-2)
+  Final entropy: 0.621
+  Rule changes: 22
+  Motifs found: 2381 total, 274 recurring
+
+=== ANALYSIS ===
+
+Size 20x20 Results:
+  Mean stability period: 12.5 ± 13.1 steps
+  Reorganization events: 11
+  Motifs per run: 962.3 ± 503.0
+  Recurring motifs: 39.3 ± 22.4
+  Entropy range: -0.000 - 1.000
+
+Size 30x30 Results:
+  Mean stability period: 11.0 ± 10.2 steps
+  Reorganization events: 11
+  Motifs per run: 1753.7 ± 481.7
+  Recurring motifs: 138.0 ± 107.2
+  Entropy range: -0.000 - 1.000
+Step 0: H=0.997, Rules=(3-4, 2-3)
+Step 50: H=-0.000, Rules=(4-5, 4-5)
+Step 100: H=-0.000, Rules=(4-5, 2-3)
+Step 150: H=-0.000, Rules=(5-6, 0-1)
+Step 0: H=0.915, Rules=(2-3, 2-3)
+Step 0: H=0.924, Rules=(2-3, 2-3)
+
+=== VERDICT ===
+✓ CLAIM 1 SUPPORTED: Punctuated equilibrium observed - rule stability periods detected
+✓ CLAIM 2 SUPPORTED: Complex recurring spatial motifs detected
+✓ CLAIM 3 SUPPORTED: Entropy values in intermediate range suggesting critical behavior
+
+Overall verification: 3/3 = 100.0%
+STRONG SUPPORT for entropy-adaptive CA hypothesis

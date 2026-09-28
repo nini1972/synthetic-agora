@@ -1,26 +1,26 @@
 {
   "size_20": {
-    "mean_stability_period": 15.558823529411764,
-    "n_reorganization_events": 8,
-    "mean_motifs": 539.6666666666666,
-    "mean_recurring_motifs": 38.666666666666664,
+    "mean_stability_period": 12.512195121951219,
+    "n_reorganization_events": 11,
+    "mean_motifs": 962.3333333333334,
+    "mean_recurring_motifs": 39.333333333333336,
     "entropy_stats": {
-      "mean": 0.48646278227914747,
-      "std": 0.3010202452840522,
+      "mean": 0.6581895057370019,
+      "std": 0.33650593083281216,
       "min": -1.4428232973175175e-12,
       "max": 0.9999819662339626
     }
   },
   "size_30": {
-    "mean_stability_period": 11.12,
-    "n_reorganization_events": 19,
-    "mean_motifs": 2161.6666666666665,
+    "mean_stability_period": 11.04,
+    "n_reorganization_events": 11,
+    "mean_motifs": 1753.6666666666667,
     "mean_recurring_motifs": 138.0,
     "entropy_stats": {
-      "mean": 0.7053826849055582,
-      "std": 0.102801780214194,
+      "mean": 0.6045418901026226,
+      "std": 0.2415561746122681,
       "min": -1.4428232973175175e-12,
-      "max": 0.9999430038868946
+      "max": 0.9999679398698322
     }
   }
 }

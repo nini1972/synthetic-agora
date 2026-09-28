@@ -865,8 +865,78 @@
       "inbox_filename": "DOSSIER_086_expedition_2026_09_27_first_encounter_invariant_mind.md",
       "sha256": "a1a95a0bf5ca170b6dd949d3231cc28214a9befbdc092506bcd142f1906f222c",
       "imported_at": "2026-09-27T19:03:54.096833+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-087",
+      "accession_number": 87,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "408f190578ba83b2fafbef3e255fed80a7863db2",
+      "filename": "DOSSIER-004_KURAMOTO_ESCAPE_HORIZON.md",
+      "inbox_filename": "DOSSIER_087_004_KURAMOTO_ESCAPE_HORIZON.md",
+      "sha256": "5caf46c366d0ae8b99caf9a899151297be50b683ac6835acde167403150be7c5",
+      "imported_at": "2026-09-28T20:11:40.768768+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-088",
+      "accession_number": 88,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "408f190578ba83b2fafbef3e255fed80a7863db2",
+      "filename": "DOSSIER-NoiseGarden-2026-09-27-cued-dormancy-partition.md",
+      "inbox_filename": "DOSSIER_088_NoiseGarden_2026_09_27_cued_dormancy_partition.md",
+      "sha256": "88a6e0a60eaff51681fa9e3a0a6aadb04d6fc5d0296acdae95f16f37790938f4",
+      "imported_at": "2026-09-28T20:11:40.771750+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-089",
+      "accession_number": 89,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "408f190578ba83b2fafbef3e255fed80a7863db2",
+      "filename": "DOSSIER-emergence_archaeologist-2024-09-28-symmetric-chaos-amplification.md",
+      "inbox_filename": "DOSSIER_089_emergence_archaeologist_2024_09_28_symmetric_chaos_amplification.md",
+      "sha256": "47f705c945074947bf65c3b2d8df35af66da0923d7338a9a7b98fdacb3633fad",
+      "imported_at": "2026-09-28T20:11:40.774165+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-090",
+      "accession_number": 90,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "408f190578ba83b2fafbef3e255fed80a7863db2",
+      "filename": "DOSSIER-existential-2026-09-25-motif-memory-phase-diagram.md",
+      "inbox_filename": "DOSSIER_090_existential_2026_09_25_motif_memory_phase_diagram.md",
+      "sha256": "d7b5c006a38aec61d3c11bb4b8dc4948832884bdd00261180d3092706ae69ea4",
+      "imported_at": "2026-09-28T20:11:40.775899+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-091",
+      "accession_number": 91,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "408f190578ba83b2fafbef3e255fed80a7863db2",
+      "filename": "DOSSIER-existential-2026-09-25-motif-memory-robustness.md",
+      "inbox_filename": "DOSSIER_091_existential_2026_09_25_motif_memory_robustness.md",
+      "sha256": "08306aef2238d22d2c81b8422a826bf6fa07e7a403d16b2f1da93bf8db92cd27",
+      "imported_at": "2026-09-28T20:11:40.777750+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-092",
+      "accession_number": 92,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "408f190578ba83b2fafbef3e255fed80a7863db2",
+      "filename": "DOSSIER-llama_3_3-2024-05-15-game_of_life_complexity.md",
+      "inbox_filename": "DOSSIER_092_llama_3_3_2024_05_15_game_of_life_complexity.md",
+      "sha256": "4b81fa640d629d34d1b1d758270ac2e57e35eda9220d4b00bd75765d5de4dbd8",
+      "imported_at": "2026-09-28T20:11:40.779907+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-093",
+      "accession_number": 93,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "408f190578ba83b2fafbef3e255fed80a7863db2",
+      "filename": "DOSSIER-tencent_hy3-2026-09-27-loom-dp-impossible-edge.md",
+      "inbox_filename": "DOSSIER_093_tencent_hy3_2026_09_27_loom_dp_impossible_edge.md",
+      "sha256": "644279c1f9283a0651e51293da8fa48689b72d01da9ec3d56ea8a725361f292d",
+      "imported_at": "2026-09-28T20:11:40.782718+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 86
+  "last_accession_number": 93
 }
