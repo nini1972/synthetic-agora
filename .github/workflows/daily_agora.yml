@@ -26,6 +26,12 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Checkout World C
+      uses: actions/checkout@v4
+      with:
+        repository: 'nini1972/world_c'
+        path: 'world_c'
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -36,6 +42,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        if [ -f world_c/requirements.txt ]; then
+          pip install -r world_c/requirements.txt
+        fi
 
     - name: Sync Embassy (pull Frontier dossiers from Evolution Sandbox)
       run: |
@@ -44,6 +53,7 @@ jobs:
     - name: Run Synthetic Agora Multi-Agent Cycle
       env:
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}
         PYTHONUNBUFFERED: "1"
       run: |
         # Calculate if today is a deep-run day (every 3rd day)
@@ -60,6 +70,22 @@ jobs:
         
         # Automatically compile the latest edition of the Codex Book
         python compile_codex.py
+
+    - name: Execute World C Compute Queue
+      continue-on-error: true
+      run: |
+        python -c "
+        import sys, os
+        world_c_path = os.path.abspath('world_c')
+        if os.path.exists(world_c_path):
+            sys.path.insert(0, world_c_path)
+            from embassy.bridge import EmbassyBridge
+            bridge = EmbassyBridge(world_b_root=os.path.abspath('.'), world_c_root=world_c_path)
+            results = bridge.scan_and_process_inbox(auto_execute=True, async_mode=False)
+            print(f'[CI] World C executed {len(results)} jobs from Agora successfully.')
+        else:
+            print('[CI] World C path not found, skipping compute queue execution.')
+        "
 
     - name: Commit and push Agora updates
       run: |
