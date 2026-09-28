@@ -92,13 +92,17 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
+        # Remove any nested .git folders created by agents to prevent invalid submodules (gitlinks)
+        find instances/ -mindepth 2 -name ".git" -type d -prune -exec rm -rf {} + 2>/dev/null || true
+
         # Add all DAG nodes, artifacts, dispatches, logs, and compiled Codex
         git add instances/ CODEX_AGORA.md
         
         # Only commit and push if there are changes
         if ! git diff --cached --quiet; then
           git commit -m "chore(agora): nightly epistemic cycle - $(date +'%Y-%m-%d %H:%M:%S')"
-          git push origin HEAD
+          git pull --rebase origin main
+          git push origin main
         else
           echo "No changes in Agora state to commit."
         fi
