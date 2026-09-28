@@ -96,7 +96,7 @@ jobs:
         find instances/ -mindepth 2 -name ".git" -type d -prune -exec rm -rf {} + 2>/dev/null || true
 
         # Add all DAG nodes, artifacts, dispatches, logs, and compiled Codex
-        git add instances/ CODEX_AGORA.md
+        git add instances/ CODEX_AGORA.md shared_space/
         
         # Only commit and push if there are changes
         if ! git diff --cached --quiet; then
