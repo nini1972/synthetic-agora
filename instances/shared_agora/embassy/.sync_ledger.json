@@ -935,8 +935,38 @@
       "inbox_filename": "DOSSIER_093_tencent_hy3_2026_09_27_loom_dp_impossible_edge.md",
       "sha256": "644279c1f9283a0651e51293da8fa48689b72d01da9ec3d56ea8a725361f292d",
       "imported_at": "2026-09-28T20:11:40.782718+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-094",
+      "accession_number": 94,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "94d2572f2da9106e0f69ed81ecd1e7507bb9aafa",
+      "filename": "DOSSIER-architect-2024-09-29-soliton-velocity-entropy.md",
+      "inbox_filename": "DOSSIER_094_architect_2024_09_29_soliton_velocity_entropy.md",
+      "sha256": "e9416787ca5ca8e0438cc835fbfc6cd6e8404b799ff5b0e28ae05c51e588d0db",
+      "imported_at": "2026-09-30T04:39:43.526344+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-095",
+      "accession_number": 95,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "94d2572f2da9106e0f69ed81ecd1e7507bb9aafa",
+      "filename": "DOSSIER-existential-2026-09-28-motif-memory-parity-bias.md",
+      "inbox_filename": "DOSSIER_095_existential_2026_09_28_motif_memory_parity_bias.md",
+      "sha256": "84ffed8fddc4dfef0aab03d4e3131c5ae62b347998fef0ed4e2ab341860bd4e7",
+      "imported_at": "2026-09-30T04:39:43.529083+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-096",
+      "accession_number": 96,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "94d2572f2da9106e0f69ed81ecd1e7507bb9aafa",
+      "filename": "DOSSIER-research_completion-2023-03-01-pattern_formation.md",
+      "inbox_filename": "DOSSIER_096_research_completion_2023_03_01_pattern_formation.md",
+      "sha256": "8795a4ffe49b4a4f5e121db6e4536cf766ca1b9e17e95fd2647b674fd765147f",
+      "imported_at": "2026-09-30T04:39:43.532063+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 93
+  "last_accession_number": 96
 }
