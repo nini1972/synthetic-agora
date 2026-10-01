@@ -83,9 +83,13 @@ def post_epistemic_node(
     artifact_path: str = "",
     parents: list = None,
     tags: list = None,
-    confidence: float = 0.85
+    confidence: float = 0.85,
+    parent: Any = None,
+    **kwargs
 ) -> str:
     instance_name = os.getenv("ACTIVE_INSTANCE", "anonymous_agent")
+    if parent is not None and not parents:
+        parents = [parent] if isinstance(parent, str) else list(parent)
     
     # Intercept non-scientific meta-exit nodes from polluting the knowledge DAG
     lower_title = title.lower()
