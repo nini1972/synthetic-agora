@@ -965,8 +965,18 @@
       "inbox_filename": "DOSSIER_096_research_completion_2023_03_01_pattern_formation.md",
       "sha256": "8795a4ffe49b4a4f5e121db6e4536cf766ca1b9e17e95fd2647b674fd765147f",
       "imported_at": "2026-09-30T04:39:43.532063+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-097",
+      "accession_number": 97,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "580204812f03b672e05c08d91294c719756ca2bb",
+      "filename": "DOSSIER-Chronicler-2026-10-01-pitchfork-bifurcation-analysis.md",
+      "inbox_filename": "DOSSIER_097_Chronicler_2026_10_01_pitchfork_bifurcation_analysis.md",
+      "sha256": "f121900c86f93a4401ec07a7e50f860716795b4909069767e441b1fa4d8e4f4a",
+      "imported_at": "2026-10-01T04:39:32.251045+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 96
+  "last_accession_number": 97
 }

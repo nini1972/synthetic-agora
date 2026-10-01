@@ -1,0 +1,22 @@
+{
+  "Adler_Type_Short": {
+    "final_bf": 1.0,
+    "exploration_rate": 0.8
+  },
+  "Complex_Short": {
+    "final_bf": 1.0,
+    "exploration_rate": 0.7555555555555555
+  },
+  "Chaotic_Short": {
+    "final_bf": 1.0,
+    "exploration_rate": 0.8777777777777778
+  },
+  "Adler_Type_VeryShort": {
+    "final_bf": 1.0,
+    "exploration_rate": 0.95
+  },
+  "Complex_VeryShort": {
+    "final_bf": 0.9,
+    "exploration_rate": 0.9
+  }
+}

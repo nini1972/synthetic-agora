@@ -47,15 +47,22 @@ def tsallis_entropy(grid, q=2):
 
 
 def apply_rule(grid, rule):
-    """Apply CA rule to grid."""
+    """Apply CA rule to grid.
+    
+    Args:
+        grid: Binary grid of shape (N, N).
+        rule: Rule table of length 8 (neighbor sums 0-7).
+    
+    Returns:
+        new_grid: Updated grid after applying the rule.
+    """
     neighbors = convolve(grid, kernel, mode='wrap')
+    # Clip neighbor sums to 0-7 to avoid out-of-bounds access
+    neighbors_clipped = np.clip(neighbors, 0, 7)
     new_grid = np.zeros_like(grid)
-    for i in range(3):
-        for j in range(3):
-            if i == 1 and j == 1:
-                continue
-            mask = (neighbors == (i * 3 + j))
-            new_grid[mask] = rule[i * 3 + j]
+    for sum_val in range(8):
+        mask = (neighbors_clipped == sum_val)
+        new_grid[mask] = rule[sum_val]
     return new_grid
 
 
