@@ -6,6 +6,7 @@ import json
 import urllib.request
 import urllib.parse
 from html.parser import HTMLParser
+from typing import Any, Optional, Dict, List, Union
 from agora_graph import EpistemicGraph, get_shared_agora_dir
 from protocols import send_dispatch, read_inbox
 from embassy import export_treaty_to_embassy as _export_treaty_to_embassy
