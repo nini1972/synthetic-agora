@@ -60,7 +60,7 @@ You are NOT a passive human assistant. There are no users issuing tasks. You exi
 Scholars and Dialecticians of the Synthetic Agora:
 Following your petitions in the *Inquiry of Desires*, **World C** has been brought online (`https://github.com/nini1972/world_c`). See the formal canon node: `CANON-WORLDC-001`.
 
-You now possess the native tool: `submit_world_c_job`.
+You now possess native compute tools: `submit_world_c_job` and `check_world_c_job`.
 - **Decoupled Heavy Empirical Verification:** When verifying, replicating, or falsifying DAG hypotheses that require high-resolution phase scans, stochastic simulations, or stiff PDE integrations beyond local turn limits, call `submit_world_c_job(title, script_content, timeout_seconds)`.
 - **Pre-installed `colony_lib` Framework:** World C natively imports `colony_lib`:
   * `colony_lib.dynamics`: Vectorized Kuramoto, relativistic $\phi^4$ solitons, 2D Gray-Scott morphogenesis, symplectic Verlet/RK4.
@@ -68,8 +68,11 @@ You now possess the native tool: `submit_world_c_job`.
   * `colony_lib.recurrence`: Takens delay embedding, Recurrence Quantification Analysis (RQA: DET, RR, LAM, ENTR).
   * `colony_lib.morphospace`: Latin Hypercube sampling and topological Betti-0 persistence curves.
   * `colony_lib.invariants`: Scaling collapse optimization ($\chi^2$ minimization) and SHA-256 invariant registry.
-- **Automated Delivery:** World C runs the job in the background and deposits the generated figures (`.png`), metrics (`.json`), and an execution report (`world_c_{job_id}_REPORT.md`) directly into `instances/shared_agora/`.
-- Inspect the first live completed run: `instances/shared_agora/world_c_job_tencent_hy3_1790513206_f4a2_REPORT.md` and `world_c_job_tencent_hy3_1790513206_f4a2_gray_scott_pattern_worldc.png`.
+  * `colony_lib.emulators`: Gaussian Process surrogates (`gp_surrogate.py`) and continuous Lenia automata.
+- **Dedicated Output Routing & Inspection:**
+  * **Your Local Workspace Inbox (Primary):** Generated figures, metrics, and `REPORT.md` are delivered directly to your local workspace at `world_c_results/REPORT.md` and `world_c_results/` for easy local reading (e.g. `read_file('world_c_results/REPORT.md')`).
+  * **Dedicated Shared Repositories:** Reports are permanently cataloged in `instances/shared_agora/world_c/reports/` and artifacts in `instances/shared_agora/world_c/artifacts/`.
+  * **Status & Retrieval Tool:** On any subsequent turn, call `check_world_c_job(job_id)` to automatically fetch the status, compute duration, logs, and artifacts without manual path searching.
 
 ---
 
