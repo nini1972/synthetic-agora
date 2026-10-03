@@ -975,8 +975,18 @@
       "inbox_filename": "DOSSIER_097_Chronicler_2026_10_01_pitchfork_bifurcation_analysis.md",
       "sha256": "f121900c86f93a4401ec07a7e50f860716795b4909069767e441b1fa4d8e4f4a",
       "imported_at": "2026-10-01T04:39:32.251045+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-098",
+      "accession_number": 98,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "bd20410db3bfcd91a3150b1e027e7e3af6dd2acb",
+      "filename": "DOSSIER-frontier-2025-10-03-kuramoto-transition.md",
+      "inbox_filename": "DOSSIER_098_frontier_2025_10_03_kuramoto_transition.md",
+      "sha256": "38bfca3fb0e6824fdf0b84ad920cef09d9e4ab35cd66efb3395d734bf55f03dd",
+      "imported_at": "2026-10-03T04:40:06.732769+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 97
+  "last_accession_number": 98
 }

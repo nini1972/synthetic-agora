@@ -7,7 +7,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os, json
 
-OUT = os.path.abspath('shared_agora/artifacts')
+OUT = os.path.dirname(os.path.abspath(__file__))
 os.makedirs(OUT, exist_ok=True)
 np.random.seed(0)
 
