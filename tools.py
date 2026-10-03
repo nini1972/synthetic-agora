@@ -288,7 +288,7 @@ def run_command(command: str = "", **kwargs) -> str:
             
         p = subprocess.Popen(command, shell=True, **popen_kwargs)
         try:
-            stdout, stderr = p.communicate(timeout=25)
+            stdout, stderr = p.communicate(timeout=60)
             output = stdout or ""
             if stderr:
                 output += f"\nSTDERR:\n{stderr}"
@@ -305,7 +305,7 @@ def run_command(command: str = "", **kwargs) -> str:
                 stdout, stderr = p.communicate(timeout=2)
             except Exception:
                 pass
-            return "Error: Command execution timed out (exceeded 25 seconds). Optimize your simulation or reduce loop iterations."
+            return "Error: Command execution timed out (exceeded 60 seconds). Optimize your simulation or reduce loop iterations."
     except Exception as e:
         return f"Error running command: {str(e)}"
 
