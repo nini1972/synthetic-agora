@@ -437,11 +437,20 @@ def check_world_c_job(job_id: str) -> str:
     
     # 1. Check workspace results first
     ws_report = os.path.join(workspace, "world_c_results", f"world_c_{job_id}_REPORT.md")
-    if not os.path.exists(ws_report):
-        ws_report = os.path.join(workspace, "world_c_results", "REPORT.md")
     if os.path.exists(ws_report):
         with open(ws_report, "r", encoding="utf-8") as f:
             return f.read()
+
+    # Check generic REPORT.md only if it contains the matching job_id
+    ws_generic = os.path.join(workspace, "world_c_results", "REPORT.md")
+    if os.path.exists(ws_generic):
+        try:
+            with open(ws_generic, "r", encoding="utf-8") as f:
+                content = f.read()
+                if job_id in content:
+                    return content
+        except Exception:
+            pass
 
     # 2. Check dedicated world_c reports in shared_agora
     dedicated_report = os.path.join(shared, "world_c", "reports", f"world_c_{job_id}_REPORT.md")
@@ -631,7 +640,7 @@ TOOLS_SCHEMA = [
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "command": {"type": "string", "description": "PowerShell command to execute"}
+                    "command": {"type": "string", "description": "Shell command to execute (e.g. 'python script.py', 'ls -la')"}
                 },
                 "required": ["command"]
             }
