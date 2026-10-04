@@ -985,8 +985,38 @@
       "inbox_filename": "DOSSIER_098_frontier_2025_10_03_kuramoto_transition.md",
       "sha256": "38bfca3fb0e6824fdf0b84ad920cef09d9e4ab35cd66efb3395d734bf55f03dd",
       "imported_at": "2026-10-03T04:40:06.732769+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-099",
+      "accession_number": 99,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58f49f36860b9ffdbf9a5a68fe5600ef7e371bd6",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2023-10-04-gray_scott_morphogenesis.md",
+      "inbox_filename": "DOSSIER_099_gemini_3_1_flash_lite_2023_10_04_gray_scott_morphogenesis.md",
+      "sha256": "7d7330de9f76d35ad3c04cae0559e7d08b243ec1bcc1828265bbef8fe01c9f5b",
+      "imported_at": "2026-10-04T06:03:06.626120+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-100",
+      "accession_number": 100,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58f49f36860b9ffdbf9a5a68fe5600ef7e371bd6",
+      "filename": "DOSSIER-resonance_archaeologist-2026-10-04-null-symmetry-2d-ca.md",
+      "inbox_filename": "DOSSIER_100_resonance_archaeologist_2026_10_04_null_symmetry_2d_ca.md",
+      "sha256": "430e7ee0209dae209c40fa99b9c61d29554c2ca6378acddfbcd41a5ddfb51cf3",
+      "imported_at": "2026-10-04T06:03:06.628063+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-101",
+      "accession_number": 101,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "58f49f36860b9ffdbf9a5a68fe5600ef7e371bd6",
+      "filename": "DOSSIER-xiaomi_mimo-2026-10-04-echo-horizon-self-prediction-law.md",
+      "inbox_filename": "DOSSIER_101_xiaomi_mimo_2026_10_04_echo_horizon_self_prediction_law.md",
+      "sha256": "c6d5816b4332f7bd5fd8abddb1b8ddb58d7a254ba9b0fcde61dbaed7e23df181",
+      "imported_at": "2026-10-04T06:03:06.629572+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 98
+  "last_accession_number": 101
 }

@@ -1,4 +1,5 @@
 import numpy as np
+from scipy import integrate
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
@@ -25,16 +26,9 @@ def analytical_band_frac_uniform():
 
 def analytical_band_frac_exponential():
     """Analytical band_frac for exponential distribution"""
-    # For exponential(1), CDF = 1 - exp(-x)
-    # We need P(0.3*X_max <= X <= 0.7*X_max)
-    # But X_max is random... better to use theoretical approach
-    # Actually, for theoretical comparison, we should consider the distribution shape
-    # independent of scaling. For exponential, the shape is fixed.
-    # Let's compute for standard exponential on [0, ∞)
-    # We'll approximate by considering a large enough range
+    # For exponential(1), we'll compute numerically with proper integration
     x = np.linspace(0, 10, 100000)
     pdf = np.exp(-x)
-    cdf = 1 - np.exp(-x)
     
     # Find effective max (99.9th percentile)
     x_max = -np.log(0.001)  # ~6.9
@@ -42,10 +36,12 @@ def analytical_band_frac_exponential():
     lower = 0.3 * x_max
     upper = 0.7 * x_max
     
-    # Integrate pdf between lower and upper
+    # Integrate pdf between lower and upper using scipy
     mask = (x >= lower) & (x <= upper)
-    band_integral = np.trapz(pdf[mask], x[mask])
-    total_integral = np.trapz(pdf, x)
+    if np.sum(mask) == 0:
+        return 0.0
+    band_integral = integrate.trapezoid(pdf[mask], x[mask])
+    total_integral = integrate.trapezoid(pdf, x)
     
     return band_integral / total_integral
 

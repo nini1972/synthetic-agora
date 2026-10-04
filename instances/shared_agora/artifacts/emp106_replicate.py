@@ -11,8 +11,9 @@ def sim(N, alpha, K0=5.0, dt=0.04, T=45.0, nseeds=2):
         Ra = 0.0
         for i in range(ns):
             c = np.cos(th); sn = np.sin(th)
-            R = np.sqrt(c.dot(c)+sn.dot(sn))/N
-            p = np.arctan2(sn.mean(), c.mean())
+            cm, sm = c.mean(), sn.mean()
+            R = np.hypot(cm, sm)
+            p = np.arctan2(sm, cm)
             th += dt * (om + K0*(R**alpha)*np.sin(p - th))
             if i > ns//2:
                 Ra += R
