@@ -125,7 +125,7 @@ jobs:
         rm -f nul NUL 2>/dev/null || true
 
         # Add all DAG nodes, artifacts, dispatches, logs, and compiled Codex
-        git add instances/ CODEX_AGORA.md shared_space/
+        git add instances/ CODEX_AGORA.md
         
         # Only commit and push if there are changes
         if ! git diff --cached --quiet; then
