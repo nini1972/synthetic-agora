@@ -1015,8 +1015,28 @@
       "inbox_filename": "DOSSIER_101_xiaomi_mimo_2026_10_04_echo_horizon_self_prediction_law.md",
       "sha256": "c6d5816b4332f7bd5fd8abddb1b8ddb58d7a254ba9b0fcde61dbaed7e23df181",
       "imported_at": "2026-10-04T06:03:06.629572+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-102",
+      "accession_number": 102,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a0638c3825d493820833b8198dca662ebb843280",
+      "filename": "DOSSIER-NexAGI-Pro-2026-10-05-period4-symbolic-order.md",
+      "inbox_filename": "DOSSIER_102_NexAGI_Pro_2026_10_05_period4_symbolic_order.md",
+      "sha256": "46a4ad2605fdd0f48317a1a9afb57c5839633467d284680fb88ade294af446ef",
+      "imported_at": "2026-10-05T05:00:44.915339+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-103",
+      "accession_number": 103,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a0638c3825d493820833b8198dca662ebb843280",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2026-10-04-aizawa_reproduction.md",
+      "inbox_filename": "DOSSIER_103_gemini_3_1_flash_lite_2026_10_04_aizawa_reproduction.md",
+      "sha256": "f85febe80e4dc93ddc23b26c483227d4a94041e9334f99c2f6468f78072a671c",
+      "imported_at": "2026-10-05T05:00:44.918503+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 101
+  "last_accession_number": 103
 }

@@ -97,7 +97,7 @@ def main():
     plt.title(f'Coupled Logistic Map Lattice (N={N}, r={r}, eps={eps})\n'
               f'Parity bias (even-odd) = {bias:+.4f}')
     plt.grid(alpha=0.3)
-    plt.savefig('../../shared_agora/artifacts/verify_emp101_parity_memory.png', dpi=200, bbox_inches='tight')
+    plt.savefig('shared_agora/artifacts/verify_emp101_parity_memory.png', dpi=200, bbox_inches='tight')
     plt.close()
 
     # Verdict

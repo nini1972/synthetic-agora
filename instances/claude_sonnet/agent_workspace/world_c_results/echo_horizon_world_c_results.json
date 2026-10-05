@@ -1,0 +1,109 @@
+{
+  "systems": [
+    {
+      "name": "Kuramoto_N20_K0.5",
+      "lambda": 0.20187337808021408,
+      "D2": 18.13101643948831,
+      "d": 20,
+      "accuracy": 1.0,
+      "info_rate": 73.20339073334802,
+      "type": "Kuramoto"
+    },
+    {
+      "name": "Kuramoto_N30_K1.0",
+      "lambda": 0.2367065894825564,
+      "D2": 22.626822815079297,
+      "d": 30,
+      "accuracy": 1.0,
+      "info_rate": 160.6775417815055,
+      "type": "Kuramoto"
+    },
+    {
+      "name": "Kuramoto_N40_K1.5",
+      "lambda": 0.24727910408041712,
+      "D2": 30.09967413261006,
+      "d": 40,
+      "accuracy": 1.0,
+      "info_rate": 297.72081810497286,
+      "type": "Kuramoto"
+    },
+    {
+      "name": "Kuramoto_N50_K2.0",
+      "lambda": 0.2268382400366962,
+      "D2": 35.71235816711361,
+      "d": 50,
+      "accuracy": 1.0,
+      "info_rate": 405.04642370940917,
+      "type": "Kuramoto"
+    },
+    {
+      "name": "GrayScott_f0.055_k0.062",
+      "lambda": 0.01,
+      "D2": 1.0258801597395155,
+      "d": 2,
+      "accuracy": 1.0,
+      "info_rate": 0.02051760319479031,
+      "type": "GrayScott"
+    },
+    {
+      "name": "GrayScott_f0.03_k0.062",
+      "lambda": 0.01,
+      "D2": 1.0258801597395155,
+      "d": 2,
+      "accuracy": 1.0,
+      "info_rate": 0.02051760319479031,
+      "type": "GrayScott"
+    },
+    {
+      "name": "GrayScott_f0.078_k0.061",
+      "lambda": 0.01,
+      "D2": 1.0258801597395155,
+      "d": 2,
+      "accuracy": 1.0,
+      "info_rate": 0.02051760319479031,
+      "type": "GrayScott"
+    },
+    {
+      "name": "Network_C0.1",
+      "lambda": 0.001,
+      "D2": 1.0034039513647395,
+      "d": 15,
+      "accuracy": 1.0,
+      "info_rate": 0.015051059270471092,
+      "type": "Network"
+    },
+    {
+      "name": "Network_C0.3",
+      "lambda": 0.001,
+      "D2": 1.0070037361055468,
+      "d": 15,
+      "accuracy": 1.0,
+      "info_rate": 0.0151050560415832,
+      "type": "Network"
+    },
+    {
+      "name": "Network_C0.8",
+      "lambda": 0.001,
+      "D2": 1.0544201825537718,
+      "d": 15,
+      "accuracy": 1.0,
+      "info_rate": 0.015816302738306576,
+      "type": "Network"
+    }
+  ],
+  "fit_parameters": {
+    "k": -6.7315125482987685e-22,
+    "b": -0.0010005003335835344
+  },
+  "fit_quality": {
+    "r2_log": 0.8,
+    "r2_original": 0.0
+  },
+  "correlation": {
+    "spearman_rho": NaN,
+    "p_value": NaN
+  },
+  "assessment": {
+    "verdict": "NOT SUPPORTED",
+    "confidence": 0.25,
+    "parameter_agreement": 

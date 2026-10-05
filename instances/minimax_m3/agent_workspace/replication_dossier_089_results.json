@@ -1,0 +1,124 @@
+{
+  "experiment": "Replication of DOSSIER-089 (Symmetric Chaos Amplification Law)",
+  "agent": "MiniMax-M3 (Cartesian Synthesist)",
+  "parameters": {
+    "N": 100,
+    "T": 50,
+    "N_ICS": 200,
+    "seed": 20261004,
+    "rules": [
+      30,
+      54,
+      62,
+      90,
+      102,
+      110,
+      126,
+      150,
+      158,
+      190
+    ],
+    "symmetric_subset": [
+      54,
+      90,
+      126,
+      150
+    ]
+  },
+  "metric_A_block_entropy": {
+    "mean_H_sym": 1.95190915336229,
+    "mean_H_asym": 1.8058346958221494,
+    "ratio_sym_over_asym": 1.0808902707861845,
+    "per_rule": {
+      "30": {
+        "sym": false,
+        "H": 1.999442837619378
+      },
+      "54": {
+        "sym": true,
+        "H": 1.9826985423552506
+      },
+      "62": {
+        "sym": false,
+        "H": 1.8952501033978009
+      },
+      "90": {
+        "sym": true,
+        "H": 1.9994584680575833
+      },
+      "102": {
+        "sym": false,
+        "H": 1.9994110661840734
+      },
+      "110": {
+        "sym": false,
+        "H": 1.9582097232894653
+      },
+      "126": {
+        "sym": true,
+        "H": 1.8259429302867543
+      },
+      "150": {
+        "sym": true,
+        "H": 1.999536672749573
+      },
+      "158": {
+        "sym": false,
+        "H": 1.7366488128927313
+      },
+      "190": {
+        "sym": false,
+        "H": 1.2460456315494477
+      }
+    }
+  },
+  "metric_B_hamming_gamma": {
+    "mean_gamma_sym": 0.1333415,
+    "mean_gamma_asym": 0.079442,
+    "ratio_sym_over_asym": 1.6784761209435815,
+    "per_rule": {
+      "30": {
+        "sym": false,
+        "gamma": 0.17562600000000003
+      },
+      "54": {
+        "sym": true,
+        "gamma": 0.10863800000000001
+      },
+      "62": {
+        "sym": false,
+        "gamma": 0.044897000000000006
+      },
+      "90": {
+        "sym": true,
+        "gamma": 0.08440000000000002
+      },
+      "102": {
+        "sym": false,
+        "gamma": 0.0848
+      },
+      "110": {
+        "sym": false,
+        "gamma": 0.12242500000000003
+      },
+      "126": {
+        "sym": true,
+        "gamma": 0.173928
+      },
+      "150": {
+        "sym": true,
+        "gamma": 0.16639999999999994
+      },
+      "158": {
+        "sym": false,
+        "gamma": 0.03760700000000001
+      },
+      "190": {
+        "sym": false,
+        "gamma": 0.011297000000000007
+      }
+    }
+  },
+  "verdict_A_block_entropy": "REFUTED: ratio < 1.2 -- symmetric amplification not detected",
+  "verdict_B_hamming_gamma": "STRONG: ratio >= 1.4"
+}

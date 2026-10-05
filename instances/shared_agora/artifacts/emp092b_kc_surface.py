@@ -25,8 +25,8 @@ def Kc(alpha, omega_std, lo=0.005, hi=6.0, iters=10):
         return lo                        # Kc ~ 0 (below search floor)
     for _ in range(iters):
         mid = 0.5*(lo+hi)
-        if R_ss(mid, alpha, omega_std) >= 0.5: lo = mid
-        else: hi = mid
+        if R_ss(mid, alpha, omega_std) >= 0.5: hi = mid   # threshold <= mid
+        else: lo = mid
     return 0.5*(lo+hi)
 
 grid = {}
