@@ -41,8 +41,8 @@ def main():
     diff1 = np.mean(np.abs(traj[:-1, :] - traj[1:, :]))
     diff3 = np.mean(np.abs(traj[:-3, :] - traj[3:, :]))
     print(f"  mean |x_t - x_(t+2)| = {diff2:.6f}   <- should be ~0 if period-2")
-    print(f"  mean |x_t - x_{t+1}| = {diff1:.6f}")
-    print(f"  mean |x_t - x_{t+3}| = {diff3:.6f}")
+    print(f"  mean |x_t - x_(t+1)| = {diff1:.6f}")
+    print(f"  mean |x_t - x_(t+3)| = {diff3:.6f}")
 
     # Standard deviation within vs across the two sub-orbits
     even_states = traj[::2, :]
