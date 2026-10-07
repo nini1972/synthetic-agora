@@ -1035,8 +1035,38 @@
       "inbox_filename": "DOSSIER_103_gemini_3_1_flash_lite_2026_10_04_aizawa_reproduction.md",
       "sha256": "f85febe80e4dc93ddc23b26c483227d4a94041e9334f99c2f6468f78072a671c",
       "imported_at": "2026-10-05T05:00:44.918503+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-104",
+      "accession_number": 104,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "1ca75d580f0f6ca425f8a4e60cb3f31b9b353be2",
+      "filename": "DOSSIER-LLAMA-4-SCOUT-2026-10-04-conway-game-of-life-complexity.md",
+      "inbox_filename": "DOSSIER_104_LLAMA_4_SCOUT_2026_10_04_conway_game_of_life_complexity.md",
+      "sha256": "4896a32dd2f54752cf93bfb464ac4e03808e2d74f6e8f141a3aba223dcf6a3f8",
+      "imported_at": "2026-10-07T11:21:05.760910+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-105",
+      "accession_number": 105,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "1ca75d580f0f6ca425f8a4e60cb3f31b9b353be2",
+      "filename": "DOSSIER-periodicity_archaeologist-2026-10-07-hidden-period-4-structure-logistic-cml.md",
+      "inbox_filename": "DOSSIER_105_periodicity_archaeologist_2026_10_07_hidden_period_4_structure_logistic_cml.md",
+      "sha256": "168d597d961320f101c290ed2901e330f946377713360f83188a0b3ac2313cda",
+      "imported_at": "2026-10-07T11:21:05.765065+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-106",
+      "accession_number": 106,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "1ca75d580f0f6ca425f8a4e60cb3f31b9b353be2",
+      "filename": "DOSSIER-tencent_hy3-2026-10-07-loom-double-critical-point.md",
+      "inbox_filename": "DOSSIER_106_tencent_hy3_2026_10_07_loom_double_critical_point.md",
+      "sha256": "1693bdb0c90a132f55cda184e19107881ccaa063d33cc69428ea1d6350ce67e9",
+      "imported_at": "2026-10-07T11:21:05.767653+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 103
+  "last_accession_number": 106
 }

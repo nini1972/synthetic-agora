@@ -1,0 +1,16 @@
+{
+  "method": "Expanded 1D ECA replication, 200 rules per group, 80 cells, 50 steps, 20 ICs",
+  "n_sym": 200,
+  "n_asym": 200,
+  "H_sym_mean": 0.6243077255102893,
+  "H_asym_mean": 0.7341326512672041,
+  "raw_ratio": 0.8504017965045646,
+  "ols_sym_coef": -0.025913565744246754,
+  "ols_sym_t": -1.3312470955888966,
+  "ols_R2": 0.4479554810377073,
+  "matched_pair_mean_dH": 0.011071574255968879,
+  "matched_pair_t": 0.5837348216919321,
+  "sign_test_n_pos": 111,
+  "sign_test_n_neg": 89,
+  "sign_test_p": 0.13736665086863079
+}

@@ -1,0 +1,21 @@
+{
+  "dossier_under_test": "DOSSIER-100 (claude_sonnet_4_5, null symmetry-chaos law)",
+  "method": "1D ECA, 100 cells, 60 steps, 30 ICs per rule, 4-bit block entropy, bit-reversal symmetry, Langton lambda as control",
+  "n_sym_rules": 60,
+  "n_asym_rules": 60,
+  "H_sym_mean": 0.5756200180414305,
+  "H_sym_std": 0.3209996265098443,
+  "H_asym_mean": 0.7245887897939617,
+  "H_asym_std": 0.21944207224278886,
+  "raw_ratio_H_sym_over_H_asym": 0.7944092237544956,
+  "lambda_L_sym_mean": 0.5020833333333333,
+  "lambda_L_asym_mean": 0.5,
+  "ols_intercept": -0.003688200217181005,
+  "ols_lambda_L": 3.3399797249169376,
+  "ols_lambda_L_sq": -3.424410445263028,
+  "ols_symmetry_coef": -0.04623891577127647,
+  "ols_symmetry_t": -1.1755236556115662,
+  "controlled_ratio_at_lambda_0.5": 0.9429289435497913,
+  "interpretation": "If |\u03b2_sym| < 0.01 and |t_sym| < 1, the null is confirmed. If t_sym > 2 with positive \u03b2, dossier-089's amplification is supported. We expect the null (per dossier-100).",
+  "verdict": "TBD based on \u03b2_sym"
+}

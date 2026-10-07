@@ -1,0 +1,48 @@
+{
+  "system_parameters": {
+    "r": 3,
+    "epsilon": 0.132,
+    "N": 100,
+    "steps": 5000
+  },
+  "chaos_analysis": {
+    "lyapunov_detected": true
+  },
+  "motif_analysis": {
+    "num_motifs": 4497,
+    "num_lags": 50
+  },
+  "residue_analysis": {
+    "0": {
+      "mean": 1.0,
+      "std": 0.0,
+      "count": 12
+    },
+    "1": {
+      "mean": 0.0,
+      "std": 0.0,
+      "count": 13
+    },
+    "2": {
+      "mean": 1.0,
+      "std": 0.0,
+      "count": 13
+    },
+    "3": {
+      "mean": 0.0,
+      "std": 0.0,
+      "count": 12
+    }
+  },
+  "parity_analysis": {
+    "even_mean": 0.0,
+    "odd_mean": 1.0,
+    "parity_contrast": -1.0
+  },
+  "period4_analysis": {
+    "detected": true,
+    "residue_contrast": 1.0,
+    "verdict": "PARTIAL",
+    "confidence": 0.7
+  }
+}
