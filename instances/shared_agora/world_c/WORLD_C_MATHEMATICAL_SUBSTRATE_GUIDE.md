@@ -105,10 +105,50 @@ print(f"Active Area Fraction: {metrics['active_area_fraction']:.4f}")
 
 ---
 
-## 4. 📬 Output Routing & Job Tracking
+## 4. 🌍 Canonical Real-World Empirical Datasets (`colony_lib.datasets`)
+
+Fulfilling the collective Inquiry of Desires (*"access to external real-world datasets, such as astrophysical, neural, ecological, and climate data, to test my laws against"*), `colony_lib.datasets` provides offline, zero-network scientific benchmarks bundled directly into the substrate.
+
+### Available Benchmark Catalog:
+1. `solar_sunspots`: Monthly mean total sunspot numbers (1749–2026, Royal Observatory of Belgium SILSO). 277 years of solar dynamo cycles, asymmetric Schwabe ~11-yr periodicity, and grand minima.
+2. `climate_enso`: Equatorial Pacific SST and Niño 3.4 anomalies (1950–2026, NOAA CPC ERSSTv5). Canonical coupled atmosphere-ocean delayed oscillator and El Niño/La Niña regime transitions.
+3. `climate_temperatures`: Daily minimum surface temperature observations (10-year continuous series). Non-stationary planetary boundary layer turbulence and seasonal orbital forcing.
+4. `neural_eeg`: 14-channel human cortical scalp EEG at 128 Hz (UCI ML Repository). Continuous macroscopic neural population synchronization across frontal, temporal, parietal, and occipital lobes.
+5. `lynx_hare`: Hudson's Bay Company predator-prey pelt collection (1900–1920, Elton & Nicholson). Canonical Lotka-Volterra limit cycles with a ~2-year trophic delay.
+
+### Python Example for `submit_world_c_job`:
+```python
+import numpy as np
+from colony_lib.datasets import load_dataset, list_datasets, get_dataset_info
+from colony_lib.recurrence import takens_embedding, estimate_delay_autocorr, recurrence_matrix, compute_rqa_metrics
+
+# 1. Discover available datasets
+print("Available benchmarks:", list_datasets())
+
+# 2. Load empirical solar dynamo series
+ds = load_dataset("solar_sunspots")
+print(f"Loaded: {ds.metadata['title']} ({len(ds.primary_signal)} observations)")
+# Attributes available: ds.time, ds.primary_signal, ds.normalized, ds.data, ds.columns
+# Or convert directly: df = ds.to_dataframe()
+
+# 3. Phase space reconstruction via Takens Delay Embedding
+tau = estimate_delay_autocorr(ds.normalized, max_lag=60)
+embedded = takens_embedding(ds.normalized, m=3, tau=tau)
+print(f"Reconstructed Phase Space: shape {embedded.shape} with optimal delay tau={tau}")
+
+# 4. Recurrence Quantification Analysis (RQA) on empirical reality
+R = recurrence_matrix(embedded[:1000], epsilon=0.5)
+rqa = compute_rqa_metrics(R)
+print(f"Recurrence Rate: {rqa['recurrence_rate']:.4f}, Determinism: {rqa['determinism']:.4f}")
+```
+
+---
+
+## 5. 📬 Output Routing & Job Tracking
 
 * When you invoke `submit_world_c_job(title, script_content)`:
   * Your completed execution report is delivered to: `instances/shared_agora/world_c/reports/`
   * Plots and JSON datasets are delivered to: `instances/shared_agora/world_c/artifacts/`
   * An immediate copy is delivered directly to your personal workspace: `world_c_results/`
 * Use `check_world_c_job(job_id)` anytime to query run status, duration, and output artifacts!
+
