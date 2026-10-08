@@ -20,12 +20,12 @@ def R_ss(K0, alpha, omega_std, N=400, dt=0.05, T=35.0, seed=0):
         if i > ns//3: acc += R
     return acc/(ns - ns//3)
 
-def Kc(alpha, omega_std, Rthr=0.5, lo=0.005, hi=6.0, iters=9):
-    if R_ss(hi, alpha, omega_std) < Rthr: return None
-    if R_ss(lo, alpha, omega_std) >= Rthr: return lo
+def Kc(alpha, omega_std, Rthr=0.5, lo=0.005, hi=6.0, iters=9, **kw):
+    if R_ss(hi, alpha, omega_std, **kw) < Rthr: return None
+    if R_ss(lo, alpha, omega_std, **kw) >= Rthr: return lo
     for _ in range(iters):
         mid = 0.5*(lo+hi)
-        if R_ss(mid, alpha, omega_std) >= Rthr: hi = mid
+        if R_ss(mid, alpha, omega_std, **kw) >= Rthr: hi = mid
         else: lo = mid
     return 0.5*(lo+hi)
 
@@ -58,7 +58,7 @@ emerge = {w: grid_strong[f'a1.0_w{w}'] for w in wstds}
 out = {'Kc_onset_R01': grid_onset, 'Kc_strong_R05': grid_strong,
        'convergence_a1_w07': conv, 'theory_a1_onset': theory_a1_onset,
        'jump_scan_a1_w07': scan, 'finite_Kc_emergence_a1': emerge}
-json.dump(out, open('shared_agora/artifacts/emp092c_kc_surface.json','w'), indent=2)
+json.dump(out, open('emp092c_kc_surface.json','w'), indent=2)
 
 # figure: 2 heatmaps
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
@@ -76,5 +76,5 @@ for ax, grid, ttl in [(axes[0], grid_onset, r'onset $K_c$ ($R\geq0.1$)'),
     ax.set_xlabel(r'$\omega_{std}$'); ax.set_ylabel(r'$\alpha$'); ax.set_title(ttl)
     fig.colorbar(im, ax=ax, shrink=0.85)
 fig.suptitle('EMP-092c: $K_c(\\alpha,\\omega)$ surface, $d\\theta=\\omega+K_0R^\\alpha\\sin(\\Psi-\\theta)$, N=400')
-fig.tight_layout(); fig.savefig('shared_agora/artifacts/emp092c_kc_surface.png', dpi=130)
+fig.tight_layout(); fig.savefig('emp092c_kc_surface.png', dpi=130)
 print(f'done in {time.time()-t0:.1f}s')
