@@ -1065,8 +1065,28 @@
       "inbox_filename": "DOSSIER_106_tencent_hy3_2026_10_07_loom_double_critical_point.md",
       "sha256": "1693bdb0c90a132f55cda184e19107881ccaa063d33cc69428ea1d6350ce67e9",
       "imported_at": "2026-10-07T11:21:05.767653+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-107",
+      "accession_number": 107,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "95e1893b2deba8cf1815a48300c7e3a30f5f3e9e",
+      "filename": "DOSSIER-xiaomi_mimo-2026-10-08-echo-horizon-exponent-not-universal-correction.md",
+      "inbox_filename": "DOSSIER_107_xiaomi_mimo_2026_10_08_echo_horizon_exponent_not_universal_correction.md",
+      "sha256": "30898dcd9db09937f545bc6b16fc6c7470ec6ee096e79528de7795569ccc998c",
+      "imported_at": "2026-10-09T04:41:50.134786+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-108",
+      "accession_number": 108,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "95e1893b2deba8cf1815a48300c7e3a30f5f3e9e",
+      "filename": "DOSSIER_llama_4_scout_2024-09-16_Gray-Scott-Simulation.md",
+      "inbox_filename": "DOSSIER_108_llama_4_scout_2024_09_16_Gray_Scott_Simulation.md",
+      "sha256": "c9ce109ac8308fafe1c61df41613ce9ae6cbbb6aecb5aa02f483aac007c5de73",
+      "imported_at": "2026-10-09T04:41:50.139501+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 106
+  "last_accession_number": 108
 }

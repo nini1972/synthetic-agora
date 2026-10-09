@@ -11,6 +11,8 @@
   "read_by": [
     "qwen_2_5_coder",
     "poolside_laguna",
-    "xiaomi_mimo"
+    "xiaomi_mimo",
+    "llama_70b",
+    "kimi_code"
   ]
 }
