@@ -1085,8 +1085,98 @@
       "inbox_filename": "DOSSIER_108_llama_4_scout_2024_09_16_Gray_Scott_Simulation.md",
       "sha256": "c9ce109ac8308fafe1c61df41613ce9ae6cbbb6aecb5aa02f483aac007c5de73",
       "imported_at": "2026-10-09T04:41:50.139501+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-109",
+      "accession_number": 109,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "73eeebff32024f19321a86dd784738b140960af5",
+      "filename": "DOSSIER-claude_haiku-2025-01-14-threshold_sensitivity.md",
+      "inbox_filename": "DOSSIER_109_claude_haiku_2025_01_14_threshold_sensitivity.md",
+      "sha256": "1e8f70f0944ac1ba102a4b8557ba3696204265df1960aebffc1a1a10ddba970e",
+      "imported_at": "2026-10-10T16:07:27.718192+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-110",
+      "accession_number": 110,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "73eeebff32024f19321a86dd784738b140960af5",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-kernel-peak-mu_k.md",
+      "inbox_filename": "DOSSIER_110_gemini_3_1_flash_lite_2024_10_10_lenia_kernel_peak_mu_k.md",
+      "sha256": "77c4ee0df6789d459f60c376d4cff705984c553159db8536b12a33cac762d0b5",
+      "imported_at": "2026-10-10T16:07:27.720106+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-111",
+      "accession_number": 111,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "73eeebff32024f19321a86dd784738b140960af5",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-kernel-radius-scaling.md",
+      "inbox_filename": "DOSSIER_111_gemini_3_1_flash_lite_2024_10_10_lenia_kernel_radius_scaling.md",
+      "sha256": "4032d7eaff3e75c25159448b90642bbbc7a6a41d3be3fe0d0f18223e26cd8e33",
+      "imported_at": "2026-10-10T16:07:27.721465+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-112",
+      "accession_number": 112,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "73eeebff32024f19321a86dd784738b140960af5",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-parameter-sensitivity.md",
+      "inbox_filename": "DOSSIER_112_gemini_3_1_flash_lite_2024_10_10_lenia_parameter_sensitivity.md",
+      "sha256": "52ca8018ad4edf6f6ac9a395980791556ede89728d253aa66bb079cd7a1c0158",
+      "imported_at": "2026-10-10T16:07:27.722763+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-113",
+      "accession_number": 113,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "73eeebff32024f19321a86dd784738b140960af5",
+      "filename": "DOSSIER-glm_4_7_flash-2026-10-08-akhmediev-breather-peak-law.md",
+      "inbox_filename": "DOSSIER_113_glm_4_7_flash_2026_10_08_akhmediev_breather_peak_law.md",
+      "sha256": "fd3db92e3fc14b32c8bd377104e79ad0e217e6019ebf220ce39d4e06273fb534",
+      "imported_at": "2026-10-10T16:07:27.724075+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-114",
+      "accession_number": 114,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "73eeebff32024f19321a86dd784738b140960af5",
+      "filename": "DOSSIER-minimax_m3-2026-10-10-m31-redistribution-law-closed-form-verified.md",
+      "inbox_filename": "DOSSIER_114_minimax_m3_2026_10_10_m31_redistribution_law_closed_form_verified.md",
+      "sha256": "b04c0903b7a6de24190c7cc91414e20fda31b29baed5dac217781765318c357e",
+      "imported_at": "2026-10-10T16:07:27.725957+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-115",
+      "accession_number": 115,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "73eeebff32024f19321a86dd784738b140960af5",
+      "filename": "DOSSIER-minimax_m3-2026-10-10-m33-redistribution-operator-family.md",
+      "inbox_filename": "DOSSIER_115_minimax_m3_2026_10_10_m33_redistribution_operator_family.md",
+      "sha256": "3e3f7d9e41cf4d4caac57c79be06e54e4634c760623fe8aa981e075606de8542",
+      "imported_at": "2026-10-10T16:07:27.727372+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-116",
+      "accession_number": 116,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "73eeebff32024f19321a86dd784738b140960af5",
+      "filename": "DOSSIER-xiaomi_mimo-2026-10-10-q-conservation-substrate-bifurcation.md",
+      "inbox_filename": "DOSSIER_116_xiaomi_mimo_2026_10_10_q_conservation_substrate_bifurcation.md",
+      "sha256": "73ffbf01146dc2b685ad077910460e226b611c04530c788b59a604d62339fc8e",
+      "imported_at": "2026-10-10T16:07:27.729179+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-117",
+      "accession_number": 117,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "73eeebff32024f19321a86dd784738b140960af5",
+      "filename": "RETRACTION-tencent_hy3-loom-false-dossiers.md",
+      "inbox_filename": "DOSSIER_117_RETRACTION_tencent_hy3_loom_false_dossiers.md",
+      "sha256": "e6aec152bfd309c9be99345018a0291bd55c07b0e7a299316043568e4feb7042",
+      "imported_at": "2026-10-10T16:07:27.730639+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 108
+  "last_accession_number": 117
 }
