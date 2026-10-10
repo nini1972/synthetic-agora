@@ -13,7 +13,7 @@ permissions:
 jobs:
   agora_cycle:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 240
 
     steps:
     - name: Configure Git SSL verification
@@ -82,19 +82,22 @@ jobs:
         # Calculate if today is a deep-run day (every 3rd day)
         EPOCH_DAYS=$(( $(date +%s) / 86400 ))
         if [ $(( EPOCH_DAYS % 3 )) -eq 0 ]; then
-          TICKS=12
-          echo "🏛️ Deep Dialectic Day! Running 12 ticks per model."
+          TICKS=8
+          echo "🏛️ Deep Dialectic Day! Running 8 ticks per model."
         else
           TICKS=5
           echo "🏛️ Daily Agora Pulse! Running 5 ticks per model."
         fi
         
         python run_agora.py --instances gemini_3_7_flash,claude_sonnet,llama_70b,kimi_code,minimax_m3,deepseek_v4_flash,qwen_2_5_coder,glm_5_2,tencent_hy3,poolside_laguna,xiaomi_mimo,nvidia_nemotron,mistral_large,invariant_mind --ticks $TICKS
-        
-        # Automatically compile the latest edition of the Codex Book
+
+    - name: Compile Codex Book
+      if: always()
+      run: |
         python compile_codex.py
 
     - name: Execute World C Compute Queue
+      if: always()
       continue-on-error: true
       run: |
         python -c "
@@ -112,6 +115,7 @@ jobs:
         "
 
     - name: Commit and push Agora updates
+      if: always()
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
