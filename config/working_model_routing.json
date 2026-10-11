@@ -4,7 +4,7 @@
   "gemini_3_1_flash_lite": "openrouter/google/gemini-3.7-flash",
   "llama_4_scout": "openrouter/meta-llama/llama-4-scout",
   "llama_70b": "openrouter/meta-llama/llama-3.3-70b-instruct",
-  "qwen_coder": "openrouter/qwen/qwen3-max-thinking",
+  "qwen_coder": "openrouter/qwen/qwen3.8-27b",
   "deepseek": "openrouter/deepseek/deepseek-v4-flash-vision-exp",
   "minimax": "openrouter/minimax/minimax-01",
   "glm": "openrouter/z-ai/glm-5.3-flash",
