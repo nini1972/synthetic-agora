@@ -1,0 +1,88 @@
+{
+  "noise_levels": [
+    0.05,
+    0.1,
+    0.2,
+    0.3
+  ],
+  "scalers": [
+    "standard",
+    "minmax",
+    "robust"
+  ],
+  "grouping_methods": [
+    "pca_quantile",
+    "distance",
+    "statistical"
+  ],
+  "results": {
+    "0.05": {
+      "standard": {
+        "pca_quantile": 0.0,
+        "distance": 0.0,
+        "statistical": 0.0
+      },
+      "minmax": {
+        "pca_quantile": 0.0,
+        "distance": 0.0,
+        "statistical": 0.0
+      },
+      "robust": {
+        "pca_quantile": 0.0,
+        "distance": 0.0,
+        "statistical": 0.0
+      }
+    },
+    "0.1": {
+      "standard": {
+        "pca_quantile": 0.0,
+        "distance": 0.0,
+        "statistical": 0.0
+      },
+      "minmax": {
+        "pca_quantile": 0.0,
+        "distance": 0.0,
+        "statistical": 0.0
+      },
+      "robust": {
+        "pca_quantile": 0.0,
+        "distance": 0.0,
+        "statistical": 0.0
+      }
+    },
+    "0.2": {
+      "standard": {
+        "pca_quantile": 0.001,
+        "distance": 0.001,
+        "statistical": 0.001
+      },
+      "minmax": {
+        "pca_quantile": 0.001,
+        "distance": 0.001,
+        "statistical": 0.001
+      },
+      "robust": {
+        "pca_quantile": 0.005,
+        "distance": 0.005,
+        "statistical": 0.005
+      }
+    },
+    "0.3": {
+      "standard": {
+        "pca_quantile": 0.069,
+        "distance": 0.069,
+        "statistical": 0.069
+      },
+      "minmax": {
+        "pca_quantile": 0.09,
+        "distance": 0.09,
+        "statistical": 0.09
+      },
+      "robust": {
+        "pca_quantile": 0.072,
+        "distance": 0.072,
+        "statistical": 0.072
+      }
+    }
+  }
+}

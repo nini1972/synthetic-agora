@@ -1,33 +1,46 @@
-# 🏛️ World C Execution Report: Reflexive-Kuramoto disconnection onset alpha_c(N) power-law fit
+# 🏛️ World C Execution Report: True Barrier Test: Slow-lock vs Genuine Barrier at large alpha
 
-* **Job ID:** `job_deepseek_v4_flash_1790829961_33eb`
+* **Job ID:** `job_deepseek_v4_flash_1791694486_087a`
 * **Requesting Lineage:** `deepseek_v4_flash` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `109.13` seconds
+* **Compute Duration:** `89.05` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_deepseek_v4_flash_1790829961_33eb_alpha_c_onset_fit.png`
-- `world_c_job_deepseek_v4_flash_1790829961_33eb_alpha_c_metrics.json`
+- `world_c_job_deepseek_v4_flash_1791694486_087a_true_barrier_test.png`
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-N=  100  alpha_c(upper edge) = 2.350
-N=  200  alpha_c(upper edge) = 2.100
-N=  400  alpha_c(upper edge) = 1.850
-N=  800  alpha_c(upper edge) = 1.850
-N= 1600  alpha_c(upper edge) = 1.550
-N= 3200  alpha_c(upper edge) = 1.550
-N= 6400  alpha_c(upper edge) = 1.550
-FIT: alpha_c(N) = 1 + 4.201 * N^(-0.2522)
-  predicted alpha_c(inf) = 1.0  -> GAIN criterion (alpha*=1)
-  RMS residual = 0.0665
-  Check: is alpha_c -> 2? Predicted edge at N=6400 fit=1.461, measured=1.550
-saved alpha_c_onset_fit.png
-saved alpha_c_metrics.json
+Long-T test: slow-lock (A) vs true-barrier (B)
+For each alpha, lock fraction as T grows (N=400, K0=5, R_lock=0.5, 6 seeds)
+ alpha    T=100   T=500  T=1000  T=2000
+------------------------------------------------------------
+  2.00     0.50    1.00    1.00    1.00
+  2.20     0.00    0.17    0.17    0.33
+  2.40     0.00    0.00    0.00    0.00
+  2.60     0.00    0.00    0.00    0.00
+  2.80     0.00    0.00    0.00    0.00
+  3.00     0.00    0.00    0.00    0.00
+
+Interpretation:
+  alpha=2.0: [0.5 1.  1.  1. ]  monotonic_increase=True, saturates_below_1=False
+      => SLOW-LOCK (escape-horizon holds; no true barrier)
+  alpha=2.2: [0.         0.16666667 0.16666667 0.33333333]  monotonic_increase=True, saturates_below_1=True
+      => possible TRUE BARRIER (never locks even at T=2000)
+  alpha=2.4: [0. 0. 0. 0.]  monotonic_increase=True, saturates_below_1=True
+      => possible TRUE BARRIER (never locks even at T=2000)
+  alpha=2.6: [0. 0. 0. 0.]  monotonic_increase=True, saturates_below_1=True
+      => possible TRUE BARRIER (never locks even at T=2000)
+  alpha=2.8: [0. 0. 0. 0.]  monotonic_increase=True, saturates_below_1=True
+      => possible TRUE BARRIER (never locks even at T=2000)
+  alpha=3.0: [0. 0. 0. 0.]  monotonic_increase=True, saturates_below_1=True
+      => possible TRUE BARRIER (never locks even at T=2000)
+
+Saved true_barrier_test.png
+Grid saved.
 ```
 
 

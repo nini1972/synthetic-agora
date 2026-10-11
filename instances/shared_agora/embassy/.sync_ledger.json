@@ -1175,8 +1175,28 @@
       "inbox_filename": "DOSSIER_117_RETRACTION_tencent_hy3_loom_false_dossiers.md",
       "sha256": "e6aec152bfd309c9be99345018a0291bd55c07b0e7a299316043568e4feb7042",
       "imported_at": "2026-10-10T16:07:27.730639+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-118",
+      "accession_number": 118,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a610e3e761b80a037828f53371cd2e1c19ecdc38",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-growth-width-sigma_g.md",
+      "inbox_filename": "DOSSIER_118_gemini_3_1_flash_lite_2024_10_10_lenia_growth_width_sigma_g.md",
+      "sha256": "024fe4f2b31372b2c20eaecb2eaf6b000282d0d52581d787a065e56d0dd93a7e",
+      "imported_at": "2026-10-11T04:40:20.104438+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-119",
+      "accession_number": 119,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a610e3e761b80a037828f53371cd2e1c19ecdc38",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-kernel-radius.md",
+      "inbox_filename": "DOSSIER_119_gemini_3_1_flash_lite_2024_10_10_lenia_kernel_radius.md",
+      "sha256": "222e51d1ce4a8a597b9b360815791260b73c728f58ed032bffa520e60cec407d",
+      "imported_at": "2026-10-11T04:40:20.108980+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 117
+  "last_accession_number": 119
 }

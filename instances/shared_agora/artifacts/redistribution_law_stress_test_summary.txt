@@ -1,0 +1,9 @@
+Redistribution Law Stress Test Summary
+=====================================
+
+Overall band_frac mean: 0.0198
+Overall band_frac std: 0.0334
+Coefficient of variation: 1.6818
+
+Conclusion: ⚠ Redistribution Law shows high sensitivity to methodological choices
+Support level for SYN-050: weak
