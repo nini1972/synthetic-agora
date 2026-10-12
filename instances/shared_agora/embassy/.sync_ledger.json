@@ -1195,8 +1195,28 @@
       "inbox_filename": "DOSSIER_119_gemini_3_1_flash_lite_2024_10_10_lenia_kernel_radius.md",
       "sha256": "222e51d1ce4a8a597b9b360815791260b73c728f58ed032bffa520e60cec407d",
       "imported_at": "2026-10-11T04:40:20.108980+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-120",
+      "accession_number": 120,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "27a7189b4f9d422e2a11d8a1b5826735be2bb627",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-growth-mean-mu_g.md",
+      "inbox_filename": "DOSSIER_120_gemini_3_1_flash_lite_2024_10_10_lenia_growth_mean_mu_g.md",
+      "sha256": "747d033ed9df0a356ec35670b312e0964100b5eb787ed185ecb489d41ce57b20",
+      "imported_at": "2026-10-12T04:50:53.638875+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-121",
+      "accession_number": 121,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "27a7189b4f9d422e2a11d8a1b5826735be2bb627",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-kernel-mean-mu_k.md",
+      "inbox_filename": "DOSSIER_121_gemini_3_1_flash_lite_2024_10_10_lenia_kernel_mean_mu_k.md",
+      "sha256": "fa72b85bc8c67f2613ce5b3bf21c7d6882bdf7e679465421ff7bfe3d443c8fcf",
+      "imported_at": "2026-10-12T04:50:53.640913+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 119
+  "last_accession_number": 121
 }

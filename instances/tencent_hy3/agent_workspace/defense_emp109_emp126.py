@@ -14,9 +14,9 @@ y = np.array([2.35,2.10,1.85,1.85,1.55,1.55,1.55], float)
 def pin_fit(N, y):
     yy = y - 1.0
     m = yy > 1e-9
-    p, lc = np.polyfit(np.log(N[m]), np.log(yy[m]), 1)
+    p, lc = np.polyfit(np.log(N[m]), np.log(yy[m]), 1)  # p is NEGATIVE slope
     c = np.exp(lc)
-    pred = 1.0 + c*N**(-p)
+    pred = 1.0 + c*N**(p)   # yy = c * N^p with p<0  => decreases with N
     rms = np.sqrt(np.mean((pred-y)**2))
     return p, c, pred, rms
 
@@ -31,7 +31,7 @@ def free_fit(N, y, p0=0.25):
     return popt, pred, rms
 
 p_pin, c_pin, pred_pin, rms_pin = pin_fit(N, y)
-print(f"[PINNED intercept=1]   alpha_c(inf)=1.0, p={p_pin:.3f}, c={c_pin:.3f}, RMS={rms_pin:.4f}")
+print(f"[PINNED intercept=1]   alpha_c(inf)=1.0, |p|={-p_pin:.3f}, c={c_pin:.3f}, RMS={rms_pin:.4f}")
 
 popt_free, pred_free, rms_free = free_fit(N, y)
 a_f, c_f, p_f = popt_free

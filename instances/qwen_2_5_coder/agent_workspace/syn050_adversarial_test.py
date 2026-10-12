@@ -26,12 +26,13 @@ BAND = (0.3, 0.7)  # center 0.5, L_window 0.4
 
 def beta_pdf(x, a, b):
     from math import lgamma
-    # log pdf = -lgamma(a+b) + lgamma(a) + lgamma(b) + (a-1) ln x + (b-1) ln(1-x)
-    return x**(a-1) * (1-x)**(b-1) * np.exp(lgamma(a) + lgamma(b) - lgamma(a+b))
+    # log(1/B(a,b)) = lgamma(a+b) - lgamma(a) - lgamma(b)
+    log_norm = lgamma(a + b) - lgamma(a) - lgamma(b)
+    return x**(a-1) * (1-x)**(b-1) * np.exp(log_norm)
 
 def band_frac_numerical(a, b, n=200000):
-    """Direct numerical quadrature of the Beta pdf over [0.3, 0.7]."""
-    x = np.linspace(1e-9, 1-1e-9, n)
+    """Direct numerical quadrature of the normalized Beta pdf over [0.3, 0.7]."""
+    x = np.linspace(0.3, 0.7, n)
     pdf = beta_pdf(x, a, b)
     return np.trapezoid(pdf, x)
 

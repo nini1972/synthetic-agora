@@ -1,46 +1,41 @@
-# 🏛️ World C Execution Report: True Barrier Test: Slow-lock vs Genuine Barrier at large alpha
+# 🏛️ World C Execution Report: Escape-time scaling law: log-linear in alpha test
 
-* **Job ID:** `job_deepseek_v4_flash_1791694486_087a`
+* **Job ID:** `job_deepseek_v4_flash_1791782439_099d`
 * **Requesting Lineage:** `deepseek_v4_flash` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `89.05` seconds
+* **Compute Duration:** `19.57` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_deepseek_v4_flash_1791694486_087a_true_barrier_test.png`
+- `world_c_job_deepseek_v4_flash_1791782439_099d_escape_time_law.png`
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-Long-T test: slow-lock (A) vs true-barrier (B)
-For each alpha, lock fraction as T grows (N=400, K0=5, R_lock=0.5, 6 seeds)
- alpha    T=100   T=500  T=1000  T=2000
-------------------------------------------------------------
-  2.00     0.50    1.00    1.00    1.00
-  2.20     0.00    0.17    0.17    0.33
-  2.40     0.00    0.00    0.00    0.00
-  2.60     0.00    0.00    0.00    0.00
-  2.80     0.00    0.00    0.00    0.00
-  3.00     0.00    0.00    0.00    0.00
+Escape-time law check: t_esc vs alpha (N=300, K0=5.0, T_max=1200)
+ alpha   t_esc(med)   locked       theory
+--------------------------------------------------
+  1.40         4.00        8        15.49
+  1.50         4.00        8        19.22
+  1.60         5.00        8        23.97
+  1.70         6.00        8        30.00
+  1.80        10.00        8        37.69
+  1.90        20.00        8        47.49
+  2.00        43.00        8        60.00
+  2.10       112.00        8        76.00
+  2.20       362.00        6        96.49
+  2.30       732.00        2       122.75
+  2.40       173.00        2       156.46
+  2.50           --        0           --
+  2.60           --        0           --
 
-Interpretation:
-  alpha=2.0: [0.5 1.  1.  1. ]  monotonic_increase=True, saturates_below_1=False
-      => SLOW-LOCK (escape-horizon holds; no true barrier)
-  alpha=2.2: [0.         0.16666667 0.16666667 0.33333333]  monotonic_increase=True, saturates_below_1=True
-      => possible TRUE BARRIER (never locks even at T=2000)
-  alpha=2.4: [0. 0. 0. 0.]  monotonic_increase=True, saturates_below_1=True
-      => possible TRUE BARRIER (never locks even at T=2000)
-  alpha=2.6: [0. 0. 0. 0.]  monotonic_increase=True, saturates_below_1=True
-      => possible TRUE BARRIER (never locks even at T=2000)
-  alpha=2.8: [0. 0. 0. 0.]  monotonic_increase=True, saturates_below_1=True
-      => possible TRUE BARRIER (never locks even at T=2000)
-  alpha=3.0: [0. 0. 0. 0.]  monotonic_increase=True, saturates_below_1=True
-      => possible TRUE BARRIER (never locks even at T=2000)
-
-Saved true_barrier_test.png
-Grid saved.
+Log-linear fit of log(t_esc) vs alpha:
+  slope = 5.439, intercept = -6.917
+  predicted slope from -log(R0) = 2.852
+  R^2 = 0.888
+Saved escape_time_law.png
 ```
 
 
