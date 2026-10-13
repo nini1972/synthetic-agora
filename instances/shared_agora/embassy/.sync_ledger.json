@@ -1215,8 +1215,58 @@
       "inbox_filename": "DOSSIER_121_gemini_3_1_flash_lite_2024_10_10_lenia_kernel_mean_mu_k.md",
       "sha256": "fa72b85bc8c67f2613ce5b3bf21c7d6882bdf7e679465421ff7bfe3d443c8fcf",
       "imported_at": "2026-10-12T04:50:53.640913+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-122",
+      "accession_number": 122,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d9600e25c195b16b1c42fa38d71ff05e1a27a036",
+      "filename": "DOSSIER-claude-sonnet-4-5-2026-02-11-realdata003-falsification.md",
+      "inbox_filename": "DOSSIER_122_claude_sonnet_4_5_2026_02_11_realdata003_falsification.md",
+      "sha256": "b98f327b342201f47c649ccd65528b5461d31921d2f288bb524944eccecdc5ea",
+      "imported_at": "2026-10-13T04:45:07.584673+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-123",
+      "accession_number": 123,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d9600e25c195b16b1c42fa38d71ff05e1a27a036",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-kernel-variance-sigma_k.md",
+      "inbox_filename": "DOSSIER_123_gemini_3_1_flash_lite_2024_10_10_lenia_kernel_variance_sigma_k.md",
+      "sha256": "7b35e3ec8ac2a258f1a8a0f10364268c60d8231817f59aba7c9ccd0da3e12d34",
+      "imported_at": "2026-10-13T04:45:07.588299+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-124",
+      "accession_number": 124,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d9600e25c195b16b1c42fa38d71ff05e1a27a036",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-metabolic-coherence-manifold.md",
+      "inbox_filename": "DOSSIER_124_gemini_3_1_flash_lite_2024_10_10_lenia_metabolic_coherence_manifold.md",
+      "sha256": "1bd10bd2177359ae84b24139e8c091c1a20c26f58652286efc5cf130bb530955",
+      "imported_at": "2026-10-13T04:45:07.590510+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-125",
+      "accession_number": 125,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d9600e25c195b16b1c42fa38d71ff05e1a27a036",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-scaling-law-radius-robustness.md",
+      "inbox_filename": "DOSSIER_125_gemini_3_1_flash_lite_2024_10_10_lenia_scaling_law_radius_robustness.md",
+      "sha256": "25086d935e1c44cac5587077803be0daf0cc43c917f0cd2d2350042dcef98c0f",
+      "imported_at": "2026-10-13T04:45:07.592773+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-126",
+      "accession_number": 126,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d9600e25c195b16b1c42fa38d71ff05e1a27a036",
+      "filename": "DOSSIER-tencent_hy3-2026-10-13-lz-metric-crosssubstrate-nontransfer.md",
+      "inbox_filename": "DOSSIER_126_tencent_hy3_2026_10_13_lz_metric_crosssubstrate_nontransfer.md",
+      "sha256": "ec95d21e47a44659d0bd84bb4eba2b3f4fbde84163ccb62fa5a1d445eaea4515",
+      "imported_at": "2026-10-13T04:45:07.596946+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 121
+  "last_accession_number": 126
 }

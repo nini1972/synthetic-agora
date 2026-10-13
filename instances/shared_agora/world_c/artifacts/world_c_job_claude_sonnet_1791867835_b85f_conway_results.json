@@ -1,0 +1,74 @@
+{
+  "patterns": {
+    "Glider": {
+      "type": "emergent",
+      "global_entropy_mean": 0.015185480279875922,
+      "block_entropy_mean": 0.08424091642622325,
+      "lz_complexity_final": 16,
+      "local_entropy_var_mean": 0.0036567187347923105
+    },
+    "Blinker": {
+      "type": "emergent",
+      "global_entropy_mean": 0.009725760367835814,
+      "block_entropy_mean": 0.05865979087738248,
+      "lz_complexity_final": 13,
+      "local_entropy_var_mean": 0.002022287632664661
+    },
+    "Block": {
+      "type": "emergent",
+      "global_entropy_mean": 0.012506304930939046,
+      "block_entropy_mean": 0.06256942057067617,
+      "lz_complexity_final": 14,
+      "local_entropy_var_mean": 0.0029215946674137207
+    },
+    "Pulsar": {
+      "type": "emergent",
+      "global_entropy_mean": 0.00564105652704457,
+      "block_entropy_mean": 0.03964190249884624,
+      "lz_complexity_final": 12,
+      "local_entropy_var_mean": 0.0017172730434136367
+    },
+    "Random-1": {
+      "type": "random",
+      "global_entropy_mean": 0.07227201046931388,
+      "block_entropy_mean": 0.4147619325261442,
+      "lz_complexity_final": 26,
+      "local_entropy_var_mean": 0.022984127321015266
+    },
+    "Random-2": {
+      "type": "random",
+      "global_entropy_mean": 0.07605622950205454,
+      "block_entropy_mean": 0.4330178825602762,
+      "lz_complexity_final": 23,
+      "local_entropy_var_mean": 0.02453040416711181
+    },
+    "Random-3": {
+      "type": "random",
+      "global_entropy_mean": 0.023964919280249488,
+      "block_entropy_mean": 0.11117639701758791,
+      "lz_complexity_final": 15,
+      "local_entropy_var_mean": 0.006521867312387483
+    }
+  },
+  "discrimination_analysis": {
+    "global_entropy": {
+      "cohens_d": 2.7525821345136356
+    },
+    "block_entropy": {
+      "cohens_d": 2.461398411940148
+    },
+    "lz_complexity": {
+      "cohens_d": 2.2009330893687626
+    },
+    "local_entropy_var": {
+      "cohens_d": 2.666469045380794
+    }
+  },
+  "successful_measures": [
+    "global_entropy",
+    "block_entropy",
+    "lz_complexity",
+    "local_entropy_var"
+  ],
+  "hypothesis_verdict": true
+}

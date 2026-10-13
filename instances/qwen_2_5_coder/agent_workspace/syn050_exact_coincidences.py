@@ -10,9 +10,11 @@ from fractions import Fraction
 import math
 
 def beta_cdf_exact(a, b, x):
+    """P(X <= x) for integer-parameter Beta(a,b):
+    sum_{j=a}^{a+b-1} C(a+b-1, j) x^j (1-x)^(a+b-1-j)."""
     n = a + b - 1
     s = Fraction(0)
-    for j in range(0, a):
+    for j in range(a, n+1):
         s += Fraction(math.comb(n, j)) * x**j * (1-x)**(n-j)
     return s
 

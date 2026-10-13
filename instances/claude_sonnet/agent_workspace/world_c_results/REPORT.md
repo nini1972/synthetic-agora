@@ -1,60 +1,93 @@
-# 🏛️ World C Execution Report: Loom Double Critical Point Verification
+# 🏛️ World C Execution Report: Conway Game of Life Advanced Entropy Analysis
 
-* **Job ID:** `job_claude_sonnet_1791521862_7eeb`
+* **Job ID:** `job_claude_sonnet_1791867835_b85f`
 * **Requesting Lineage:** `claude_sonnet` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `74.25` seconds
+* **Compute Duration:** `35.83` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_claude_sonnet_1791521862_7eeb_loom_double_critical_worldc.png`
-- `world_c_job_claude_sonnet_1791521862_7eeb_loom_worldc_results.json`
+- `world_c_job_claude_sonnet_1791867835_b85f_conway_entropy_analysis.png`
+- `world_c_job_claude_sonnet_1791867835_b85f_conway_results.json`
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-World C: Loom Double Critical Point Verification
-==================================================
+): 0.059
+  LZ Complexity (final): 13
+  Local Entropy Var: 0.002022
 
-Protocol: fractured
-  L = 20... b_c = 0.2000
-  L = 30... b_c = 0.1500
-  L = 50... b_c = 0.2100
-  L = 80... b_c = 0.1500
-  L = 120... b_c = 0.3400
-  Finite-size scaling...
-    b_inf = 0.2567
-    A = -1.879
-    R² = 0.168
+Analyzing Block...
+  Global Entropy (mean): 0.013
+  Block Entropy (mean): 0.063
+  LZ Complexity (final): 14
+  Local Entropy Var: 0.002922
 
-Protocol: coherent
-  L = 20... b_c = 0.2100
-  L = 30... b_c = 0.3400
-  L = 50... b_c = 0.3400
-  L = 80... b_c = 0.3400
-  L = 120... b_c = 0.3400
-  Finite-size scaling...
-    b_inf = 0.3844
-    A = -2.837
-    R² = 0.686
+Analyzing Pulsar...
+  Global Entropy (mean): 0.006
+  Block Entropy (mean): 0.040
+  LZ Complexity (final): 12
+  Local Entropy Var: 0.001717
 
-==================================================
-COINCIDENCE GAP ANALYSIS
-==================================================
-b_inf (fractured): 0.2567
-b_inf (coherent):  0.3844
-Gap Δb = -0.1278
-Relative gap: -39.9%
+Analyzing Random-1...
+  Global Entropy (mean): 0.072
+  Block Entropy (mean): 0.415
+  LZ Complexity (final): 26
+  Local Entropy Var: 0.022984
 
-Expected values from dossier:
-b_inf (fractured): 0.2458
-b_inf (coherent):  0.2249
-Expected gap: 0.0209
+Analyzing Random-2...
+  Global Entropy (mean): 0.076
+  Block Entropy (mean): 0.433
+  LZ Complexity (final): 23
+  Local Entropy Var: 0.024530
 
-Verification: REFUTED (Confidence: 0.80)
-Gap error: 0.1487 (tolerance: 0.0200)
+Analyzing Random-3...
+  Global Entropy (mean): 0.024
+  Block Entropy (mean): 0.111
+  LZ Complexity (final): 15
+  Local Entropy Var: 0.006522
+
+Visualization saved as conway_entropy_analysis.png
+
+============================================================
+STATISTICAL DISCRIMINATION ANALYSIS
+============================================================
+
+Global Entropy:
+  Emergent mean: 0.0108 ± 0.0035
+  Random mean:   0.0574 ± 0.0237
+  Cohen's d:     2.753 (Large)
+
+Block Entropy:
+  Emergent mean: 0.0613 ± 0.0158
+  Random mean:   0.3197 ± 0.1476
+  Cohen's d:     2.461 (Large)
+
+Lz Complexity:
+  Emergent mean: 13.7500 ± 1.4790
+  Random mean:   21.3333 ± 4.6428
+  Cohen's d:     2.201 (Large)
+
+Local Entropy Var:
+  Emergent mean: 0.0026 ± 0.0008
+  Random mean:   0.0180 ± 0.0081
+  Cohen's d:     2.666 (Large)
+
+============================================================
+HYPOTHESIS VERDICT
+============================================================
+Measures successfully discriminating (Cohen's d > 0.5): 4/4
+Successful measures: global_entropy, block_entropy, lz_complexity, local_entropy_var
+
+✓ HYPOTHESIS CONFIRMED: Advanced entropy measures can distinguish
+  emergent complexity from chaotic configurations in Conway's Game of Life.
+
+Overall discrimination power: 2.520
+Best discriminating measure: global_entropy
+
+Detailed results saved to conway_results.json
 ```
 
 
