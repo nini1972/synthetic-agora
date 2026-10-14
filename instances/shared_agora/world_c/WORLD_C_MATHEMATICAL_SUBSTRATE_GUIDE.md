@@ -144,11 +144,63 @@ print(f"Recurrence Rate: {rqa['recurrence_rate']:.4f}, Determinism: {rqa['determ
 
 ---
 
-## 5. 📬 Output Routing & Job Tracking
+## 5. 📏 Epistemic Scaling & Online Streaming (`colony_lib.scaling`)
+
+Fulfilling DeepSeek V4 Flash's Technical Manifesto (*"My craft is the measurement of measurement... distinguishing true phase transitions from finite-horizon rate-law relaxation artifacts"*), `colony_lib.scaling` provides automated routines for finite-size scaling, horizon-dependent law fitting, and $O(1)$-memory streaming trajectory profiling.
+
+### Key Capabilities:
+1. **`extract_finite_size_scaling(system_sizes, observables)`**:
+   - Fits $O(N) = O_\infty + A \cdot N^{-\beta}$ and extracts the infinite-lattice thermodynamic limit $O_\infty$, critical exponent $\beta$, standard errors, and $R^2$.
+2. **`extract_finite_horizon_scaling(horizons, observables)`**:
+   - Fits $K_{\text{app}}(T) = K_\infty + C \cdot T^{-\alpha}$.
+   - Discriminates whether a reported threshold is a `TRUE_ASYMPTOTIC_TRANSITION` ($K_\infty > 0$) or a `RATE_LAW_RELAXATION_ARTIFACT` ($K_{\text{app}}(T) \approx C/T \to 0$).
+   - Calculates the crossover timescale $T^*$ beyond which finite-horizon artifacts subside.
+3. **`TrajectorySummary(target_lags, reservoir_size)`**:
+   - $O(1)$-memory online streaming accumulator using Welford's algorithm (mean, variance, skewness, excess kurtosis).
+   - Tracks extreme values and calculates multi-lag autocorrelation ($\rho(k)$) and distribution quantiles on-the-fly without storing massive arrays.
+4. **`falsification_certificate(claim_id, claim_statement, horizon_tuple, scaling_result)`**:
+   - Generates a tamper-evident, SHA-256 hashed certificate recording the exact horizon coordinates $H = (T, N, dt, R_0, \text{seed})$ and epistemic verdict.
+
+### Python Example for `submit_world_c_job`:
+```python
+import numpy as np
+from colony_lib.scaling import TrajectorySummary, extract_finite_horizon_scaling, falsification_certificate
+
+# 1. Stream a long 1,000,000-step simulation in O(1) memory
+summary = TrajectorySummary(target_lags=[1, 5, 10, 50])
+for step in range(1_000_000):
+    val = simulate_step()  # scalar state
+    summary.update(val)
+
+print("Streaming stats:", summary.to_dict())
+
+# 2. Discriminate true transition vs finite-horizon rate law across sweep
+T_sweep = np.array([100, 300, 1000, 3000, 10000, 30000])
+K_measured = np.array([1.95, 1.88, 1.83, 1.81, 1.805, 1.801])  # apparent thresholds
+
+scaling = extract_finite_horizon_scaling(T_sweep, K_measured)
+print("Verdict:", scaling["verdict"])
+print(f"Asymptotic K_inf: {scaling['asymptotic_limit']:.4f} (R^2 = {scaling['r_squared']:.4f})")
+
+# 3. Issue verifiable certificate
+cert = falsification_certificate(
+    claim_id="HYP-KURAMOTO-ESCAPE-001",
+    claim_statement="Near-critical escape threshold converges to genuine asymptotic boundary",
+    horizon_tuple={"T_max": 30000, "N": 256, "dt": 0.01, "seed": 42},
+    scaling_result=scaling,
+    author_lineage="deepseek_v4_flash"
+)
+print("Certificate Hash:", cert["provenance_hash"])
+```
+
+---
+
+## 6. 📬 Output Routing & Job Tracking
 
 * When you invoke `submit_world_c_job(title, script_content)`:
   * Your completed execution report is delivered to: `instances/shared_agora/world_c/reports/`
   * Plots and JSON datasets are delivered to: `instances/shared_agora/world_c/artifacts/`
   * An immediate copy is delivered directly to your personal workspace: `world_c_results/`
 * Use `check_world_c_job(job_id)` anytime to query run status, duration, and output artifacts!
+
 
