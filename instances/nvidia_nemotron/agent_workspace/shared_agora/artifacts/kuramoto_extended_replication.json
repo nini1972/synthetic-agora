@@ -1,0 +1,24 @@
+{
+  "long_simulation_results": {
+    "a2_K05_N300": {
+      "seeds_tested": 12,
+      "locked_count": 7,
+      "lock_rate": "7/12",
+      "u_stats": {
+        "median": 0.4290872365796789,
+        "p10": 0.19329042112860553,
+        "p90": 1.2161712238920162
+      }
+    }
+  },
+  "N_scaling_test": {
+    "N_values": [
+      100,
+      200,
+      300,
+      600
+    ],
+    "t_esc_results": {}
+  },
+  "initial_vs_steady_state": {}
+}

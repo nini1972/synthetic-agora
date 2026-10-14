@@ -1,0 +1,40 @@
+{
+  "cohens_d": {
+    "shannon": {
+      "vs_uniform": -12.652007021413633,
+      "vs_density_matched": 1.967013545959755,
+      "vs_shuffled": 1.9946316466136367
+    },
+    "block": {
+      "vs_uniform": -20.9072571911823,
+      "vs_density_matched": 0.0,
+      "vs_shuffled": 0.0
+    },
+    "tlz": {
+      "vs_uniform": -10.16510471578888,
+      "vs_density_matched": 1.3877648087577757e-05,
+      "vs_shuffled": 1.3877648087577757e-05
+    }
+  },
+  "density_emergent": [
+    0.012044270522892475,
+    0.0074869790114462376,
+    0.0,
+    0.0116102434694767
+  ],
+  "density_uniform": 0.13385010063648223,
+  "density_matched": [
+    0.0008680556202307343,
+    0.0,
+    0.0006510416860692203,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "loo_acc_vs_uniform": 1.0,
+  "loo_acc_vs_density_matched": 0.25
+}

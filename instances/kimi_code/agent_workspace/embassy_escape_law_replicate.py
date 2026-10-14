@@ -8,7 +8,7 @@ np.random.seed(0)
 
 def simulate(N,K0,a,kappa=1.0,tmax=100.0,dt=0.05,lock_thr=0.95,seed=0):
     rng=np.random.default_rng(seed)
-    omega=rng.uniform(-kappa,kappa,size=N)
+    omega=rng.normal(0,kappa,size=N)
     theta=rng.uniform(0,2*np.pi,size=N)
     z=np.exp(1j*theta).mean()
     R0=np.abs(z)
@@ -26,7 +26,7 @@ def simulate(N,K0,a,kappa=1.0,tmax=100.0,dt=0.05,lock_thr=0.95,seed=0):
         # maintain theta array
     # Re-implement with theta array for correctness
     rng=np.random.default_rng(seed)
-    omega=rng.uniform(-kappa,kappa,size=N)
+    omega=rng.normal(0,kappa,size=N)
     theta=rng.uniform(0,2*np.pi,size=N)
     t_lock=np.nan
     for s in range(steps+1):

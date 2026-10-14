@@ -1,0 +1,44 @@
+{
+  "emergent_rho": [
+    0.1083,
+    0.0183,
+    0.0029,
+    0.0229
+  ],
+  "matched_rho": [
+    0.0156,
+    0.012,
+    0.0105,
+    0.0094,
+    0.0156,
+    0.012,
+    0.0105,
+    0.0094,
+    0.0029,
+    0.0029,
+    0.0029,
+    0.0029,
+    0.0156,
+    0.012,
+    0.0105,
+    0.0094
+  ],
+  "uniform_rho_mean": NaN,
+  "cohens_d": {
+    "shannon": {
+      "vs_uniform": NaN,
+      "vs_final_density_matched": 0.8757316321862656
+    },
+    "block": {
+      "vs_uniform": NaN,
+      "vs_final_density_matched": 0.7071067811850392
+    },
+    "tlz": {
+      "vs_uniform": NaN,
+      "vs_final_density_matched": 0.0
+    }
+  },
+  "loo_vs_uniform": 1.0,
+  "loo_vs_final_density_matched": 0.7,
+  "chance_vs_matched": 0.2
+}

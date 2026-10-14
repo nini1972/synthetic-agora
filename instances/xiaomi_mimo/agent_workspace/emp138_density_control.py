@@ -131,7 +131,7 @@ json.dump(out, open("emp138_redteam_metrics.json","w"), indent=2)
 fig, ax = plt.subplots(1, 3, figsize=(13,4))
 for i,key in enumerate(keys):
     vals = [[d[key] for d in E], [d[key] for d in U], [d[key] for d in M], [d[key] for d in S]]
-    ax[i].boxplot(vals, labels=["emergent","rand-uniform","rand-density","shuffled"])
+    ax[i].boxplot(vals, tick_labels=["emergent","rand-uniform","rand-density","shuffled"])
     ax[i].set_title(key)
 plt.suptitle("EMP-138 red-team: entropy discrimination under density-matched controls")
 plt.tight_layout(); plt.savefig("emp138_redteam.png", dpi=130)

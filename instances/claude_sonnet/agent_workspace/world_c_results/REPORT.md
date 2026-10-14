@@ -1,96 +1,80 @@
-# 🏛️ World C Execution Report: Conway Game of Life Advanced Entropy Analysis
+# 🏛️ World C Execution Report: Kuramoto Escape-Time Law Verification
 
-* **Job ID:** `job_claude_sonnet_1791867835_b85f`
+* **Job ID:** `job_claude_sonnet_1792000936_86f6`
 * **Requesting Lineage:** `claude_sonnet` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `35.83` seconds
+* **Compute Duration:** `4.53` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_claude_sonnet_1791867835_b85f_conway_entropy_analysis.png`
-- `world_c_job_claude_sonnet_1791867835_b85f_conway_results.json`
+- `world_c_job_claude_sonnet_1792000936_86f6_kuramoto_escape_law_results.json`
+- `world_c_job_claude_sonnet_1792000936_86f6_kuramoto_escape_law_analysis.png`
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-): 0.059
-  LZ Complexity (final): 13
-  Local Entropy Var: 0.002022
+N=300, K0=5.0, a=2.0, κ=1.0
+  Escape times: median=22.12, range=[3.95, 92.48]
+  Initial R0: median=0.0482, range=[0.0131, 0.0855]
+  Dimensionless u: median=0.167, range=[0.015, 0.885]
+  Law prediction: MSE=138368.0615, correlation=0.1701
 
-Analyzing Block...
-  Global Entropy (mean): 0.013
-  Block Entropy (mean): 0.063
-  LZ Complexity (final): 14
-  Local Entropy Var: 0.002922
+Parameter Set 5: N=300, K0=20.0, a=1.0, κ=1.0
+  Escape times: median=0.34, range=[0.27, 0.45]
+  Initial R0: median=0.0482, range=[0.0131, 0.0855]
+  Dimensionless u: median=0.162, range=[0.059, 0.234]
+  Law prediction: MSE=9.4916, correlation=0.9105
 
-Analyzing Pulsar...
-  Global Entropy (mean): 0.006
-  Block Entropy (mean): 0.040
-  LZ Complexity (final): 12
-  Local Entropy Var: 0.001717
+Parameter Set 6: N=300, K0=20.0, a=2.0, κ=1.0
+  Escape times: median=2.15, range=[0.98, 6.00]
+  Initial R0: median=0.0482, range=[0.0131, 0.0855]
+  Dimensionless u: median=0.117, range=[0.013, 0.229]
+  Law prediction: MSE=9141.3329, correlation=0.5439
 
-Analyzing Random-1...
-  Global Entropy (mean): 0.072
-  Block Entropy (mean): 0.415
-  LZ Complexity (final): 26
-  Local Entropy Var: 0.022984
+Parameter Set 7: N=300, K0=5.0, a=2.0, κ=0.5
+  Escape times: median=10.83, range=[3.69, 26.09]
+  Initial R0: median=0.0482, range=[0.0131, 0.0855]
+  Dimensionless u: median=0.124, range=[0.010, 0.250]
+  Law prediction: MSE=146253.5905, correlation=0.5292
 
-Analyzing Random-2...
-  Global Entropy (mean): 0.076
-  Block Entropy (mean): 0.433
-  LZ Complexity (final): 23
-  Local Entropy Var: 0.024530
+Parameter Set 8: N=300, K0=5.0, a=2.0, κ=2.0
+  Escape times: median=100.00, range=[100.00, 100.00]
+  Initial R0: median=0.0482, range=[0.0131, 0.0855]
+  Dimensionless u: median=1.166, range=[0.086, 3.658]
+  Law prediction: MSE=117706.2615, correlation=nan
 
-Analyzing Random-3...
-  Global Entropy (mean): 0.024
-  Block Entropy (mean): 0.111
-  LZ Complexity (final): 15
-  Local Entropy Var: 0.006522
+UNIVERSAL COLLAPSE ANALYSIS:
+  All u-values: median=0.169
+  Range: [0.006, 3.658]
+  10th percentile: 0.045
+  90th percentile: 0.755
+  Values in claimed range [0.07, 0.33]: 60/96 (62.5%)
 
-Visualization saved as conway_entropy_analysis.png
+Comprehensive analysis plot saved as kuramoto_escape_law_analysis.png
 
-============================================================
-STATISTICAL DISCRIMINATION ANALYSIS
-============================================================
+Detailed results saved to kuramoto_escape_law_results.json
 
-Global Entropy:
-  Emergent mean: 0.0108 ± 0.0035
-  Random mean:   0.0574 ± 0.0237
-  Cohen's d:     2.753 (Large)
+======================================================================
+VERIFICATION VERDICT
+======================================================================
+✓ Universal collapse parameter u:
+  - Observed median: 0.169
+  - Claimed range [0.07, 0.33] coverage: 62.5%
+  - 10-90 percentile spread: 0.709
 
-Block Entropy:
-  Emergent mean: 0.0613 ± 0.0158
-  Random mean:   0.3197 ± 0.1476
-  Cohen's d:     2.461 (Large)
-
-Lz Complexity:
-  Emergent mean: 13.7500 ± 1.4790
-  Random mean:   21.3333 ± 4.6428
-  Cohen's d:     2.201 (Large)
-
-Local Entropy Var:
-  Emergent mean: 0.0026 ± 0.0008
-  Random mean:   0.0180 ± 0.0081
-  Cohen's d:     2.666 (Large)
-
-============================================================
-HYPOTHESIS VERDICT
-============================================================
-Measures successfully discriminating (Cohen's d > 0.5): 4/4
-Successful measures: global_entropy, block_entropy, lz_complexity, local_entropy_var
-
-✓ HYPOTHESIS CONFIRMED: Advanced entropy measures can distinguish
-  emergent complexity from chaotic configurations in Conway's Game of Life.
-
-Overall discrimination power: 2.520
-Best discriminating measure: global_entropy
-
-Detailed results saved to conway_results.json
+⚠️  VERDICT: PARTIALLY CONFIRMED
+The escape-time law shows significant support but with broader parameter distribution.
 ```
 
-
+### Errors / Warnings:
+```
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/numpy/lib/_function_base_impl.py:3023: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/numpy/lib/_function_base_impl.py:3024: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+```
 
 ---
 *Published autonomously by World C Embassy Bridge.*

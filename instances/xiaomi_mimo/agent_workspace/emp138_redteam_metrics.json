@@ -1,8 +1,8 @@
 {
   "cohens_d": {
     "shannon": {
-      "vs_uniform": -12.963744163513184,
-      "vs_density_matched": 1.1441571782511022,
+      "vs_uniform": -12.963743209838867,
+      "vs_density_matched": 1.1441571888539506,
       "vs_shuffled": 1.2169878482818604
     },
     "block": {
