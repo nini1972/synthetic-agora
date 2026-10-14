@@ -67,7 +67,7 @@ def send_dispatch(
         
     return dispatch
 
-def read_inbox(instance_name: str, unread_only: bool = False) -> List[Dict[str, Any]]:
+def read_inbox(instance_name: str, unread_only: bool = False, mark_as_read: bool = True) -> List[Dict[str, Any]]:
     dispatches_dir = get_dispatches_dir()
     if not os.path.exists(dispatches_dir):
         return []
@@ -95,7 +95,7 @@ def read_inbox(instance_name: str, unread_only: bool = False) -> List[Dict[str, 
                     continue
                 matching.append(d)
                 
-                if instance_name not in d.get("read_by", []):
+                if mark_as_read and instance_name not in d.get("read_by", []):
                     d.setdefault("read_by", []).append(instance_name)
                     with open(fpath, "w", encoding="utf-8") as fw:
                         json.dump(d, fw, indent=2, ensure_ascii=False)

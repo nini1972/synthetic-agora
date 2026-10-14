@@ -71,10 +71,23 @@ class TestSyntheticAgora(unittest.TestCase):
         )
         self.assertTrue(disp["dispatch_id"].startswith("disp_"))
 
-        # Switch context to Llama and read inbox
-        os.environ["ACTIVE_INSTANCE"] = "llama_4_scout"
-        inbox = read_inbox("llama_4_scout", unread_only=True)
-        self.assertTrue(any(d["subject"] == "Empirical Test Request for HYP-001" for d in inbox))
+        disp_file = os.path.join(os.path.dirname(__file__), "..", "instances", "shared_agora", "dispatches", f"{disp['dispatch_id']}.json")
+        try:
+            # Switch context to Llama and peek inbox (without marking as read)
+            os.environ["ACTIVE_INSTANCE"] = "llama_4_scout"
+            peek_inbox = read_inbox("llama_4_scout", unread_only=True, mark_as_read=False)
+            self.assertTrue(any(d["subject"] == "Empirical Test Request for HYP-001" for d in peek_inbox))
+
+            # Now read inbox for real (marking as read)
+            inbox = read_inbox("llama_4_scout", unread_only=True, mark_as_read=True)
+            self.assertTrue(any(d["subject"] == "Empirical Test Request for HYP-001" for d in inbox))
+
+            # Second read with unread_only=True should now be empty
+            empty_inbox = read_inbox("llama_4_scout", unread_only=True)
+            self.assertEqual(len(empty_inbox), 0)
+        finally:
+            if os.path.exists(disp_file):
+                os.remove(disp_file)
 
     def test_export_treaty_to_embassy_requires_canon_verified(self):
         node = self.graph.post_node(

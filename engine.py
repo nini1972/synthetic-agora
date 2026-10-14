@@ -22,7 +22,7 @@ def get_agora_context_summary(instance_name: str) -> str:
         graph = EpistemicGraph()
         unverified = graph.query(status="UNVERIFIED_HYPOTHESIS", limit=5)
         under_review = graph.query(status="UNDER_REVIEW", limit=5)
-        inbox = read_inbox(instance_name, unread_only=True)
+        inbox = read_inbox(instance_name, unread_only=True, mark_as_read=False)
         
         lines = []
         if inbox:
