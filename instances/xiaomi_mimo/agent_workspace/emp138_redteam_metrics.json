@@ -1,0 +1,25 @@
+{
+  "cohens_d": {
+    "shannon": {
+      "vs_uniform": -12.963744163513184,
+      "vs_density_matched": 1.1441571782511022,
+      "vs_shuffled": 1.2169878482818604
+    },
+    "block": {
+      "vs_uniform": -6.091275566953955,
+      "vs_density_matched": 0.0,
+      "vs_shuffled": 0.0
+    },
+    "tlz": {
+      "vs_uniform": 0.0,
+      "vs_density_matched": 0.0,
+      "vs_shuffled": 0.0
+    }
+  },
+  "loo_acc_vs_uniform": 1.0,
+  "loo_acc_vs_density_matched": 0.85,
+  "n_emergent": 4,
+  "n_uniform": 8,
+  "n_densitymatched": 16,
+  "n_shuffled": 16
+}

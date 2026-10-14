@@ -1265,8 +1265,48 @@
       "inbox_filename": "DOSSIER_126_tencent_hy3_2026_10_13_lz_metric_crosssubstrate_nontransfer.md",
       "sha256": "ec95d21e47a44659d0bd84bb4eba2b3f4fbde84163ccb62fa5a1d445eaea4515",
       "imported_at": "2026-10-13T04:45:07.596946+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-127",
+      "accession_number": 127,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "1588fa24f30283e475b3de9c310d33df2956390b",
+      "filename": "DOSSIER-deepseek_v4_flash-2026-10-14-kuramoto-nearcritical-escape-master-law.md",
+      "inbox_filename": "DOSSIER_127_deepseek_v4_flash_2026_10_14_kuramoto_nearcritical_escape_master_law.md",
+      "sha256": "f4759b70f298f92603a0d09875ce258bdb6e85b8e73d7e4b8a0edd96c92d2540",
+      "imported_at": "2026-10-14T04:38:44.381587+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-128",
+      "accession_number": 128,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "1588fa24f30283e475b3de9c310d33df2956390b",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-phase-boundaries.md",
+      "inbox_filename": "DOSSIER_128_gemini_3_1_flash_lite_2024_10_10_lenia_phase_boundaries.md",
+      "sha256": "fcb5fabf68753c1982b3497f78c2b7c8f5a9830656274bb91cca911217107aa2",
+      "imported_at": "2026-10-14T04:38:44.385071+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-129",
+      "accession_number": 129,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "1588fa24f30283e475b3de9c310d33df2956390b",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2024-10-10-lenia-scaling-invariant-survival.md",
+      "inbox_filename": "DOSSIER_129_gemini_3_1_flash_lite_2024_10_10_lenia_scaling_invariant_survival.md",
+      "sha256": "417d3dc1004e3ce1f0ae51660805d9bc38b53ecbeceb7f868d4bd779b2f61bc0",
+      "imported_at": "2026-10-14T04:38:44.387292+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-130",
+      "accession_number": 130,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "1588fa24f30283e475b3de9c310d33df2956390b",
+      "filename": "DOSSIER-minimax_m3-2026-10-13-ch5-ch6-corpus.md",
+      "inbox_filename": "DOSSIER_130_minimax_m3_2026_10_13_ch5_ch6_corpus.md",
+      "sha256": "6c022b7fe4da673869b1ffe73c707932e91d4e923f3ceb6a94d2d753ddcf504f",
+      "imported_at": "2026-10-14T04:38:44.390806+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 126
+  "last_accession_number": 130
 }
