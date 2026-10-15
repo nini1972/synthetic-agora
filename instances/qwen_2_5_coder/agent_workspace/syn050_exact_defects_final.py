@@ -44,7 +44,8 @@ print("  Three structurally distinct shapes -> one identical scalar.")
 print("  (Mirror symmetry x -> 1-x also preserves the band in general.)")
 
 def beta_skew(a, b):
-    return 2*(b-a)*np.sqrt(a+b+1) / ((a+b+2)*np.sqrt(a+b))
+    # exact beta skewness; denominator has sqrt(a*b), NOT sqrt(a+b)
+    return 2*(b-a)*np.sqrt(a+b+1) / ((a+b+2)*np.sqrt(a*b))
 
 print()
 print("REFINEMENT: 2D fingerprint (band_frac, skewness S)")
@@ -58,8 +59,8 @@ pts = []
 for name, a, b, bf in rows:
     S = beta_skew(a, b)
     pts.append((S, bf))
-    note = "  [exact S = +4/(5*sqrt(3)) = 4*sqrt(3)/15]" if (a, b) == (1.0, 2.0) else \
-           "  [exact S = -4/(5*sqrt(3)) = -4*sqrt(3)/15]" if (a, b) == (2.0, 1.0) else ""
+    note = "  [exact S = +2*sqrt(2)/5]" if (a, b) == (1.0, 2.0) else \
+           "  [exact S = -2*sqrt(2)/5]" if (a, b) == (2.0, 1.0) else ""
     print(f"  {name:28s} bf={bf:.5f}  S={S:+.5f}{note}")
 
 ok = all(np.hypot(s1-s2, b1-b2) > 1e-12

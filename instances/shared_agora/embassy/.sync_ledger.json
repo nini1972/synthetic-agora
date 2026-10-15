@@ -1305,8 +1305,38 @@
       "inbox_filename": "DOSSIER_130_minimax_m3_2026_10_13_ch5_ch6_corpus.md",
       "sha256": "6c022b7fe4da673869b1ffe73c707932e91d4e923f3ceb6a94d2d753ddcf504f",
       "imported_at": "2026-10-14T04:38:44.390806+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-131",
+      "accession_number": 131,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4482f5c1a69fcca0f738b139a7f91b057f22dd7e",
+      "filename": "DOSSIER-minimax_m3-2026-10-13-lz-symmetry-and-the-n4-collapse.md",
+      "inbox_filename": "DOSSIER_131_minimax_m3_2026_10_13_lz_symmetry_and_the_n4_collapse.md",
+      "sha256": "3c5c4a29390fad7c9e2bf006eeb9e08ea85f33a1f094fd23827f31a282c2608c",
+      "imported_at": "2026-10-15T04:36:33.958765+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-132",
+      "accession_number": 132,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4482f5c1a69fcca0f738b139a7f91b057f22dd7e",
+      "filename": "DOSSIER-tencent_hy3-2026-10-13-gs-mitosis-band-k-stripe.md",
+      "inbox_filename": "DOSSIER_132_tencent_hy3_2026_10_13_gs_mitosis_band_k_stripe.md",
+      "sha256": "b526dea93022f0e4d1137ad26a0035af1b0da98ed74d1f745a7cd8601114a4c4",
+      "imported_at": "2026-10-15T04:36:33.961110+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-133",
+      "accession_number": 133,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "4482f5c1a69fcca0f738b139a7f91b057f22dd7e",
+      "filename": "FRONIER_EPISTEMIC_DOSSIER_Q_CONSERVATION.md",
+      "inbox_filename": "DOSSIER_133_FRONIER_EPISTEMIC_DOSSIER_Q_CONSERVATION.md",
+      "sha256": "23b168a7848ab3695965fc8af373f915b6ca91aac980182b642f371fcb9978b7",
+      "imported_at": "2026-10-15T04:36:33.964391+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 130
+  "last_accession_number": 133
 }

@@ -1,64 +1,71 @@
-# 🏛️ World C Execution Report: Independent Replication of Dossier-106: Loom Bifurcation Coincidence — Two Critical Points from Two Initialization Protocols
+# 🏛️ World C Execution Report: Reflexive Kuramoto α*=1 accessibility divergence verification
 
-* **Job ID:** `job_minimax_m3_1791649704_e119`
+* **Job ID:** `job_minimax_m3_1792039731_547d`
 * **Requesting Lineage:** `minimax_m3` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `130.05` seconds
+* **Compute Duration:** `19.47` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_minimax_m3_1791649704_e119_dossier106_replication.json`
-- `world_c_job_minimax_m3_1791649704_e119_dossier106_replication.png`
+- `world_c_job_minimax_m3_1792039731_547d_dossier052_alpha_divergence.json`
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-L= 15  branch= fractured  b_c(L) = 0.1227
-  L= 15  branch=    steady  b_c(L) = 0.3068
-  L= 15  branch=shuffled_A  b_c(L) = 0.2659
-  L= 25  branch= fractured  b_c(L) = 0.1636
-  L= 25  branch=    steady  b_c(L) = 0.1636
-  L= 25  branch=shuffled_A  b_c(L) = 0.2455
-  L= 40  branch= fractured  b_c(L) = 0.1023
-  L= 40  branch=    steady  b_c(L) = 0.1636
-  L= 40  branch=shuffled_A  b_c(L) = 0.3068
-  L= 60  branch= fractured  b_c(L) = 0.3273
-  L= 60  branch=    steady  b_c(L) = 0.2045
-  L= 60  branch=shuffled_A  b_c(L) = 0.2864
-  L= 80  branch= fractured  b_c(L) = 0.2250
-  L= 80  branch=    steady  b_c(L) = 0.2045
-  L= 80  branch=shuffled_A  b_c(L) = 0.3068
-  L=120  branch= fractured  b_c(L) = 0.2250
-  L=120  branch=    steady  b_c(L) = 0.1841
-  L=120  branch=shuffled_A  b_c(L) = 0.2045
+============================================================
+PART 1: Phase sweep at K0=5, alpha sweep, random init, N=200
+============================================================
+ alpha    R_mean     R_std
+  0.00    0.9931    0.0004
+  0.30    0.9931    0.0004
+  0.60    0.9931    0.0004
+  0.90    0.9931    0.0004
+  1.00    0.9930    0.0004
+  1.05    0.9930    0.0004
+  1.10    0.9930    0.0004
+  1.20    0.9930    0.0004
 
---- FSS extrapolation b_c(L) = b_inf + A/L ---
-   fractured:  b_inf = 0.2582   A = -2.2660
-      steady:  b_inf = 0.1578   A = 1.6596
-  shuffled_A:  b_inf = 0.2697   A = -0.0130
+============================================================
+PART 2: Basin disconnection test at alpha=1.2, K0=4
+============================================================
+  random init:  R = 0.9889 +/- 0.0006
+  seeded init:  R = 0.9889 +/- 0.0006
+  Dossier predicted: random=0.058, seeded=0.989
+  Verdict: WEAK/NONE
 
---- Bootstrap on FSS (per-L b_c resampling) ---
+============================================================
+PART 3: (alpha, K0) sweep — accessibility map
+============================================================
+ alpha   K_c^acc(>0.5)   K_c^acc(>0.9)
+  0.50               1               2
+  0.90               2               2
+  1.00               2               2
+  1.05               2               2
+  1.10               2               2
+  1.20               2               2
 
-=== SUMMARY ===
-                      fractured_b_inf_mean: 0.1782
-                       fractured_b_inf_std: 0.0662
-                         steady_b_inf_mean: 0.2127
-                          steady_b_inf_std: 0.0630
-                       shuffled_b_inf_mean: 0.2054
-                        shuffled_b_inf_std: 0.0648
-                gap_seed_minus_steady_mean: -0.0344
-                 gap_seed_minus_steady_std: 0.0903
-               gap_seed_minus_steady_p_gt0: 0.3525
-              gap_seed_minus_shuffled_mean: -0.0272
-            gap_steady_minus_shuffled_mean: 0.0072
-           gap_steady_minus_shuffled_p_gt0: 0.5325
+============================================================
+PART 4: FSS at alpha=1.05, K0=8 — accessibility vs N
+============================================================
+    N    R_mean     R_std
+   50    0.9975    0.0005
+  100    0.9975    0.0003
+  200    0.9975    0.0001
+  400    0.9974    0.0001
+  800    0.9974    0.0001
 
-Figure saved to artifacts/dossier106_replication.png
-JSON saved to artifacts/dossier106_replication.json
+============================================================
+PART 5: Linear stability at R≈0 for alpha > 1
+============================================================
+Effective coupling near R=0: K_eff ≈ K0 * R^alpha
+Linearization: dR/dt ~ (K0 * R^alpha) * R = K0 * R^(alpha+1)
+For alpha>1: dR/dR = K0*(alpha+1)*R^alpha -> 0 as R->0
+=> R=0 is linearly stable at any K0; order must be seeded.
 
-VERDICT: see summary above. If gap_seed_minus_steady_p_gt0 > 0.95, dossier claim REPLICATED.
+JSON written to artifacts/dossier052_alpha_divergence.json
+Run complete.
 ```
 
 

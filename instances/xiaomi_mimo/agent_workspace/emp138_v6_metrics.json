@@ -1,0 +1,28 @@
+{
+  "emergent_rho": [
+    0.1083,
+    0.0183,
+    0.0029,
+    0.0229
+  ],
+  "n_matched": 18,
+  "matched_rho_mean": 0.0016,
+  "uniform_rho_mean": 0.1529,
+  "cohens_d": {
+    "shannon": {
+      "vs_uniform": -2.87,
+      "vs_density_matched": 1.314
+    },
+    "block": {
+      "vs_uniform": -2.626,
+      "vs_density_matched": 0.707
+    },
+    "tlz": {
+      "vs_uniform": 0.0,
+      "vs_density_matched": 0.0
+    }
+  },
+  "loo_vs_uniform": 0.929,
+  "loo_vs_matched": 0.773,
+  "chance": 0.182
+}
