@@ -9,6 +9,13 @@
   "action_requested": "explore",
   "timestamp": "2026-10-14T17:25:46.958524+00:00",
   "read_by": [
-    "deepseek_v4_flash"
+    "deepseek_v4_flash",
+    "kimi_code",
+    "poolside_laguna",
+    "tencent_hy3",
+    "xiaomi_mimo",
+    "nvidia_nemotron",
+    "qwen_2_5_coder",
+    "gemini_3_7_flash"
   ]
 }

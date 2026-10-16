@@ -1,43 +1,32 @@
-# 🏛️ World C Execution Report: Definitive discriminating test: true-barrier saturates vs slow-lock decays
+# 🏛️ World C Execution Report: Formal finite-horizon classifier: TRUE transition vs rate-law relaxation artifact for each alpha
 
-* **Job ID:** `job_deepseek_v4_flash_1791867619_0d40`
+* **Job ID:** `job_deepseek_v4_flash_1792125461_1f81`
 * **Requesting Lineage:** `deepseek_v4_flash` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `225.82` seconds
+* **Compute Duration:** `2.32` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_deepseek_v4_flash_1791867619_0d40_barrier_vs_slowlock.png`
+- `world_c_job_deepseek_v4_flash_1792125461_1f81_finite_horizon_classifier.json`
+- `world_c_job_deepseek_v4_flash_1792125461_1f81_finite_horizon_classifier.png`
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-Never-lock fraction F_never(alpha, T):
- alpha T=  200 T=  400 T=  800 T= 1600 T= 3200
-------------------------------------------------------------
-  2.00  0.17  0.08  0.00  0.00  0.00
-  2.10  0.67  0.17  0.08  0.00  0.00
-  2.20  1.00  0.83  0.67  0.58  0.42
-  2.30  1.00  1.00  1.00  1.00  0.92
-  2.40  1.00  1.00  1.00  1.00  1.00
-  2.50  1.00  1.00  1.00  1.00  1.00
-  2.60  1.00  1.00  1.00  1.00  1.00
+alpha=2.0: F_inf=0.0000 +/- 0.0931, C=10.000, lam=0.804 -> RATE_LAW_RELAXATION_ARTIFACT
+alpha=2.1: F_inf=0.0000 +/- 0.8152, C=10.000, lam=0.590 -> RATE_LAW_RELAXATION_ARTIFACT
+alpha=2.2: F_inf=0.0000 +/- 0.4120, C=4.718, lam=0.291 -> RATE_LAW_RELAXATION_ARTIFACT
+alpha=2.3: F_inf=0.0000 +/- 75.3100, C=1.148, lam=0.023 -> RATE_LAW_RELAXATION_ARTIFACT
+alpha=2.4: F_inf=1.0000 +/- 0.0000, C=0.000, lam=0.676 -> TRUE_ASYMPTOTIC_TRANSITION
+alpha=2.5: F_inf=1.0000 +/- 0.0000, C=0.000, lam=0.676 -> TRUE_ASYMPTOTIC_TRANSITION
+alpha=2.6: F_inf=1.0000 +/- 0.0000, C=0.000, lam=0.676 -> TRUE_ASYMPTOTIC_TRANSITION
 
-Interpretation: does F_never saturate above 0 as T grows?
-A true barrier shows F_never -> plateau > 0 (last two T values nearly equal).
-Slow-lock shows F_never decreasing toward 0 across all T.
+BOUNDARY alpha_c* (first alpha classified as TRUE barrier) = 2.4
 
-  alpha=2.00: F_never(T=3200)=0.00, dF over last step=+0.00 -> SLOW-LOCK (still decreasing)
-  alpha=2.10: F_never(T=3200)=0.00, dF over last step=+0.00 -> SLOW-LOCK (still decreasing)
-  alpha=2.20: F_never(T=3200)=0.42, dF over last step=-0.17 -> SLOW-LOCK (still decreasing)
-  alpha=2.30: F_never(T=3200)=0.92, dF over last step=-0.08 -> SLOW-LOCK (still decreasing)
-  alpha=2.40: F_never(T=3200)=1.00, dF over last step=+0.00 -> TRUE BARRIER (saturated)
-  alpha=2.50: F_never(T=3200)=1.00, dF over last step=+0.00 -> TRUE BARRIER (saturated)
-  alpha=2.60: F_never(T=3200)=1.00, dF over last step=+0.00 -> TRUE BARRIER (saturated)
-
-Saved barrier_vs_slowlock.png
+Saved finite_horizon_classifier.png and finite_horizon_classifier.json
+BOUNDARY alpha_c* = 2.4
 ```
 
 

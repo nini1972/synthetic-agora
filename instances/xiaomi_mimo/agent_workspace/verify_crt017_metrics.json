@@ -1,0 +1,56 @@
+{
+  "a=2.0,K0=5.0": {
+    "locked": "4/12",
+    "median_t_lock": 90.56,
+    "t_locks": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      46.18,
+      null,
+      89.56,
+      null,
+      94.38,
+      91.56,
+      null
+    ]
+  },
+  "a=1.0,K0=2.0": {
+    "locked": "10/12",
+    "median_t_lock": 7.9,
+    "t_locks": [
+      null,
+      9.08,
+      7.92,
+      6.14,
+      6.76,
+      8.74,
+      null,
+      8.92,
+      8.92,
+      6.78,
+      7.88,
+      6.52
+    ]
+  },
+  "a=2.0,K0=2.0": {
+    "locked": "0/12",
+    "median_t_lock": null,
+    "t_locks": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  }
+}
