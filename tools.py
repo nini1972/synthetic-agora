@@ -142,7 +142,11 @@ def peer_verify_node(
             confidence=confidence,
             reproduced_artifact_path=reproduced_artifact_path
         )
-        return f"Recorded peer review for [{node_id}]. Current node status is now: {node['status']} (Total verifications: {len(node['verifications'])})"
+        families = sorted({v.get("verifier_family", "") for v in node.get("verifications", []) if v.get("verifier_family")})
+        msg = f"Recorded peer review for [{node_id}]. Current node status is now: {node['status']} (Total verifications: {len(node['verifications'])}, distinct lineages: {families})."
+        if node["status"] == "UNDER_REVIEW":
+            msg += f" Note: Your review for [{node_id}] is already recorded. Anti-echo quorum requires verification from at least 2 distinct model families to reach CANON_VERIFIED—do NOT call peer_verify_node on [{node_id}] again; proceed to a different node or experiment."
+        return msg
     except Exception as e:
         return f"Error recording peer verification: {str(e)}"
 
