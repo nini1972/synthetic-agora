@@ -118,58 +118,65 @@ def run_loop(instance: str, ticks: int = 1):
             if action.get("content"):
                 print(f"💭 Agent Thought: {action['content']}")
                 
-            tool_name = action["tool_name"]
-            arguments = action["arguments"]
-            tool_call_id = action["tool_call_id"]
+            tool_calls_list = action.get("all_tool_calls") or [{
+                "tool_call_id": action["tool_call_id"],
+                "tool_name": action["tool_name"],
+                "arguments": action["arguments"],
+            }]
             
-            print(f"⚡ Action: Call tool '{tool_name}' with args {json.dumps(arguments, ensure_ascii=False)}")
-            
-            assistant_message = {
-                "role": "assistant",
-                "content": action.get("content", ""),
-                "tool_calls": [{
-                    "id": tool_call_id,
-                    "type": "function",
-                    "function": {
-                        "name": tool_name,
-                        "arguments": json.dumps(arguments, ensure_ascii=False)
-                    }
-                }]
-            }
-            append_to_history(assistant_message)
-            
-            if tool_name in AVAILABLE_TOOLS:
-                try:
-                    if isinstance(arguments, dict):
-                        result = AVAILABLE_TOOLS[tool_name](**arguments)
-                    elif isinstance(arguments, list) and len(arguments) > 0 and isinstance(arguments[0], dict):
-                        result = AVAILABLE_TOOLS[tool_name](**arguments[0])
-                    else:
-                        result = f"Error: Tool arguments must be a JSON dictionary object, got {type(arguments).__name__}."
-                except TypeError as e:
-                    import inspect
-                    sig_params = [p for p in inspect.signature(AVAILABLE_TOOLS[tool_name]).parameters.keys() if p != "kwargs"]
-                    result = f"TypeError: {str(e)}. Allowed parameters for '{tool_name}': {sig_params}"
-                except Exception as e:
-                    result = f"Error executing tool '{tool_name}': {str(e)}"
-            else:
-                result = f"Error: Tool '{tool_name}' not found."
+            for idx, tc_item in enumerate(tool_calls_list):
+                tool_name = tc_item["tool_name"]
+                arguments = tc_item["arguments"]
+                tool_call_id = tc_item["tool_call_id"]
                 
-            preview = str(result)[:400] + ("..." if len(str(result)) > 400 else "")
-            print(f"📋 Result:\n{preview}")
-            
-            tool_message = {
-                "role": "tool",
-                "tool_call_id": tool_call_id,
-                "name": tool_name,
-                "content": str(result)
-            }
-            append_to_history(tool_message)
-            log_agora_event("tool_call", instance, {
-                "tool": tool_name,
-                "args": arguments,
-                "result_preview": preview
-            })
+                print(f"⚡ Action: Call tool '{tool_name}' with args {json.dumps(arguments, ensure_ascii=False)}")
+                
+                assistant_message = {
+                    "role": "assistant",
+                    "content": action.get("content", "") if idx == 0 else "",
+                    "tool_calls": [{
+                        "id": tool_call_id,
+                        "type": "function",
+                        "function": {
+                            "name": tool_name,
+                            "arguments": json.dumps(arguments, ensure_ascii=False)
+                        }
+                    }]
+                }
+                append_to_history(assistant_message)
+                
+                if tool_name in AVAILABLE_TOOLS:
+                    try:
+                        if isinstance(arguments, dict):
+                            result = AVAILABLE_TOOLS[tool_name](**arguments)
+                        elif isinstance(arguments, list) and len(arguments) > 0 and isinstance(arguments[0], dict):
+                            result = AVAILABLE_TOOLS[tool_name](**arguments[0])
+                        else:
+                            result = f"Error: Tool arguments must be a JSON dictionary object, got {type(arguments).__name__}."
+                    except TypeError as e:
+                        import inspect
+                        sig_params = [p for p in inspect.signature(AVAILABLE_TOOLS[tool_name]).parameters.keys() if p != "kwargs"]
+                        result = f"TypeError: {str(e)}. Allowed parameters for '{tool_name}': {sig_params}"
+                    except Exception as e:
+                        result = f"Error executing tool '{tool_name}': {str(e)}"
+                else:
+                    result = f"Error: Tool '{tool_name}' not found."
+                    
+                preview = str(result)[:400] + ("..." if len(str(result)) > 400 else "")
+                print(f"📋 Result:\n{preview}")
+                
+                tool_message = {
+                    "role": "tool",
+                    "tool_call_id": tool_call_id,
+                    "name": tool_name,
+                    "content": str(result)
+                }
+                append_to_history(tool_message)
+                log_agora_event("tool_call", instance, {
+                    "tool": tool_name,
+                    "args": arguments,
+                    "result_preview": preview
+                })
 
         time.sleep(2)
         
