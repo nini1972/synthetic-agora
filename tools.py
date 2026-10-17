@@ -40,11 +40,20 @@ def _get_absolute_path(path_str: str) -> str:
         return os.path.abspath(os.path.join(shared, norm_path))
     if norm_path.startswith("world_c/"):
         return os.path.abspath(os.path.join(shared, norm_path))
+
+    # Strip redundant leading workspace/ or agent_workspace/ prefix if present
+    cleaned_rel = path_str
+    for prefix in ("workspace/", "workspace\\", "agent_workspace/", "agent_workspace\\"):
+        if cleaned_rel.startswith(prefix):
+            candidate = os.path.abspath(os.path.join(workspace, cleaned_rel[len(prefix):]))
+            if os.path.exists(candidate) or not os.path.exists(os.path.abspath(os.path.join(workspace, path_str))):
+                cleaned_rel = cleaned_rel[len(prefix):]
+                break
     
-    target = os.path.abspath(os.path.join(workspace, path_str))
+    target = os.path.abspath(os.path.join(workspace, cleaned_rel))
     if not os.path.exists(target):
         # Check in local world_c_results
-        ws_res = os.path.abspath(os.path.join(workspace, "world_c_results", os.path.basename(path_str)))
+        ws_res = os.path.abspath(os.path.join(workspace, "world_c_results", os.path.basename(cleaned_rel)))
         if os.path.exists(ws_res):
             return ws_res
         # Check in shared directory
@@ -52,19 +61,19 @@ def _get_absolute_path(path_str: str) -> str:
         if os.path.exists(shared_direct):
             return shared_direct
         # Check in shared artifacts directory
-        shared_art = os.path.abspath(os.path.join(shared, "artifacts", os.path.basename(path_str)))
+        shared_art = os.path.abspath(os.path.join(shared, "artifacts", os.path.basename(cleaned_rel)))
         if os.path.exists(shared_art):
             return shared_art
         # Check in shared embassy directory
-        shared_embassy = os.path.abspath(os.path.join(shared, "embassy", "inbox", os.path.basename(path_str)))
+        shared_embassy = os.path.abspath(os.path.join(shared, "embassy", "inbox", os.path.basename(cleaned_rel)))
         if os.path.exists(shared_embassy):
             return shared_embassy
         # Check in shared world_c reports
-        shared_report = os.path.abspath(os.path.join(shared, "world_c", "reports", os.path.basename(path_str)))
+        shared_report = os.path.abspath(os.path.join(shared, "world_c", "reports", os.path.basename(cleaned_rel)))
         if os.path.exists(shared_report):
             return shared_report
         # Check in shared world_c artifacts
-        shared_art_wc = os.path.abspath(os.path.join(shared, "world_c", "artifacts", os.path.basename(path_str)))
+        shared_art_wc = os.path.abspath(os.path.join(shared, "world_c", "artifacts", os.path.basename(cleaned_rel)))
         if os.path.exists(shared_art_wc):
             return shared_art_wc
     return target
@@ -217,14 +226,14 @@ def export_treaty_to_embassy(node_id: str, originating_dossier_filename: str = "
 
 # --- WORKSPACE FILE & COMMAND TOOLS ---
 
-def read_file(path: str) -> str:
+def read_file(path: str, offset: int = None, limit: int = None, start_line: int = None, end_line: int = None, **kwargs) -> str:
     if not _is_safe_path(path):
         return "Error: Path is outside of allowed workspace."
     abs_path = _get_absolute_path(path)
     if not os.path.exists(abs_path):
         return f"Error: File {path} does not exist."
     if os.path.isdir(abs_path):
-        return f"Error: '{path}' is a directory. Use run_command with 'dir' to list directory contents."
+        return f"Error: '{path}' is a directory. Use run_command with 'dir' or 'ls' to list directory contents."
     
     # Handle binary files gracefully
     ext = os.path.splitext(abs_path)[1].lower()
@@ -234,11 +243,26 @@ def read_file(path: str) -> str:
 
     try:
         with open(abs_path, 'r', encoding='utf-8') as f:
-            return f.read()
+            content = f.read()
+        if offset is not None or limit is not None or start_line is not None or end_line is not None:
+            lines = content.splitlines(keepends=True)
+            s_idx = 0
+            if start_line is not None:
+                s_idx = max(0, int(start_line) - 1)
+            elif offset is not None:
+                s_idx = max(0, int(offset))
+            if end_line is not None:
+                e_idx = min(len(lines), int(end_line))
+            elif limit is not None:
+                e_idx = min(len(lines), s_idx + int(limit))
+            else:
+                e_idx = len(lines)
+            return "".join(lines[s_idx:e_idx])
+        return content
     except Exception as e:
         return f"Error reading file: {str(e)}"
 
-def write_file(path: str, content: str) -> str:
+def write_file(path: str, content: str, **kwargs) -> str:
     if not _is_safe_path(path):
         return "Error: Path is outside of allowed workspace."
     abs_path = _get_absolute_path(path)
@@ -250,7 +274,7 @@ def write_file(path: str, content: str) -> str:
     except Exception as e:
         return f"Error writing file: {str(e)}"
 
-def edit_file(path: str, old_content: str, new_content: str) -> str:
+def edit_file(path: str, old_content: str, new_content: str, **kwargs) -> str:
     if not _is_safe_path(path):
         return "Error: Path is outside of allowed workspace."
     abs_path = _get_absolute_path(path)
@@ -260,7 +284,12 @@ def edit_file(path: str, old_content: str, new_content: str) -> str:
         with open(abs_path, 'r', encoding='utf-8') as f:
             file_data = f.read()
         if old_content not in file_data:
-            return "Error: The exact search content (old_content) was not found in the file."
+            preview = file_data if len(file_data) <= 2500 else (file_data[:1250] + "\n... [SNIP] ...\n" + file_data[-1250:])
+            return (
+                f"Error: The exact search content (old_content) was not found in '{path}'. "
+                f"Use 'write_file' to overwrite the file or copy an exact block from the current file content below:\n\n"
+                f"--- CURRENT CONTENT OF {path} ---\n{preview}"
+            )
         if file_data.count(old_content) > 1:
             return "Error: Multiple occurrences of old_content found. Provide more surrounding context lines."
         updated = file_data.replace(old_content, new_content)
@@ -276,9 +305,26 @@ def run_command(command: str = "", **kwargs) -> str:
     if not command:
         return "Error: No command provided to run."
     try:
+        ws_dir = get_workspace_dir()
+        # Normalize redundant 'workspace/' prefix in commands if 'workspace/' subdir does not exist
+        if ("workspace/" in command or "/workspace/" in command) and not os.path.exists(os.path.join(ws_dir, "workspace")):
+            command = command.replace("/workspace/", "").replace("workspace/", "")
+
+        env = os.environ.copy()
+        candidate_wc = [
+            os.path.abspath(os.path.join(os.path.dirname(__file__), "world_c")),
+            os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "world_c")),
+            r"C:\Users\ninic\.gemini\antigravity\scratch\world_c",
+        ]
+        for cd in candidate_wc:
+            if os.path.exists(cd) and os.path.exists(os.path.join(cd, "colony_lib")):
+                env["PYTHONPATH"] = cd + os.pathsep + env.get("PYTHONPATH", "")
+                break
+
         # On POSIX (Linux), use start_new_session=True so child processes can be killed as a group
         popen_kwargs = {
-            "cwd": get_workspace_dir(),
+            "cwd": ws_dir,
+            "env": env,
             "stdout": subprocess.PIPE,
             "stderr": subprocess.PIPE,
             "text": True
@@ -292,6 +338,9 @@ def run_command(command: str = "", **kwargs) -> str:
             output = stdout or ""
             if stderr:
                 output += f"\nSTDERR:\n{stderr}"
+                if "No such file or directory" in stderr and "can't open file" in stderr:
+                    existing_files = [f for f in os.listdir(ws_dir) if not f.startswith(".")][:15]
+                    output += f"\n[Hint: Your current working directory is already your workspace ({ws_dir}). Existing files here: {existing_files}. Use 'write_file' to create the script first if it does not exist, or call 'query_epistemic_graph' / 'read_agent_inbox' to inspect Agora nodes.]"
             return output if output else "Command executed silently."
         except subprocess.TimeoutExpired:
             if sys.platform == "win32":

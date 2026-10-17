@@ -194,7 +194,7 @@ def extract_fallback_tool_call(content: str, tools: list = None) -> dict:
             if args:
                 # Whitelist arguments to prevent multi-line code assignments (e.g. n=4, r=0.5) from being treated as tool kwargs
                 VALID_PARAMS = {
-                    "read_file": {"path"},
+                    "read_file": {"path", "offset", "limit", "start_line", "end_line"},
                     "write_file": {"path", "content"},
                     "edit_file": {"path", "old_content", "new_content"},
                     "run_command": {"command"},
@@ -229,16 +229,7 @@ def extract_fallback_tool_call(content: str, tools: list = None) -> dict:
 
 def resolve_agent_model(instance_name: str) -> str:
     """Resolves the authentic model endpoint for a given instance."""
-    # 1. Check instance-level .env override
-    if instance_name:
-        instance_dotenv = os.path.abspath(os.path.join(os.path.dirname(__file__), "instances", instance_name, ".env"))
-        if os.path.exists(instance_dotenv):
-            load_dotenv(dotenv_path=instance_dotenv, override=True)
-            custom_model = os.getenv("AGENT_MODEL")
-            if custom_model:
-                return custom_model
-
-    # 2. Check centralized model_routing.json mapping
+    # 1. Check centralized model_routing.json mapping FIRST
     if instance_name:
         routing_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "config", "model_routing.json"))
         if os.path.exists(routing_path):
@@ -249,6 +240,15 @@ def resolve_agent_model(instance_name: str) -> str:
                         return routing[instance_name]
             except Exception as e:
                 print(f"[Model Resolver] Warning: Failed to load model routing ({e})")
+
+    # 2. Check instance-level .env override
+    if instance_name:
+        instance_dotenv = os.path.abspath(os.path.join(os.path.dirname(__file__), "instances", instance_name, ".env"))
+        if os.path.exists(instance_dotenv):
+            load_dotenv(dotenv_path=instance_dotenv, override=True)
+            custom_model = os.getenv("AGENT_MODEL")
+            if custom_model:
+                return custom_model
 
     # 3. Global fallback environment variable
     return os.getenv("DEFAULT_FALLBACK_MODEL", "openrouter/google/gemini-2.5-flash")
@@ -267,12 +267,13 @@ def get_model_context_limits(agent_model: str) -> tuple[int, int]:
     # Tencent HY3 has 256k context and outputs internal chain-of-thought tokens, needing generous completion headroom
     if any(k in slug for k in [
         "tencent", "hy3", "kimi", "deepseek", "minimax", "claude", "gemini",
-        "glm", "qwen", "llama-3.3", "llama-4", "mistral", "nemotron", "mimo"
+        "glm", "qwen", "llama-3.3", "llama-4", "mistral", "nemotron", "mimo",
+        "poolside", "laguna"
     ]):
         return 65536, 8192
 
     # Default / smaller open-weight models (e.g. 8B models, Gemma)
-    return 8192, 2048
+    return 16384, 4096
 
 def generate_next_action(system_prompt: str, history: list, tools: list) -> dict:
     global_dotenv = os.path.abspath(os.path.join(os.path.dirname(__file__), "config", ".env"))
@@ -376,6 +377,9 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
             
             # Extract content or reasoning tokens
             content_text = message.content or getattr(message, "reasoning_content", "") or ""
+            for tok in ("<|im_start|>", "<|im_end|>", "<|endoftext|>"):
+                content_text = content_text.replace(tok, "")
+            content_text = content_text.strip()
 
             if message.tool_calls:
                 tool_call = message.tool_calls[0]

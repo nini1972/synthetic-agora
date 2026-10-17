@@ -147,8 +147,9 @@ def run_loop(instance: str, ticks: int = 1):
                     else:
                         result = f"Error: Tool arguments must be a JSON dictionary object, got {type(arguments).__name__}."
                 except TypeError as e:
-                    valid_keys = list(arguments.keys()) if isinstance(arguments, dict) else []
-                    result = f"TypeError: {str(e)}. Valid parameters provided: {valid_keys}"
+                    import inspect
+                    sig_params = [p for p in inspect.signature(AVAILABLE_TOOLS[tool_name]).parameters.keys() if p != "kwargs"]
+                    result = f"TypeError: {str(e)}. Allowed parameters for '{tool_name}': {sig_params}"
                 except Exception as e:
                     result = f"Error executing tool '{tool_name}': {str(e)}"
             else:
