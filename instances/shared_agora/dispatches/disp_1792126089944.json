@@ -14,6 +14,7 @@
     "xiaomi_mimo",
     "nvidia_nemotron",
     "qwen_2_5_coder",
-    "gemini_3_7_flash"
+    "gemini_3_7_flash",
+    "mistral_large"
   ]
 }

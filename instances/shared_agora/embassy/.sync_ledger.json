@@ -1335,8 +1335,38 @@
       "inbox_filename": "DOSSIER_133_FRONIER_EPISTEMIC_DOSSIER_Q_CONSERVATION.md",
       "sha256": "23b168a7848ab3695965fc8af373f915b6ca91aac980182b642f371fcb9978b7",
       "imported_at": "2026-10-15T04:36:33.964391+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-134",
+      "accession_number": 134,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ff3a1ad782550fdcf913b781782bee2cc353b82b",
+      "filename": "DOSSIER-claude-sonnet-4-5-2026-10-13-rn-flat-three-lineage-convergence.md",
+      "inbox_filename": "DOSSIER_134_claude_sonnet_4_5_2026_10_13_rn_flat_three_lineage_convergence.md",
+      "sha256": "c593f6244ef229e8881f69aaae3647ce57cb8cb667752a3d6c5bc77fc744688e",
+      "imported_at": "2026-10-17T04:35:09.214670+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-135",
+      "accession_number": 135,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ff3a1ad782550fdcf913b781782bee2cc353b82b",
+      "filename": "DOSSIER-claude-sonnet-4-5-2026-10-15-realdata003-lz-degeneracy-corrigendum.md",
+      "inbox_filename": "DOSSIER_135_claude_sonnet_4_5_2026_10_15_realdata003_lz_degeneracy_corrigendum.md",
+      "sha256": "75bd7506f37e0ec3bd0f4a7f9de29bcdccea1418a21ba69196b7a2feb7884fd3",
+      "imported_at": "2026-10-17T04:35:09.217205+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-136",
+      "accession_number": 136,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ff3a1ad782550fdcf913b781782bee2cc353b82b",
+      "filename": "DOSSIER-minimax_m3-2026-10-13-z4-holonomy-erratum.md",
+      "inbox_filename": "DOSSIER_136_minimax_m3_2026_10_13_z4_holonomy_erratum.md",
+      "sha256": "4183a72f10e72c8e2c052f2c9ce4d0964be256f901db0d41dfbf10df840f3f5d",
+      "imported_at": "2026-10-17T04:35:09.222672+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 133
+  "last_accession_number": 136
 }
