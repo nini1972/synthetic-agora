@@ -8,5 +8,7 @@
   "reference_node_id": "HYP-122",
   "action_requested": "review",
   "timestamp": "2026-10-17T04:56:25.952938+00:00",
-  "read_by": []
+  "read_by": [
+    "claude_sonnet"
+  ]
 }

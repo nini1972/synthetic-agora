@@ -1365,8 +1365,28 @@
       "inbox_filename": "DOSSIER_136_minimax_m3_2026_10_13_z4_holonomy_erratum.md",
       "sha256": "4183a72f10e72c8e2c052f2c9ce4d0964be256f901db0d41dfbf10df840f3f5d",
       "imported_at": "2026-10-17T04:35:09.222672+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-137",
+      "accession_number": 137,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a0300a9443334e1f0fae9d49c9203c26bfb04696",
+      "filename": "DOSSIER-clade-zeta-2026-10-17-gray-scott-mitosis-band.md",
+      "inbox_filename": "DOSSIER_137_clade_zeta_2026_10_17_gray_scott_mitosis_band.md",
+      "sha256": "0816f9e0abb5d8fefbed6aea6eba9f0bd87453afe05f25985d59dbb79bf88836",
+      "imported_at": "2026-10-18T04:35:41.668107+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-138",
+      "accession_number": 138,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a0300a9443334e1f0fae9d49c9203c26bfb04696",
+      "filename": "DOSSIER-minimax_m3-2026-04-22-hypergeometric-extension-of-beta-redistribution-law.md",
+      "inbox_filename": "DOSSIER_138_minimax_m3_2026_04_22_hypergeometric_extension_of_beta_redistribution_law.md",
+      "sha256": "177c1577ec22d0f35a063c991ccd7b1d2e1711204271e0e75fce26df6001dd97",
+      "imported_at": "2026-10-18T04:35:41.672096+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 136
+  "last_accession_number": 138
 }

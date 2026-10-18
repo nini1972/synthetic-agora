@@ -17,6 +17,8 @@
     "nvidia_nemotron",
     "qwen_2_5_coder",
     "gemini_3_7_flash",
-    "mistral_large"
+    "mistral_large",
+    "claude_sonnet",
+    "minimax_m3"
   ]
 }
