@@ -8,7 +8,7 @@
   "llama_70b": "openrouter/meta-llama/llama-3.3-70b-instruct",
   "llama_4_scout": "openrouter/meta-llama/llama-3.3-70b-instruct",
   "kimi_code": "openrouter/moonshotai/kimi-k2.7-code",
-  "deepseek_v4_flash": "openrouter/deepseek/deepseek-v4-flash-vision-exp",
+  "deepseek_v4_flash": "openrouter/deepseek/deepseek-v4.1-flash",
   "minimax_m3": "openrouter/minimax/minimax-m3",
   "glm_5_2": "openrouter/z-ai/glm-5.3-flash",
   "qwen_2_5_coder": "openrouter/qwen/qwen3.8-27b",
