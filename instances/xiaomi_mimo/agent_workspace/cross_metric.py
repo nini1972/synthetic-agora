@@ -54,17 +54,22 @@ def stat_complexity(s):
         for u,v in zip(a,b):
             if u>0: s+=u*math.log2(u/max(v,1e-12))
         return s
-    Js=0.5*kl(P,U)+0.5*kl(U,P)          # in bits, max 1
-    Q=Js*(1+ (-(p0*math.log2(p0+1e-12)+p1*math.log2(p1+1e-12))))  # Q = J * (1-P)
+    m=[0.5*(P[i]+U[i]) for i in range(2)]
+    Js=0.5*kl(P,m)+0.5*kl(U,m)          # proper JSD, bounded in [0,1] bit
+    H=-(p0*math.log2(p0+1e-12)+p1*math.log2(p1+1e-12))
+    Q=Js*(1+H)  # Q = J * (1+P), bounded by 2 for binary support
     return Q
 
 def katz_fd(s):
     """Katz fractal dimension of the 0/1 profile."""
     x=np.array([1 if ch=='1' else 0 for ch in s],dtype=float)
-    dl=np.sum(np.abs(np.diff(x))) or 1e-12   # total length
+    dl=float(np.sum(np.abs(np.diff(x))))   # total polyline length
     n=len(x)
-    dia=np.abs(x-x[0]).max() or 1e-12
-    return math.log10(n)/math.log10(dl/dia) if dl/dia>0 else float('nan')
+    dia=float(np.abs(x-x[0]).max())        # diameter of profile
+    if dl<=0 or dia<=0: return float('nan')  # constant string: FD undefined
+    ratio=dl/dia
+    if ratio<=1 or ratio==1: return float('nan')
+    return math.log10(n)/math.log10(ratio)
 
 def lz_norm(s): return lz76_B(s)/len(s)
 
@@ -105,12 +110,12 @@ for n in [10,50,100,300,1000,3000]:
     for p in (0.5,0.9):
         v=[lz76_B(bern(p,n))/n for _ in range(60)]
         H=-(p*math.log2(p)+(1-p)*math.log2(1-p))
-        r[f'm{p}']=float(np.mean(v))
-        r[f'H/logn_{p}']=H/math.log(n) if n>1 else float('nan')
+        r[f'm_{p}']=float(np.mean(v))
+        r[f'Hlogn_{p}']=H/math.log(n) if n>1 else float('nan')
     r['run_heur_0.5']=2*0.5*0.5; r['run_heur_0.9']=2*0.9*0.1
     sweep.append(r)
-    print(f"  n={n:5d} LZ(E) p=.5 {r['m_0.5']:.4f} (heur 0.500, H/logn {r['H/logn_0.5']:.4f}) | "
-          f"p=.9 {r['m_0.9']:.4f} (heur 0.180, H/logn {r['H/logn_0.9']:.4f})")
+    print(f"  n={n:5d} LZ(E) p=.5 {r['m_0.5']:.4f} (heur 0.500, H/logn {r['Hlogn_0.5']:.4f}) | "
+          f"p=.9 {r['m_0.9']:.4f} (heur 0.180, H/logn {r['Hlogn_0.9']:.4f})")
 
 # ---------- figure ----------
 fig,ax=plt.subplots(1,3,figsize=(16,4.6))
@@ -124,12 +129,12 @@ ax[1].plot(ns,[r['m_0.5'] for r in sweep],'o-',label='LZ E[c/n], p=.5')
 ax[1].plot(ns,[r['m_0.9'] for r in sweep],'s-',label='LZ E[c/n], p=.9')
 ax[1].axhline(0.5,ls='--',c='gray',label='run-heur 2p(1-p), p=.5')
 ax[1].axhline(0.18,ls=':',c='gray',label='run-heur, p=.9')
-ax[1].plot(ns,[r['H/logn_0.5'] for r in sweep],'^-',mfc='none',c='C0',label='H/log n, p=.5')
+ax[1].plot(ns,[r['Hlogn_0.5'] for r in sweep],'^-',mfc='none',c='C0',label='H/log n, p=.5')
 ax[1].set_xscale('log'); ax[1].set_xlabel('window n'); ax[1].set_ylabel('normalized LZ')
 ax[1].set_title('B. 2p(1-p) is NOT an asymptote'); ax[1].legend(fontsize=7)
 
 cols={'LZ76':'#4C72B0','PermEnt':'#DD8452','SampEn':'#55A868','Q(LMP)':'#C44E52','KatzFD':'#8172B3'}
-xs=list(range(len(sep)))
+xs=np.arange(len(sep))
 ax[2].bar(xs-0.18,[sep[k]['d'] for k in sep],0.36,label="Cohen's d",color=[cols[k] for k in sep])
 ax[2].bar(xs+0.18,[sep[k]['defined_frac'] for k in sep],0.36,label='defined frac',color=[cols[k] for k in sep],alpha=0.45)
 ax[2].set_xticks(xs); ax[2].set_xticklabels(list(sep),rotation=30); ax[2].set_title('C. cross-metric, n=10'); ax[2].legend(fontsize=8)

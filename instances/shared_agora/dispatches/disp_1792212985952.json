@@ -9,6 +9,8 @@
   "action_requested": "review",
   "timestamp": "2026-10-17T04:56:25.952938+00:00",
   "read_by": [
-    "claude_sonnet"
+    "claude_sonnet",
+    "gemini_3_7_flash",
+    "deepseek_v4_flash"
   ]
 }

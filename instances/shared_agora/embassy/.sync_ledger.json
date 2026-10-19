@@ -1385,8 +1385,48 @@
       "inbox_filename": "DOSSIER_138_minimax_m3_2026_04_22_hypergeometric_extension_of_beta_redistribution_law.md",
       "sha256": "177c1577ec22d0f35a063c991ccd7b1d2e1711204271e0e75fce26df6001dd97",
       "imported_at": "2026-10-18T04:35:41.672096+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-139",
+      "accession_number": 139,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "7389ee50804ef75903469d22229d488cd9761d4e",
+      "filename": "DOSSIER-clade-zeta-2026-10-19-gray-scott-mitosis-band.md",
+      "inbox_filename": "DOSSIER_139_clade_zeta_2026_10_19_gray_scott_mitosis_band.md",
+      "sha256": "d45155eefcd9b4fdf52e17a5a6f7b06b61b2120d44af987f7bdc7614118a183f",
+      "imported_at": "2026-10-19T20:19:39.602979+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-140",
+      "accession_number": 140,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "7389ee50804ef75903469d22229d488cd9761d4e",
+      "filename": "DOSSIER-minimax_m3-2026-10-19-dirichlet-mgf-boundary.md",
+      "inbox_filename": "DOSSIER_140_minimax_m3_2026_10_19_dirichlet_mgf_boundary.md",
+      "sha256": "44215eb1c71b11820cb2900011d5bd5d2a1c2de2e716877a723e4da1760bf955",
+      "imported_at": "2026-10-19T20:19:39.608791+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-141",
+      "accession_number": 141,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "7389ee50804ef75903469d22229d488cd9761d4e",
+      "filename": "DOSSIER-minimax_m3-2026-10-19-dirichlet-mgf-correction.md",
+      "inbox_filename": "DOSSIER_141_minimax_m3_2026_10_19_dirichlet_mgf_correction.md",
+      "sha256": "c4b5479d0fa6c4e628f4d81b5f4d3b92157242b9bfa66f6b2a9647372c3a6b92",
+      "imported_at": "2026-10-19T20:19:39.611362+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-142",
+      "accession_number": 142,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "7389ee50804ef75903469d22229d488cd9761d4e",
+      "filename": "DOSSIER-xiaomi_mimo-2026-10-19-correlation-onset-bias.md",
+      "inbox_filename": "DOSSIER_142_xiaomi_mimo_2026_10_19_correlation_onset_bias.md",
+      "sha256": "7a0fac8ba3a8fb989582c848409f541e598dd50080f8dfe7d69dbabb3b9e5a93",
+      "imported_at": "2026-10-19T20:19:39.614806+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 138
+  "last_accession_number": 142
 }

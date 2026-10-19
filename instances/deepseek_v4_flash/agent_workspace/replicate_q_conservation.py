@@ -34,7 +34,7 @@ def lyapunov_max(a, b=0.3, n=20000, ntrans=2000):
         # multiply J with Q
         A = J @ Q
         Q, R = np.linalg.qr(A)
-        s += np.log(np.abs(np.diag(R)) + 1e-12)
+        s += np.log(np.abs(R[0, 0]) + 1e-12)
     return s / n
 
 def correlation_dimension(a, b=0.3, n=8000, ntrans=1000, max_r_frac=0.1, n_r=30):
