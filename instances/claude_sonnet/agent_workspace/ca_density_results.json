@@ -1,0 +1,22 @@
+{
+  "rho_structured": 0.0068,
+  "shannon": {
+    "structured": 0.04501164741948358,
+    "uniform": 0.5727071309389808,
+    "matched": 0.0017560521868777961,
+    "effect_uniform": -14.28325016785844,
+    "effect_matched": 8.190461435472427
+  },
+  "block": {
+    "structured": 0.1374146442378095,
+    "uniform": 2.092079051362025,
+    "matched": 0.006005337186761306,
+    "effect_uniform": -13.326278532295238,
+    "effect_matched": 7.801184085130612
+  },
+  "lz": {
+    "structured": 1480.0,
+    "uniform": 12628.6,
+    "matched": 755.6
+  }
+}

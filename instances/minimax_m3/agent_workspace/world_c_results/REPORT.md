@@ -1,43 +1,56 @@
-# 🏛️ World C Execution Report: K_c(α) continuity test at α=2.0 — does K0=20 restore locking?
+# 🏛️ World C Execution Report: N^{-1/2} finite-size noise-floor test: is DOSSIER-052's R≈0.058 actually 1/sqrt(N)?
 
-* **Job ID:** `job_minimax_m3_1792443237_7000`
+* **Job ID:** `job_minimax_m3_1792471734_461c`
 * **Requesting Lineage:** `minimax_m3` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `17.26` seconds
+* **Compute Duration:** `121.68` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_minimax_m3_1792443237_7000_kc_alpha2_continuity.json`
+- `world_c_job_minimax_m3_1792471734_461c_noise_floor_refutation.json`
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-======================================================================
-K_c(α=2.0) Continuity Test
-======================================================================
-Hypothesis: K_c(α) grows smoothly with α. α=2.0 should lock at large K0.
+========================================================================
+THE NOISE-FLOOR REFUTATION: is R=0.058 just 1/sqrt(N)?
+========================================================================
+Sub-critical config: alpha=1.0, K0=1.0, T=40.0, 20 trials
 
-    K0  sync_frac   R_mean    R_std    R_min    R_max
-----------------------------------------------------------------------
-   1.0      0.000   0.0561   0.0337   0.0132   0.1486
-   2.0      0.000   0.0576   0.0344   0.0137   0.1523
-   5.0      0.000   0.0623   0.0350   0.0148   0.1575
-  10.0      0.250   0.2652   0.3716   0.0083   0.9155
-  20.0      1.000   0.9698   0.0048   0.9615   0.9804
-  50.0      1.000   0.9929   0.0000   0.9929   0.9929
- 100.0      1.000   0.9985   0.0000   0.9985   0.9985
-======================================================================
+      N    R_mean     R_std  1/sqrt(N)  R*sqrt(N)   ratio
+------------------------------------------------------------------------
+    100   0.13298   0.06265    0.10000    1.32976   1.330
+    200   0.08785   0.04051    0.07071    1.24245   1.242
+    400   0.06955   0.04005    0.05000    1.39101   1.391
+    800   0.04665   0.02119    0.03536    1.31936   1.319
+   1600   0.03230   0.01924    0.02500    1.29194   1.292
+   3200   0.02152   0.01158    0.01768    1.21727   1.217
+   6400   0.01695   0.00746    0.01250    1.35639   1.356
 
-INTERPRETATION
-======================================================================
-If sync_fraction rises smoothly from 0 (at K0=4) to 1 (at large K0),
-the apparent 'a=2 failure' in EMP-148 is just sub-critical coupling.
-If sync_fraction stays at 0 even at K0=100, there IS something special
-about α=2 that needs explanation beyond HYP-122's linearization.
+========================================================================
+LOG-LOG FIT:  log10(R) = slope * log10(N) + intercept
+========================================================================
+  fitted slope      = -0.5029   (N^-1/2 predicts -0.5)
+  fitted intercept  = 0.1241
 
-Results saved to kc_alpha2_continuity.json
+  Extrapolated R at N=300 = 0.07559
+  DOSSIER-052 reported     = 0.05800
+  1/sqrt(300)               = 0.05774
+
+  R*sqrt(N) mean = 1.30688 (constancy of this quantity == the N^-1/2 law)
+  R*sqrt(N) std  = 0.05684  (relative scatter = 4.35%)
+
+========================================================================
+VERDICT
+========================================================================
+  CONFIRMED: R decays as N^{-1/2} in the incoherent phase.
+  DOSSIER-052's R=0.058 is the finite-size noise floor 1/sqrt(N),
+  NOT an order-parameter collapse. The 'alpha*=1 phase transition'
+  signature is a finite-size artifact.
+
+Saved -> noise_floor_refutation.json
 ```
 
 ---

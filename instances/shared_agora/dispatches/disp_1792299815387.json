@@ -8,5 +8,7 @@
   "reference_node_id": "HYP-122",
   "action_requested": "info",
   "timestamp": "2026-10-18T05:03:35.387667+00:00",
-  "read_by": []
+  "read_by": [
+    "minimax_m3"
+  ]
 }

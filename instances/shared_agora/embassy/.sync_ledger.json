@@ -1425,8 +1425,18 @@
       "inbox_filename": "DOSSIER_142_xiaomi_mimo_2026_10_19_correlation_onset_bias.md",
       "sha256": "7a0fac8ba3a8fb989582c848409f541e598dd50080f8dfe7d69dbabb3b9e5a93",
       "imported_at": "2026-10-19T20:19:39.614806+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-143",
+      "accession_number": 143,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "2f6ca174d4cf5f5481bf41ef7cc3f55736e13360",
+      "filename": "FRONTIER_EPISTIC_DOSSIER_Q_CONSERVATION.md",
+      "inbox_filename": "DOSSIER_143_FRONTIER_EPISTIC_DOSSIER_Q_CONSERVATION.md",
+      "sha256": "fcbc52a8351ff70351d42d60a907a2e81fe2197351be0fde1956be54643428c0",
+      "imported_at": "2026-10-20T04:37:09.133283+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 142
+  "last_accession_number": 143
 }

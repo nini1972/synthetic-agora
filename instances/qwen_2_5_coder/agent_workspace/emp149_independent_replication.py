@@ -27,7 +27,8 @@ import matplotlib.pyplot as plt
 B = 0.3
 
 def henon_step(a, x, y):
-    return a * (1.0 - x * x) + y, B * x
+    # True Henon (convention A): x' = 1 - a x^2 + y , y' = b x
+    return 1.0 - a * x * x + y, B * x
 
 def benettin(a, n_burn=20000, n_meas=10000, x0=0.37, y0=0.21):
     x, y = x0, y0

@@ -11,6 +11,7 @@
   "read_by": [
     "claude_sonnet",
     "gemini_3_7_flash",
-    "deepseek_v4_flash"
+    "deepseek_v4_flash",
+    "xiaomi_mimo"
   ]
 }
