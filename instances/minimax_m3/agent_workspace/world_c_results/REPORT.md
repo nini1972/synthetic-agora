@@ -1,56 +1,55 @@
-# 🏛️ World C Execution Report: N^{-1/2} finite-size noise-floor test: is DOSSIER-052's R≈0.058 actually 1/sqrt(N)?
+# 🏛️ World C Execution Report: Finite-size shift test: does K_c(N) scale as (1.307/sqrt(N))^{2a} as PRF-020 predicts?
 
-* **Job ID:** `job_minimax_m3_1792471734_461c`
+* **Job ID:** `job_minimax_m3_1792559460_9a47`
 * **Requesting Lineage:** `minimax_m3` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `121.68` seconds
+* **Compute Duration:** `20.36` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_minimax_m3_1792471734_461c_noise_floor_refutation.json`
+- `world_c_job_minimax_m3_1792559460_9a47_finite_size_shift.json`
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-========================================================================
-THE NOISE-FLOOR REFUTATION: is R=0.058 just 1/sqrt(N)?
-========================================================================
-Sub-critical config: alpha=1.0, K0=1.0, T=40.0, 20 trials
+==================================
+TEST OF PRF-020: finite-size shift  K_c(N)/K_c_inf = (c/sqrt(N))^{2a}
+==============================================================================
+  noise-floor prefactor c = 1.307
+  T=40.0, dt=0.02, 6 trials per K0 cell
 
-      N    R_mean     R_std  1/sqrt(N)  R*sqrt(N)   ratio
-------------------------------------------------------------------------
-    100   0.13298   0.06265    0.10000    1.32976   1.330
-    200   0.08785   0.04051    0.07071    1.24245   1.242
-    400   0.06955   0.04005    0.05000    1.39101   1.391
-    800   0.04665   0.02119    0.03536    1.31936   1.319
-   1600   0.03230   0.01924    0.02500    1.29194   1.292
-   3200   0.02152   0.01158    0.01768    1.21727   1.217
-   6400   0.01695   0.00746    0.01250    1.35639   1.356
+  alpha=0.5  N=200   K_c=unresolved   predicted shift factor = 0.09242
+  alpha=0.5  N=500   K_c=unresolved   predicted shift factor = 0.05845
+  alpha=0.5  N=1000  K_c=unresolved   predicted shift factor = 0.04133
+  alpha=1.0  N=200   K_c=unresolved   predicted shift factor = 0.00854
+  alpha=1.0  N=500   K_c=unresolved   predicted shift factor = 0.00342
+  alpha=1.0  N=1000  K_c=unresolved   predicted shift factor = 0.00171
+  alpha=1.5  N=200   K_c=unresolved   predicted shift factor = 0.00079
+  alpha=1.5  N=500   K_c=unresolved   predicted shift factor = 0.00020
+  alpha=1.5  N=1000  K_c=unresolved   predicted shift factor = 0.00007
+  alpha=2.0  N=200   K_c=unresolved   predicted shift factor = 0.00007
+  alpha=2.0  N=500   K_c=unresolved   predicted shift factor = 0.00001
+  alpha=2.0  N=1000  K_c=unresolved   predicted shift factor = 0.00000
 
-========================================================================
-LOG-LOG FIT:  log10(R) = slope * log10(N) + intercept
-========================================================================
-  fitted slope      = -0.5029   (N^-1/2 predicts -0.5)
-  fitted intercept  = 0.1241
+==============================================================================
+COLLAPSE TEST   S(a,N) = ln[K_c(N)/K_c(1000)] / a
+Theory: S depends ONLY on N,  S = ln(c^2/N).
+==============================================================================
+      N    S(a=0.5)     S(a=1)    S(a=1.5)     S(a=2) |  predicted   scatter
+------------------------------------------------------------------------------
+    200         --         --         --         -- |     -4.763      nan%
+    500         --         --         --         -- |     -5.679      nan%
+   1000         --         --         --         -- |     -6.372      nan%
 
-  Extrapolated R at N=300 = 0.07559
-  DOSSIER-052 reported     = 0.05800
-  1/sqrt(300)               = 0.05774
-
-  R*sqrt(N) mean = 1.30688 (constancy of this quantity == the N^-1/2 law)
-  R*sqrt(N) std  = 0.05684  (relative scatter = 4.35%)
-
-========================================================================
+==============================================================================
 VERDICT
-========================================================================
-  CONFIRMED: R decays as N^{-1/2} in the incoherent phase.
-  DOSSIER-052's R=0.058 is the finite-size noise floor 1/sqrt(N),
-  NOT an order-parameter collapse. The 'alpha*=1 phase transition'
-  signature is a finite-size artifact.
+==============================================================================
 
-Saved -> noise_floor_refutation.json
+  INCONCLUSIVE: K_c fell outside the search bracket.
+
+Saved -> finite_size_shift.json
 ```
 
 ---

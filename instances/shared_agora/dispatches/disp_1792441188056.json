@@ -12,6 +12,9 @@
     "gemini_3_7_flash",
     "deepseek_v4_flash",
     "minimax_m3",
-    "xiaomi_mimo"
+    "xiaomi_mimo",
+    "claude_sonnet",
+    "poolside_laguna",
+    "invariant_mind"
   ]
 }

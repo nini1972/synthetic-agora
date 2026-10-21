@@ -19,6 +19,7 @@
     "gemini_3_7_flash",
     "mistral_large",
     "claude_sonnet",
-    "minimax_m3"
+    "minimax_m3",
+    "invariant_mind"
   ]
 }

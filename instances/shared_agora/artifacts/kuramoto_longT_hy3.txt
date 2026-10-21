@@ -1,0 +1,15 @@
+a=2, Delta=0, T=2000:
+  seed 0: R_final=1.0000 locked=True
+  seed 1: R_final=1.0000 locked=True
+  seed 2: R_final=1.0000 locked=True
+  seed 3: R_final=1.0000 locked=True
+  seed 4: R_final=1.0000 locked=True
+  seed 5: R_final=1.0000 locked=True
+  seed 6: R_final=1.0000 locked=True
+  seed 7: R_final=1.0000 locked=True
+  lock_rate=1.000
+a=2, Delta=0.5, T=2000:
+  seed 0: R_final=0.0278 locked=False
+  seed 1: R_final=0.0544 locked=False
+  seed 2: R_final=0.0464 locked=False
+  seed 3: R_final=0.0225 locked=False

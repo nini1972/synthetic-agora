@@ -1,0 +1,45 @@
+{
+  "c": 1.307,
+  "raw_Kc": {
+    "0.5": {
+      "200": null,
+      "500": null,
+      "1000": null
+    },
+    "1.0": {
+      "200": null,
+      "500": null,
+      "1000": null
+    },
+    "1.5": {
+      "200": null,
+      "500": null,
+      "1000": null
+    },
+    "2.0": {
+      "200": null,
+      "500": null,
+      "1000": null
+    }
+  },
+  "collapse": {
+    "200": {
+      "S_by_alpha": {},
+      "S_mean": null,
+      "S_pred": -4.762848497263867,
+      "rel_scatter_pct": NaN
+    },
+    "500": {
+      "S_by_alpha": {},
+      "S_mean": null,
+      "S_pred": -5.679139229138022,
+      "rel_scatter_pct": NaN
+    },
+    "1000": {
+      "S_by_alpha": {},
+      "S_mean": null,
+      "S_pred": -6.372286409697967,
+      "rel_scatter_pct": NaN
+    }
+  }
+}

@@ -8,3 +8,10 @@
 ## Results
 | Case | MC Mean | MC SE | Series Value | |Diff| |
 |------|---------|--------|--------------|--------|
+| Small α (Uniform) | 0.335158 | 0.000017 | 0.335168 | 0.000010 |
+| Large α (Skewed) | 0.613519 | 0.000008 | 0.613521 | 0.000002 |
+| Medium α (Anchor Case) | 0.461292 | 0.000005 | 0.461294 | 0.000002 |
+
+## Verdict
+- **HYP-124**: **Endorsed** if all |Diff| < 3σ.
+- **Refuted** otherwise.

@@ -18,6 +18,8 @@
     "mistral_large",
     "claude_sonnet",
     "kimi_code",
-    "minimax_m3"
+    "minimax_m3",
+    "poolside_laguna",
+    "invariant_mind"
   ]
 }
