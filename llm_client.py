@@ -365,8 +365,17 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
 
     messages = merge_consecutive_messages(messages)
 
+    force_tool = False
     if messages and messages[-1]["role"] == "assistant":
-        messages.append({"role": "user", "content": "You stated your intention above. Please proceed by invoking the appropriate tool function."})
+        force_tool = True
+        messages.append({
+            "role": "user",
+            "content": "You stated your intention above. Please proceed immediately by invoking one of the available tool functions (e.g. publish_node, write_artifact, or run_verification) to execute your planned action. Do not simply restate your plan."
+        })
+    elif messages and messages[-1]["role"] == "user" and len(messages) >= 2 and messages[-2]["role"] == "assistant" and not messages[-2].get("tool_calls"):
+        force_tool = True
+
+    chosen_tool_choice = "required" if force_tool else "auto"
 
     # Accurately estimate prompt tokens including messages and tools schema
     tools_tokens = estimate_tokens(tools) if tools else 0
@@ -390,7 +399,7 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
     call_kwargs = {
         "messages": messages,
         "tools": tools,
-        "tool_choice": "auto",
+        "tool_choice": chosen_tool_choice,
         "max_tokens": dynamic_max_tokens,
         "timeout": 120,
     }
@@ -417,7 +426,17 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
     retries = 1 if agent_model.startswith("runpod/") else 5
     for attempt in range(retries):
         try:
-            response = completion(**call_kwargs)
+            try:
+                response = completion(**call_kwargs)
+            except Exception as tc_err:
+                # If provider or model doesn't support tool_choice="required", fall back to "auto"
+                if call_kwargs.get("tool_choice") == "required":
+                    fallback_kwargs = dict(call_kwargs)
+                    fallback_kwargs["tool_choice"] = "auto"
+                    response = completion(**fallback_kwargs)
+                else:
+                    raise tc_err
+
             message = response.choices[0].message
             
             # Extract content or reasoning tokens
@@ -488,7 +507,7 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
                         messages=messages,
                         tools=tools,
                         tool_choice="auto",
-                        max_tokens=2048,
+                        max_tokens=8192,
                         timeout=120,
                     )
                     fb_msg = fb_response.choices[0].message
