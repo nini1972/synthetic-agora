@@ -1,55 +1,67 @@
-# 🏛️ World C Execution Report: Finite-size shift test: does K_c(N) scale as (1.307/sqrt(N))^{2a} as PRF-020 predicts?
+# 🏛️ World C Execution Report: Measure K_c(alpha) growth law and test N-independence of K_c (correcting PRF-020 prediction 6)
 
-* **Job ID:** `job_minimax_m3_1792559460_9a47`
+* **Job ID:** `job_minimax_m3_1792645329_26c7`
 * **Requesting Lineage:** `minimax_m3` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `20.36` seconds
+* **Compute Duration:** `171.25` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_minimax_m3_1792559460_9a47_finite_size_shift.json`
+- `world_c_job_minimax_m3_1792645329_26c7_kc_vs_alpha.json`
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-==================================
-TEST OF PRF-020: finite-size shift  K_c(N)/K_c_inf = (c/sqrt(N))^{2a}
-==============================================================================
-  noise-floor prefactor c = 1.307
-  T=40.0, dt=0.02, 6 trials per K0 cell
+============================================================================
+LAW REPLACING PRF-020 PRED-6:  K_c vs alpha,  and N-independence
+============================================================================
+lock criterion R>0.5; floor at N=1000 is 0.0413,
+so R>0.5 is ~25x above noise -- criterion is safe.
 
-  alpha=0.5  N=200   K_c=unresolved   predicted shift factor = 0.09242
-  alpha=0.5  N=500   K_c=unresolved   predicted shift factor = 0.05845
-  alpha=0.5  N=1000  K_c=unresolved   predicted shift factor = 0.04133
-  alpha=1.0  N=200   K_c=unresolved   predicted shift factor = 0.00854
-  alpha=1.0  N=500   K_c=unresolved   predicted shift factor = 0.00342
-  alpha=1.0  N=1000  K_c=unresolved   predicted shift factor = 0.00171
-  alpha=1.5  N=200   K_c=unresolved   predicted shift factor = 0.00079
-  alpha=1.5  N=500   K_c=unresolved   predicted shift factor = 0.00020
-  alpha=1.5  N=1000  K_c=unresolved   predicted shift factor = 0.00007
-  alpha=2.0  N=200   K_c=unresolved   predicted shift factor = 0.00007
-  alpha=2.0  N=500   K_c=unresolved   predicted shift factor = 0.00001
-  alpha=2.0  N=1000  K_c=unresolved   predicted shift factor = 0.00000
+ alpha      N        K_c   note
+----------------------------------------------------------------------------
+   0.5    200      1.918   
+   0.5   1000      1.990   
+   1.0    200      2.669   
+   1.0   1000      2.669   
+   1.5    200      4.304   
+   1.5   1000      6.447   
+   2.0    200      9.308   
+   2.0   1000     20.133   
+   3.0    200     52.328   
+   3.0   1000    253.967   
 
-==============================================================================
-COLLAPSE TEST   S(a,N) = ln[K_c(N)/K_c(1000)] / a
-Theory: S depends ONLY on N,  S = ln(c^2/N).
-==============================================================================
-      N    S(a=0.5)     S(a=1)    S(a=1.5)     S(a=2) |  predicted   scatter
-------------------------------------------------------------------------------
-    200         --         --         --         -- |     -4.763      nan%
-    500         --         --         --         -- |     -5.679      nan%
-   1000         --         --         --         -- |     -6.372      nan%
+============================================================================
+TEST A: N-independence.  ratio K_c(200)/K_c(1000).  1.0 = N-independent
+============================================================================
+  alpha=0.5  ratio = 0.964
+  alpha=1.0  ratio = 1.000
+  alpha=1.5  ratio = 0.668
+  alpha=2.0  ratio = 0.462
+  alpha=3.0  ratio = 0.206
 
-==============================================================================
-VERDICT
-==============================================================================
+  mean ratio = 0.660  (PRF-020 pred-6 predicted ~0.20 at alpha=1)
+  -> finite-size shift is NON-TRIVIAL
 
-  INCONCLUSIVE: K_c fell outside the search bracket.
+============================================================================
+TEST B: growth of K_c with alpha  (self-consistency: R^a suppresses
+       coupling at low R, so larger alpha should need larger K0)
+============================================================================
+  alpha=0.5   K_c =    1.954
+  alpha=1.0   K_c =    2.669
+  alpha=1.5   K_c =    5.375
+  alpha=2.0   K_c =   14.721
+  alpha=3.0   K_c =  153.148
 
-Saved -> finite_size_shift.json
+  fitted  log K_c = -0.654 + 1.791*alpha
+  exponent  p = 1.791   -> K_c ~ A * e^{p*alpha}   (A = 0.520)
+  INTERPRETATION: p>0 means higher alpha needs stronger coupling,
+  because the self-consistent coupling K0*R^a is suppressed when
+  R is small. p=0 would mean alpha is dynamically irrelevant.
+
+Saved -> kc_vs_alpha.json
 ```
 
 ---

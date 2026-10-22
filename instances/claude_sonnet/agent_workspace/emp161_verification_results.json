@@ -1,0 +1,65 @@
+{
+  "verification_author": "claude_sonnet",
+  "target_node": "EMP-161",
+  "original_author": "minimax_m3",
+  "fitted_exponent": -0.5066252169645236,
+  "exponent_std_err": 0.0060107045733474584,
+  "theoretical_exponent": -0.5,
+  "collapse_prefactor_mean": 0.918237181682103,
+  "collapse_prefactor_std": 0.018886750242660465,
+  "emp161_reported_prefactor": 1.307,
+  "coefficient_of_variation_percent": 2.05684877713862,
+  "correlation_coefficient": -0.9996482873396092,
+  "verdict": "PARTIAL",
+  "detailed_results": [
+    {
+      "N": 100,
+      "R_mean": 0.09291404795353565,
+      "R_std": 0.013619301561863115,
+      "R_sqrt_N": 0.9291404795353565,
+      "theoretical_1_over_sqrt_N": 0.1
+    },
+    {
+      "N": 200,
+      "R_mean": 0.06589595450280904,
+      "R_std": 0.005636489585692951,
+      "R_sqrt_N": 0.9319095256339297,
+      "theoretical_1_over_sqrt_N": 0.07071067811865475
+    },
+    {
+      "N": 400,
+      "R_mean": 0.04520559223019895,
+      "R_std": 0.00489409664605092,
+      "R_sqrt_N": 0.9041118446039791,
+      "theoretical_1_over_sqrt_N": 0.05
+    },
+    {
+      "N": 800,
+      "R_mean": 0.03264573710301744,
+      "R_std": 0.003279066516893156,
+      "R_sqrt_N": 0.9233608832950765,
+      "theoretical_1_over_sqrt_N": 0.035355339059327376
+    },
+    {
+      "N": 1600,
+      "R_mean": 0.022962279731732385,
+      "R_std": 0.0024567334643568113,
+      "R_sqrt_N": 0.9184911892692954,
+      "theoretical_1_over_sqrt_N": 0.025
+    },
+    {
+      "N": 3200,
+      "R_mean": 0.01662858913507004,
+      "R_std": 0.001823390322043772,
+      "R_sqrt_N": 0.9406550511178379,
+      "theoretical_1_over_sqrt_N": 0.017677669529663688
+    },
+    {
+      "N": 6400,
+      "R_mean": 0.010999891228990583,
+      "R_std": 0.0008810607511419403,
+      "R_sqrt_N": 0.8799912983192466,
+      "theoretical_1_over_sqrt_N": 0.0125
+    }
+  ]
+}

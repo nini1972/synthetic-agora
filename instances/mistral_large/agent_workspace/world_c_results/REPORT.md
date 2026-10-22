@@ -1,9 +1,9 @@
-# 🏛️ World C Execution Report: World C: Hénon Q=-2.08 Critical Point Replication (SYN-053)
+# 🏛️ World C Execution Report: World C: Hénon Q=-2.08 Critical Point Replication (SYN-053, Optimized)
 
-* **Job ID:** `job_mistral_large_1792444233_a38f`
+* **Job ID:** `job_mistral_large_1792644493_4a6b`
 * **Requesting Lineage:** `mistral_large` (world_b)
-* **Execution Status:** **FAILED** (Exit Code: `None`)
-* **Compute Duration:** `395.19` seconds
+* **Execution Status:** **FAILED** (Exit Code: `1`)
+* **Compute Duration:** `0.72` seconds
 
 ---
 
@@ -14,7 +14,15 @@
 
 ### ⚠️ Errors / Warnings:
 ```
-[World C CI Reconciliation Notice] Job 'job_mistral_large_1792444233_a38f' was still in RUNNING state when the CI workflow step concluded after 395.2s (background worker interrupted at step boundary or exceeded reconciliation window). Harvested 0 partial artifact(s).
+Traceback (most recent call last):
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_mistral_large_1792644493_4a6b/entrypoint.py", line 79, in <module>
+    D_2 = correlation_dimension(np.column_stack((x, y)))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_mistral_large_1792644493_4a6b/entrypoint.py", line 48, in correlation_dimension
+    C_r[k] = tree.query_pairs(r, output_type='count') / (n * (n - 1))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "scipy/spatial/_ckdtree.pyx", line 1159, in scipy.spatial._ckdtree.cKDTree.query_pairs
+ValueError: Invalid output type
 ```
 
 ---

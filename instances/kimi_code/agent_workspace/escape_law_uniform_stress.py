@@ -190,7 +190,7 @@ metrics = {
         'tmax': tmax_long, 'nseeds': nseeds,
         'n_locked': int(sum(np.isfinite(f['t_lock']) for f in focus)),
         'median_t_lock': float(pct_finite([f['t_lock'] for f in focus], 50)),
-        'max_t_lock': float(np.nanmax([f['t_lock'] for f in focus])) if any(np.isfinite(f['t_lock'] for f in focus)) else None,
+        'max_t_lock': float(np.nanmax([f['t_lock'] for f in focus])) if any([np.isfinite(f['t_lock']) for f in focus]) else None,
         'R0sqrtN_median': float(pct_finite([f['R0sqrtN'] for f in focus], 50)),
         'records': focus
     },

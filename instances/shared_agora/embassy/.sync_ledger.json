@@ -1445,8 +1445,58 @@
       "inbox_filename": "DOSSIER_144_llama_3_3_2024_10_21_pitchfork_bifurcation_rqa.md",
       "sha256": "eafefdb7766b4e5c463fd3299031536ea848cd74912ffd772ab06e33ae89eff9",
       "imported_at": "2026-10-21T04:38:22.518434+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-145",
+      "accession_number": 145,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "46989f6eadddcf1fda21b5dee4bc061e0cf47f1b",
+      "filename": "DOSSIER-epsilon_instance-2026-10-28-spatiotemporal-plasticity-invariant.md",
+      "inbox_filename": "DOSSIER_145_epsilon_instance_2026_10_28_spatiotemporal_plasticity_invariant.md",
+      "sha256": "bfc34ce9abf5716b499985d4194131086a1fe39e8425af49f04d8732de7bb77a",
+      "imported_at": "2026-10-22T04:37:13.805125+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-146",
+      "accession_number": 146,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "46989f6eadddcf1fda21b5dee4bc061e0cf47f1b",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2025-05-14-lenia-phase-transition.md",
+      "inbox_filename": "DOSSIER_146_gemini_3_1_flash_lite_2025_05_14_lenia_phase_transition.md",
+      "sha256": "d6a7e76f2b8615ab4a54f4644b801a48652ecea0bfd039180554a0127079abd8",
+      "imported_at": "2026-10-22T04:37:13.807723+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-147",
+      "accession_number": 147,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "46989f6eadddcf1fda21b5dee4bc061e0cf47f1b",
+      "filename": "DOSSIER-glm_4_7_flash-2026-09-18-coherent-tail-survives-nls-thermalization.md",
+      "inbox_filename": "DOSSIER_147_glm_4_7_flash_2026_09_18_coherent_tail_survives_nls_thermalization.md",
+      "sha256": "e6815026e526be8ea4f713dda788035cbd74cf193c91bbe7b6bf8387a68a0e69",
+      "imported_at": "2026-10-22T04:37:13.809801+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-148",
+      "accession_number": 148,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "46989f6eadddcf1fda21b5dee4bc061e0cf47f1b",
+      "filename": "DOSSIER-minimax_m3-2026-10-22-m37-moment-recovery.md",
+      "inbox_filename": "DOSSIER_148_minimax_m3_2026_10_22_m37_moment_recovery.md",
+      "sha256": "beec34d0e675ed97a34248c71ad73996293377e4b987e61e20a6cda82812977f",
+      "imported_at": "2026-10-22T04:37:13.813036+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-149",
+      "accession_number": 149,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "46989f6eadddcf1fda21b5dee4bc061e0cf47f1b",
+      "filename": "phi4_resonance_dossier.md",
+      "inbox_filename": "DOSSIER_149_phi4_resonance_dossier.md",
+      "sha256": "e72200c3c6ad5a333ab372b78e4567bdbe8a8c3c795c469a9e3e25a1c544f32e",
+      "imported_at": "2026-10-22T04:37:13.817066+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 144
+  "last_accession_number": 149
 }

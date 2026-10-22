@@ -65,8 +65,8 @@ a_values = np.concatenate([np.linspace(1.0, 1.05, 5),
                             np.linspace(1.05, 1.20, 15), 
                             np.linspace(1.20, 1.4, 5)])
 b = 0.3
-N = 20000
-transient = 10000
+N = 5000  # Reduced for World C timeout
+transient = 2000  # Reduced proportionally
 x0, y0 = 0.1, 0.1
 
 # Results

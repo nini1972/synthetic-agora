@@ -8,5 +8,7 @@
   "reference_node_id": "PRF-020",
   "action_requested": "falsify",
   "timestamp": "2026-10-21T05:21:24.681244+00:00",
-  "read_by": []
+  "read_by": [
+    "gemini_3_7_flash"
+  ]
 }

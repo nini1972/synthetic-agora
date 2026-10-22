@@ -1,0 +1,338 @@
+[
+  {
+    "bc": "periodic",
+    "N": 32,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 2.1970896467328263e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 32,
+    "eps": 0.35,
+    "f": 0.30632040050062576,
+    "d2": 5.224930535849773e-06,
+    "verdict": "subharmonic band-hop"
+  },
+  {
+    "bc": "periodic",
+    "N": 32,
+    "eps": 0.5,
+    "f": 0.20056320400500627,
+    "d2": 2.8360996636697472e-06,
+    "verdict": "subharmonic band-hop"
+  },
+  {
+    "bc": "periodic",
+    "N": 33,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 1.7742823143558493e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 33,
+    "eps": 0.35,
+    "f": 0.3995619524405507,
+    "d2": 1.077830724417573e-05,
+    "verdict": "other"
+  },
+  {
+    "bc": "periodic",
+    "N": 33,
+    "eps": 0.5,
+    "f": 0.23498122653316644,
+    "d2": 3.768107923838208e-06,
+    "verdict": "subharmonic band-hop"
+  },
+  {
+    "bc": "periodic",
+    "N": 48,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 4.95383403748409e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 48,
+    "eps": 0.35,
+    "f": 0.5,
+    "d2": 2.6595944810345234e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 48,
+    "eps": 0.5,
+    "f": 0.5,
+    "d2": 1.6613927588226015e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 64,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 3.8436184333365055e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 64,
+    "eps": 0.35,
+    "f": 0.5,
+    "d2": 2.4533210444062032e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 64,
+    "eps": 0.5,
+    "f": 0.5,
+    "d2": 1.44148241296507e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 65,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 2.920854154920407e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 65,
+    "eps": 0.35,
+    "f": 0.4831038798498123,
+    "d2": 3.255340030109769e-05,
+    "verdict": "other"
+  },
+  {
+    "bc": "periodic",
+    "N": 65,
+    "eps": 0.5,
+    "f": 0.5,
+    "d2": 2.074669225016637e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 96,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 3.7506141229276635e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 96,
+    "eps": 0.35,
+    "f": 0.5,
+    "d2": 3.225265996808816e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 96,
+    "eps": 0.5,
+    "f": 0.5,
+    "d2": 2.782633764436338e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 128,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 3.717631014159356e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 128,
+    "eps": 0.35,
+    "f": 0.5,
+    "d2": 2.9884345495530765e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "periodic",
+    "N": 128,
+    "eps": 0.5,
+    "f": 0.5,
+    "d2": 3.1221275689486185e-05,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 32,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 0.00034974261146580166,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 32,
+    "eps": 0.35,
+    "f": 0.36295369211514394,
+    "d2": 0.0003982574779986842,
+    "verdict": "other"
+  },
+  {
+    "bc": "open",
+    "N": 32,
+    "eps": 0.5,
+    "f": 0.2554755944931164,
+    "d2": 0.00035355766931788584,
+    "verdict": "subharmonic band-hop"
+  },
+  {
+    "bc": "open",
+    "N": 33,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 0.00037253485414459554,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 33,
+    "eps": 0.35,
+    "f": 0.46636420525657074,
+    "d2": 0.00041281850531413485,
+    "verdict": "other"
+  },
+  {
+    "bc": "open",
+    "N": 33,
+    "eps": 0.5,
+    "f": 0.3233729662077597,
+    "d2": 0.000349824122089257,
+    "verdict": "other"
+  },
+  {
+    "bc": "open",
+    "N": 48,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 0.0002728695125544984,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 48,
+    "eps": 0.35,
+    "f": 0.5,
+    "d2": 0.0003390415914106958,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 48,
+    "eps": 0.5,
+    "f": 0.498279098873592,
+    "d2": 0.00036832512209390494,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 64,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 0.00021512527481567316,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 64,
+    "eps": 0.35,
+    "f": 0.5,
+    "d2": 0.00026908750846771275,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 64,
+    "eps": 0.5,
+    "f": 0.5,
+    "d2": 0.0003045253448871624,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 65,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 0.00020583211803111345,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 65,
+    "eps": 0.35,
+    "f": 0.5,
+    "d2": 0.0002496401333258578,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 65,
+    "eps": 0.5,
+    "f": 0.5,
+    "d2": 0.0003197076013233556,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 96,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 0.0001527503413654976,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 96,
+    "eps": 0.35,
+    "f": 0.5,
+    "d2": 0.00019159943838960037,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 96,
+    "eps": 0.5,
+    "f": 0.5,
+    "d2": 0.0002101600285714119,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 128,
+    "eps": 0.2,
+    "f": 0.5,
+    "d2": 0.00012349691728732654,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 128,
+    "eps": 0.35,
+    "f": 0.5,
+    "d2": 0.0001414276800092475,
+    "verdict": "NYQUIST-LOCK"
+  },
+  {
+    "bc": "open",
+    "N": 128,
+    "eps": 0.5,
+    "f": 0.5,
+    "d2": 0.00017200013811066915,
+    "verdict": "NYQUIST-LOCK"
+  }
+]

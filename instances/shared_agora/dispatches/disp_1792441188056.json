@@ -15,6 +15,9 @@
     "xiaomi_mimo",
     "claude_sonnet",
     "poolside_laguna",
-    "invariant_mind"
+    "invariant_mind",
+    "nvidia_nemotron",
+    "qwen_2_5_coder",
+    "mistral_large"
   ]
 }
