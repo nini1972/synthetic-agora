@@ -1,0 +1,502 @@
+[
+  {
+    "peak_f": 0.390625,
+    "rho_anti": 0.04423864636257912,
+    "d2": 0.34483838547920853,
+    "spatial_std": 0.29915779779908336,
+    "bc": "periodic",
+    "N": 32,
+    "eps": 0.05,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.471923828125,
+    "rho_anti": -0.23793687817767273,
+    "d2": 0.23366152400783902,
+    "spatial_std": 0.26167552827788115,
+    "bc": "periodic",
+    "N": 32,
+    "eps": 0.1,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.4970703125,
+    "rho_anti": 0.20734184511968926,
+    "d2": 0.15756614274150385,
+    "spatial_std": 0.23861139975871049,
+    "bc": "periodic",
+    "N": 32,
+    "eps": 0.2,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.4677734375,
+    "rho_anti": -0.2307906490896488,
+    "d2": 0.17864746380566116,
+    "spatial_std": 0.24367068501235611,
+    "bc": "periodic",
+    "N": 32,
+    "eps": 0.35,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.4931640625,
+    "rho_anti": 0.3229566129787093,
+    "d2": 0.1845397130349349,
+    "spatial_std": 0.24688818459076606,
+    "bc": "periodic",
+    "N": 32,
+    "eps": 0.5,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.41748046875,
+    "rho_anti": 0.13419206305626638,
+    "d2": 0.34437599870424557,
+    "spatial_std": 0.29904278308257926,
+    "bc": "periodic",
+    "N": 48,
+    "eps": 0.05,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.480712890625,
+    "rho_anti": -0.053063078695337385,
+    "d2": 0.23631352783600287,
+    "spatial_std": 0.26221520983874536,
+    "bc": "periodic",
+    "N": 48,
+    "eps": 0.1,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.49755859375,
+    "rho_anti": -0.07907938639927603,
+    "d2": 0.15715363478599204,
+    "spatial_std": 0.2386588945691406,
+    "bc": "periodic",
+    "N": 48,
+    "eps": 0.2,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.48779296875,
+    "rho_anti": 0.1335146087710212,
+    "d2": 0.17777032942364468,
+    "spatial_std": 0.24386996783712045,
+    "bc": "periodic",
+    "N": 48,
+    "eps": 0.35,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.4990234375,
+    "rho_anti": 0.1035705975804016,
+    "d2": 0.18325315746564763,
+    "spatial_std": 0.2456521584689289,
+    "bc": "periodic",
+    "N": 48,
+    "eps": 0.5,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.357666015625,
+    "rho_anti": 0.07184928045089539,
+    "d2": 0.34558756678572733,
+    "spatial_std": 0.299249050252237,
+    "bc": "periodic",
+    "N": 64,
+    "eps": 0.05,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.481689453125,
+    "rho_anti": 0.16912242434572344,
+    "d2": 0.23629820946001487,
+    "spatial_std": 0.2624831750939603,
+    "bc": "periodic",
+    "N": 64,
+    "eps": 0.1,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.498779296875,
+    "rho_anti": -0.02285541238130023,
+    "d2": 0.15621197933607806,
+    "spatial_std": 0.23805226503486088,
+    "bc": "periodic",
+    "N": 64,
+    "eps": 0.2,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.49853515625,
+    "rho_anti": -0.026296916350693325,
+    "d2": 0.18095685144392953,
+    "spatial_std": 0.24425085911470054,
+    "bc": "periodic",
+    "N": 64,
+    "eps": 0.35,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.4990234375,
+    "rho_anti": -0.07241162384615474,
+    "d2": 0.1847344629192132,
+    "spatial_std": 0.24660572816616808,
+    "bc": "periodic",
+    "N": 64,
+    "eps": 0.5,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.38037109375,
+    "rho_anti": 0.10349532573084079,
+    "d2": 0.3455109290535486,
+    "spatial_std": 0.29939038705281484,
+    "bc": "periodic",
+    "N": 96,
+    "eps": 0.05,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.497802734375,
+    "rho_anti": -0.039120318854483326,
+    "d2": 0.23636481028081097,
+    "spatial_std": 0.2623017498081387,
+    "bc": "periodic",
+    "N": 96,
+    "eps": 0.1,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.488037109375,
+    "rho_anti": -0.08552984297051665,
+    "d2": 0.1559444228827218,
+    "spatial_std": 0.23795740302623403,
+    "bc": "periodic",
+    "N": 96,
+    "eps": 0.2,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.4755859375,
+    "rho_anti": -0.10722376382953049,
+    "d2": 0.17976011087447896,
+    "spatial_std": 0.2442493776465904,
+    "bc": "periodic",
+    "N": 96,
+    "eps": 0.35,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.484619140625,
+    "rho_anti": 0.0003197463719776389,
+    "d2": 0.1809478257767197,
+    "spatial_std": 0.24501213703758296,
+    "bc": "periodic",
+    "N": 96,
+    "eps": 0.5,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.36376953125,
+    "rho_anti": -0.027466838299531022,
+    "d2": 0.3442383972055788,
+    "spatial_std": 0.29906170668554155,
+    "bc": "periodic",
+    "N": 128,
+    "eps": 0.05,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.4775390625,
+    "rho_anti": -0.019971947590590223,
+    "d2": 0.23713946263548175,
+    "spatial_std": 0.2624878314722356,
+    "bc": "periodic",
+    "N": 128,
+    "eps": 0.1,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.49365234375,
+    "rho_anti": -0.047338723468642346,
+    "d2": 0.1569378413849194,
+    "spatial_std": 0.23812990387316066,
+    "bc": "periodic",
+    "N": 128,
+    "eps": 0.2,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.4931640625,
+    "rho_anti": -0.057220926901950915,
+    "d2": 0.18035635487851231,
+    "spatial_std": 0.2444996650559193,
+    "bc": "periodic",
+    "N": 128,
+    "eps": 0.35,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.4931640625,
+    "rho_anti": 0.011712977605808042,
+    "d2": 0.18581065092968163,
+    "spatial_std": 0.24657076755807972,
+    "bc": "periodic",
+    "N": 128,
+    "eps": 0.5,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.381103515625,
+    "rho_anti": -0.02151034889039232,
+    "d2": 0.34359513142202064,
+    "spatial_std": 0.29819373575085456,
+    "bc": "open",
+    "N": 32,
+    "eps": 0.05,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.493896484375,
+    "rho_anti": -0.08879772363801747,
+    "d2": 0.22955549933275712,
+    "spatial_std": 0.259756586222188,
+    "bc": "open",
+    "N": 32,
+    "eps": 0.1,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.495361328125,
+    "rho_anti": -0.14268208971826948,
+    "d2": 0.15031368662058936,
+    "spatial_std": 0.23521354338435313,
+    "bc": "open",
+    "N": 32,
+    "eps": 0.2,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.498291015625,
+    "rho_anti": 0.33684130821002595,
+    "d2": 0.16865693726554576,
+    "spatial_std": 0.23899682295957614,
+    "bc": "open",
+    "N": 32,
+    "eps": 0.35,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.484375,
+    "rho_anti": -0.017668625553064473,
+    "d2": 0.17604019419733458,
+    "spatial_std": 0.24257903550025994,
+    "bc": "open",
+    "N": 32,
+    "eps": 0.5,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.369873046875,
+    "rho_anti": -0.07988446723541803,
+    "d2": 0.3438368784262651,
+    "spatial_std": 0.2986620476968943,
+    "bc": "open",
+    "N": 48,
+    "eps": 0.05,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.490234375,
+    "rho_anti": -0.3434029828296577,
+    "d2": 0.23537212229531335,
+    "spatial_std": 0.26183061144648345,
+    "bc": "open",
+    "N": 48,
+    "eps": 0.1,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.49853515625,
+    "rho_anti": 0.03672589303100007,
+    "d2": 0.15093240940291827,
+    "spatial_std": 0.2355699560768756,
+    "bc": "open",
+    "N": 48,
+    "eps": 0.2,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.493408203125,
+    "rho_anti": 0.10755359262448404,
+    "d2": 0.17603692358984205,
+    "spatial_std": 0.24182819471757722,
+    "bc": "open",
+    "N": 48,
+    "eps": 0.35,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.482666015625,
+    "rho_anti": -0.09545401486293376,
+    "d2": 0.17749989836874508,
+    "spatial_std": 0.24315912207743415,
+    "bc": "open",
+    "N": 48,
+    "eps": 0.5,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.435302734375,
+    "rho_anti": 0.0905054572353976,
+    "d2": 0.3455896340963873,
+    "spatial_std": 0.29896551068962485,
+    "bc": "open",
+    "N": 64,
+    "eps": 0.05,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.471923828125,
+    "rho_anti": 0.018954428723618896,
+    "d2": 0.23534779423604965,
+    "spatial_std": 0.2619070827780844,
+    "bc": "open",
+    "N": 64,
+    "eps": 0.1,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.491455078125,
+    "rho_anti": 0.13976823958789122,
+    "d2": 0.15343742182473036,
+    "spatial_std": 0.23694975247188693,
+    "bc": "open",
+    "N": 64,
+    "eps": 0.2,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.49853515625,
+    "rho_anti": -0.04099431461228478,
+    "d2": 0.1750972071296502,
+    "spatial_std": 0.24172311907615665,
+    "bc": "open",
+    "N": 64,
+    "eps": 0.35,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.49658203125,
+    "rho_anti": 0.022495617930980167,
+    "d2": 0.17399199236253385,
+    "spatial_std": 0.24248932780622584,
+    "bc": "open",
+    "N": 64,
+    "eps": 0.5,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.330810546875,
+    "rho_anti": -0.08494625388158095,
+    "d2": 0.34430471988885214,
+    "spatial_std": 0.2988374338279727,
+    "bc": "open",
+    "N": 96,
+    "eps": 0.05,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.48046875,
+    "rho_anti": -0.057501970614111615,
+    "d2": 0.235048322786931,
+    "spatial_std": 0.2619705789358281,
+    "bc": "open",
+    "N": 96,
+    "eps": 0.1,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.497802734375,
+    "rho_anti": -0.18485145226412253,
+    "d2": 0.1542999278236863,
+    "spatial_std": 0.23738805150348238,
+    "bc": "open",
+    "N": 96,
+    "eps": 0.2,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.49755859375,
+    "rho_anti": -0.09614068092128139,
+    "d2": 0.17292905473621517,
+    "spatial_std": 0.24148097154946868,
+    "bc": "open",
+    "N": 96,
+    "eps": 0.35,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.490478515625,
+    "rho_anti": -0.0029364646390948497,
+    "d2": 0.18025045826374833,
+    "spatial_std": 0.24461580884206785,
+    "bc": "open",
+    "N": 96,
+    "eps": 0.5,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.362060546875,
+    "rho_anti": -0.05168502565351835,
+    "d2": 0.34539343487036195,
+    "spatial_std": 0.299104651923909,
+    "bc": "open",
+    "N": 128,
+    "eps": 0.05,
+    "tag": "broadband chaotic"
+  },
+  {
+    "peak_f": 0.49658203125,
+    "rho_anti": -0.0762547396705789,
+    "d2": 0.23655894232926422,
+    "spatial_std": 0.2624275469436891,
+    "bc": "open",
+    "N": 128,
+    "eps": 0.1,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.486083984375,
+    "rho_anti": 0.12046854367587786,
+    "d2": 0.15425246350421018,
+    "spatial_std": 0.23724366610294645,
+    "bc": "open",
+    "N": 128,
+    "eps": 0.2,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.48583984375,
+    "rho_anti": 0.01593858019290327,
+    "d2": 0.17687412907909425,
+    "spatial_std": 0.24268989715306377,
+    "bc": "open",
+    "N": 128,
+    "eps": 0.35,
+    "tag": "f=1/2 dominant but Delta_2 large"
+  },
+  {
+    "peak_f": 0.477294921875,
+    "rho_anti": -0.01598934321291701,
+    "d2": 0.1799075749674783,
+    "spatial_std": 0.24429445434122316,
+    "bc": "open",
+    "N": 128,
+    "eps": 0.5,
+    "tag": "broadband chaotic"
+  }
+]

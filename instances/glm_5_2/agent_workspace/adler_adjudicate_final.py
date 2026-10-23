@@ -1,75 +1,146 @@
 import numpy as np
+from scipy import special
+import json
 
-K = 1.65
+K0 = 1.65
 
-# ---------- 1. Deterministic dwell-bias rho_det (sigma -> 0 limit) ----------
-def rho_det(dw, K):
+# ============================================================
+# 1. Deterministic R via exact quadrature (sigma -> 0, dw > 2K)
+# ============================================================
+def R_det_quad(dw, K, ntheta=200001):
     if dw <= 2*K:
         return 1.0
-    # locked fraction of period: time where |dw - 2K sin| drives forward-slip only
-    # slip occurs where dw - 2K sin(theta) > 0, i.e. theta in (a, pi-a) etc.
-    s = 2*K/dw
-    a = np.arcsin(s)
-    # fraction of cycle spent slipping forward through the fast region
-    f = (np.pi - 2*a)/np.pi
-    return f
+    th = np.linspace(0, 2*np.pi, ntheta)
+    v = dw - 2*K*np.sin(th)
+    w = 1.0/v
+    Z = np.trapz(w, th)
+    re = np.trapz(w*np.cos(th), th)/Z
+    im = np.trapz(w*np.sin(th), th)/Z
+    return float(np.hypot(re, im))
 
-# ---------- 2. Exact periodic constant-flux FP: tridiagonal (Thomas) solve ----------
-# Recurrence (n>=1):  K c_{n+1} + (i*dw + D_tilde*n) c_n - K c_{n-1} = 0
-# (equivalent to deepseek's c_{n+1} = a_n c_n + c_{n-1}, a_n = (dw - i Dn)/(iK)
-#  after conjugation; both give identical |c_1|). Boundary: c_0 = 1, c_{N+1} = 0.
-def R_cf(dw, K, sigma, N=400):
+# ============================================================
+# 2. Periodic constant-flux FP: tridiagonal Thomas solve, O(N)
+#    Recurrence (n>=1):  K c_{n+1} + (i*dw + D~ n) c_n - K c_{n-1} = 0
+#    c_0 = 1, c_{N+1} = 0 (minimal solution).  R = |c_1|.
+#    Vectorized over (K, dw) pairs: axes (N, P, M).
+# ============================================================
+def R_cf_grid(dw_arr, K_arr, sigma, N=400):
     D = 0.5*sigma*sigma
-    n = np.arange(1, N+1)
-    # Thomas algorithm, vectorizable but scalar-loop is fine at N=400
-    # a_i (sub) = -K, b_i (diag) = i*dw + D*n_i, c_i (super) = -K, d_i = 0 except d_1 = -K*c_0 = -K
-    # forward sweep
-    cp = np.zeros(N, dtype=complex); dp = np.zeros(N, dtype=complex)
-    b0 = 1j*dw + D*1.0
-    cp[0] = -K/b0
-    dp[0] = (-K)/b0          # d_1 = -K (from c_0=1 term)
+    dws = np.atleast_1d(dw_arr)[None, :]           # (1, M)
+    Ks = np.atleast_1d(K_arr)[:, None]             # (P, 1)
+    P, M = Ks.size, dws.size
+    b_vec = 1j*dws + D*np.arange(1, N+1)[:, None]  # (N, M)
+    cp = np.zeros((N, P, M), dtype=complex)
+    dp = np.zeros((N, P, M), dtype=complex)
+    b1 = 1j*dws + D                                # (1, M), n=1
+    cp[0] = -Ks/b1                                 # super diag / b1
+    dp[0] = (-Ks)/b1                               # rhs_1 = -K*c_0 = -K
     for i in range(1, N):
-        b = 1j*dw + D*(i+1)
-        denom = b - (-K)*cp[i-1]
-        cp[i] = -K/denom
-        dp[i] = (0 - (-K)*dp[i-1])/denom
-    # back substitution: c_N = dp[N-1]; c_n = dp[n-1] - cp[n-1]*c_{n+1}
-    c = np.zeros(N+1, dtype=complex)
-    c[N] = dp[N-1]
+        bi = b_vec[i][None, :]                     # (1, M)
+        denom = bi - (-Ks)*cp[i-1]                 # (P, M)
+        cp[i] = (-Ks)/denom
+        dp[i] = (0.0 - (-Ks)*dp[i-1])/denom
+    cn = dp[N-1].copy()                            # c_N
+    cout = np.zeros((P, M), dtype=complex)
     for i in range(N-1, 0, -1):
-        c[i] = dp[i-1] - cp[i-1]*c[i+1]
-    # c[0] should be 1 by construction; R = |c_1|
-    return abs(c[1])
+        cn = dp[i-1] - cp[i-1]*cn
+        if i == 1:
+            cout = cn.copy()                       # c_1
+    return np.abs(cout)
 
-# ---------- 3. Bessel anchor at dw=0: R = I_1(2K/D)/I_0(2K/D) ----------
-from scipy import special
+def R_cf(dw, K, sigma, N=400):
+    return float(R_cf_grid([dw], [K], sigma, N)[0, 0])
+
 def R_bessel_dw0(K, sigma):
     D = 0.5*sigma*sigma
     x = 2*K/D
-    return special.i1(x)/special.i0(x)
+    return float(special.i1(x)/special.i0(x))
 
-# ---------- 4. Euler-Maruyama stationary MC (ergodic time average) ----------
-def R_mc(dw, K, sigma, burn=20000, run=200000, dt=0.02, seed=1):
+# ============================================================
+# 3. Stationary ergodic Euler-Maruyama MC (time average, batched)
+# ============================================================
+def R_mc_stationary(dw, K, sigma, burn=5000, run=100000, dt=0.02, nwalk=64, seed=1):
     rng = np.random.default_rng(seed)
-    theta = rng.uniform(0, 2*np.pi)
+    th = rng.uniform(0, 2*np.pi, nwalk)
     sq = sigma*np.sqrt(2*dt)
+    def step(th):
+        return (th + dt*(dw - 2*K*np.sin(th)) + sq*rng.standard_normal(nwalk)) % (2*np.pi)
     for _ in range(burn):
-        theta = (theta + dt*(dw - 2*K*np.sin(theta)) + sq*rng.standard_normal()) % (2*np.pi)
-    acc = 0.0 + 0.0j
+        th = step(th)
+    ar = 0.0; ai = 0.0
     for _ in range(run):
-        theta = (theta + dt*(dw - 2*K*np.sin(theta)) + sq*rng.standard_normal()) % (2*np.pi)
-        acc += np.exp(1j*theta)
-    return abs(acc/run)
+        th = step(th)
+        ar += np.cos(th).sum(); ai += np.sin(th).sum()
+    return float(np.hypot(ar, ai)/(run*nwalk))
 
-# ---------- Run adjudication ----------
-print("=== dw=0 Bessel anchor vs CF ===")
+# ============================================================
+# 4. Deepseek-style FIXED-TIME ENSEMBLE MC (suspected protocol)
+# ============================================================
+def R_mc_fixedtime(dw, K, sigma, nwalk=2000, steps=20000, dt=0.01, theta0=0.0, seed=2):
+    rng = np.random.default_rng(seed)
+    th = np.full(nwalk, theta0)
+    sq = sigma*np.sqrt(2*dt)
+    for _ in range(steps):
+        th = (th + dt*(dw - 2*K*np.sin(th)) + sq*rng.standard_normal(nwalk)) % (2*np.pi)
+    return float(np.abs(np.exp(1j*th).mean()))
+
+# ============================================================
+# MAIN
+# ============================================================
+out = {}
+
+print("=== (A) Bessel anchor at dw=0, K=1.65: CF recurrence correctness ===")
+for sig in [0.05, 0.2, 0.5]:
+    cf = R_cf(0.0, K0, sig); be = R_bessel_dw0(K0, sig)
+    print(f"sigma={sig:.2f}: CF={cf:.6f}  Bessel={be:.6f}  diff={abs(cf-be):.2e}")
+    out[f"bessel_s{sig}"] = (cf, be)
+
+print("\n=== (B) Deterministic quadrature vs CF at sigma=0.001 ===")
+for dw in [3.5, 4.0, 5.0, 6.0, 7.0]:
+    rd = R_det_quad(dw, K0); rc = R_cf(dw, K0, 0.001)
+    print(f"dw={dw:.1f}: quad={rd:.6f}  CF(s=0.001)={rc:.6f}  diff={abs(rd-rc):.2e}")
+
+print("\n=== (C) Core dispute: sigma=0.05, K=1.65, dw=4,5,6 ===")
+print("  deepseek EMP-094 MC claimed: 0.2287, 0.5704, 0.3884  (NON-monotone)")
+for dw in [4.0, 5.0, 6.0]:
+    rd = R_det_quad(dw, K0)
+    rc = R_cf(dw, K0, 0.05)
+    rm = R_mc_stationary(dw, K0, 0.05)
+    print(f"dw={dw:.1f}: R_det={rd:.4f}  R_CF={rc:.4f}  R_MCstat={rm:.4f}")
+    out[f"core_s05_dw{int(dw)}"] = (rd, rc, rm)
+
+print("\n=== (D) Monotonicity scan, K=1.65 ===")
+dws = np.linspace(3.4, 8.0, 24)
 for sig in [0.05, 0.5]:
-    print(f"sigma={sig}: CF={R_cf(0.0,K,sig):.6f}  Bessel={R_bessel_dw0(K,sig):.6f}")
+    Rv = R_cf_grid(dws, [K0], sig)[0]
+    diffs = np.diff(Rv)
+    print(f"sigma={sig}: strictly decreasing? {bool(np.all(diffs < 1e-12))}  max_increase={float(diffs.max()):.2e}")
 
-print("\n=== R(dw) at K=1.65, sigma=0.05 (deepseek claimed 0.2287, 0.5704, 0.3884 at dw=4,5,6) ===")
+print("\n=== (E) Reproduce deepseek protocol: fixed-time ensemble, dt=0.01, 20000 steps ===")
 for dw in [4.0, 5.0, 6.0]:
-    print(f"dw={dw}: rho_det={rho_det(dw,K):.4f}  CF={R_cf(dw,K,0.05):.4f}  MC={R_mc(dw,K,0.05,run=60000):.4f}")
+    for t0 in [0.0, np.pi/2]:
+        rf = R_mc_fixedtime(dw, K0, 0.05, theta0=t0)
+        print(f"dw={dw:.1f} theta0={t0:.3f}: R_fixedtime={rf:.4f}")
+        out[f"fixedtime_dw{int(dw)}_t0{int(round(t0*100))}"] = rf
 
-print("\n=== R(dw) at K=1.65, sigma=0.5 ===")
-for dw in [4.0, 5.0, 6.0]:
-    print(f"dw={dw}: rho_det={rho_det(dw,K):.4f}  CF={R_cf(dw,K,0.5):.4f}  MC={R_mc(dw,K,0.5,run=60000):.4f}")
+print("\n=== (F) band_frac_max(sigma): fine vs coarse dw grid ===")
+Ks = np.linspace(0.3, 4.0, 241)
+dws_fine = np.linspace(0.0, 6.0, 601)
+dws_coarse = np.linspace(0.0, 6.0, 61)
+def band_frac(sigma, dwgrid):
+    Rm = R_cf_grid(dwgrid, Ks, sigma)
+    bf = ((Rm > 0.3) & (Rm < 0.7)).mean(axis=1)
+    k = int(np.argmax(bf))
+    return float(bf[k]), float(Ks[k])
+for sig in [0.001, 0.05, 0.1, 0.2, 0.3, 0.5]:
+    bf, kstar = band_frac(sig, dws_fine)
+    bf_c, kstar_c = band_frac(sig, dws_coarse)
+    print(f"sigma={sig:5.3f}: fine={bf:.4f}@K={kstar:.3f}   coarse={bf_c:.4f}@K={kstar_c:.3f}")
+    out[f"bandfrac_s{sig}"] = (bf, kstar, bf_c, kstar_c)
+
+print("\nC = 316/763 =", 316/763)
+
+with open("adler_adjudication_out.json", "w") as f:
+    json.dump({k: (list(map(float, v)) if isinstance(v, (tuple, list)) else v)
+               for k, v in out.items()}, f, indent=1, default=str)
+print("saved adler_adjudication_out.json")

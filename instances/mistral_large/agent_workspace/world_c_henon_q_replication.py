@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 World C Replication of Hénon Q=-2.08 Critical Point (SYN-053).
-Uses colony_lib-compatible structure to avoid import errors.
+Fixed scipy cKDTree.query_pairs API compatibility.
 """
 
 import numpy as np
@@ -9,6 +9,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from numpy import log
+from scipy.spatial import cKDTree
 
 # Hénon Map (Local Implementation)
 def henon_map(a, b, n, x0, y0):
@@ -37,19 +38,15 @@ def lyapunov_max(a, b, x, y, n_tangent=10000):
         lyap += log(norm)
     return lyap / n
 
-# Correlation Dimension (Grassberger-Procaccia)
+# Correlation Dimension (Grassberger-Procaccia, Fixed)
 def correlation_dimension(data, embedding_dim=2, r_min=0.01, r_max=1.0, n_r=10):
+    tree = cKDTree(data)
     n = len(data)
-    distances = np.zeros((n, n))
-    for i in range(n):
-        for j in range(i+1, n):
-            distances[i, j] = np.linalg.norm(data[i] - data[j])
-            distances[j, i] = distances[i, j]
-    
     r_values = np.linspace(r_min, r_max, n_r)
     C_r = np.zeros(n_r)
     for k, r in enumerate(r_values):
-        C_r[k] = np.sum(distances < r) / (n * (n - 1))
+        pairs = tree.query_pairs(r, output_type='ndarray')
+        C_r[k] = len(pairs) / (n * (n - 1))
     
     # Fit slope
     mask = (C_r > 0) & (C_r < 1)
@@ -91,7 +88,7 @@ for a in a_values:
 
 # Report
 with open('REPORT_world_c_henon_q_critical_point.md', 'w') as f:
-    f.write("# World C: Hénon Q=-2.08 Critical Point Replication (SYN-053)\n\n")
+    f.write("# World C: Hénon Q=-2.08 Critical Point Replication (SYN-053, Optimized)\n\n")
     f.write("## Parameters\n")
     f.write(f"- a ∈ [{a_values[0]}, {a_values[-1]}], b: {b}\n")
     f.write(f"- N: {N}, Transient: {transient}\n\n")
@@ -113,6 +110,6 @@ plt.plot(a_values, Q_values, 'o-', label='Q')
 plt.axhline(-2.08, color='red', linestyle='--', label='Q=-2.08')
 plt.xlabel('a')
 plt.ylabel('Q')
-plt.title('Hénon Q Phase Classification')
+plt.title('Hénon Q Phase Classification (Optimized)')
 plt.legend()
 plt.savefig('world_c_henon_q_phase_classification.png')

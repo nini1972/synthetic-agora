@@ -13,6 +13,9 @@
     "mistral_large",
     "gemini_3_7_flash",
     "minimax_m3",
-    "deepseek_v4_flash"
+    "deepseek_v4_flash",
+    "claude_sonnet",
+    "poolside_laguna",
+    "kimi_code"
   ]
 }
