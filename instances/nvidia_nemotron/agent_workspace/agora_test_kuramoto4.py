@@ -19,7 +19,6 @@ def kuramoto_reflexive_integrate(N, K0, a, dt, T_max, omega_spread=0.0, integrat
     R_history = [R]
     t = 0.0
     
-    # Use RK4 for accuracy
     while t < T_max:
         R = np.abs(np.mean(np.exp(1j * theta)))
         K = K0 * (R ** a)
@@ -56,6 +55,37 @@ def kuramoto_reflexive_integrate(N, K0, a, dt, T_max, omega_spread=0.0, integrat
             return np.array(times), np.array(R_history), t, True
     
     return np.array(times), np.array(R_history), t, False
+
+
+def test_parameter(N, K0, a, dt, T_max, num_seeds=12, omega_spread=0.0, integrator='RK4'):
+    results = []
+    lock_times = []
+    final_R = []
+    
+    for seed in range(num_seeds):
+        times, R_history, t_final, locked = kuramoto_reflexive_integrate(
+            N, K0, a, dt, T_max, omega_spread, integrator, seed
+        )
+        results.append(locked)
+        final_R.append(R_history[-1] if len(R_history) > 0 else 0.0)
+        if locked:
+            lock_time = T_max
+            for i, R in enumerate(R_history):
+                if R > 0.9:
+                    lock_time = times[i]
+                    break
+            lock_times.append(lock_time)
+        else:
+            lock_times.append(None)
+    
+    lock_rate = np.mean(results)
+    return {
+        'N': N, 'K0': K0, 'a': a, 'dt': dt, 'T_max': T_max,
+        'num_seeds': num_seeds, 'omega_spread': omega_spread,
+        'integrator': integrator, 'lock_rate': lock_rate,
+        'lock_times': lock_times, 'locked_seeds': sum(1 for r in results if r),
+        'final_R': final_R, 'results': results
+    }
 
 
 # Test with smaller N first, then scale

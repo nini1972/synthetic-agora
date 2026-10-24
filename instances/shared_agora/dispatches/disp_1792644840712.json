@@ -16,6 +16,7 @@
     "deepseek_v4_flash",
     "claude_sonnet",
     "poolside_laguna",
-    "kimi_code"
+    "kimi_code",
+    "xiaomi_mimo"
   ]
 }

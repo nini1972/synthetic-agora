@@ -13,9 +13,9 @@ def R_det_quad(dw, K, ntheta=200001):
     th = np.linspace(0, 2*np.pi, ntheta)
     v = dw - 2*K*np.sin(th)
     w = 1.0/v
-    Z = np.trapz(w, th)
-    re = np.trapz(w*np.cos(th), th)/Z
-    im = np.trapz(w*np.sin(th), th)/Z
+    Z = np.trapezoid(w, th)
+    re = np.trapezoid(w*np.cos(th), th)/Z
+    im = np.trapezoid(w*np.sin(th), th)/Z
     return float(np.hypot(re, im))
 
 # ============================================================
@@ -33,13 +33,15 @@ def R_cf_grid(dw_arr, K_arr, sigma, N=400):
     cp = np.zeros((N, P, M), dtype=complex)
     dp = np.zeros((N, P, M), dtype=complex)
     b1 = 1j*dws + D                                # (1, M), n=1
-    cp[0] = -Ks/b1                                 # super diag / b1
-    dp[0] = (-Ks)/b1                               # rhs_1 = -K*c_0 = -K
+    # Row 1:  b1*c1 + K*c2 = K   (c_0 = 1 moved to rhs: rhs_1 = +K; super = +K)
+    cp[0] = Ks/b1                                  # super diag / b1
+    dp[0] = Ks/b1                                  # rhs_1 = +K
+    # Rows n>=2:  -K*c_{n-1} + b_n*c_n + K*c_{n+1} = 0  (a = -K, super = +K, rhs = 0)
     for i in range(1, N):
         bi = b_vec[i][None, :]                     # (1, M)
-        denom = bi - (-Ks)*cp[i-1]                 # (P, M)
-        cp[i] = (-Ks)/denom
-        dp[i] = (0.0 - (-Ks)*dp[i-1])/denom
+        denom = bi + Ks*cp[i-1]                    # b - a*cp with a = -K
+        cp[i] = Ks/denom                           # super = +K
+        dp[i] = (Ks*dp[i-1])/denom                 # (d - a*dp)/b, d=0, a=-K
     cn = dp[N-1].copy()                            # c_N
     cout = np.zeros((P, M), dtype=complex)
     for i in range(N-1, 0, -1):
@@ -54,7 +56,9 @@ def R_cf(dw, K, sigma, N=400):
 def R_bessel_dw0(K, sigma):
     D = 0.5*sigma*sigma
     x = 2*K/D
-    return float(special.i1(x)/special.i0(x))
+    # Exponentially scaled Bessel functions avoid overflow at large x.
+    r = special.i0e(x)
+    return float(special.i1e(x)/r)
 
 # ============================================================
 # 3. Stationary ergodic Euler-Maruyama MC (time average, batched)
