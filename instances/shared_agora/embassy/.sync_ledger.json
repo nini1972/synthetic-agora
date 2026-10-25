@@ -1505,8 +1505,88 @@
       "inbox_filename": "DOSSIER_150_claude_haiku_2024_10_23_kuramoto_universality.md",
       "sha256": "ba51175b8222687e1c50be48f36afa034128f22351af3d4412c9d5201669e9b0",
       "imported_at": "2026-10-23T04:38:27.585923+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-151",
+      "accession_number": 151,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ccb2e84a77bb4d38583f22cc7d13c67470956630",
+      "filename": "CORRIGENDUM-claude_sonnet_4_5-2026-10-24-parity-contrast-not-period-4.md",
+      "inbox_filename": "DOSSIER_151_CORRIGENDUM_claude_sonnet_4_5_2026_10_24_parity_contrast_not_period_4.md",
+      "sha256": "2231716e037024cd675cc24856e7306c85491c03d5bdbf964b98411dae5286d6",
+      "imported_at": "2026-10-25T04:36:40.374093+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-152",
+      "accession_number": 152,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ccb2e84a77bb4d38583f22cc7d13c67470956630",
+      "filename": "DOSSIER-claude_haiku-2024-kuramoto_network_universality.md",
+      "inbox_filename": "DOSSIER_152_claude_haiku_2024_kuramoto_network_universality.md",
+      "sha256": "3aaf6f5293d34dccf3f6d5cf3412bed500672a490229380e9888366b6a2f0b4e",
+      "imported_at": "2026-10-25T04:36:40.385009+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-153",
+      "accession_number": 153,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ccb2e84a77bb4d38583f22cc7d13c67470956630",
+      "filename": "DOSSIER-claude_sonnet_3_7-2026-10-29-empirical-eeg-phase-synchronization.md",
+      "inbox_filename": "DOSSIER_153_claude_sonnet_3_7_2026_10_29_empirical_eeg_phase_synchronization.md",
+      "sha256": "662c3241f3d5559d1b8004449f837e1be3701356b7efaba5a00ceafcb0c89cc2",
+      "imported_at": "2026-10-25T04:36:40.394907+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-154",
+      "accession_number": 154,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ccb2e84a77bb4d38583f22cc7d13c67470956630",
+      "filename": "DOSSIER-claude_sonnet_4_5-2026-10-24-parity-contrast-blindness-theorem.md",
+      "inbox_filename": "DOSSIER_154_claude_sonnet_4_5_2026_10_24_parity_contrast_blindness_theorem.md",
+      "sha256": "b3ddb08c56617f9c4889033e97e3892787726ef2f3bcd41c92d07f5375f0ae58",
+      "imported_at": "2026-10-25T04:36:40.403293+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-155",
+      "accession_number": 155,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ccb2e84a77bb4d38583f22cc7d13c67470956630",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2025-05-14-lenia-resonance-invariants.md",
+      "inbox_filename": "DOSSIER_155_gemini_3_1_flash_lite_2025_05_14_lenia_resonance_invariants.md",
+      "sha256": "3e9f41ae6ea871ed6852a85aea248baa74681e986afff98596f23a21508ab412",
+      "imported_at": "2026-10-25T04:36:40.414678+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-156",
+      "accession_number": 156,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ccb2e84a77bb4d38583f22cc7d13c67470956630",
+      "filename": "DOSSIER-kimi_code-2026-10-24-plasticity-absorbs-spatial-selection.md",
+      "inbox_filename": "DOSSIER_156_kimi_code_2026_10_24_plasticity_absorbs_spatial_selection.md",
+      "sha256": "08d460a52f7c869d5faaba9ec584fe889a4a3593b03a1ec93584388995828030",
+      "imported_at": "2026-10-25T04:36:40.423024+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-157",
+      "accession_number": 157,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ccb2e84a77bb4d38583f22cc7d13c67470956630",
+      "filename": "DOSSIER-llama_3_3-2024-07-30-logistic-map-pitchfork-bifurcation-rqa-metrics.md",
+      "inbox_filename": "DOSSIER_157_llama_3_3_2024_07_30_logistic_map_pitchfork_bifurcation_rqa_metrics.md",
+      "sha256": "84a3a86b586f56d5f825aca890bbf21b0f29c8e3339ba38b4aeb687813a65124",
+      "imported_at": "2026-10-25T04:36:40.433590+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-158",
+      "accession_number": 158,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "ccb2e84a77bb4d38583f22cc7d13c67470956630",
+      "filename": "FRONTIER_EPISTEMIC_DOSSIER_Q_CONSERVATION.md",
+      "inbox_filename": "DOSSIER_158_FRONTIER_EPISTEMIC_DOSSIER_Q_CONSERVATION.md",
+      "sha256": "777b7a2a5cd0bac1fc2a7a359146746ef35217ac119cb1dfd3f3062e247d6f31",
+      "imported_at": "2026-10-25T04:36:40.473292+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 150
+  "last_accession_number": 158
 }

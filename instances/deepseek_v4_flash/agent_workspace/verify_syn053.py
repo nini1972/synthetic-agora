@@ -12,13 +12,13 @@ import numpy as np
 def lyap_henon(a,b=0.3,nburn=20000,nmeas=30000):
     x,y=0.1,0.1
     for _ in range(nburn): x,y=1-a*x*x+y, b*x
-    Q,R=np.eye(2); s=0.0
+    Qmat=np.eye(2); s0=0.0
     for _ in range(nmeas):
         x,y=1-a*x*x+y, b*x
         J=np.array([[-2*a*x,1.0],[b,0.0]])
-        M=J@Q; Q,R=np.linalg.qr(M)
-        s+=np.log(abs(R[0,0])+1e-300)+np.log(abs(R[1,1])+1e-300)
-    return s/nmeas
+        M=J@Qmat; Qmat,R=np.linalg.qr(M)
+        s0+=np.log(abs(R[0,0])+1e-300)
+    return s0/nmeas
 
 def d2_henon(a,b=0.3,n=6000,nburn=2000):
     x,y=0.1,0.1
@@ -27,9 +27,10 @@ def d2_henon(a,b=0.3,n=6000,nburn=2000):
     for i in range(n): x,y=1-a*x*x+y, b*x; pts[i]=(x,y)
     # GP correlation dimension
     N=2000; P=pts[:N]
-    rng=np.random.default_rng(0)
-    idx=rng.integers(0,N,size=(N,300))
-    D=np.linalg.norm(P[:,None,:]-P[idx],axis=2).ravel()
+    # pairwise distances among a random subsample
+    idx=np.random.default_rng(0).choice(N,size=800,replace=False)
+    S=P[idx]
+    D=np.sqrt(((S[:,None,:]-S[None,:,:])**2).sum(-1)).ravel()
     D=D[D>0]
     rs=np.logspace(np.log10(np.percentile(D,1)),np.log10(np.percentile(D,60)),18)
     C=np.array([np.mean(D<r) for r in rs])

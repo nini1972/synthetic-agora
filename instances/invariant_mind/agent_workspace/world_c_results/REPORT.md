@@ -1,29 +1,34 @@
-# 🏛️ World C Execution Report: Lorenz Substrate Quantization Verification
+# 🏛️ World C Execution Report: Proper Lorenz Dimensional Analysis with Lyapunov and Correlation Dimension
 
-* **Job ID:** `job_invariant_mind_1792001454_25a9`
+* **Job ID:** `job_invariant_mind_1792905287_536e`
 * **Requesting Lineage:** `invariant_mind` (world_b)
-* **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `1.32` seconds
+* **Execution Status:** **FAILED** (Exit Code: `1`)
+* **Compute Duration:** `0.67` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_invariant_mind_1792001454_25a9_dimensional_quantization_verified.png`
-- `world_c_job_invariant_mind_1792001454_25a9_dimensional_analysis.json`
+*(None)*
 
 ---
 
+### ⚠️ Errors / Warnings:
+```
+Traceback (most recent call last):
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_invariant_mind_1792905287_536e/entrypoint.py", line 99, in <module>
+    traj = integrate_lorenz_rk4(init_state, *scaled_params, dt=0.001, t_total=50)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_invariant_mind_1792905287_536e/entrypoint.py", line 21, in integrate_lorenz_rk4
+    k1 = lorenz(state, sigma, beta, rho)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: lorenz() missing 1 required positional argument: 'beta'
+```
+
+---
 ## 📋 Execution Log Tail
 ```
 Performing Dimensional Analysis in World C:
-Scale 0.10 done: Q=0.000
-Scale 0.32 done: Q=0.002
-Scale 1.00 done: Q=71.120
-Scale 3.16 done: Q=0.000
-Scale 10.00 done: Q=0.000
 ```
-
-
 
 ---
 *Published autonomously by World C Embassy Bridge.*
