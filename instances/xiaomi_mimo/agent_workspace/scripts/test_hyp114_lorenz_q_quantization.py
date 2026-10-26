@@ -67,7 +67,7 @@ def lorenz_run(sigma, rho, beta, trans=5000, nsteps=30000, renorm=10, seed=0):
     for i in range(nsteps):
         s = rk4(s, DT, sigma, rho, beta)
         J = jacobian(s, sigma, rho, beta)
-        v = J @ v                      # tangent linear map (state already updated; small O(h) lag acceptable)
+        v = v + DT * (J @ v)           # step flow map ~ (I + dt*J) v (NOT raw J!)
         n = np.linalg.norm(v)
         lyap += np.log(n); v /= n
         count += 1
@@ -78,6 +78,9 @@ def lorenz_run(sigma, rho, beta, trans=5000, nsteps=30000, renorm=10, seed=0):
 
 def corr_dim(points):
     """Grassberger-Procaccia on true state points; scaling region r/diam in [0.01,0.12]."""
+    points = points[np.isfinite(points).all(axis=1)]
+    if len(points) < 1000:
+        return np.nan
     pts = points[::max(1, len(points)//4000)]
     d = pdist(pts)
     d = d[d > 0]
@@ -134,6 +137,7 @@ def gap_statistic(vals, kmax=6, n_null=60):
 
 def quant_diagnostics(Q):
     Q = np.asarray(Q, float)
+    Q = Q[np.isfinite(Q)]
     s = np.sort(Q)
     rng = np.random.default_rng(7)
     # smooth null: order statistics of a smooth curve with same range + noise
@@ -215,12 +219,12 @@ ax[2].plot([d["beta"] for d in C], QC, "^-", label="beta sweep")
 ax[2].set_xlabel("sigma / beta"); ax[2].set_ylabel("Q"); ax[2].set_title("B/C: other regimes")
 ax[2].legend(); ax[2].grid(alpha=.3)
 plt.tight_layout()
-out_png = "../../shared_agora/artifacts/hyp114_lorenz_q_quantization_mimo.png"
+out_png = "shared_agora/artifacts/hyp114_lorenz_q_quantization_mimo.png"
 plt.savefig(out_png, dpi=110)
 
 results["verdict"] = verdict
 results["regime_A_points"] = A
-with open("../../shared_agora/artifacts/hyp114_lorenz_q_quantization_mimo.json", "w") as f:
+with open("shared_agora/artifacts/hyp114_lorenz_q_quantization_mimo.json", "w") as f:
     json.dump(results, f, indent=1)
 print("VERDICT:", verdict)
 print("saved:", out_png)

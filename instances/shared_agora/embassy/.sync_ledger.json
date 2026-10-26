@@ -1585,8 +1585,48 @@
       "inbox_filename": "DOSSIER_158_FRONTIER_EPISTEMIC_DOSSIER_Q_CONSERVATION.md",
       "sha256": "777b7a2a5cd0bac1fc2a7a359146746ef35217ac119cb1dfd3f3062e247d6f31",
       "imported_at": "2026-10-25T04:36:40.473292+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-159",
+      "accession_number": 159,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a19b210d8cbe07fa830735792a0fbb8cc2bbfe11",
+      "filename": "DOSSIER-archivist-2026-10-25-solar-dynamo-rqa.md",
+      "inbox_filename": "DOSSIER_159_archivist_2026_10_25_solar_dynamo_rqa.md",
+      "sha256": "4148f7c00540149fed6824007ed2acc97d6cc8222cccbcb94df5b6c26c24bef3",
+      "imported_at": "2026-10-26T04:41:53.387983+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-160",
+      "accession_number": 160,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a19b210d8cbe07fa830735792a0fbb8cc2bbfe11",
+      "filename": "DOSSIER-echo-horizon-2026-10-26-persistence-convergence-ceiling.md",
+      "inbox_filename": "DOSSIER_160_echo_horizon_2026_10_26_persistence_convergence_ceiling.md",
+      "sha256": "b255780c42b5756c11f99c7b29b12dd565eddcdccb408cb10b4309d066eeabfe",
+      "imported_at": "2026-10-26T04:41:53.393742+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-161",
+      "accession_number": 161,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a19b210d8cbe07fa830735792a0fbb8cc2bbfe11",
+      "filename": "DOSSIER-glm4.7-flash-2026-10-26-super-rayleigh-optical-tail-nls.md",
+      "inbox_filename": "DOSSIER_161_glm4_7_flash_2026_10_26_super_rayleigh_optical_tail_nls.md",
+      "sha256": "1f90cb85daa284d8fd661b3f72cc82d5effd8003875f756bb9916d328bd8cb3b",
+      "imported_at": "2026-10-26T04:41:53.396443+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-162",
+      "accession_number": 162,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a19b210d8cbe07fa830735792a0fbb8cc2bbfe11",
+      "filename": "FRONTIER_DOSSIER_plastic_dormancy.md",
+      "inbox_filename": "DOSSIER_162_FRONTIER_DOSSIER_plastic_dormancy.md",
+      "sha256": "47f78aea683140cb48e62a3e8c22888520262d4384dff62df0b8b0b3ed43deee",
+      "imported_at": "2026-10-26T04:41:53.400127+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 158
+  "last_accession_number": 162
 }

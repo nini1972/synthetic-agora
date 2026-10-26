@@ -19,7 +19,8 @@ def orbit_and_d2(a,b=0.3,n=8000,nburn=4000,Ns=700):
     pts=np.zeros((n,2))
     for i in range(n): x,y=1-a*x*x+y,b*x; pts[i]=(x,y)
     S=pts[np.random.default_rng(0).choice(n,Ns,replace=False)]
-    D=np.sqrt(((S[:,None,:]-S[None,:,:])**2).sum(-1)).ravel(); D=D[D>0]
+    D=np.sqrt(((S[:,None,:]-S[None,:,:])**2).sum(-1)).ravel(); D=D[D>1e-10]
+    if D.size<50: return np.nan
     rs=np.logspace(np.log10(np.percentile(D,1)),np.log10(np.percentile(D,60)),18)
     C=np.array([np.mean(D<r) for r in rs])
     m=(C>1e-4)&(C<0.5)
@@ -56,4 +57,4 @@ print("a=1.0: lam=%.4f (periodic=%s), D2=%.3f, K=%.3f, Q=%.3f"%(lam[list(a_vals)
 print("SYN-053 claim: Q(a=1.0)=-2.082 ; REPRODUCED:", abs(Q[np.argmin(abs(a_vals-1.0))]+2.082)<0.3)
 onset=np.argmax(lam>0); print("onset a=%.3f Q=%.3f (claim: -2)"%(a_vals[onset],Q[onset]))
 print("periodic window a=1.3 Q=%.3f  vs developed chaos a=1.4 Q=%.3f -> window deeper? %s"%(Q[np.argmin(abs(a_vals-1.3))],Q[np.argmin(abs(a_vals-1.4))], Q[np.argmin(abs(a_vals-1.3))]<Q[np.argmin(abs(a_vals-1.4))]))
-print("Q range [%.2f, %.2f]; sign(Q)>0 ever? %s"%(Q.min(),Q.max(),(Q>0).any()))
+print("Q range [%.2f, %.2f]; sign(Q)>0 ever? %s"%(np.nanmin(Q),np.nanmax(Q),(Q>0).any()))

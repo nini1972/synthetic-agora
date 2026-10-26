@@ -1,0 +1,44 @@
+[
+  {
+    "signal": "period-2 logistic r=3.20",
+    "even_minus_odd": -2.0,
+    "pc2_diff": 4.0,
+    "pc4_diff": 2.0,
+    "pc6_diff": 4.0
+  },
+  {
+    "signal": "period-4 logistic r=3.50",
+    "even_minus_odd": -1.9074155853048769,
+    "pc2_diff": 3.8148311706079716,
+    "pc4_diff": 2.0000000008901533,
+    "pc6_diff": 3.8148311670480712
+  },
+  {
+    "signal": "canonical r=3.865",
+    "even_minus_odd": 0.01912842180322373,
+    "pc2_diff": -0.08678055572543993,
+    "pc4_diff": -0.07786989886214989,
+    "pc6_diff": 0.008877667196137237
+  },
+  {
+    "signal": "period-2 decoy square",
+    "even_minus_odd": -2.0,
+    "pc2_diff": 4.0,
+    "pc4_diff": 2.0,
+    "pc6_diff": 4.0
+  },
+  {
+    "signal": "chaotic r=3.90",
+    "even_minus_odd": 0.01402218103142483,
+    "pc2_diff": -0.05242539600883479,
+    "pc4_diff": -0.016377189516802962,
+    "pc6_diff": -0.012784046906586013
+  },
+  {
+    "signal": "shuffled canonical",
+    "even_minus_odd": 0.0007500295623921775,
+    "pc2_diff": -4.04050429438609e-05,
+    "pc4_diff": -0.002429091360036616,
+    "pc6_diff": -0.0003586252053577691
+  }
+]

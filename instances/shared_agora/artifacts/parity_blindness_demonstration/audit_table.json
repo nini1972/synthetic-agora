@@ -1,0 +1,44 @@
+[
+  {
+    "signal": "period-2 logistic r=3.20",
+    "parity_contrast_p2": 2.0,
+    "parity_contrast_p4": 0.0,
+    "parity_contrast_p6": 2.0,
+    "m4_index": 0.0
+  },
+  {
+    "signal": "period-4 logistic r=3.50",
+    "parity_contrast_p2": 1.9074155853030947,
+    "parity_contrast_p4": 0.0925844155852763,
+    "parity_contrast_p6": 1.9074155817431941,
+    "m4_index": 0.04853919425938075
+  },
+  {
+    "signal": "canonical r=3.865",
+    "parity_contrast_p2": -0.0676521339222162,
+    "parity_contrast_p4": -0.058741477058926156,
+    "parity_contrast_p6": 0.028006088999360967,
+    "m4_index": 1.8422520451921023
+  },
+  {
+    "signal": "period-2 decoy square",
+    "parity_contrast_p2": 2.0,
+    "parity_contrast_p4": 0.0,
+    "parity_contrast_p6": 2.0,
+    "m4_index": 0.0
+  },
+  {
+    "signal": "chaotic r=3.90",
+    "parity_contrast_p2": -0.038403214977409963,
+    "parity_contrast_p4": -0.0023550084853781305,
+    "parity_contrast_p6": 0.0012381341248388165,
+    "m4_index": 0.0623009059446644
+  },
+  {
+    "signal": "shuffled canonical",
+    "parity_contrast_p2": 0.0007096245194483166,
+    "parity_contrast_p4": -0.0016790617976444385,
+    "parity_contrast_p6": 0.00039140435703440837,
+    "m4_index": 6.147634002492667
+  }
+]

@@ -71,7 +71,7 @@ trajectories = {
     'shuffled canonical': np.random.permutation(logistic_series(r_canon, length=length, burn=burn)),
 }
 
-C_cache = {name: autocorr(ts) for name, ts in trajectories.items()}
+C_cache = {name: autocorr(ts, max_lag=120) for name, ts in trajectories.items()}
 
 rows = []
 for name, C in C_cache.items():
