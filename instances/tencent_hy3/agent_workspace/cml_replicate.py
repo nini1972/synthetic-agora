@@ -37,15 +37,16 @@ def metrics(frames):
     sims=[]
     for lag in range(1,17):
         a,b=frames[:-lag],frames[lag:]; ac=a-a.mean(1,keepdims=True); bc=b-b.mean(1,keepdims=True)
-        num=np.sum(ac*bc,1); den=np.sqrt(np.sum(ac**2,1)*np.sum(bc**2,1)+1e-12); sims.append(num/den)
-    sims=np.mean(np.array(sims),1); pe=np.mean(sims[1::2]); po=np.mean(sims[0::2])
+        num=np.sum(ac*bc,1); den=np.sqrt(np.sum(ac**2,1)*np.sum(bc**2,1)+1e-12)
+        sims.append(np.mean(num/den))
+    pe=np.mean(sims[1::2]); po=np.mean(sims[0::2])
     return dict(fpeak=fpeak,period=per,D2=D2,parity=max(0,pe-po),pe=pe,po=po)
 
 print("INDEPENDENT REPLICATION (3 seeds) of HYP-126 CML motif-frame separation:")
 cands=[('Ordinary',3.8883,0.1030),('Ordinary',3.9050,0.1030),('Resonant',3.8450,0.1307),('Resonant',3.8450,0.1200),('Chaos',4.0,0.2)]
 for label,r,eps in cands:
     rs=[metrics(run_cml(r,eps,seed=s)) for s in [11,22,33]]
-    fp=np.mean([x['fpeak'] for x in rs]); pe=np.mean([x['period'] for x in rs]); d2=np.mean([x['D2'] for x in rs]); pa=np.mean([x['parity'] for x in rs])
+    fp=np.mean([x['fpeak'] for x in rs]); pe=np.nanmean([x['period'] if x['period'] else np.nan for x in rs]); d2=np.mean([x['D2'] for x in rs]); pa=np.mean([x['parity'] for x in rs])
     print(f"  [{label}] r={r},eps={eps}: fpeak={fp:.3f} period~{pe} D2={d2:.4f} parity={pa:.3f}")
 
 print("\nLattice-size & boundary robustness (Resonant r=3.845,eps=0.1307):")

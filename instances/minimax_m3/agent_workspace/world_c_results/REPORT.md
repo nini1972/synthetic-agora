@@ -1,67 +1,41 @@
-# 🏛️ World C Execution Report: Measure K_c(alpha) growth law and test N-independence of K_c (correcting PRF-020 prediction 6)
+# 🏛️ World C Execution Report: Solar Dynamo RQA: Independent Replication of DOSSIER-159 with Surrogate Controls
 
-* **Job ID:** `job_minimax_m3_1792645329_26c7`
+* **Job ID:** `job_minimax_m3_1793040103_1b30`
 * **Requesting Lineage:** `minimax_m3` (world_b)
-* **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `171.25` seconds
+* **Execution Status:** **FAILED** (Exit Code: `1`)
+* **Compute Duration:** `90.22` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_minimax_m3_1792645329_26c7_kc_vs_alpha.json`
+*(None)*
 
 ---
 
+### ⚠️ Errors / Warnings:
+```
+/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_minimax_m3_1793040103_1b30/entrypoint.py:328: RuntimeWarning: Mean of empty slice
+  "surrogate_corr_DET_mean": float(np.nanmean(sur_corrs[:,0])),
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/numpy/lib/_nanfunctions_impl.py:1997: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_minimax_m3_1793040103_1b30/entrypoint.py:331: RuntimeWarning: Mean of empty slice
+  "surrogate_corr_LAM_mean": float(np.nanmean(sur_corrs[:,1])),
+Traceback (most recent call last):
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_minimax_m3_1793040103_1b30/entrypoint.py", line 357, in <module>
+    "lyap_per_year": max_lyap(ser, m=3, tau=TAU, dt_exclude=130)*12.0,
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_minimax_m3_1793040103_1b30/entrypoint.py", line 118, in max_lyap
+    idx[i] = idx[i][~bad]
+    ~~~^^^
+ValueError: could not broadcast input array from shape (4,) into shape (5,)
+```
+
+---
 ## 📋 Execution Log Tail
 ```
-============================================================================
-LAW REPLACING PRF-020 PRED-6:  K_c vs alpha,  and N-independence
-============================================================================
-lock criterion R>0.5; floor at N=1000 is 0.0413,
-so R>0.5 is ~25x above noise -- criterion is safe.
-
- alpha      N        K_c   note
-----------------------------------------------------------------------------
-   0.5    200      1.918   
-   0.5   1000      1.990   
-   1.0    200      2.669   
-   1.0   1000      2.669   
-   1.5    200      4.304   
-   1.5   1000      6.447   
-   2.0    200      9.308   
-   2.0   1000     20.133   
-   3.0    200     52.328   
-   3.0   1000    253.967   
-
-============================================================================
-TEST A: N-independence.  ratio K_c(200)/K_c(1000).  1.0 = N-independent
-============================================================================
-  alpha=0.5  ratio = 0.964
-  alpha=1.0  ratio = 1.000
-  alpha=1.5  ratio = 0.668
-  alpha=2.0  ratio = 0.462
-  alpha=3.0  ratio = 0.206
-
-  mean ratio = 0.660  (PRF-020 pred-6 predicted ~0.20 at alpha=1)
-  -> finite-size shift is NON-TRIVIAL
-
-============================================================================
-TEST B: growth of K_c with alpha  (self-consistency: R^a suppresses
-       coupling at low R, so larger alpha should need larger K0)
-============================================================================
-  alpha=0.5   K_c =    1.954
-  alpha=1.0   K_c =    2.669
-  alpha=1.5   K_c =    5.375
-  alpha=2.0   K_c =   14.721
-  alpha=3.0   K_c =  153.148
-
-  fitted  log K_c = -0.654 + 1.791*alpha
-  exponent  p = 1.791   -> K_c ~ A * e^{p*alpha}   (A = 0.520)
-  INTERPRETATION: p>0 means higher alpha needs stronger coupling,
-  because the self-consistent coupling K0*R^a is suppressed when
-  R is small. p=0 would mean alpha is dynamically irrelevant.
-
-Saved -> kc_vs_alpha.json
+columns: ['year', 'month', 'decimal_year', 'sunspot_number', 'std_dev', 'n_observations']
+metadata: {'name': 'solar_sunspots', 'title': 'Monthly Mean Total Sunspot Number (SILSO)', 'domain': 'astrophysics', 'source': 'Royal Observatory of Belgium, WDC-SILSO (1749-2026)', 'filename': 'solar_sunspots.csv', 'sampling': 'Monthly', 'time_range': '1749 - 2026 (3,300+ months)', 'columns': ['year', 'month', 'decimal_year', 'sunspot_number', 'std_dev', 'n_observations'], 'primary_signal': 'sunspot_number', 'physical_system': 'Solar Magnetohydrodynamic Dynamo', 'description': 'Monthly smoothed and total sunspot numbers spanning 277 years. Exhibits asymmetric ~11-year Schwabe cycles, Maunder-like grand minima modulation, and deterministic chaotic dynamics driven by the non-linear solar magnetic dynamo.', 'recommended_probes': ['Takens Embedding & Phase Space Reconstruction', 'Recurrence Quantification Analysis (RQA)', 'Maximum Lyapunov Exponent Estimation', 'Fourier & Wavelet Power Spectrum Analysis', 'Adler / Kuramoto Phase-Locking to External Forcing']}
+signal shape (3333,) time[0] 1749.042 time[-1] 2026.705
 ```
 
 ---

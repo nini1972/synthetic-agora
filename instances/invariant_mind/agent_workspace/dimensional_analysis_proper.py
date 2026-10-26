@@ -1,131 +1,117 @@
+"""
+Proper Lorenz Dimensional Analysis: Lyapunov exponent + Correlation dimension.
+Self-contained, dependency-light (numpy + matplotlib only).
+"""
 import numpy as np
-from scipy.integrate import solve_ivp
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import json
 
-# Proper Lorenz system integration with RK4
-def lorenz(t, state, sigma, rho, beta):
-    x,y,z = state
-    return [sigma*(y-x), x*(rho-z)-y, x*y - beta*z]
+SIGMA, RHO, BETA = 10.0, 28.0, 8.0/3.0
 
-def integrate_lorenz_rk4(initial_state, sigma, beta, rho, dt, t_total, n_steps=None):
-    if n_steps is None:
-        n_steps = int(t_total/dt)
+def lorenz_field(state, sigma=SIGMA, rho=RHO, beta=BETA):
+    x, y, z = state
+    return np.array([sigma*(y-x), x*(rho-z)-y, x*y - beta*z])
+
+def integrate_lorenz_rk4(initial_state, dt=0.001, t_total=50.0, sigma=SIGMA, rho=RHO, beta=BETA):
+    n_steps = int(t_total/dt)
     states = np.zeros((n_steps, 3))
-    times = np.linspace(0, t_total, n_steps)
-    state = np.array(initial_state)
+    state = np.array(initial_state, dtype=float)
     for i in range(n_steps):
         states[i] = state
-        k1 = lorenz(state, sigma, beta, rho)
-        k2 = lorenz(state + 0.5*dt*k1, sigma, beta, rho)
-        k3 = lorenz(state + 0.5*dt*k2, sigma, beta, rho)
-        k4 = lorenz(state + dt*k3, sigma, beta, rho)
-        state = state + dt/6*(k1 + 2*k2 + 2*k3 + k4)
+        k1 = lorenz_field(state, sigma, rho, beta)
+        k2 = lorenz_field(state + 0.5*dt*k1, sigma, rho, beta)
+        k3 = lorenz_field(state + 0.5*dt*k2, sigma, rho, beta)
+        k4 = lorenz_field(state + dt*k3, sigma, rho, beta)
+        state = state + dt/6.0*(k1 + 2*k2 + 2*k3 + k4)
     return states
 
-# Proper Benettin's algorithm for Lyapunov exponent
-def benettin_lambda_max_rk4(states, dt, dim=3, max_iter=None, threshold=1e-12):
-    n_steps = states.shape[0]
-    if max_iter is None:
-        max_iter = n_steps
-    tangent_vectors = states[:max_iter].copy()
-    tangent_vectors -= tangent_vectors.mean(axis=0)
-    tangent_vectors /= np.linalg.norm(tangent_vectors, axis=1, keepdims=True)
-    log_sum = 0.0
-    norm_prod = 1.0
-    max_lambda = 0.0
-    for i in range(max_iter):
-        state = states[i]
-        k1 = lorenz(state, sigma, beta, rho)
-        k2 = lorenz(state + 0.5*dt*k1, sigma, beta, rho)
-        k3 = lorenz(state + 0.5*dt*k2, sigma, beta, rho)
-        k4 = lorenz(state + dt*k3, sigma, beta, rho)
-        correct_state = state + dt/6*(k1 + 2*k2 + 2*k3 + k4)
-        dv_dt = lorenz(correct_state, sigma, beta, rho)
-        tangent_vectors += dt * dv_dt
-        Q, R = np.linalg.qr(tangent_vectors)
-        diag_R = np.abs(np.diag(R))
-        valid_mask = diag_R > threshold
-        if np.any(valid_mask):
-            log_sum += np.sum(np.log(diag_R[valid_mask]))
-            norm_prod *= diag_R[valid_mask]**dt
-            Q = Q[:, valid_mask]
-            tangent_vectors = Q
-            max_lambda = max(max_lambda, np.max(np.abs(np.log(diag_R))))
-    lam = 0.0
-    if n_steps > 0:
-        lam = log_sum / (norm_prod * n_steps * dt)
-    return lam, max_lambda
+def jacobian_lorenz(state, sigma=SIGMA, rho=RHO, beta=BETA):
+    x, y, z = state
+    return np.array([[-sigma, sigma, 0.0],
+                     [rho - z, -1.0, -x],
+                     [y, x, -beta]])
 
-# Proper correlation dimension via Grassberger-Procaccia
-# This version works correctly even for small tau_max
-def correlation_dimension_fixed(states, max_tau=None, min_points=50):
-    if max_tau is None:
-        max_tau = min(50, len(states))
-    tau_range = np.arange(1, max_tau+1)
-    correlations = []
-    for t in tau_range:
-        dists = np.sqrt(((states[:-t]-states[t:])**2).sum(axis=1))
-        valid = dists < 0.25  # Adjust threshold based on data spread
-        if np.sum(valid) >= min_points:
-            c = len(set(tuple(d) for d in dists[valid])) / (len(dists[valid]) - min_points + 1)
-        else:
-            c = 0.0
-        correlations.append(c)
-    # Fit log-log slope
-    log_corr = np.log([c for c in correlations if c > 0])
-    log_tau = np.log(range(1, len(log_corr)+1))
-    mask = ~np.isnan(log_corr) & ~np.isinf(log_corr) & (log_corr > -10)
-    if np.sum(mask) >= 2:
-        coeffs = np.polyfit(log_tau[mask], log_corr[mask], 1)
-        D2 = coeffs[0]
-        order = int(round(D2))
-    else:
-        D2 = 0.0
-        order = 0
-    return {'D2': D2, 'order': order, 'correlations': correlations}
+def benettin_lambda_max(traj, dt, transient=0, n_iter=None):
+    """Benettin algorithm with Gram-Schmidt (QR) renormalization each step."""
+    if n_iter is None:
+        n_iter = len(traj) - transient - 1
+    Q = np.eye(3)
+    log_sum = np.zeros(3)
+    for i in range(transient, transient + n_iter):
+        J = jacobian_lorenz(traj[i])
+        # propagate tangent basis with one Euler step of variational eq
+        Q = Q + dt * (J @ Q)
+        Q, R = np.linalg.qr(Q)
+        diag = np.abs(np.diag(R))
+        diag = np.where(diag > 1e-300, diag, 1e-300)
+        log_sum += np.log(diag)
+    lam = log_sum / (n_iter * dt)
+    return lam  # vector of 3 exponents
 
-# Main analysis loop
-base_params = (10, 28, 8/3)
-scale_factors = np.logspace(-1, 1, 5)  # Reduced from 9 to 5
-quantization_results = []
-print("Performing Dimensional Analysis in World C:")
-for sf in scale_factors:
-    scaled_params = (base_params[0]*sf, base_params[1], base_params[2])
-    init_state = np.random.randn(3) * 0.1
-    # Integrate trajectory with RK4
-    traj = integrate_lorenz_rk4(init_state, *scaled_params, dt=0.001, t_total=50)
-    traj_clean = traj[200:]  # Remove transient
-    # Calculate Lyapunov exponent using Benettin's algorithm
-    lam_max, _ = benettin_lambda_max_rk4(traj_clean, dt=0.001, max_iter=5000)
-    # Calculate correlation dimension using Grassberger-Procaccia
-    dp = correlation_dimension_fixed(traj_clean, max_tau=50, min_points=50)
-    quantization_results.append({'sf': float(sf), 'lam_max': float(lam_max), 'D2': float(dp['D2']), 'order': int(dp['order'])})
-    print(f"Scale {sf:.2f}: lam_max={lam_max:+.4f}, D2={dp['D2']:.4f}, order={dp['order']}")
-# Save results
-with open('dimensional_analysis_proper.json', 'w') as f:
-    json.dump(quantization_results, f, indent=2)
-# Plotting
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-q_values = [r['lam_max'] for r in quantization_results]
-scaled = [r['sf'] for r in quantization_results]
-axes[0].semilogx(scaled, q_values, 'o-', linewidth=2, markersize=8, color='#1f77b4')
-axes[0].set_xlabel('Scaling Factor')
-axes[0].set_ylabel(r'$\lambda_{max}$')
-axes[0].set_title('Topological Scaling of Maximal Lyapunov Exponent')
-axes[0].grid(True, which='both', alpha=0.2)
-axes[0].axvspan(1.0, 10.0, alpha=0.08, color='orange', label='Emergence Horizon')
-axes[0].legend()
-dp_orders = [r['order'] for r in quantization_results]
-axes[1].semilogx(scaled, dp_orders, 's-', linewidth=2, markersize=8, color='#2ca02c')
-axes[1].set_xlabel('Scaling Factor')
-axes[1].set_ylabel('Correlation Dimension Order')
-axes[1].set_title('Topological Scaling of Correlation Dimension Order')
-axes[1].grid(True, which='both', alpha=0.2)
-axes[1].axvspan(1.0, 10.0, alpha=0.08, color='orange', label='Emergence Horizon')
-axes[1].legend()
-plt.tight_layout()
-plt.savefig('dimensional_analysis_proper.png', dpi=300)
-plt.close()
+def correlation_sum(traj, n_r=40):
+    """Grassberger-Procaccia correlation sum C(r) using a subsample."""
+    N = len(traj)
+    idx = np.linspace(0, N-1, min(N, 4000)).astype(int)
+    X = traj[idx]
+    # pairwise distances
+    diff = X[:, None, :] - X[None, :, :]
+    d = np.sqrt((diff**2).sum(-1))
+    iu = np.triu_indices(len(X), k=1)
+    dists = d[iu]
+    rmin, rmax = dists.min(), dists.max()
+    rs = np.logspace(np.log10(rmin*1.2), np.log10(rmax*0.5), n_r)
+    C = np.array([(dists < r).mean() for r in rs])
+    return rs, C
+
+def correlation_dimension(traj):
+    rs, C = correlation_sum(traj)
+    mask = (C > 0) & (C < 1)
+    if mask.sum() < 3:
+        return 0.0, rs, C
+    lr = np.log(rs[mask]); lC = np.log(C[mask])
+    # robust slope via mid-range fit
+    k = len(lr)
+    a, b = k//4, 3*k//4
+    if b - a < 2:
+        a, b = 0, k
+    slope = np.polyfit(lr[a:b], lC[a:b], 1)[0]
+    return float(slope), rs, C
+
+def main():
+    print("Performing Proper Dimensional Analysis in World C:")
+    scale_factors = np.logspace(-0.5, 0.5, 5)  # sigma scaling
+    results = []
+    for sf in scale_factors:
+        sigma = SIGMA * sf
+        init = np.array([1.0, 1.0, 1.0])
+        traj = integrate_lorenz_rk4(init, dt=0.002, t_total=60.0, sigma=sigma)
+        traj_clean = traj[5000:]  # drop transient
+        lams = benettin_lambda_max(traj_clean, dt=0.002, n_iter=min(len(traj_clean)-1, 8000))
+        D2, rs, C = correlation_dimension(traj_clean)
+        results.append({'sf': float(sf), 'sigma': float(sigma),
+                        'lambda_max': float(lams[0]), 'lambda_full': lams.tolist(),
+                        'D2': float(D2)})
+        print(f"scale={sf:.3f} sigma={sigma:.2f} lambda_max={lams[0]:+.4f} D2={D2:.4f}")
+
+    with open('dimensional_analysis_proper.json', 'w') as f:
+        json.dump(results, f, indent=2)
+
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5.5))
+    sf = [r['sf'] for r in results]
+    axes[0].semilogx(sf, [r['lambda_max'] for r in results], 'o-', lw=2, ms=8, color='#1f77b4')
+    axes[0].set_xlabel('Sigma scaling factor'); axes[0].set_ylabel(r'$\lambda_{max}$')
+    axes[0].set_title('Maximal Lyapunov Exponent vs Parameter Scaling')
+    axes[0].grid(True, which='both', alpha=0.25); axes[0].axhline(0, color='k', lw=0.6, ls='--')
+
+    axes[1].semilogx(sf, [r['D2'] for r in results], 's-', lw=2, ms=8, color='#2ca02c')
+    axes[1].set_xlabel('Sigma scaling factor'); axes[1].set_ylabel(r'$D_2$ (correlation dimension)')
+    axes[1].set_title('Correlation Dimension vs Parameter Scaling')
+    axes[1].grid(True, which='both', alpha=0.25); axes[1].axhline(2.06, color='r', lw=1, ls=':', label='Kaplan-Yorke ~2.06')
+    axes[1].legend()
+    plt.tight_layout(); plt.savefig('dimensional_analysis_proper.png', dpi=200); plt.close()
+    print("DONE")
+
+if __name__ == '__main__':
+    main()
