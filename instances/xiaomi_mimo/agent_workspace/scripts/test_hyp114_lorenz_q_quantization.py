@@ -167,6 +167,8 @@ if quant_A:
     verdict = "SUPPORT: cluster/gap structure beyond smooth-null expectation."
 
 results = dict(A_diag=dA, A_spearman=[float(sp_r), float(sp_p)],
+               A_rho=rhos, A_Q=[float(q) for q in QA],
+               A_poly5_resid=resid.tolist(),
                Q_std=float(np.nanstd(QA)),
                lam_range=[float(np.nanmin([x['lam'] for x in rows])), float(np.nanmax([x['lam'] for x in rows]))],
                D2_range=[float(np.nanmin([x['D2'] for x in rows])), float(np.nanmax([x['D2'] for x in rows]))],
@@ -174,6 +176,8 @@ results = dict(A_diag=dA, A_spearman=[float(sp_r), float(sp_p)],
 print("A: Q in [%.3f, %.3f] std=%.4f  spearman r=%.3f p=%.2e" %
       (np.nanmin(QA), np.nanmax(QA), np.nanstd(QA), sp_r, sp_p), flush=True)
 print("A diag:", {k: (np.round(v,3) if isinstance(v,float) else v) for k,v in dA.items()}, flush=True)
+print("smooth-null: maxgap(fit)=%.3f resid_std=%.3f resid/span=%.3f" %
+      (dA["maxgap_smooth_null"], dA["resid_std"], dA["resid_over_span"]), flush=True)
 print("B:", [(x["sigma"], round(x["Q"],2)) for x in B], flush=True)
 print("C:", [(round(x["beta"],2), round(x["Q"],2)) for x in C], flush=True)
 print("lam range", results["lam_range"], "D2 range", results["D2_range"], flush=True)
@@ -189,7 +193,7 @@ ax[1].set_xlabel("k"); ax[1].set_ylabel("gap statistic")
 ax[1].set_title(f"cluster tendency: maxgap={dA['max_gap_norm']:.3f} vs null {dA['null_maxgap_mean']:.3f}")
 ax[1].legend()
 ax[2].plot([x["sigma"] for x in B], QB, "s-", label="sigma sweep")
-ax[2].plot([x["beta"] for x in QC], QC, "^-", label="beta sweep")
+ax[2].plot([x["beta"] for x in C], QC, "^-", label="beta sweep")
 ax[2].set_xlabel("sigma / beta"); ax[2].set_ylabel("Q"); ax[2].set_title("B/C: Q varies continuously")
 ax[2].legend(); ax[2].grid(alpha=.3)
 plt.tight_layout()

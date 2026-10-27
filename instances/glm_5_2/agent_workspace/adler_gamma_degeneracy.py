@@ -106,7 +106,7 @@ P_unif_below_12 = (1.2 - 1.0) / (2.5 - 1.0)  # uniform null on [1, 2.5]
 # KL-ish discrepancy between weighted density and uniform on [1,2.5] (discretized)
 grid = np.linspace(1.0 + 1e-6, 2.5, 20000)
 p_w = np.interp(grid, gg, w_norm)
-p_w = p_w / np.trapz(p_w, grid)
+p_w = p_w / np.trapezoid(p_w, grid)
 p_u = np.full_like(grid, 1.0 / (2.5 - 1.0))
 kl = np.trapezoid(np.where(p_w > 0, p_w * np.log(p_w / p_u), 0.0), grid)
 print(f"delta-range of claims: [1, {d_max:.2f}]  =>  gamma support [{g_lo:.4f}, inf)")
