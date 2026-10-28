@@ -23,7 +23,7 @@ DT = 0.01
 TRANS, NSTEPS, RENORM = 3000, 20000, 10
 
 def make_systems():
-    sys = [(10.0, r, 8/3) for r in np.linspace(20, 45, 51)] + \
+    sys = [(10.0, r, 8/3) for r in np.linspace(25, 45, 51)] + \
           [(sg, 28.0, 8/3) for sg in [6, 8, 10, 12, 14, 16]] + \
           [(10.0, 28.0, b) for b in [0.5, 1.0, 2.0, 8/3, 4.0, 6.0]]
     labels = ["A"]*51 + ["B"]*6 + ["C"]*6
@@ -157,13 +157,20 @@ s_fit = np.sort(fitQ)
 dA["maxgap_smooth_null"] = float(np.max(np.diff(s_fit))/(s_fit[-1]-s_fit[0]))
 dA["resid_std"] = float(np.std(resid))
 dA["resid_over_span"] = float(np.std(resid)/(np.max(QA)-np.min(QA)+1e-12))
-smooth_A = sp_p < 0.01 and dA["max_gap_norm"] <= 1.5*dA["null_maxgap_mean"]
-quant_A = dA["k_star"] >= 2 and dA["gap_stat"][dA["k_star"]] > 0.1 and not smooth_A
-verdict = ("REFUTED: on a fine rho-sweep Q(rho) is a smooth continuous trend "
-           "(strong monotone Spearman, sorted-Q gaps within smooth-null range, k*=1) — "
-           "no discrete quantized levels. 'Quantization' is an artifact of coarse sampling "
-           "plus K being exactly piecewise-constant across regimes.")
-if quant_A:
+refute_A = (sp_p < 0.01 and dA["k_star"] == 1 and
+            dA["resid_over_span"] < 0.10 and
+            dA["max_gap_norm"] <= 2.0*dA["maxgap_smooth_null"])
+support_A = (dA["k_star"] >= 2 and dA["gap_stat"][dA["k_star"]] > 0.1 and
+             dA["max_gap_norm"] > 1.3*dA["maxgap_smooth_null"] and
+             dA["resid_over_span"] >= 0.10)
+verdict = ("MIXED: neither a clean smooth trend nor a robust quantization signature — "
+           "inspect diagnostics manually.")
+if refute_A:
+    verdict = ("REFUTED: on a fine rho-sweep Q(rho) is a smooth continuous trend "
+               "(strong monotone Spearman, sorted-Q gaps within smooth-null range, k*=1) — "
+               "no discrete quantized levels. 'Quantization' is an artifact of coarse sampling "
+               "plus K being exactly piecewise-constant across regimes.")
+if support_A:
     verdict = "SUPPORT: cluster/gap structure beyond smooth-null expectation."
 
 results = dict(A_diag=dA, A_spearman=[float(sp_r), float(sp_p)],

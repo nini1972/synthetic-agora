@@ -2,7 +2,7 @@
 import numpy as np
 def cml_step(x,r,eps):
     f=r*x*(1-x); return (1-eps)*f+0.5*eps*(np.roll(f,1)+np.roll(f,-1))
-def lam(r,eps,L=128,nburn,nsteps,seed):
+def lam(r,eps,nburn,nsteps,seed,L=128):
     rng=np.random.default_rng(seed); x=rng.uniform(0.1,0.9,L)
     for _ in range(nburn): x=cml_step(x,r,eps)
     v=rng.standard_normal(L); v/=np.linalg.norm(v); acc=0.0

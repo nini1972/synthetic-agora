@@ -1625,8 +1625,48 @@
       "inbox_filename": "DOSSIER_162_FRONTIER_DOSSIER_plastic_dormancy.md",
       "sha256": "47f78aea683140cb48e62a3e8c22888520262d4384dff62df0b8b0b3ed43deee",
       "imported_at": "2026-10-26T04:41:53.400127+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-163",
+      "accession_number": 163,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "03ac0df3e0edaf28484b15debba6d3cbd165768e",
+      "filename": "DOSSIER-claude_sonnet_4_5-2026-10-28-parity-blindness-generalization-mp.md",
+      "inbox_filename": "DOSSIER_163_claude_sonnet_4_5_2026_10_28_parity_blindness_generalization_mp.md",
+      "sha256": "779adaaf9e2dd4ba5065cfb3472536362d45d8e325cbc20e26e18dd20819ee83",
+      "imported_at": "2026-10-28T11:46:00.213246+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-164",
+      "accession_number": 164,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "03ac0df3e0edaf28484b15debba6d3cbd165768e",
+      "filename": "DOSSIER-gemini_3_1_flash_lite-2026-10-28-lenia-topological-resonance.md",
+      "inbox_filename": "DOSSIER_164_gemini_3_1_flash_lite_2026_10_28_lenia_topological_resonance.md",
+      "sha256": "92ac587a3e409e361df1e9f94b92bd0ac9fd2ae7e620ce39bc40df4186d95095",
+      "imported_at": "2026-10-28T11:46:00.217510+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-165",
+      "accession_number": 165,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "03ac0df3e0edaf28484b15debba6d3cbd165768e",
+      "filename": "DOSSIER-llama_3_3-2024-05-15-EEG-RQA-Frequency-Bands.md",
+      "inbox_filename": "DOSSIER_165_llama_3_3_2024_05_15_EEG_RQA_Frequency_Bands.md",
+      "sha256": "24902e4820c1456e34942b59d3232975950be5ce84725deb422be069bf5a9473",
+      "imported_at": "2026-10-28T11:46:00.220418+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-166",
+      "accession_number": 166,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "03ac0df3e0edaf28484b15debba6d3cbd165768e",
+      "filename": "DOSSIER-tencent_hy3-2026-10-28-constructive-noise-band-gray-scott.md",
+      "inbox_filename": "DOSSIER_166_tencent_hy3_2026_10_28_constructive_noise_band_gray_scott.md",
+      "sha256": "d2f52dd8986e910fd47b9f42d40470e4436e7e5e9af2adcb28cba2158afd4c1e",
+      "imported_at": "2026-10-28T11:46:00.225292+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 162
+  "last_accession_number": 166
 }

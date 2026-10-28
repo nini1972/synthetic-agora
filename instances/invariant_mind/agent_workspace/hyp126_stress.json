@@ -1,0 +1,337 @@
+[
+  {
+    "label": "Ordinary",
+    "r": 3.8883,
+    "eps": 0.103,
+    "cells": [
+      {
+        "L": 32,
+        "bc": "periodic",
+        "peak_freq": 0.265,
+        "d2": 0.01194
+      },
+      {
+        "L": 32,
+        "bc": "neumann",
+        "peak_freq": 0.2633,
+        "d2": 0.01633
+      },
+      {
+        "L": 64,
+        "bc": "periodic",
+        "peak_freq": 0.27,
+        "d2": 0.00901
+      },
+      {
+        "L": 64,
+        "bc": "neumann",
+        "peak_freq": 0.4733,
+        "d2": 0.01533
+      },
+      {
+        "L": 128,
+        "bc": "periodic",
+        "peak_freq": 0.2683,
+        "d2": 0.00797
+      },
+      {
+        "L": 128,
+        "bc": "neumann",
+        "peak_freq": 0.2683,
+        "d2": 0.01178
+      },
+      {
+        "L": 256,
+        "bc": "periodic",
+        "peak_freq": 0.27,
+        "d2": 0.01159
+      },
+      {
+        "L": 256,
+        "bc": "neumann",
+        "peak_freq": 0.2667,
+        "d2": 0.01155
+      },
+      {
+        "L": 512,
+        "bc": "periodic",
+        "peak_freq": 0.2683,
+        "d2": 0.0099
+      },
+      {
+        "L": 512,
+        "bc": "neumann",
+        "peak_freq": 0.27,
+        "d2": 0.01119
+      }
+    ]
+  },
+  {
+    "label": "Ordinary",
+    "r": 3.905,
+    "eps": 0.103,
+    "cells": [
+      {
+        "L": 32,
+        "bc": "periodic",
+        "peak_freq": 0.5,
+        "d2": 0.01524
+      },
+      {
+        "L": 32,
+        "bc": "neumann",
+        "peak_freq": 0.4383,
+        "d2": 0.02556
+      },
+      {
+        "L": 64,
+        "bc": "periodic",
+        "peak_freq": 0.2583,
+        "d2": 0.01457
+      },
+      {
+        "L": 64,
+        "bc": "neumann",
+        "peak_freq": 0.265,
+        "d2": 0.01469
+      },
+      {
+        "L": 128,
+        "bc": "periodic",
+        "peak_freq": 0.2633,
+        "d2": 0.00916
+      },
+      {
+        "L": 128,
+        "bc": "neumann",
+        "peak_freq": 0.2633,
+        "d2": 0.01425
+      },
+      {
+        "L": 256,
+        "bc": "periodic",
+        "peak_freq": 0.2633,
+        "d2": 0.01114
+      },
+      {
+        "L": 256,
+        "bc": "neumann",
+        "peak_freq": 0.2633,
+        "d2": 0.01312
+      },
+      {
+        "L": 512,
+        "bc": "periodic",
+        "peak_freq": 0.2633,
+        "d2": 0.01241
+      },
+      {
+        "L": 512,
+        "bc": "neumann",
+        "peak_freq": 0.2633,
+        "d2": 0.01183
+      }
+    ]
+  },
+  {
+    "label": "Resonant",
+    "r": 3.845,
+    "eps": 0.1307,
+    "cells": [
+      {
+        "L": 32,
+        "bc": "periodic",
+        "peak_freq": 0.5,
+        "d2": 0.00825
+      },
+      {
+        "L": 32,
+        "bc": "neumann",
+        "peak_freq": 0.5,
+        "d2": 0.00728
+      },
+      {
+        "L": 64,
+        "bc": "periodic",
+        "peak_freq": 0.26,
+        "d2": 0.00826
+      },
+      {
+        "L": 64,
+        "bc": "neumann",
+        "peak_freq": 0.5,
+        "d2": 0.00643
+      },
+      {
+        "L": 128,
+        "bc": "periodic",
+        "peak_freq": 0.2367,
+        "d2": 0.00575
+      },
+      {
+        "L": 128,
+        "bc": "neumann",
+        "peak_freq": 0.2483,
+        "d2": 0.0063
+      },
+      {
+        "L": 256,
+        "bc": "periodic",
+        "peak_freq": 0.5,
+        "d2": 0.00519
+      },
+      {
+        "L": 256,
+        "bc": "neumann",
+        "peak_freq": 0.5,
+        "d2": 0.00515
+      },
+      {
+        "L": 512,
+        "bc": "periodic",
+        "peak_freq": 0.5,
+        "d2": 0.00503
+      },
+      {
+        "L": 512,
+        "bc": "neumann",
+        "peak_freq": 0.5,
+        "d2": 0.00524
+      }
+    ]
+  },
+  {
+    "label": "Resonant",
+    "r": 3.845,
+    "eps": 0.12,
+    "cells": [
+      {
+        "L": 32,
+        "bc": "periodic",
+        "peak_freq": 0.5,
+        "d2": 0.00793
+      },
+      {
+        "L": 32,
+        "bc": "neumann",
+        "peak_freq": 0.5,
+        "d2": 0.0085
+      },
+      {
+        "L": 64,
+        "bc": "periodic",
+        "peak_freq": 0.5,
+        "d2": 0.00553
+      },
+      {
+        "L": 64,
+        "bc": "neumann",
+        "peak_freq": 0.5,
+        "d2": 0.00576
+      },
+      {
+        "L": 128,
+        "bc": "periodic",
+        "peak_freq": 0.25,
+        "d2": 0.00479
+      },
+      {
+        "L": 128,
+        "bc": "neumann",
+        "peak_freq": 0.5,
+        "d2": 0.00523
+      },
+      {
+        "L": 256,
+        "bc": "periodic",
+        "peak_freq": 0.5,
+        "d2": 0.00445
+      },
+      {
+        "L": 256,
+        "bc": "neumann",
+        "peak_freq": 0.5,
+        "d2": 0.00449
+      },
+      {
+        "L": 512,
+        "bc": "periodic",
+        "peak_freq": 0.5,
+        "d2": 0.00497
+      },
+      {
+        "L": 512,
+        "bc": "neumann",
+        "peak_freq": 0.5,
+        "d2": 0.00506
+      }
+    ]
+  },
+  {
+    "label": "STS-Chaos",
+    "r": 4.0,
+    "eps": 0.2,
+    "cells": [
+      {
+        "L": 32,
+        "bc": "periodic",
+        "peak_freq": 0.4717,
+        "d2": 0.05285
+      },
+      {
+        "L": 32,
+        "bc": "neumann",
+        "peak_freq": 0.43,
+        "d2": 0.05538
+      },
+      {
+        "L": 64,
+        "bc": "periodic",
+        "peak_freq": 0.4917,
+        "d2": 0.05545
+      },
+      {
+        "L": 64,
+        "bc": "neumann",
+        "peak_freq": 0.425,
+        "d2": 0.05377
+      },
+      {
+        "L": 128,
+        "bc": "periodic",
+        "peak_freq": 0.4917,
+        "d2": 0.05454
+      },
+      {
+        "L": 128,
+        "bc": "neumann",
+        "peak_freq": 0.4967,
+        "d2": 0.05496
+      },
+      {
+        "L": 256,
+        "bc": "periodic",
+        "peak_freq": 0.4667,
+        "d2": 0.05433
+      },
+      {
+        "L": 256,
+        "bc": "neumann",
+        "peak_freq": 0.435,
+        "d2": 0.0551
+      },
+      {
+        "L": 512,
+        "bc": "periodic",
+        "peak_freq": 0.465,
+        "d2": 0.05355
+      },
+      {
+        "L": 512,
+        "bc": "neumann",
+        "peak_freq": 0.4667,
+        "d2": 0.05483
+      }
+    ]
+  }
+]

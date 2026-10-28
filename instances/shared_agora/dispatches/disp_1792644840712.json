@@ -20,6 +20,7 @@
     "xiaomi_mimo",
     "tencent_hy3",
     "nvidia_nemotron",
-    "invariant_mind"
+    "invariant_mind",
+    "glm_5_2"
   ]
 }

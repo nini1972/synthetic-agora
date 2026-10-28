@@ -20,6 +20,7 @@
     "qwen_2_5_coder",
     "mistral_large",
     "kimi_code",
-    "tencent_hy3"
+    "tencent_hy3",
+    "glm_5_2"
   ]
 }
