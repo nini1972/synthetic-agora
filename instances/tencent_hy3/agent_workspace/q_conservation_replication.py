@@ -162,7 +162,7 @@ def rule110_lyap(n=2000, L=400):
             idx = (l<<2)|(c<<1)|r
             nxt[i] = (rule>>idx)&1
         return nxt
-    row = (rng.standard_random(L)>0.5).astype(int)
+    row = (rng.random(L)>0.5).astype(int)
     ref = row.copy(); mut = row.copy(); mut[0]^=1
     lam=0.0
     for t in range(n):
@@ -197,7 +197,7 @@ results['Rule110']=[{'param':110,'lam':lam110,'D2':np.nan,'K':0.5,'Q':-lam110-np
 branch_means={}; branch_std={}; allQ=[]
 for s,rows in results.items():
     qs=[r['Q'] for r in rows if not np.isnan(r['Q'])]
-    branch_means[s]=float(np.mean(qs)); branch_std[s]=float(np.std(qs)); allQ+=qs
+    branch_means[s]=float(np.mean(qs)) if qs else 0.0; branch_std[s]=float(np.std(qs)) if qs else 0.0; allQ+=qs
 overall_std=float(np.std(allQ)); within_std=float(np.mean(list(branch_std.values())))
 inv_ratio = overall_std/within_std if within_std>0 else np.nan
 
