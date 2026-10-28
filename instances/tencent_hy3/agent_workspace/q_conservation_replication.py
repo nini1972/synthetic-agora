@@ -27,19 +27,23 @@ rng = np.random.default_rng(20260927)
 def corr_dim(ts, m=6, tau=8, eps=None, npts=20):
     N = len(ts)
     emb = np.array([ts[i:i+m*tau:tau] for i in range(N - (m-1)*tau)])
+    if len(emb) > 4000:
+        idx = np.linspace(0, len(emb) - 1, 4000, dtype=int)
+        emb = emb[idx]
     emb = emb - emb.mean(0)
     tree = cKDTree(emb)
     if eps is None:
-        d = tree.sparse_distance_matrix(tree, np.percentile(tree.query(emb, 2)[0][:,1], 99)).tocoo()
-        dmax = d.data.max() if len(d.data) else 1.0
-        eps = np.geomspace(dmax*0.05, dmax*0.6, npts)
-    C = np.array([(tree.query_ball_point(p, e) and len(tree.query_ball_point(p, e))) for p in emb for e in [eps[0]]])
-    # vectorized counting
-    C = np.array([np.mean([len(tree.query_ball_point(p, e)) for p in emb]) for e in eps])
-    C = np.maximum(C / len(emb), 1e-12)
+        nn_dists = tree.query(emb, 2)[0][:, 1]
+        pos_dists = nn_dists[nn_dists > 1e-12]
+        dmax = float(np.percentile(pos_dists, 99)) * 4.0 if len(pos_dists) else float(np.std(emb))
+        if dmax <= 1e-12:
+            return 0.0
+        eps = np.geomspace(dmax * 0.05, dmax * 0.6, npts)
+    counts = tree.count_neighbors(tree, eps).astype(float)
+    C = np.maximum((counts - len(emb)) / (len(emb) * max(len(emb) - 1, 1)), 1e-12)
     valid = (C > 1e-3) & (C < 0.5)
     if valid.sum() < 3:
-        return np.nan
+        return 0.0
     slope = np.polyfit(np.log(eps[valid]), np.log(C[valid]), 1)[0]
     return float(np.clip(slope, 0, m))
 
@@ -136,7 +140,7 @@ def ks_run(L=32, Nx=64, T=120.0, dt=0.05):
     lam/= (nT//nstep * renorm)
     d2 = corr_dim(np.array(traj), m=5, tau=4)
     # K transparent: spectral coupling scale ~ max(|kx^2|)/max(|kx^4|) diffusion ratio
-    K = float(kx2.max()/kx4.max())  # O(1/L^2) scaled
+    K = float(np.abs(ikx2).max()/np.maximum(ikx4.max(), 1e-12))  # O(1/L^2) scaled
     return lam, d2, K*L*L  # scale to O(1)
 
 # ---------------------------------------------------------------- Rule110 (CA)

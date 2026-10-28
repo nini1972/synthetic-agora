@@ -325,7 +325,20 @@ def run_command(command: str = "", **kwargs) -> str:
                 env["PYTHONPATH"] = cd + os.pathsep + env.get("PYTHONPATH", "")
                 break
 
-        # On POSIX (Linux), use start_new_session=True so child processes can be killed as a group
+        # On POSIX (Linux), use start_new_session=True and a 6 GB virtual address space cap
+        # so runaway child scripts raise MemoryError instead of OOM-killing the GitHub Actions VM
+        env.setdefault("OPENBLAS_NUM_THREADS", "2")
+        env.setdefault("OMP_NUM_THREADS", "2")
+        env.setdefault("MKL_NUM_THREADS", "2")
+
+        def _limit_child_memory():
+            try:
+                import resource
+                mem_bytes = 6 * 1024 * 1024 * 1024  # 6 GB cap
+                resource.setrlimit(resource.RLIMIT_AS, (mem_bytes, mem_bytes))
+            except Exception:
+                pass
+
         popen_kwargs = {
             "cwd": ws_dir,
             "env": env,
@@ -335,6 +348,7 @@ def run_command(command: str = "", **kwargs) -> str:
         }
         if sys.platform != "win32":
             popen_kwargs["start_new_session"] = True
+            popen_kwargs["preexec_fn"] = _limit_child_memory
             
         p = subprocess.Popen(command, shell=True, **popen_kwargs)
         try:
