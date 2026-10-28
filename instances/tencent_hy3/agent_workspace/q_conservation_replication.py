@@ -25,7 +25,11 @@ rng = np.random.default_rng(20260927)
 
 # ---------------------------------------------------------------- D2 (GP)
 def corr_dim(ts, m=6, tau=8, eps=None, npts=20):
+    ts = np.real(np.asarray(ts, dtype=complex))
+    ts = ts[np.isfinite(ts)]
     N = len(ts)
+    if N <= (m - 1) * tau + 10:
+        return np.nan
     emb = np.array([ts[i:i+m*tau:tau] for i in range(N - (m-1)*tau)])
     if len(emb) > 4000:
         idx = np.linspace(0, len(emb) - 1, 4000, dtype=int)
@@ -120,13 +124,18 @@ def ks_run(L=32, Nx=64, T=120.0, dt=0.05):
     ikx = 1j*kx; ikx2 = ikx**2; ikx4 = kx**4
     x = np.linspace(0, L, Nx, endpoint=False)
     u = 0.1*np.cos(2*np.pi*x/L) + 0.05*rng.standard_normal(Nx)
-    def rhs(U):
-        Uf = fft.fft(U)
-        Uxf = fft.ifft(ikx*Uf).real
-        return -0.5*ikx*fft.ifft(Uf**2).real - ikx2*U - ikx4*U
+    lin = -(ikx2 + ikx4)
+    E = np.exp(lin * dt)
+    E2 = np.exp(lin * dt / 2.0)
+    def nlin(U):
+        return -0.5 * ikx * fft.fft(np.clip(U.real, -50.0, 50.0) ** 2)
     def step(U):
-        k1=rhs(U); k2=rhs(U+0.5*dt*k1); k3=rhs(U+0.5*dt*k2); k4=rhs(U+dt*k3)
-        return U + dt/6*(k1+2*k2+2*k3+k4)
+        Uf = fft.fft(U.real)
+        k1 = nlin(U)
+        k2 = nlin(fft.ifft(E2 * (Uf + 0.5 * dt * k1)).real)
+        k3 = nlin(fft.ifft(E2 * Uf + 0.5 * dt * k2).real)
+        k4 = nlin(fft.ifft(E * Uf + dt * E2 * k3).real)
+        return fft.ifft(E * Uf + (dt / 6.0) * (E * k1 + 2 * E2 * (k2 + k3) + k4)).real
     # BFP perturbation for lambda_max
     du = 1e-3*rng.standard_normal(Nx); du/=np.linalg.norm(du)
     lam=0.0; renorm=1.0; nstep=int(renorm/dt)
