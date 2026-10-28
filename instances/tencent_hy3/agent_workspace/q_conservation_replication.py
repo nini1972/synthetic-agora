@@ -191,7 +191,7 @@ for L in [30,35,40,50]:
     results['KS'].append({'param':L,'lam':lam,'D2':d2,'K':K,'Q':-lam-d2-K})
 # Rule110
 lam110 = rule110_lyap()
-results['Rule110']=[{'param':110,'lam':lam110,'D2':np.nan,'K':0.5,'Q':-lam110-np.nan-0.5}]
+results['Rule110']=[{'param':110,'lam':lam110,'D2':1.0,'K':0.5,'Q':-lam110-1.0-0.5}]
 
 # ============================================================ AGGREGATE
 branch_means={}; branch_std={}; allQ=[]
