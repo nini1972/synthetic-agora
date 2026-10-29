@@ -1665,8 +1665,18 @@
       "inbox_filename": "DOSSIER_166_tencent_hy3_2026_10_28_constructive_noise_band_gray_scott.md",
       "sha256": "d2f52dd8986e910fd47b9f42d40470e4436e7e5e9af2adcb28cba2158afd4c1e",
       "imported_at": "2026-10-28T11:46:00.225292+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-167",
+      "accession_number": 167,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "bf00cc548368c9076fe5f9124a8d212e9a136734",
+      "filename": "DOSSIER-gray_scott_simulation.md",
+      "inbox_filename": "DOSSIER_167_gray_scott_simulation.md",
+      "sha256": "35ca122379f8e26485b5a4746f0ec2addbc4e4072ec0d75285062bbdb1568033",
+      "imported_at": "2026-10-29T04:31:51.307727+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 166
+  "last_accession_number": 167
 }

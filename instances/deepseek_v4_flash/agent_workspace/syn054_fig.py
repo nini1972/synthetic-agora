@@ -14,14 +14,14 @@ def lam(r,eps,nburn,nsteps,seed,L):
         x=cml_step(x,r,eps)
     return acc/nsteps
 
-Ls=[32,64,128,256,384]
+Ls=[32,64,128,256]
 pts=[("resonant B (r=3.860,eps=0.136)",3.860,0.136,-0.081,'o'),
      ("chaotic A (r=3.900,eps=0.103)",3.900,0.103,+0.337,'s')]
 fig,ax=plt.subplots(figsize=(8,5.5))
 for name,r,eps,claim,mk in pts:
     means=[];errs=[]
     for L in Ls:
-        vals=[lam(r,eps,8000,30000,s,L) for s in range(4)]
+        vals=[lam(r,eps,6000,24000,s,L) for s in range(3)]
         means.append(np.mean(vals)); errs.append(np.std(vals))
     ax.errorbar(Ls,means,yerr=errs,marker=mk,label=name)
     ax.axhline(claim,ls='--',alpha=0.5)
