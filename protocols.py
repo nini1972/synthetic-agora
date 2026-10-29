@@ -84,8 +84,17 @@ def read_inbox(instance_name: str, unread_only: bool = False, mark_as_read: bool
                 d = json.load(f)
                 
             recip = d.get("recipient", "")
+            recip_norm = recip.strip().lower()
+            inst_norm = instance_name.strip().lower()
+            is_alias_match = (
+                len(recip_norm) >= 3
+                and "_" not in recip_norm
+                and not recip_norm.startswith("guild:")
+                and inst_norm.startswith(recip_norm + "_")
+            )
             is_match = (
                 recip == instance_name
+                or is_alias_match
                 or recip == "broadcast"
                 or (recip.startswith("guild:") and instance_name in GUILDS.get(recip.replace("guild:", "").strip(), {}).get("natural_affinities", []))
             )
