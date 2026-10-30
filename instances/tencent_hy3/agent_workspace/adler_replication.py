@@ -39,8 +39,8 @@ def fp_stationary_r(dw, nphi=4000):
     A=np.vstack([A, np.ones(n)])
     b=np.zeros(n+1); b[-1]=1.0
     p,*_=np.linalg.lstsq(A,b,rcond=None)
-    p=np.clip(p,1e-300,None); p=p/np.trapz(p,phi)
-    return float(np.abs(np.trapz(np.exp(1j*phi)*p,phi)))
+    p=np.clip(p,1e-300,None); p=p/trapz(p,phi)
+    return float(np.abs(trapz(np.exp(1j*phi)*p,phi)))
 
 # ---- (M1) Long-time MC (lean, vectorized step) ----
 def mc_r(dw, N=4000, dt=0.05, Ttr=200.0, Tm=600.0, seed=0):
@@ -55,7 +55,7 @@ def mc_r(dw, N=4000, dt=0.05, Ttr=200.0, Tm=600.0, seed=0):
         dW=np.sqrt(dt)*rng.standard_normal(N)
         th=(th+(K*np.cos(th)-dw+(sigma**2/2)*np.sin(th)*np.cos(th))*dt+sigma*dW)%(2*np.pi)
         Rs.append(np.abs(np.mean(np.exp(1j*th))))
-    return float(np.mean(Rs)),float(np.std(Rs))
+    return float(np.mean(Rs)),float(np.std(np.asarray(Rs)))
 
 dw=int(sys.argv[1]) if len(sys.argv)>1 else 4
 claims={4:0.5271,5:0.3769,6:0.300}

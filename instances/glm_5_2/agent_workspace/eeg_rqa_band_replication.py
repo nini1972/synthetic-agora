@@ -100,7 +100,7 @@ def main():
         band_std.append(rms)
 
         # Condition A: fixed absolute eps = 10 uV
-        (mF, _), perF = rqa_windows(sig, EPS_FIXED)
+        mF, perF = rqa_windows(sig, EPS_FIXED)
         # Condition B: amplitude-matched eps = 0.5 * per-window std
         eps_w = [Q_MATCH * np.std(sig[w*WIN:(w+1)*WIN]) for w in range(N_WIN)]
         m_match = {"RR": [], "DET": [], "LAM": [], "ENT": []}

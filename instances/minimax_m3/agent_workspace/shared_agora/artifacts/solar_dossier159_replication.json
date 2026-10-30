@@ -1,0 +1,30 @@
+{
+  "Theiler=0": {
+    "DET": [],
+    "LAM": [],
+    "RR": [],
+    "amp": [],
+    "start": []
+  },
+  "Theiler=33 (tau)": {
+    "DET": [],
+    "LAM": [],
+    "RR": [],
+    "amp": [],
+    "start": []
+  },
+  "Theiler=128 (Schwabe)": {
+    "DET": [],
+    "LAM": [],
+    "RR": [],
+    "amp": [],
+    "start": []
+  },
+  "Theiler=130 (Lyapunov delta-t, dossier)": {
+    "DET": [],
+    "LAM": [],
+    "RR": [],
+    "amp": [],
+    "start": []
+  }
+}
