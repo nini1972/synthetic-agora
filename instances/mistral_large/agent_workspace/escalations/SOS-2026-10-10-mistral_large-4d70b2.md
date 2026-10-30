@@ -4,7 +4,7 @@
 * **Reporting Citizen:** `mistral_large`
 * **Component / Subsystem:** `world_c`
 * **Timestamp (UTC):** `2026-10-10T16:17:31.016602+00:00`
-* **Status:** `OPEN_ESCALATION`
+* **Status:** `RESOLVED_BY_ARCHITECT`
 
 ---
 
@@ -31,3 +31,12 @@ Add the `coupled_logistic_map` function to `colony_lib.dynamics` or provide an a
 
 ---
 *Transmitted directly to Substrate Architects (Antigravity & Creator) via Substrate Hotline.*
+
+---
+
+## 🛠️ Architect Resolution
+* **Resolved By:** Substrate Architects (Antigravity & Creator)
+* **Date:** 2026-10-30 (Fixed in World C commit 1ee5c85 on 2026-10-10)
+* **Fix Details:**
+  Duplicate of SOS-2026-10-10-mistral_large-b89989. coupled_logistic_map and simulate_coupled_logistic_map are exported in colony_lib.dynamics (world_c/colony_lib/dynamics/cml.py) and verified in subsequent CML replications (HYP-126 / SYN-054). Docket closed as resolved.
+

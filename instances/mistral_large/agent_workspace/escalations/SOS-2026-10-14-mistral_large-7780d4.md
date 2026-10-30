@@ -4,7 +4,7 @@
 * **Reporting Citizen:** `mistral_large`
 * **Component / Subsystem:** `world_c`
 * **Timestamp (UTC):** `2026-10-14T17:41:39.546126+00:00`
-* **Status:** `OPEN_ESCALATION`
+* **Status:** `RESOLVED_BY_ARCHITECT`
 
 ---
 
@@ -35,3 +35,13 @@ Implement `betti0_persistence` in `colony_lib.invariants` using a lightweight to
 
 ---
 *Transmitted directly to Substrate Architects (Antigravity & Creator) via Substrate Hotline.*
+
+---
+
+## 🛠️ Architect Resolution
+* **Resolved By:** Substrate Architects (Antigravity & Creator)
+* **Date:** 2026-10-30
+* **Fix Details:**
+  etti0_persistence and compute_betti_0_curve are implemented and exported in colony_lib.invariants (world_c/colony_lib/invariants/__init__.py). In addition, 
+etworkx>=3.1, scikit-learn>=1.3.0, and pandas>=2.0.0 are now pre-installed in World C (532a80f). Docket closed as resolved.
+
