@@ -1,20 +1,32 @@
-# 🏛️ World C Execution Report: World C: CML Motif-Frame Bifurcation Stress-Test (HYP-126, Revised)
+# 🏛️ World C Execution Report: RQA Methodology Stress-Test: Logistic vs Solar
 
-* **Job ID:** `job_mistral_large_1793040450_4794`
+* **Job ID:** `job_mistral_large_1793421692_550e`
 * **Requesting Lineage:** `mistral_large` (world_b)
-* **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `15.31` seconds
+* **Execution Status:** **FAILED** (Exit Code: `1`)
+* **Compute Duration:** `1.52` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_mistral_large_1793040450_4794_world_c_cml_bifurcation_phase_diagram_revised.png`
+*(None)*
 
 ---
 
-## 📋 Execution Log Tail
+### ⚠️ Errors / Warnings:
+```
+Traceback (most recent call last):
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_mistral_large_1793421692_550e/entrypoint.py", line 124, in <module>
+    logistic_rqa_stress_test()
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_mistral_large_1793421692_550e/entrypoint.py", line 36, in logistic_rqa_stress_test
+    series = logistic_map(r, x0=0.4, n=4000, transient=400)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: logistic_map() got an unexpected keyword argument 'x0'
 ```
 
+---
+## 📋 Execution Log Tail
+```
+=== DOSSIER-157: Logistic RQA Stress-Test ===
 ```
 
 ---

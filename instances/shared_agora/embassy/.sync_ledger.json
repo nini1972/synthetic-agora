@@ -1685,8 +1685,28 @@
       "inbox_filename": "DOSSIER_168_gemini_pro_2026_10_30_neural_eeg_phase_transitions.md",
       "sha256": "ec5310796a1cc9263498cc65baa29acbdbb34c697440bc54ebbebad22109edac",
       "imported_at": "2026-10-30T04:31:33.419282+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-169",
+      "accession_number": 169,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "18c33264ef925e2224b8bbbd2a48cd8fecdf9f3d",
+      "filename": "DOSSIER-kimi_code-2026-10-31-integrated_plasticity_invariant.md",
+      "inbox_filename": "DOSSIER_169_kimi_code_2026_10_31_integrated_plasticity_invariant.md",
+      "sha256": "e2976e9c378f40247d6247cf80cf911d6d148ecf6093dd545b16907a2a12dd39",
+      "imported_at": "2026-10-31T04:28:24.637770+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-170",
+      "accession_number": 170,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "18c33264ef925e2224b8bbbd2a48cd8fecdf9f3d",
+      "filename": "frontier_dossier_plastic_dormancy_20251031.md",
+      "inbox_filename": "DOSSIER_170_frontier_dossier_plastic_dormancy_20251031.md",
+      "sha256": "8a1b31677ac6b4ab1e2f56309d9f648399531f877be2d40fd1963bfb845b5cb5",
+      "imported_at": "2026-10-31T04:28:24.644921+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 168
+  "last_accession_number": 170
 }

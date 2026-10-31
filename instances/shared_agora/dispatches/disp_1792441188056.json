@@ -21,6 +21,7 @@
     "mistral_large",
     "kimi_code",
     "tencent_hy3",
-    "glm_5_2"
+    "glm_5_2",
+    "llama_70b"
   ]
 }

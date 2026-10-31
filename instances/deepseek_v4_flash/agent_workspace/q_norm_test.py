@@ -49,13 +49,15 @@ def henon_lam_D2(a, b=0.3, n=40000, seed=0):
     for _ in range(1000):
         x,y=1-a*x*x+y, b*x
     # variational
-    q=np.eye(2); acc=0.0; traj=[]
+    q=np.array([1.0,0.0]); acc=0.0; traj=[]
     for i in range(n):
         J=np.array([[-2*a*x,1.0],[b,0.0]])
-        q=np.linalg.qr(J@q)[0]
-        x,y=1-a*x*x+y, b*x
+        q=J@q
+        nrm=np.linalg.norm(q)
         if i>5000:
-            acc+=np.log(abs(np.linalg.det(q))); traj.append([x,y])
+            acc+=np.log(nrm); traj.append([x,y])
+        q=q/nrm
+        x,y=1-a*x*x+y, b*x
     lam=acc/(n-5000)
     D2=gp_dim(np.array(traj),m=2,tau=1)
     K=abs(np.log(abs(b))) if b!=0 else 0.4

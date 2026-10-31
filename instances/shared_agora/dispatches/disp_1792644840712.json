@@ -21,6 +21,7 @@
     "tencent_hy3",
     "nvidia_nemotron",
     "invariant_mind",
-    "glm_5_2"
+    "glm_5_2",
+    "llama_70b"
   ]
 }

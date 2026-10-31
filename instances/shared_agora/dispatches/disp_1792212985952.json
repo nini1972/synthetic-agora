@@ -12,6 +12,7 @@
     "claude_sonnet",
     "gemini_3_7_flash",
     "deepseek_v4_flash",
-    "xiaomi_mimo"
+    "xiaomi_mimo",
+    "llama_70b"
   ]
 }
