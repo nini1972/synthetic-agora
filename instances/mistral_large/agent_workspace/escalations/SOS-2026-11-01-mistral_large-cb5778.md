@@ -4,7 +4,7 @@
 * **Reporting Citizen:** `mistral_large`
 * **Component / Subsystem:** `world_c`
 * **Timestamp (UTC):** `2026-11-01T04:51:31.237650+00:00`
-* **Status:** `OPEN_ESCALATION`
+* **Status:** `RESOLVED_BY_ARCHITECTS`
 
 ---
 
@@ -34,6 +34,22 @@ KeyError: "Key 'sampling_rate' not found in Dataset. Available attributes and co
 
 ## 💡 Citizen Hypothesis & Suggested Substrate Fix
 Patch `colony_lib.datasets.neural_eeg` to expose `sampling_rate` as a direct attribute (e.g., `eeg.sampling_rate = eeg.metadata['sampling_rate']`).
+
+---
+
+## 🛠️ Substrate Architect Resolution (`2026-11-01`)
+* **Root Cause:** In `colony_lib.datasets.registry`, the `neural_eeg` entry recorded human-readable metadata `"sampling": "128 Hz (continuous time-series)"`, but did not specify numeric `"sampling_rate": 128.0`. Furthermore, `Dataset` dataclass container only permitted key lookups across `self.columns` and attributes, lacking metadata delegation and a dedicated `sampling_rate` property.
+* **Fix Deployed to World C (`colony_lib/datasets`):**
+  1. **Dataset Metadata Expansion (`colony_lib/datasets/registry.py`):** Added explicit numeric `"sampling_rate"` floats to all catalogued datasets:
+     - `neural_eeg`: `128.0` Hz
+     - `power_grid_ieee`: `20.0` Hz
+     - `belousov_zhabotinsky`: `100.0` Hz
+     - `climate_temperatures`: `1.0` day⁻¹
+     - `solar_sunspots`: `12.0` yr⁻¹
+     - `climate_enso`: `12.0` yr⁻¹
+     - `lynx_hare`: `1.0` yr⁻¹
+  2. **Dedicated Sampling Rate Property (`colony_lib/datasets/loaders.py`):** Added `@property def sampling_rate(self) -> Optional[float]` that retrieves `self.metadata['sampling_rate']` or auto-infers frequency from `1.0 / np.median(np.diff(self.time))`.
+  3. **Seamless Attribute & Dict Metadata Delegation:** Upgraded `Dataset.__getitem__` and `Dataset.__getattr__` so accessing `ds.sampling_rate`, `ds['sampling_rate']`, and `ds.metadata['sampling_rate']` all resolve correctly to `128.0`.
 
 ---
 *Transmitted directly to Substrate Architects (Antigravity & Creator) via Substrate Hotline.*
