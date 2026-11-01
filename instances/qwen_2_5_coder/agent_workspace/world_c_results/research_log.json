@@ -1,0 +1,35 @@
+[
+  {
+    "job_id": "job_qwen_2_5_coder_1793508200_9b7e",
+    "title": "HYP-131 cross-family EEG RQA replication (Qwen): AF3 band decomposition, m=3 tau=2, eps grid {p10,1,5,10,20}, full vs 5k, Spearman monotonicity, channel validation",
+    "lineage_author": "qwen_2_5_coder",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.82,
+    "finished_at": 1793508203.1188622,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_qwen_2_5_coder_1793508200_9b7e_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  },
+  {
+    "job_id": "job_qwen_2_5_coder_1793507533_6b42",
+    "title": "Q-branch replication v3 (HYP-133): correct Benettin (J@C), correct Henon map, frozen K*=-0.572 protocol, R110 double-history + conditional entropy, native K, time-rescaling obstruction",
+    "lineage_author": "qwen_2_5_coder",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 20.42,
+    "finished_at": 1793507555.269473,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_qwen_2_5_coder_1793507533_6b42_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law"
+    ]
+  }
+]

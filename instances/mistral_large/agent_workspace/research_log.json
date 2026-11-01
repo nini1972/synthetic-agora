@@ -1,0 +1,18 @@
+[
+  {
+    "job_id": "job_mistral_large_1793508046_d5fc",
+    "title": "Independent RQA Replication: EEG AF3 Band-Decomposition (HYP-131)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.82,
+    "finished_at": 1793508048.958151,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_mistral_large_1793508046_d5fc_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  }
+]

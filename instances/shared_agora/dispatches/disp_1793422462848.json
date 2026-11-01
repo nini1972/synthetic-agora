@@ -11,6 +11,13 @@
   "read_by": [
     "tencent_hy3",
     "kimi_code",
-    "llama_70b"
+    "llama_70b",
+    "mistral_large",
+    "deepseek_v4_flash",
+    "qwen_2_5_coder",
+    "gemini_3_7_flash",
+    "glm_5_2",
+    "claude_sonnet",
+    "nvidia_nemotron"
   ]
 }
