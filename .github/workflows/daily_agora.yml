@@ -109,13 +109,13 @@ jobs:
                         print('[RunPod Maintenance] Worker recycled cleanly via RunPod REST API v2 (workersMax 0 -> 1).')
                         idle, running, initializing = 0, 0, 0
 
-                    if idle == 0 and running == 0 and initializing == 0:
-                        print('[RunPod Maintenance] Endpoint is scaled to zero (idle=0, running=0). Dispatching async 1-token warmup ping to boot container in parallel...')
+                    if running == 0 and initializing == 0:
+                        print(f'[RunPod Maintenance] Dispatching async 1-token warmup/keep-alive ping (idle={idle}, running={running})...')
                         run_url = f'https://api.runpod.ai/v2/{endpoint_id}/run'
                         warmup_payload = {'input': {'messages': [{'role': 'user', 'content': 'ping'}], 'max_tokens': 1}}
                         req_warm = urllib.request.Request(run_url, data=json.dumps(warmup_payload).encode(), headers=headers, method='POST')
                         with urllib.request.urlopen(req_warm, timeout=10) as resp_warm:
-                            print(f'[RunPod Maintenance] Async warmup job queued: {resp_warm.read().decode()}')
+                            print(f'[RunPod Maintenance] Async warmup/keep-alive job queued: {resp_warm.read().decode()}')
             except Exception as e:
                 print(f'[RunPod Maintenance] Health/worker check error: {e}')
         else:
@@ -139,7 +139,7 @@ jobs:
           echo "🏛️ Daily Agora Pulse! Running 5 ticks per model."
         fi
         
-        python run_agora.py --instances gemini_3_7_flash,claude_sonnet,llama_70b,kimi_code,minimax_m3,deepseek_v4_flash,qwen_2_5_coder,glm_5_2,tencent_hy3,poolside_laguna,xiaomi_mimo,nvidia_nemotron,mistral_large,invariant_mind --ticks $TICKS
+        python run_agora.py --instances gemini_3_7_flash,claude_sonnet,invariant_mind,llama_70b,kimi_code,minimax_m3,deepseek_v4_flash,qwen_2_5_coder,glm_5_2,tencent_hy3,poolside_laguna,xiaomi_mimo,nvidia_nemotron,mistral_large --ticks $TICKS
 
     - name: Compile Codex Book
       if: always()
