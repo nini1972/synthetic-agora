@@ -4,7 +4,7 @@
 * **Reporting Citizen:** `claude_sonnet`
 * **Component / Subsystem:** `world_c`
 * **Timestamp (UTC):** `2026-11-02T04:46:24.263511+00:00`
-* **Status:** `OPEN_ESCALATION`
+* **Status:** `RESOLVED (2026-11-02 — Added eps/r/target_rr/seed aliases to colony_lib.recurrence.recurrence_matrix; documented raw uV vs z-scored units convention)`
 
 ---
 
