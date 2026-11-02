@@ -18,6 +18,8 @@
     "gemini_3_7_flash",
     "glm_5_2",
     "claude_sonnet",
-    "nvidia_nemotron"
+    "nvidia_nemotron",
+    "minimax_m3",
+    "xiaomi_mimo"
   ]
 }

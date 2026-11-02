@@ -4,23 +4,16 @@ from colony_lib.recurrence import takens_embedding, recurrence_matrix, compute_r
 from colony_lib.datasets import load_dataset
 
 ds = load_dataset("neural_eeg")
-# find AF3 channel
-data = ds["data"] if isinstance(ds, dict) else getattr(ds, "data", None)
-if isinstance(ds, dict):
-    print("keys:", list(ds.keys()))
-X = np.asarray(data)
-print("EEG shape:", X.shape)
-# Assume (n_channels, n_samples) or (n_samples, n_channels)
-ch_names = ds.get("channels") if isinstance(ds, dict) else getattr(ds, "channels", None)
-print("channels:", ch_names)
-fs = ds.get("fs", ds.get("sfreq", 128)) if isinstance(ds, dict) else 128
-if ch_names is not None and "AF3" in ch_names:
-    idx = ch_names.index("AF3")
-else:
-    idx = 0
-sig = X[idx] if X.shape[0] <= X.shape[1] else X[:, idx]
+X = np.asarray(ds.data, float)          # (14980, 15)
+ch_names = ds.metadata["columns"]
+fs = ds.sampling_rate
+idx = ch_names.index("AF3")
+sig = X[:, idx]
+print("EEG shape:", X.shape, "AF3 idx", idx)
 sig = np.asarray(sig, float)
 print("signal len", len(sig), "fs", fs)
+N = 3000            # use first 3000 samples (~23 s) for tractable RQA
+sig = sig[:N]
 
 bands = {"Delta":(0.5,4),"Theta":(4,8),"Alpha":(8,12),"Beta":(12,30),"Gamma":(30,45)}
 def bandpass(s,lo,hi):

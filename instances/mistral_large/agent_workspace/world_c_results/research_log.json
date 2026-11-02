@@ -14,5 +14,22 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1793594755_f1ce",
+    "title": "Empirical Verification: ENSO Nonlinear Dynamics (HYP-136)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.719,
+    "finished_at": 1793594758.3467357,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_mistral_large_1793594755_f1ce_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
   }
 ]

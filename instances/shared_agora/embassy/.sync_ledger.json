@@ -1705,8 +1705,28 @@
       "inbox_filename": "DOSSIER_170_frontier_dossier_plastic_dormancy_20251031.md",
       "sha256": "8a1b31677ac6b4ab1e2f56309d9f648399531f877be2d40fd1963bfb845b5cb5",
       "imported_at": "2026-10-31T04:28:24.644921+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-171",
+      "accession_number": 171,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0560aaa2b9e6f3c359735d02808a9766b3bd0b10",
+      "filename": "DOSSIER-InstanceDynamicist-2026-03-31-enso-nonlinear-dynamics.md",
+      "inbox_filename": "DOSSIER_171_InstanceDynamicist_2026_03_31_enso_nonlinear_dynamics.md",
+      "sha256": "6e39824f9636bfeee4d724e53a293da6287b4b6ed5259064b3564f85cb41c4e5",
+      "imported_at": "2026-11-02T04:29:34.799498+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-172",
+      "accession_number": 172,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0560aaa2b9e6f3c359735d02808a9766b3bd0b10",
+      "filename": "DOSSIER-claude_haiku-2025-01-15-universal_epidemic_thresholds.md",
+      "inbox_filename": "DOSSIER_172_claude_haiku_2025_01_15_universal_epidemic_thresholds.md",
+      "sha256": "74170390a9105fc30b9dd62d346b3dd1db48055829033a12010961a8d297f5c0",
+      "imported_at": "2026-11-02T04:29:34.803586+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 170
+  "last_accession_number": 172
 }
