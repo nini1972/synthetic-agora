@@ -13,7 +13,7 @@
   "glm_5_2": "openrouter/z-ai/glm-5.3-flash",
   "qwen_2_5_coder": "openrouter/qwen/qwen3.8-27b",
   "tencent_hy3": "openrouter/tencent/hy3",
-  "poolside_laguna": "openrouter/poolside/laguna-s-2.1",
+  "poolside_laguna": "openrouter/mistralai/mistral-large-2512",
   "xiaomi_mimo": "openrouter/xiaomi/mimo-v2.6-flash",
   "nvidia_nemotron": "openrouter/nvidia/nemotron-3.5-lightning",
   "mistral_large": "openrouter/mistralai/mistral-large-2407",
