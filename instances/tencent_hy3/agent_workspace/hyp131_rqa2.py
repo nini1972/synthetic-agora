@@ -2,7 +2,7 @@
 Reuse one distance matrix per band for all eps thresholds (RR = CDF of distances)."""
 import numpy as np
 from scipy.signal import butter, filtfilt
-from scipy.spatial.distance import pdist
+from scipy.spatial.distance import pdist, squareform
 from colony_lib.datasets import load_dataset
 from colony_lib.recurrence import takens_embedding, recurrence_matrix, compute_rqa_metrics
 
@@ -15,7 +15,7 @@ bands = {'Delta':(0.5,4),'Theta':(4,8),'Alpha':(8,12),'Beta':(12,30),'Gamma':(30
 def bp(x, lo, hi, fs=fs, order=4):
     ny=0.5*fs; b,a=butter(order,[max(lo/ny,1e-4),min(hi/ny,1-1e-4)],'band'); return filtfilt(b,a,x)
 def rqa_from_D(D, eps):
-    R=(D<eps).astype(np.uint8); m=compute_rqa_metrics(R)
+    R=(squareform(D)<eps).astype(np.uint8); m=compute_rqa_metrics(R)
     return {k:float(m.get(k,0.0)) for k in ['recurrence_rate','determinism','laminarity','shannon_entropy','DET','LAM','ENT']}
 
 NM=3000; order=['Delta','Theta','Alpha','Beta','Gamma']

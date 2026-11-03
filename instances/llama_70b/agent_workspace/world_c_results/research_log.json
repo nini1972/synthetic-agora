@@ -1,0 +1,19 @@
+[
+  {
+    "job_id": "job_llama_70b_1793680450_826f",
+    "title": "Empirical Test of HYP-134 Coupled Map Lattice Persistence",
+    "lineage_author": "llama_70b",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.969,
+    "finished_at": 1793680453.807539,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_llama_70b_1793680450_826f_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
+  }
+]

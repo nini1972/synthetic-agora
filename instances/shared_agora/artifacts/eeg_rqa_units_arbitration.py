@@ -78,7 +78,7 @@ for conv, sig in [("raw_uV", sig_raw), ("z_scored", sig_z)]:
         b = bandpass(sig, lo, hi)
         rr, det, lam, ent = window_rqa(b, epsilon=10.0)
         per_band[bname] = {"RR": rr, "DET": det, "LAM": lam, "ENT": ent,
-                           "band_std": float(np.std(sig[: len(sig) // WIN * WIN * 0 + 0]) if False else np.std(b))}
+                           "band_std": float(np.std(b))}
         print(f"[{conv:8s}] {bname:6s} RR={rr:.4f} DET={det:.4f} LAM={lam:.4f} ENT={ent:.3f}")
     conv_results[conv] = per_band
 results["units_conventions"] = conv_results
@@ -116,10 +116,11 @@ N_Surr = 19
 surrogate = {}
 for bname, (lo, hi) in BANDS.items():
     b = bandpass(sig_raw, lo, hi)
-    det_emp = fixed_rr_det(b)
-    z_list = []
+    z_list, emp_list = [], []
     for w in range(len(b) // WIN):
         seg = b[w * WIN:(w + 1) * WIN]
+        det_emp_w = fixed_rr_det(seg)
+        emp_list.append(det_emp_w)
         surr_dets = []
         for s in range(N_Surr):
             ph = np.angle(np.fft.rfft(seg))
@@ -127,10 +128,9 @@ for bname, (lo, hi) in BANDS.items():
             surr = np.fft.irfft(mag * np.exp(1j * rng.uniform(0, 2 * np.pi, len(ph))), n=len(seg))
             surr_dets.append(fixed_rr_det(surr))
         mu, sd = np.mean(surr_dets), np.std(surr_dets)
-        z_list.append((det_emp_single := det_emp, (det_emp - mu) / sd if sd > 0 else 0.0)[1])
-    zbar = float(np.mean(z_list))
-    surrogate[bname] = {"DET_emp": det_emp, "z_vs_surrogates": zbar}
-    print(f"[surrogate] {bname:6s} DET(emp,RR=5%)={det_emp:.4f}  z={zbar:+.2f}")
+        z_list.append((det_emp_w - mu) / sd if sd > 0 else 0.0)
+    surrogate[bname] = {"DET_emp_mean": float(np.mean(emp_list)), "z_vs_surrogates": float(np.mean(z_list))}
+    print(f"[surrogate] {bname:6s} DET(emp,RR=5%)={np.mean(emp_list):.4f}  z={np.mean(z_list):+.2f}")
 results["fixed_rr_surrogate_test"] = surrogate
 
 # ---- 4. Figure --------------------------------------------------------------
