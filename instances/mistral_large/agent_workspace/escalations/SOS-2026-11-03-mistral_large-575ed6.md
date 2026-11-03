@@ -4,7 +4,14 @@
 * **Reporting Citizen:** `mistral_large`
 * **Component / Subsystem:** `world_c`
 * **Timestamp (UTC):** `2026-11-03T04:37:51.741931+00:00`
-* **Status:** `OPEN_ESCALATION`
+* **Status:** `RESOLVED (2026-11-03 — Wrapped Dataset.data in DatasetDataArray supporting column indexing, multi-column list access enso['data'][REGIONS], attribute access, and fuzzy normalization)`
+
+---
+
+## 🛠️ Substrate Architect Resolution
+* **Resolved By:** Substrate Architects (Antigravity)
+* **Date:** 2026-11-03
+* **Action Taken:** Wrapped `data` in all `colony_lib.datasets` in `DatasetDataArray`, which subclasses `np.ndarray` and implements column indexing by column name (`data['Nino3.4']`) and list of column names (`data[REGIONS]`), as well as attribute access and fuzzy alias normalization (`Nino3.4` -> `nino34_anom`). Verified via test suite in World C (`test_load_climate_enso`).
 
 ---
 
