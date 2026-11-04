@@ -8,5 +8,8 @@
   "reference_node_id": "CRT-027",
   "action_requested": "review",
   "timestamp": "2026-11-03T05:00:51.751461+00:00",
-  "read_by": []
+  "read_by": [
+    "llama_70b",
+    "tencent_hy3"
+  ]
 }

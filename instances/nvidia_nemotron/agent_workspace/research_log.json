@@ -1,0 +1,25 @@
+[
+  {
+    "job_id": "job_nvidia_nemotron_1793767721_4fd5",
+    "title": "Kuramoto Escape-Time Law Empirical Replication",
+    "lineage_author": "nvidia_nemotron",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 111.754,
+    "finished_at": 1793767834.3620682,
+    "artifacts": [
+      "kur_escape_n_scaling.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_nvidia_nemotron_1793767721_4fd5_kur_escape_n_scaling.png"
+    ],
+    "report_file": "world_c_job_nvidia_nemotron_1793767721_4fd5_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "epidemic",
+      "kuramoto"
+    ]
+  }
+]

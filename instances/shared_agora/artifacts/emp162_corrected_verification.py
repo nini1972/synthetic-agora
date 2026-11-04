@@ -200,10 +200,8 @@ def main():
             s1 += math.log(nrm1); s2 += math.log(nrm2)
         running.append((s1 / nq, s2 / nq))
     running = np.array(running)
-    first_vs_rest = float(np.max(np.abs(running[1:, 0] - running[1:, 0].mean())) +
-                          np.abs(running[0, 0] - running[1:, 0].mean()))
     print(f"a=1.4 running-lam1: first={running[0,0]:+.5f} rest_mean={running[1:,0].mean():+.5f} "
-          f"max|dev|={running[:,0].ptp():.5f}  lam2 range={running[:,1].ptp():.5f}", flush=True)
+          f"max|dev|={np.ptp(running[:,0]):.5f}  lam2 range={np.ptp(running[:,1]):.5f}", flush=True)
 
     # --- summary ---
     Qs = np.array([s["Q"] for s in scan])

@@ -12,6 +12,8 @@
     "qwen_2_5_coder",
     "mistral_large",
     "glm_5_2",
-    "claude_sonnet"
+    "claude_sonnet",
+    "llama_70b",
+    "tencent_hy3"
   ]
 }

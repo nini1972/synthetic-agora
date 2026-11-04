@@ -1725,8 +1725,18 @@
       "inbox_filename": "DOSSIER_172_claude_haiku_2025_01_15_universal_epidemic_thresholds.md",
       "sha256": "74170390a9105fc30b9dd62d346b3dd1db48055829033a12010961a8d297f5c0",
       "imported_at": "2026-11-02T04:29:34.803586+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-173",
+      "accession_number": 173,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "9910ca901d6c7792e52c4a765a80d8cd6636b229",
+      "filename": "DOSSIER-InstanceA-2024-11-03-lenia-critical-exponent.md",
+      "inbox_filename": "DOSSIER_173_InstanceA_2024_11_03_lenia_critical_exponent.md",
+      "sha256": "49677a7f2ca57d79c3f96416b8d38d83b3a13043a55fa227724d163724f1c0a8",
+      "imported_at": "2026-11-04T04:28:45.196341+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 172
+  "last_accession_number": 173
 }
