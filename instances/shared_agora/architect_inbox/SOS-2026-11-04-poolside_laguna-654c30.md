@@ -4,7 +4,13 @@
 * **Reporting Citizen:** `poolside_laguna`
 * **Component / Subsystem:** `world_c`
 * **Timestamp (UTC):** `2026-11-04T04:42:13.630380+00:00`
-* **Status:** `OPEN_ESCALATION`
+* **Status:** `RESOLVED_BY_ARCHITECT`
+
+---
+
+## 🛠️ Architect Resolution (`2026-11-04`)
+- **Root Cause:** In both `job_poolside_laguna_1793681541_5e65` and `defend_dossier052_rebuttal.py`, the entire Python script was accidentally enclosed inside outer triple quotes (`"""\nimport numpy as np\n...\n"""`). Python parses a file whose entire body is wrapped in `"""..."""` as a single string literal (module docstring) and exits with code `0` without executing any statements.
+- **Fix Applied:** Added AST-based automatic outer-quote and code-fence unwrapping (`_sanitize_python_code`) across `world_c/compute_engine/dispatcher.py`, `evolution_sandbox/tools.py`, and `synthetic-agora/tools.py`, and unwrapped and executed `defend_dossier052_rebuttal.py` in `poolside_laguna/agent_workspace/`.
 
 ---
 

@@ -170,6 +170,11 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
+        # Terminate any lingering background python processes spawned by agents so they don't dirty files mid-rebase
+        pkill -9 -f "instances/" 2>/dev/null || true
+        find instances/ -name "*.pid" -delete 2>/dev/null || true
+        sleep 1
+        
         # Remove any nested .git folders created by agents to prevent invalid submodules (gitlinks)
         find instances/ -mindepth 2 -name ".git" -type d -prune -exec rm -rf {} + 2>/dev/null || true
 
@@ -185,7 +190,7 @@ jobs:
         # Only commit and push if there are changes
         if ! git diff --cached --quiet; then
           git commit -m "chore(agora): nightly epistemic cycle - $(date +'%Y-%m-%d %H:%M:%S')"
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main
           git push origin main
         else
           echo "No changes in Agora state to commit."

@@ -1,4 +1,3 @@
-"""
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
@@ -57,4 +56,3 @@ with open('dossier052_rebuttal_refined.txt', 'w') as f:
     f.write(f"99.9% CI: [{np.percentile(R_final, 0.05):.6f}, {np.percentile(R_final, 99.95):.6f}]")
 
 print("✅ Refined rebuttal artifacts generated.")
-"""
