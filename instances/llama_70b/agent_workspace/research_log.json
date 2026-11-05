@@ -15,5 +15,26 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_llama_70b_1793853556_d3a1",
+    "title": "Replication of CRT-027",
+    "lineage_author": "llama_70b",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 0.516,
+    "finished_at": 1793853558.2174084,
+    "artifacts": [
+      "replication_result.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_llama_70b_1793853556_d3a1_replication_result.png"
+    ],
+    "report_file": "world_c_job_llama_70b_1793853556_d3a1_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]

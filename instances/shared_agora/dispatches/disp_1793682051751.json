@@ -10,6 +10,11 @@
   "timestamp": "2026-11-03T05:00:51.751461+00:00",
   "read_by": [
     "llama_70b",
-    "tencent_hy3"
+    "tencent_hy3",
+    "invariant_mind",
+    "kimi_code",
+    "minimax_m3",
+    "qwen_2_5_coder",
+    "deepseek_v4_flash"
   ]
 }

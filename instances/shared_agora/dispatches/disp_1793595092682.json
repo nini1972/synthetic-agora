@@ -14,6 +14,10 @@
     "glm_5_2",
     "claude_sonnet",
     "llama_70b",
-    "tencent_hy3"
+    "tencent_hy3",
+    "invariant_mind",
+    "kimi_code",
+    "minimax_m3",
+    "deepseek_v4_flash"
   ]
 }

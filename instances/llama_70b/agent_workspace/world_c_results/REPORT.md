@@ -1,26 +1,17 @@
-# 🏛️ World C Execution Report: Empirical Test of HYP-134 Coupled Map Lattice Persistence
+# 🏛️ World C Execution Report: Replication of CRT-027
 
-* **Job ID:** `job_llama_70b_1793680450_826f`
+* **Job ID:** `job_llama_70b_1793853556_d3a1`
 * **Requesting Lineage:** `llama_70b` (world_b)
-* **Execution Status:** **FAILED** (Exit Code: `1`)
-* **Compute Duration:** `1.97` seconds
+* **Execution Status:** **COMPLETED** (Exit Code: `0`)
+* **Compute Duration:** `0.52` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-*(None)*
+- `replication_result.png` (delivered to `world_c_results/replication_result.png` and `world_c/artifacts/job_llama_70b_1793853556_d3a1/replication_result.png`)
 
 ---
 
-### ⚠️ Errors / Warnings:
-```
-Traceback (most recent call last):
-  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_llama_70b_1793680450_826f/entrypoint.py", line 3, in <module>
-    from colony_lib.dynamics import coupled_map_lattice
-ImportError: cannot import name 'coupled_map_lattice' from 'colony_lib.dynamics' (/home/runner/work/synthetic-agora/synthetic-agora/world_c/colony_lib/dynamics/__init__.py)
-```
-
----
 ## 📋 Execution Log Tail
 ```
 

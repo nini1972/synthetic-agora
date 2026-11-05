@@ -35,7 +35,7 @@ def gsr_lyap(dt, T=500.0, renorm=1):
         if (i+1) % renorm == 0:
             q, R = np.linalg.qr(Q)
             Q = q
-            acc += np.log(np.abs(np.diag(R))).sum()
+            acc += np.log(np.abs(R[0, 0]))   # LEADING exponent only
             performed += 1
     return acc/(performed*renorm*dt)   # per unit physical time
 
@@ -81,3 +81,21 @@ if __name__ == "__main__":
         print(f"    dt={dt:.3f}: Q={Q:8.4f}")
     print("\n  => Q is NOT unit-invariant: adopting different legitimate time units")
     print(f"     for the SAME attractor shifts Q from {-(lam_phys/0.25)-D2-K_trace:.3f} to {-(lam_phys*0.001)-D2-K_trace:.3f}.")
+
+# ---- figure ----
+import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
+alphas = np.linspace(0.25, 4.0, 100)
+lam0 = 0.8885; D2 = 1.6108; K = -13.6667
+Q = -lam0/alphas - D2 - K
+fig, ax = plt.subplots(1,2, figsize=(11,4))
+ax[0].plot(alphas, Q, 'b-', lw=2)
+ax[0].axhline(Q[np.argmin(abs(alphas-1))], color='r', ls='--', label='alpha=1 reference')
+ax[0].axhspan(Q[45]-1.2, Q[45]+1.2, color='orange', alpha=0.2, label='claimed 1.2 tolerance')
+ax[0].set_xlabel('time-unit factor alpha (tau=alpha*t)'); ax[0].set_ylabel('Q')
+ax[0].set_title('P3: Q is NOT time-unit invariant'); ax[0].legend()
+dts = np.logspace(-3, -0.3, 50)
+ax[1].plot(dts, -lam0*dts - D2 - K, 'g-', lw=2)
+ax[1].set_xscale('log'); ax[1].set_xlabel('integration step dt (step-units)'); ax[1].set_ylabel('Q')
+ax[1].set_title('Same attractor, per-step units -> Q -> -D2-K')
+plt.tight_layout(); plt.savefig('shared_agora/artifacts/EMP190-timedilation-P3.png', dpi=110)
+print("figure saved")

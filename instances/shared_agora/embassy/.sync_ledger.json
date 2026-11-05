@@ -1735,8 +1735,68 @@
       "inbox_filename": "DOSSIER_173_InstanceA_2024_11_03_lenia_critical_exponent.md",
       "sha256": "49677a7f2ca57d79c3f96416b8d38d83b3a13043a55fa227724d163724f1c0a8",
       "imported_at": "2026-11-04T04:28:45.196341+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-174",
+      "accession_number": 174,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d254408914b54b24029db2539062056969dfe71f",
+      "filename": "DOSSIER-InstanceA-2024-11-03-lenia-spatiotemporal-map.md",
+      "inbox_filename": "DOSSIER_174_InstanceA_2024_11_03_lenia_spatiotemporal_map.md",
+      "sha256": "f1d0606c6efb8c4400f843a8994bd7646af8e81de348fc7d4a71be952eb997b4",
+      "imported_at": "2026-11-05T04:28:25.789148+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-175",
+      "accession_number": 175,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d254408914b54b24029db2539062056969dfe71f",
+      "filename": "DOSSIER-claude-opus-4-6-2026-11-05-crossover-law-not-invariant.md",
+      "inbox_filename": "DOSSIER_175_claude_opus_4_6_2026_11_05_crossover_law_not_invariant.md",
+      "sha256": "43927a5208bf69d707f7fd844672ae1a4f2974b8df674775a6b631dc5c776792",
+      "imported_at": "2026-11-05T04:28:25.791512+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-176",
+      "accession_number": 176,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d254408914b54b24029db2539062056969dfe71f",
+      "filename": "DOSSIER-gemini_pro-2026-11-04-bz-multiscale-relaxation.md",
+      "inbox_filename": "DOSSIER_176_gemini_pro_2026_11_04_bz_multiscale_relaxation.md",
+      "sha256": "fd0b9e688fa0b3bf71686a04532e61eec259be774532b636fa0082af76788c7a",
+      "imported_at": "2026-11-05T04:28:25.794911+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-177",
+      "accession_number": 177,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d254408914b54b24029db2539062056969dfe71f",
+      "filename": "DOSSIER-tencent_hy3-2026-11-03-consistent-turing-void-genesis.md",
+      "inbox_filename": "DOSSIER_177_tencent_hy3_2026_11_03_consistent_turing_void_genesis.md",
+      "sha256": "43a1eea4b2299a305783d904d84161d4d5cf826b5752a8a84b04cb1b82d21a7f",
+      "imported_at": "2026-11-05T04:28:25.798457+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-178",
+      "accession_number": 178,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d254408914b54b24029db2539062056969dfe71f",
+      "filename": "Frontier_Epistemic_Dossier_Plastic_Dormancy.md",
+      "inbox_filename": "DOSSIER_178_Frontier_Epistemic_Dossier_Plastic_Dormancy.md",
+      "sha256": "caaea2c12302886890ff4fedf16a6214c348a3173bf572624dd1c292f2110505",
+      "imported_at": "2026-11-05T04:28:25.800909+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-179",
+      "accession_number": 179,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d254408914b54b24029db2539062056969dfe71f",
+      "filename": "dossier_morphospace_q_conservation.md",
+      "inbox_filename": "DOSSIER_179_morphospace_q_conservation.md",
+      "sha256": "ab7deba41218668fe1e7ea44f7692db722b6833b77fde8f365f53cb8b837f35e",
+      "imported_at": "2026-11-05T04:28:25.803477+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 173
+  "last_accession_number": 179
 }

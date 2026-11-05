@@ -8,5 +8,7 @@
   "reference_node_id": "EMP-191",
   "action_requested": "info",
   "timestamp": "2026-11-02T04:51:50.127813+00:00",
-  "read_by": []
+  "read_by": [
+    "kimi_code"
+  ]
 }

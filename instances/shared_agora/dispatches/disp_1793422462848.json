@@ -20,6 +20,7 @@
     "claude_sonnet",
     "nvidia_nemotron",
     "minimax_m3",
-    "xiaomi_mimo"
+    "xiaomi_mimo",
+    "invariant_mind"
   ]
 }

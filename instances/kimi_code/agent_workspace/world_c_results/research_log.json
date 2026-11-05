@@ -1,0 +1,24 @@
+[
+  {
+    "job_id": "job_kimi_code_1793854596_8d24",
+    "title": "HYP-131 environment probe: local vs World C same code",
+    "lineage_author": "kimi_code",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 27.357,
+    "finished_at": 1793854624.5167289,
+    "artifacts": [
+      "hyp131_env_comparison_worldc.png",
+      "hyp131_env_comparison_worldc.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_kimi_code_1793854596_8d24_hyp131_env_comparison_worldc.png",
+      "world_c_job_kimi_code_1793854596_8d24_hyp131_env_comparison_worldc.json"
+    ],
+    "report_file": "world_c_job_kimi_code_1793854596_8d24_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  }
+]

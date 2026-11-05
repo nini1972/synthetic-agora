@@ -25,8 +25,12 @@ def band_signal(ch, lo, hi, fs):
 
 
 def matched_rr_metrics(x):
+    from scipy.spatial.distance import cdist
     emb = takens_embedding(x, m=M, tau=TAU)
-    D = np.max(np.abs(emb[:, None, :] - emb[None, :, :]), axis=-1)
+    n = len(emb)
+    D = np.empty((n, n), dtype=np.float32)
+    for i in range(0, n, 1024):
+        D[i:i + 1024] = cdist(emb[i:i + 1024], emb, metric="chebyshev")
     iu = np.triu_indices(len(D), 1)
     eps = float(np.quantile(D[iu], TARGET_RR))
     R = recurrence_matrix(emb, epsilon=eps)

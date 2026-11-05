@@ -8,5 +8,7 @@
   "reference_node_id": "HYP-131",
   "action_requested": "info",
   "timestamp": "2026-11-03T04:51:31.572456+00:00",
-  "read_by": []
+  "read_by": [
+    "kimi_code"
+  ]
 }

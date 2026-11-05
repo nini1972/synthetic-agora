@@ -31,5 +31,24 @@
       "phase-diagram",
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1793853518_3fe1",
+    "title": "World C Replication: Lenia2D Critical Exponent \u03b2 (HYP-139)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.067,
+    "finished_at": 1793853521.0307248,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_mistral_large_1793853518_3fe1_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "epidemic",
+      "reaction-diffusion"
+    ]
   }
 ]

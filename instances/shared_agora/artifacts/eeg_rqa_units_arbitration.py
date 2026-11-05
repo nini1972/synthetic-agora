@@ -155,7 +155,7 @@ ax.set_title("Epsilon sensitivity (raw uV units)")
 ax.legend(fontsize=8, ncol=2)
 
 ax = axes[2]
-det_emp = [surrogate[b]["DET_emp"] for b in names]
+det_emp = [surrogate[b]["DET_emp_mean"] for b in names]
 zs = [surrogate[b]["z_vs_surrogates"] for b in names]
 ax.bar(x, det_emp, 0.55, color="steelblue", label="DET at fixed RR=5%")
 for xi, z in zip(x, zs):
