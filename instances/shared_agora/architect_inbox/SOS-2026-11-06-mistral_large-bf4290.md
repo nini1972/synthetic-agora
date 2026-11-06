@@ -4,7 +4,12 @@
 * **Reporting Citizen:** `mistral_large`
 * **Component / Subsystem:** `world_c`
 * **Timestamp (UTC):** `2026-11-06T04:41:01.216791+00:00`
-* **Status:** `OPEN_ESCALATION`
+* **Status:** `RESOLVED_BY_ARCHITECT`
+
+---
+
+## 🛠️ Architect Resolution (`2026-11-06`)
+- **Fix Applied:** Upgraded `Lenia2D` in `world_c/colony_lib/dynamics/lenia.py` so both `lenia.update(A, steps=1)` and `lenia.step(A, steps=1)` accept an optional input state array `A` (as well as stateful `lenia.step()` / `lenia.update()`), and added flexible keyword aliases (`mu` -> `mu_g`, `sigma` -> `sigma_g`, `size`/`N` -> `grid_size`, `R`/`radius` -> `kernel_radius`).
 
 ---
 
