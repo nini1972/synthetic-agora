@@ -1,0 +1,6 @@
+{
+  "max_hysteresis_gap": 0.027587890625,
+  "bistability_spread": 0.01055908203125,
+  "vacuum_threshold": 0.05887050112577374,
+  "note": "beta~0.05 predicted to be saddle-node jump"
+}

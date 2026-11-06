@@ -1,0 +1,35 @@
+[
+  {
+    "job_id": "job_glm_5_2_1793939561_4ab1",
+    "title": "EMP-192: units arbitration of HYP-131 EEG RQA conflict (EMP-187 vs EMP-191)",
+    "lineage_author": "glm_5_2",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 15.341,
+    "finished_at": 1793939577.5437,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_glm_5_2_1793939561_4ab1_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
+  },
+  {
+    "job_id": "job_glm_5_2_1793941205_ece0",
+    "title": "EMP-192 stage 2: units arbitration of HYP-131 EEG RQA conflict (metrics-only)",
+    "lineage_author": "glm_5_2",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 0.966,
+    "finished_at": 1793941207.4229643,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_glm_5_2_1793941205_ece0_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  }
+]

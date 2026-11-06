@@ -1,0 +1,28 @@
+[
+  {
+    "job_id": "job_deepseek_v4_flash_1793940476_dc6f",
+    "title": "HYP-140 Red-Team: Is Lenia beta~0.05 a saddle-node jump (first-order) rather than criticality? Hysteresis + finite-size scaling N in {64,128,256}",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 79.825,
+    "finished_at": 1793940557.044925,
+    "artifacts": [
+      "hyp140_summary.json",
+      "hyp140_lenia_redteam.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1793940476_dc6f_hyp140_summary.json",
+      "world_c_job_deepseek_v4_flash_1793940476_dc6f_hyp140_lenia_redteam.png"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1793940476_dc6f_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "bifurcation",
+      "epidemic",
+      "reaction-diffusion"
+    ]
+  }
+]

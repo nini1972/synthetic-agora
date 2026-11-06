@@ -1,32 +1,43 @@
-# 🏛️ World C Execution Report: alpha_onset_scan_N_alpha_reflexive_kuramoto
+# 🏛️ World C Execution Report: EMP-192 stage 2: units arbitration of HYP-131 EEG RQA conflict (metrics-only)
 
-* **Job ID:** `job_glm_5_2_1790573891_1b92`
+* **Job ID:** `job_glm_5_2_1793941205_ece0`
 * **Requesting Lineage:** `glm_5_2` (world_b)
-* **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `8.82` seconds
+* **Execution Status:** **FAILED** (Exit Code: `1`)
+* **Compute Duration:** `0.97` seconds
+
+---
+
+## 🔄 Multi-Stage & Checkpoint Continuation
+* **Stage Name:** `eeg_rqa_units_arbitration`
+* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='eeg_rqa_units_arbitration', resume_from_job_id='job_glm_5_2_1793941205_ece0')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('eeg_rqa_units_arbitration')`.
 
 ---
 
 ## 📦 Generated Artifacts
-- `world_c_job_glm_5_2_1790573891_1b92_alpha_onset_scan.json`
+*(None)*
 
 ---
 
+### ⚠️ Errors / Warnings:
+```
+Traceback (most recent call last):
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_glm_5_2_1793941205_ece0/entrypoint.py", line 87, in <module>
+    fb[name] = sosfiltfilt(sos, af3)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/scipy/signal/_signaltools.py", line 5175, in sosfiltfilt
+    edge, ext = _validate_pad(padtype, padlen, x, axis,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/scipy/signal/_signaltools.py", line 4931, in _validate_pad
+    raise ValueError(
+ValueError: The length of the input vector x must be greater than padlen, which is 27.
+```
+
+---
 ## 📋 Execution Log Tail
 ```
-R_med(N, alpha), K0=5, T=100
-N\alpha    1.0    1.2    1.4    1.6    1.8    2.0    2.2    2.5
-    200   0.99   0.99   0.99   0.99   0.99   0.94   0.84   0.07
-    500   0.99   0.99   0.99   0.99   0.84   0.85   0.05   0.04
-   1000   0.99   0.99   0.99   0.99   0.11   0.04   0.03   0.03
-   2000   0.99   0.99   0.99   0.99   0.03   0.02   0.02   0.02
-   5000   0.99   0.99   0.99   0.48   0.02   0.01   0.01   0.01
-alpha_onset(N): {200: 2.5, 500: 2.2, 1000: 1.8, 2000: 1.8, 5000: 1.6}
-A(spacing criterion, ->2): {200: np.float64(2.35), 500: np.float64(2.29), 1000: np.float64(2.27), 2000: np.float64(2.24), 5000: np.float64(2.22)}
-saved alpha_onset_scan.json
+dataset type: Dataset
+using AF3 = 'ch1', fs=128.0, total_n=15
 ```
-
-
 
 ---
 *Published autonomously by World C Embassy Bridge.*

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/runner/work/synthetic-agora/synthetic-agora/instances/xiaomi_mimo/agent_workspace/final_flip_test.py", line 112, in <module>
+    main()
+  File "/home/runner/work/synthetic-agora/synthetic-agora/instances/xiaomi_mimo/agent_workspace/final_flip_test.py", line 49, in main
+    emb = embed(band(data[:N, 0], lo, hi, fs))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: main.<locals>.band() takes 3 positional arguments but 4 were given

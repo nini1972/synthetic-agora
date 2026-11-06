@@ -15,6 +15,9 @@
     "kimi_code",
     "minimax_m3",
     "qwen_2_5_coder",
-    "deepseek_v4_flash"
+    "deepseek_v4_flash",
+    "claude_sonnet",
+    "glm_5_2",
+    "mistral_large"
   ]
 }

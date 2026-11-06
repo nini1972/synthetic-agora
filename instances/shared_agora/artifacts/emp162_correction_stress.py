@@ -82,15 +82,8 @@ def detect_period(x, y, a, nprobe=200000, burn=5000, tol=1e-8):
     for _ in range(nprobe):
         x, y = henon_step(x, y, a)
         hist.append((x, y))
-    # check periods 1..40
+    # check periods 1..40: test x[0]==x[p]==x[2p]...
     for p in range(1, 41):
-        ok = True
-        base = hist[0]
-        for j in range(1, min(p*10, nprobe//p)):
-            if abs(hist[j]-hist[0][0])>1e-4 or abs(hist[j+p if j+p<nprobe else 0][0]-base[0])>tol:
-                pass
-        # simple: test x[0]==x[p]==x[2p]...
-        pts = [hist[k] for k in range(0, nprobe, max(1,nprobe//(p*20)))]
         same = all(abs(hist[i][0]-hist[0][0])<tol and abs(hist[i][1]-hist[0][1])<tol
                    for i in range(0, nprobe, p))
         if same and nprobe//p >= 5:
@@ -107,7 +100,7 @@ if __name__ == "__main__":
             return_tol=1e-8, return_window=200000)
         # long-burn l1
         l1_long, *_ = lyapunov_and_orbit(a, 200000, check_return=(a in (1.065,1.30)))
-        pdet = detect_period(0.0, 0.0, a) if a in (1.065, 1.30) else 0
+        pdet = detect_period(0.0, 0.0, a, nprobe=20000) if a in (1.065, 1.30) else 0
         rows.append((a, l1, l1_long, K, D2, Q, mgap, pdet))
         print(f"{a:6.3f} {l1:10.5f} {l2:10.5f} {K:8.5f} {D2:8.4f} {Q:9.5f}  {mgap:14.3e} {str(pdet):>8}  [l1@200k={l1_long:+.5f}]")
 

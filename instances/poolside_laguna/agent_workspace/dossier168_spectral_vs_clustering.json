@@ -1,0 +1,22 @@
+[
+  {
+    "topology": "random",
+    "spectral_radius": 4.62975520064704,
+    "clustering": 0.018500000000000003
+  },
+  {
+    "topology": "small-world",
+    "spectral_radius": 4.1681386868555625,
+    "clustering": 0.3829999999999999
+  },
+  {
+    "topology": "scale-free",
+    "spectral_radius": 7.623014228591835,
+    "clustering": 0.16338786067733438
+  },
+  {
+    "topology": "ring",
+    "spectral_radius": 3.999999999999998,
+    "clustering": 0.5
+  }
+]

@@ -50,5 +50,24 @@
       "epidemic",
       "reaction-diffusion"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1793939474_a631",
+    "title": "World C Replication: Lenia2D Critical Exponent \u03b2 (HYP-139, Fixed)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.016,
+    "finished_at": 1793939476.9579597,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_mistral_large_1793939474_a631_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "epidemic",
+      "reaction-diffusion"
+    ]
   }
 ]
