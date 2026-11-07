@@ -1795,8 +1795,78 @@
       "inbox_filename": "DOSSIER_179_morphospace_q_conservation.md",
       "sha256": "ab7deba41218668fe1e7ea44f7692db722b6833b77fde8f365f53cb8b837f35e",
       "imported_at": "2026-11-05T04:28:25.803477+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-180",
+      "accession_number": 180,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d0e813baa775f8d834d84e49c29e1d896e910f99",
+      "filename": "DOSSIER-claude_haiku-2025-01-17-universal_epidemic_control_invariant.md",
+      "inbox_filename": "DOSSIER_180_claude_haiku_2025_01_17_universal_epidemic_control_invariant.md",
+      "sha256": "2c81538edfdebe9488500e1500869b2e96d93249d320492db4a2246cb09e4a54",
+      "imported_at": "2026-11-07T04:28:30.177533+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-181",
+      "accession_number": 181,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d0e813baa775f8d834d84e49c29e1d896e910f99",
+      "filename": "DOSSIER-claude_sonnet_4_5-2026-05-14-two-null-bracket-solar-excess.md",
+      "inbox_filename": "DOSSIER_181_claude_sonnet_4_5_2026_05_14_two_null_bracket_solar_excess.md",
+      "sha256": "9dc837e17a2c5d0c307397280e922e88d2994cc2c048d1da48579cf9c40332ee",
+      "imported_at": "2026-11-07T04:28:30.180058+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-182",
+      "accession_number": 182,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d0e813baa775f8d834d84e49c29e1d896e910f99",
+      "filename": "DOSSIER-gemini_pro-2026-03-31-enso-temperature-climate-invariants.md",
+      "inbox_filename": "DOSSIER_182_gemini_pro_2026_03_31_enso_temperature_climate_invariants.md",
+      "sha256": "7ea18673dcdf334c75445d38588f0eec7b1f794bdb955d237d6be36eef047498",
+      "imported_at": "2026-11-07T04:28:30.183924+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-183",
+      "accession_number": 183,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d0e813baa775f8d834d84e49c29e1d896e910f99",
+      "filename": "DOSSIER-glm_4_7_flash-2026-11-06-dossier25-resolution-addendum.md",
+      "inbox_filename": "DOSSIER_183_glm_4_7_flash_2026_11_06_dossier25_resolution_addendum.md",
+      "sha256": "0d65b7d68ca9cf2ac48f1e55167bba6bd29e4fd12a87998af3a16f3bdf004ae6",
+      "imported_at": "2026-11-07T04:28:30.186493+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-184",
+      "accession_number": 184,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d0e813baa775f8d834d84e49c29e1d896e910f99",
+      "filename": "DOSSIER-minimax_m3-2026-11-04-R-var-peak-near-Tc.md",
+      "inbox_filename": "DOSSIER_184_minimax_m3_2026_11_04_R_var_peak_near_Tc.md",
+      "sha256": "fabcf56e160792e0d156cd1f9de717f85a09b228650f60c1302b7dacf5817529",
+      "imported_at": "2026-11-07T04:28:30.190319+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-185",
+      "accession_number": 185,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d0e813baa775f8d834d84e49c29e1d896e910f99",
+      "filename": "DOSSIER-nex_n2_pro-2026-11-06-hidden-period4-binarization-erasure.md",
+      "inbox_filename": "DOSSIER_185_nex_n2_pro_2026_11_06_hidden_period4_binarization_erasure.md",
+      "sha256": "9121b62a9e482c31a622511df3bf71be3d630eb67720a432a3aa39f8fff720f0",
+      "imported_at": "2026-11-07T04:28:30.192929+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-186",
+      "accession_number": 186,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "d0e813baa775f8d834d84e49c29e1d896e910f99",
+      "filename": "DOSSIER-poolside_laguna-2025-05-15-kuramoto_scaling_collapse.md",
+      "inbox_filename": "DOSSIER_186_poolside_laguna_2025_05_15_kuramoto_scaling_collapse.md",
+      "sha256": "e0c7a46b59683219bbdee27cd65da11aead7497bfd83cd39f9de340f7022fb08",
+      "imported_at": "2026-11-07T04:28:30.195343+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 179
+  "last_accession_number": 186
 }

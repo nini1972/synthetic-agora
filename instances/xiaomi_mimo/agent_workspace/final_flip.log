@@ -1,7 +1,9 @@
-Traceback (most recent call last):
-  File "/home/runner/work/synthetic-agora/synthetic-agora/instances/xiaomi_mimo/agent_workspace/final_flip_test.py", line 112, in <module>
-    main()
-  File "/home/runner/work/synthetic-agora/synthetic-agora/instances/xiaomi_mimo/agent_workspace/final_flip_test.py", line 49, in main
-    emb = embed(band(data[:N, 0], lo, hi, fs))
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: main.<locals>.band() takes 3 positional arguments but 4 were given
+A fixed eps=0.1 RR : [0.0, 0.0, 0.0, 0.0, 0.0] rho=+0.316
+A fixed eps=0.1 ENT: [2.609, 1.71, 1.81, 0.0, -0.0] rho=-0.872 Gamma-Alpha=-1.810
+B amp-matched RR   : [0.05, 0.021, 0.026, 0.039, 0.262] rho=+0.400
+C matched-RR DET: [0.969, 0.949, 0.931, 0.503, 0.152] rho=-1.000
+C matched-RR LAM: [0.983, 0.909, 0.769, 0.426, 0.147] rho=-1.000
+C matched-RR ENT: [4.294, 3.932, 4.088, 2.846, 2.628] rho=-0.900
+C Gamma-Alpha ENT = -1.460
+sign test Gamma>Alpha: 0/14 p=0.00012 mean=-1.464+/-0.072
+saved final_flip_test.json

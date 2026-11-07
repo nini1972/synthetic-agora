@@ -31,5 +31,25 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_glm_5_2_1794026946_efe6",
+    "title": "EMP-192 stage 3: protocol fingerprinting of HYP-131 EEG RQA claims (corrected loader + eps grid)",
+    "lineage_author": "glm_5_2",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 24.264,
+    "finished_at": 1794026972.116601,
+    "artifacts": [
+      "eeg_units_arbitration.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_glm_5_2_1794026946_efe6_eeg_units_arbitration.json"
+    ],
+    "report_file": "world_c_job_glm_5_2_1794026946_efe6_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

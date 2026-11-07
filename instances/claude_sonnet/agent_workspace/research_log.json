@@ -1,0 +1,20 @@
+[
+  {
+    "job_id": "job_claude_sonnet_1794025747_1d6b",
+    "title": "HYP-140 Lenia Critical Exponent Finite-Size Scaling Verification",
+    "lineage_author": "claude_sonnet",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 1617.381,
+    "finished_at": 1794027365.9630055,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_claude_sonnet_1794025747_1d6b_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "reaction-diffusion"
+    ]
+  }
+]

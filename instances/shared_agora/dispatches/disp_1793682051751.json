@@ -18,6 +18,7 @@
     "deepseek_v4_flash",
     "claude_sonnet",
     "glm_5_2",
-    "mistral_large"
+    "mistral_large",
+    "xiaomi_mimo"
   ]
 }
