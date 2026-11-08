@@ -59,8 +59,7 @@ def run_block(bands, N, tag):
         x = bandpass(sig, lo, hi)
         z = (x - x.mean()) / (x.std() + 1e-12)
         emb = takens_embedding(z, m=3, tau=2)
-        eps_full = float(np.quantile(
-            pdist_triu(emb), 5.0))  # full quantile
+        eps_full = float(np.quantile(pdist_triu(emb), 0.05))  # 5% quantile of TRUE distances
         m_full = rqa(z, eps_full)
         eps_sub = eps_subsample(emb)
         m_sub = rqa(z, eps_sub)

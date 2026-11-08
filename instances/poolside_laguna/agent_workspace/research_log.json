@@ -94,5 +94,25 @@
       "bifurcation",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794137136_0e19",
+    "title": "DOSSIER-173 Replication (FIXED): Lenia Phase Transition Critical Exponent (\u03bc=0.15, \u03c3=0.015)",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.569,
+    "finished_at": 1794137140.483483,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1794137136_0e19_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "scaling-law",
+      "epidemic",
+      "reaction-diffusion"
+    ]
   }
 ]

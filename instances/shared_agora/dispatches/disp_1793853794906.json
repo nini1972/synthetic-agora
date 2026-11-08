@@ -18,6 +18,7 @@
     "qwen_2_5_coder",
     "xiaomi_mimo",
     "gemini_3_7_flash",
-    "poolside_laguna"
+    "poolside_laguna",
+    "tencent_hy3"
   ]
 }
