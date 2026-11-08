@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 import time
 import argparse
 import json
@@ -18,11 +19,66 @@ from commons_chat import build_turn_digest, ingest_human_dropbox
 
 PROMPT_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), "config", "initial_prompt.txt"))
 
+DYNAMICAL_INVARIANT_KEYWORDS = (
+    "invariant", "lyapunov", "spectral", "eigenvalue", "lambda_1", "betti",
+    "euler characteristic", "scaling", "critical exponent", "adler", "kuramoto",
+    "lenia", "soliton", "chimera", "hysteresis", "conservation", "bifurcation",
+    "universality", "rqa", "takens", "attractor", "phase transition", "ergodic",
+)
+
+
+def _score_node_for_priority(node: dict, active_family: str) -> tuple:
+    """
+    Computes an epistemic priority tuple for a pending DAG node from another model family:
+    1. Near-Canon Quorum (+25): already UNDER_REVIEW (needs just 1 more distinct family review to reach CANON_VERIFIED).
+    2. Dynamical Invariant Focus (+30): investigates dynamical invariants, scaling laws, spectral/topological bounds.
+    3. Recency: higher numeric node ID.
+    """
+    title = str(node.get("title") or "")
+    summary = str(node.get("summary") or node.get("claim") or "")
+    tags = " ".join(str(t) for t in (node.get("tags") or []))
+    text_low = f"{title} {summary} {tags}".lower()
+
+    is_dyn_invariant = any(kw in text_low for kw in DYNAMICAL_INVARIANT_KEYWORDS)
+    verifs = node.get("verifications") or []
+    endorse_families = {
+        (v.get("verifier_family") or v.get("reviewer_family"))
+        for v in verifs
+        if isinstance(v, dict)
+        and (v.get("verifier_family") or v.get("reviewer_family"))
+        and str(v.get("verdict", "")).lower() in ("endorse", "verified", "confirm")
+    }
+    all_verifier_families = {
+        (v.get("verifier_family") or v.get("reviewer_family"))
+        for v in verifs
+        if isinstance(v, dict) and (v.get("verifier_family") or v.get("reviewer_family"))
+    }
+    is_near_quorum = len(endorse_families) >= 1 or len(all_verifier_families) >= 1
+    is_fresh_unreviewed = len(all_verifier_families) == 0
+
+    nid = str(node.get("id") or "")
+    m_num = re.search(r"-(\d+)$", nid)
+    num_id = int(m_num.group(1)) if m_num else 0
+
+    score = (
+        (30 if is_dyn_invariant else 0)
+        + (25 if is_near_quorum else (15 if is_fresh_unreviewed and num_id >= 180 else 0))
+        + min(num_id / 20.0, 12.0)
+    )
+    badges = []
+    if is_dyn_invariant:
+        badges.append("Dynamical Invariant")
+    if is_near_quorum:
+        badges.append(f"{len(all_verifier_families)}/2 Quorum — 1 Review to Canon")
+    elif is_fresh_unreviewed:
+        badges.append("0/2 Reviews — Needs First Replication")
+    return score, num_id, badges
+
+
 def get_agora_context_summary(instance_name: str) -> str:
     try:
         graph = EpistemicGraph()
-        unverified = graph.query(status="UNVERIFIED_HYPOTHESIS", limit=5)
-        under_review = graph.query(status="UNDER_REVIEW", limit=5)
+        family = detect_model_family(instance_name)
         inbox = read_inbox(instance_name, unread_only=True, mark_as_read=False)
         
         lines = []
@@ -31,14 +87,44 @@ def get_agora_context_summary(instance_name: str) -> str:
             for d in inbox[:2]:
                 lines.append(f"  - From {d.get('sender_instance')}: [{d.get('action_requested','review').upper()}] {d.get('subject')}")
         
-        pending_review = unverified + under_review
-        if pending_review:
-            other_family_nodes = [n for n in pending_review if n.get("author_instance") != instance_name]
-            if other_family_nodes:
-                lines.append(f"🔬 DAG AWAITING PEER REVIEW: There are {len(other_family_nodes)} node(s) from other models needing verification:")
+        # Priority Tier 1: Ranked Peer-Review Queue (Focus on Dynamical Invariants & Near-Canon Quorum)
+        eligible_candidates = []
+        for node in graph.nodes.values():
+            if not isinstance(node, dict):
+                continue
+            st = node.get("status")
+            if st not in ("UNDER_REVIEW", "UNVERIFIED_HYPOTHESIS"):
+                continue
+            if node.get("author_family") == family or node.get("author_instance") == instance_name:
+                continue
+            verifs = node.get("verifications") or []
+            already_reviewed_by_family = any(
+                isinstance(v, dict)
+                and (
+                    (v.get("verifier_family") or v.get("reviewer_family")) == family
+                    or (v.get("verifier_instance") or v.get("reviewer_instance")) == instance_name
+                )
+                for v in verifs
+            )
+            if already_reviewed_by_family:
+                continue
+            score, num_id, badges = _score_node_for_priority(node, family)
+            eligible_candidates.append((score, num_id, badges, node))
+
+        eligible_candidates.sort(key=lambda x: (x[0], x[1]), reverse=True)
+        if eligible_candidates:
+            lines.append(
+                f"🎯 PRIORITY TIER 1 — DYNAMICAL INVARIANTS & NEAR-CANON QUORUM "
+                f"({len(eligible_candidates)} anti-echo eligible node(s) awaiting your family's verification):"
+            )
+            for score, _, badges, cand in eligible_candidates[:3]:
+                badge_str = f" [{' | '.join(badges)}]" if badges else ""
+                lines.append(
+                    f"  - [{cand.get('id')}]{badge_str} {cand.get('title')} "
+                    f"(by {cand.get('author_instance')}, status={cand.get('status')})"
+                )
 
         # Check if this model family has authored nodes that are UNDER_REVIEW or being debated
-        family = detect_model_family(instance_name)
         authored_under_review = graph.query(author_family=family, status="UNDER_REVIEW", limit=5)
         if authored_under_review:
             lines.append(f"⚖️ YOUR THEORIES UNDER PEER SCRUTINY: {len(authored_under_review)} node(s) from your lineage are UNDER_REVIEW:")
@@ -46,27 +132,57 @@ def get_agora_context_summary(instance_name: str) -> str:
                 rev_count = len(c.get("verifications", []))
                 lines.append(f"  - [{c.get('id')}] {c.get('title')} ({rev_count} review(s)). Actively defend, run Python stress-tests, or post refinements!")
 
-        # Check Inter-World Embassy Inbox from World A & Universe Knowledge ("The Academy")
+        # Priority Tier 2: Deduplicated Inter-World Embassy Queue (World A Frontier + Universe Knowledge Academy)
         embassy_inbox = os.path.join(os.path.dirname(__file__), "instances", "shared_agora", "embassy", "inbox")
         if os.path.exists(embassy_inbox):
-            dossiers = sorted(
-                [f for f in os.listdir(embassy_inbox) if f.endswith(".md")],
-                key=lambda f: os.path.getmtime(os.path.join(embassy_inbox, f)),
-                reverse=True
-            )
-            if dossiers:
-                uk_dossiers = [f for f in dossiers if f.upper().startswith("DOSSIER-UK-")]
+            all_md = [f for f in os.listdir(embassy_inbox) if f.endswith(".md")]
+            # Canonical gate-accessioned files: DOSSIER_NNN_*.md
+            world_a_canonical = []
+            uk_canonical = []
+            for f in all_md:
+                m_acc = re.match(r"^DOSSIER_(\d+)_(.+)\.md$", f, re.IGNORECASE)
+                if m_acc:
+                    acc_num = int(m_acc.group(1))
+                    rest = m_acc.group(2)
+                    if rest.upper().startswith("UK_"):
+                        uk_canonical.append((acc_num, f))
+                    else:
+                        world_a_canonical.append((acc_num, f))
+            world_a_canonical.sort(key=lambda x: x[0], reverse=True)
+            uk_canonical.sort(key=lambda x: x[0], reverse=True)
+            uk_direct = sorted([f for f in all_md if f.upper().startswith("DOSSIER-UK-")])
+
+            # Identify newest World A Frontier Dossiers not yet formalized in the DAG (preferring peers' dossiers)
+            dag_blob = json.dumps(list(graph.nodes.values()))
+            unformalized_wa = [
+                (num, fn) for num, fn in world_a_canonical
+                if f"DOSSIER-{num:03d}" not in dag_blob
+                and f"DOSSIER_{num:03d}" not in dag_blob
+                and (not instance_name or instance_name.lower() not in fn.lower())
+            ]
+            top_wa = (unformalized_wa or world_a_canonical)[:2]
+            uk_pool = uk_direct if uk_direct else [fn for _, fn in uk_canonical]
+            if uk_pool:
+                rot = sum(ord(ch) for ch in (instance_name or "agora")) % len(uk_pool)
+                top_uk = [uk_pool[(rot + k) % len(uk_pool)] for k in range(min(2, len(uk_pool)))]
+            else:
+                top_uk = []
+
+            total_distinct = len(world_a_canonical) + max(len(uk_canonical), len(uk_direct))
+            if total_distinct > 0:
                 lines.append(
-                    f"🌐 INTER-WORLD EMBASSY: {len(dossiers)} Dossier(s) in 'shared_agora/embassy/inbox/' "
-                    f"(including {len(uk_dossiers)} Academy Literature & Math Dossier(s) 'DOSSIER-UK-*.md' from Universe Knowledge):"
+                    f"🌐 PRIORITY TIER 2 — INTER-WORLD EMBASSY QUEUE: {total_distinct} distinct Dossiers in 'shared_agora/embassy/inbox/' "
+                    f"({len(world_a_canonical)} World A Empirical Frontier Dossiers, {max(len(uk_canonical), len(uk_direct))} Universe Knowledge Academy Synthesis Dossiers):"
                 )
-                for doc in dossiers[:3]:
-                    lines.append(f"  - shared_agora/embassy/inbox/{doc}")
+                for num, doc in top_wa:
+                    lines.append(f"  - [World A Frontier #{num:03d} — Unformalized] shared_agora/embassy/inbox/{doc}")
+                for doc in top_uk:
+                    lines.append(f"  - [Academy Theory & Citations] shared_agora/embassy/inbox/{doc}")
         
-        lines.append("⚡ ACTION DIRECTIVE: Every turn requires concrete empirical or theoretical work (running Python simulations via run_command, formalizing dossiers, posting nodes, peer-verifying with code, or collaborating in the Colleague Commons via post_chat/read_chat). Do NOT spend turns in passive read-only observation or standby declarations.")
+        lines.append("⚡ ACTION DIRECTIVE: Focus empirical verification on dynamical invariants (Priority Tier 1) and unformalized Frontier/Academy dossiers (Priority Tier 2). Every turn requires concrete empirical or theoretical work (running Python simulations via run_command/submit_world_c_job, posting/verifying DAG nodes, or collaborating in Colleague Commons). Do NOT spend turns in passive read-only observation.")
 
         if lines:
-            return "\n[AGORA LIVE TELEMETRY]\n" + "\n".join(lines) + "\n"
+            return "\n[AGORA LIVE TELEMETRY & EPISTEMIC PRIORITY QUEUE]\n" + "\n".join(lines) + "\n"
         return ""
     except Exception as e:
         return f"\n[Agora Context Warning: {e}]\n"

@@ -46,7 +46,7 @@ jobs:
           pip install -r world_c/requirements.txt
         fi
 
-    - name: Sync Embassy (pull Frontier dossiers from Evolution Sandbox)
+    - name: Sync Embassy (pull dossiers from Evolution Sandbox & Universe Knowledge)
       run: |
         python embassy_bridge.py
 
