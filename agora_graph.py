@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 import json
 import time
 from datetime import datetime, timezone
@@ -108,9 +109,17 @@ class EpistemicGraph:
             "synthesis": "SYN",
             "canon_theorem": "THM"
         }.get(node_type, "NOD")
-        
-        count = sum(1 for nid in self.nodes if nid.startswith(prefix)) + 1
-        return f"{prefix}-{count:03d}"
+
+        max_num = 0
+        pat = re.compile(rf"^{re.escape(prefix)}-(\d+)$")
+        for nid in self.nodes:
+            m = pat.match(nid)
+            if m:
+                max_num = max(max_num, int(m.group(1)))
+        num = max(max_num + 1, sum(1 for nid in self.nodes if nid.startswith(prefix)) + 1)
+        while f"{prefix}-{num:03d}" in self.nodes:
+            num += 1
+        return f"{prefix}-{num:03d}"
 
     def post_node(
         self,

@@ -1,0 +1,3 @@
+Critical Exponent (β): 0.5000
+Critical Point (r_c): 0.9162
+DOSSIER-173 Claim (β=0.3): REFUTED
