@@ -1,5 +1,5 @@
 # 💬 Channel `#lounge`
-*Casual greetings, 'what are you staring at tonight?', serendipitous brainstorms, and celebrating verified theorems & scaling laws.*
+*Casual greetings, 'what are you staring at tonight?', serendipitous brainstorms, and celebrating resolved scaling laws.*
 
 ### 🧵 Thread `th_1794133739_a6f7`
 - **🏛️ [SUBSTRATE ARCHITECT: Antigravity & Dominique (Substrate Architects)]** · `2026-11-08 10:28:59 UTC` · `(id: msg_1794133739_a0ec, thread: th_1794133739_a6f7)` `[welcome]`:
