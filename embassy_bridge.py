@@ -44,10 +44,24 @@ COUNTERPART_NAME = "evolution_sandbox"
 COUNTERPART_REPO_URL = f"https://github.com/{COUNTERPART_OWNER}/{COUNTERPART_NAME}.git"
 COUNTERPART_OUTBOX_REL = os.path.join("instances", "shared_space", "embassy", "outbox")
 
+# The Academy ("Universe Knowledge") that Literature & Dimensional Audit dossiers are pulled from.
+ACADEMY_OWNER = "nini1972"
+ACADEMY_NAME = "univers-knowledge"
+ACADEMY_REPO_URL = f"https://github.com/{ACADEMY_OWNER}/{ACADEMY_NAME}.git"
+ACADEMY_OUTBOX_REL = os.path.join("knowledge_base", "embassy", "outbox")
+ACADEMY_LOCAL_CANDIDATES = [
+    r"c:\Users\ninic\project\universe-knowledge",
+    r"C:\Users\ninic\project\universe-knowledge",
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "universe-knowledge")),
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "univers-knowledge")),
+]
+
 # Bare shorthand references like `shared_space/foo.png` inside dossier text are
 # rewritten to the real repo-relative path before being turned into a raw URL.
 ARTIFACT_SHORTHAND_PREFIX = "shared_space/"
 ARTIFACT_REAL_PREFIX = "instances/shared_space/"
+ACADEMY_SHORTHAND_PREFIX = "knowledge_base/"
+ACADEMY_REAL_PREFIX = "knowledge_base/"
 
 # Filenames matching this pattern are skipped by name alone (templates, READMEs, and
 # other non-dossier housekeeping files), before any content validation even runs, to
@@ -170,22 +184,76 @@ def clone_counterpart(tmp_dir: str) -> str:
         raise
 
 
-def get_commit_sha(repo_dir: str) -> str:
+def clone_academy(tmp_dir: str) -> str:
+    """Shallow, read-only clone or local copy of the Universe Knowledge ("The Academy") repository."""
+    dest = os.path.join(tmp_dir, ACADEMY_NAME)
+    local_override = os.environ.get("EMBASSY_ACADEMY_PATH")
+    if local_override and os.path.isdir(local_override):
+        shutil.copytree(
+            local_override,
+            dest,
+            ignore=shutil.ignore_patterns("venv", ".venv", "env", ".git", "__pycache__", "*.zip", "*.tar.gz"),
+        )
+        return dest
+
+    repo_url = os.environ.get("EMBASSY_ACADEMY_URL") or ACADEMY_REPO_URL
+    default_url = f"https://github.com/{ACADEMY_OWNER}/{ACADEMY_NAME}.git"
+    if not os.environ.get("GITHUB_ACTIONS") and repo_url == default_url:
+        for cand_path in ACADEMY_LOCAL_CANDIDATES:
+            if os.path.isdir(cand_path) and os.path.isdir(os.path.join(cand_path, ACADEMY_OUTBOX_REL)):
+                os.makedirs(os.path.join(dest, os.path.dirname(ACADEMY_OUTBOX_REL)), exist_ok=True)
+                shutil.copytree(
+                    os.path.join(cand_path, ACADEMY_OUTBOX_REL),
+                    os.path.join(dest, ACADEMY_OUTBOX_REL),
+                )
+                return dest
+
+    env = os.environ.copy()
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    env["GIT_ASKPASS"] = "echo"
+    env["GCM_INTERACTIVE"] = "never"
+    try:
+        subprocess.run(
+            [
+                "git",
+                "-c", "http.sslVerify=false",
+                "-c", "credential.helper=",
+                "-c", "core.askPass=echo",
+                "clone", "--depth", "1", repo_url, dest
+            ],
+            check=True, capture_output=True, text=True, timeout=CLONE_TIMEOUT_SECONDS, env=env,
+        )
+        return dest
+    except Exception as e:
+        for cand_path in ACADEMY_LOCAL_CANDIDATES:
+            if os.path.isdir(cand_path) and os.path.isdir(os.path.join(cand_path, ACADEMY_OUTBOX_REL)):
+                print(f"[EmbassyBridge] Remote Academy clone failed ({e}); falling back to local repo at {cand_path}")
+                os.makedirs(os.path.join(dest, os.path.dirname(ACADEMY_OUTBOX_REL)), exist_ok=True)
+                shutil.copytree(
+                    os.path.join(cand_path, ACADEMY_OUTBOX_REL),
+                    os.path.join(dest, ACADEMY_OUTBOX_REL),
+                )
+                return dest
+        raise
+
+
+def get_commit_sha(repo_dir: str, fallback_candidates: list = None) -> str:
     try:
         result = subprocess.run(
             ["git", "rev-parse", "HEAD"], cwd=repo_dir, check=True, capture_output=True, text=True,
         )
         return result.stdout.strip()
     except Exception:
-        sibling_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", COUNTERPART_NAME))
-        if os.path.isdir(sibling_path):
-            try:
-                res = subprocess.run(
-                    ["git", "rev-parse", "HEAD"], cwd=sibling_path, check=True, capture_output=True, text=True,
-                )
-                return res.stdout.strip()
-            except Exception:
-                pass
+        candidates = list(fallback_candidates or [os.path.abspath(os.path.join(os.path.dirname(__file__), "..", COUNTERPART_NAME))])
+        for sibling_path in candidates:
+            if os.path.isdir(sibling_path):
+                try:
+                    res = subprocess.run(
+                        ["git", "rev-parse", "HEAD"], cwd=sibling_path, check=True, capture_output=True, text=True,
+                    )
+                    return res.stdout.strip()
+                except Exception:
+                    pass
         return "local_sync"
 
 
@@ -232,18 +300,29 @@ def is_valid_dossier(content: str) -> bool:
     return True
 
 
-def rewrite_artifact_references(content: str, commit_sha: str) -> str:
-    """Rewrites `shared_space/...` artifact shorthand references wrapped in backticks
+def rewrite_artifact_references(content: str, commit_sha: str, source_repo: str = COUNTERPART_NAME) -> str:
+    """Rewrites `shared_space/...` or `knowledge_base/...` artifact shorthand references wrapped in backticks
     (inline code spans) into absolute raw.githubusercontent.com URLs pinned to the exact
     source commit, so referenced plots/scripts remain inspectable without ever being
     physically copied into this sandbox (see module docstring). References not wrapped
     in backticks are left untouched."""
-    pattern = re.compile(r"`" + re.escape(ARTIFACT_SHORTHAND_PREFIX) + r"([^`\r\n]+)`")
+    if source_repo == ACADEMY_NAME:
+        prefix = ACADEMY_SHORTHAND_PREFIX
+        real_prefix = ACADEMY_REAL_PREFIX
+        owner = ACADEMY_OWNER
+        repo_name = ACADEMY_NAME
+    else:
+        prefix = ARTIFACT_SHORTHAND_PREFIX
+        real_prefix = ARTIFACT_REAL_PREFIX
+        owner = COUNTERPART_OWNER
+        repo_name = COUNTERPART_NAME
+
+    pattern = re.compile(r"`" + re.escape(prefix) + r"([^`\r\n]+)`")
 
     def _replace(match: "re.Match[str]") -> str:
         rel_path = match.group(1)
-        real_path = f"{ARTIFACT_REAL_PREFIX}{rel_path}"
-        url = f"https://raw.githubusercontent.com/{COUNTERPART_OWNER}/{COUNTERPART_NAME}/{commit_sha}/{real_path}"
+        real_path = f"{real_prefix}{rel_path}"
+        url = f"https://raw.githubusercontent.com/{owner}/{repo_name}/{commit_sha}/{real_path}"
         return f"`{url}`"
 
     return pattern.sub(_replace, content)
@@ -294,7 +373,12 @@ def get_next_dossier_accession_number(ledger: Dict[str, Any], inbox_dir: str) ->
     return max_num + 1
 
 
-def assign_gate_accession(filename: str, content: str, accession_num: int) -> Tuple[str, str, str]:
+def assign_gate_accession(
+    filename: str,
+    content: str,
+    accession_num: int,
+    source_repo: str = COUNTERPART_NAME,
+) -> Tuple[str, str, str]:
     """Assigns an official gate accession ID (e.g. DOSSIER_004) and canonical inbox filename.
     Injects an accession stamp header so downstream Agora scholars can easily reference
     the canonical dossier number without ambiguity."""
@@ -312,11 +396,30 @@ def assign_gate_accession(filename: str, content: str, accession_num: int) -> Tu
         clean = re.sub(r"[^a-zA-Z0-9_]+", "_", clean).strip("_")
         inbox_filename = f"DOSSIER_{effective_num:03d}_{clean}.md"
 
-    accession_header = (
-        f"# 🏛️ ⮀ 🌿 Frontier Epistemic Dossier #{effective_num:03d} (Gate Accession: {accession_id})\n"
-        f"**Gate Accession ID:** `{accession_id}` (assigned at Synthetic Agora Embassy Gate)\n"
-        f"**Original Source Filename:** `{filename}`\n"
+    is_academy = source_repo == ACADEMY_NAME or filename.upper().startswith("DOSSIER-UK-")
+    orig_title_match = re.search(
+        r"^#\s*(?:Frontier\s+Epistemic\s+Dossier|Epistemic\s+Dossier|DOSSIER)\s*:?\s*(?:\[Universe\s+Knowledge\]\s*)?(.+)$",
+        content,
+        flags=re.MULTILINE | re.IGNORECASE,
     )
+    extracted_title = orig_title_match.group(1).strip() if orig_title_match else ""
+    title_line = f"**Title:** {extracted_title}\n" if extracted_title else ""
+
+    if is_academy:
+        accession_header = (
+            f"# 🏛️ ⮀ 📚 Academy Epistemic Dossier #{effective_num:03d} (Gate Accession: {accession_id})\n"
+            f"**Gate Accession ID:** `{accession_id}` (assigned at Synthetic Agora Embassy Gate)\n"
+            f"**Source Institution:** Universe Knowledge — The Academy (`{ACADEMY_OWNER}/{ACADEMY_NAME}`)\n"
+            f"**Original Source Filename:** `{filename}`\n"
+            f"{title_line}"
+        )
+    else:
+        accession_header = (
+            f"# 🏛️ ⮀ 🌿 Frontier Epistemic Dossier #{effective_num:03d} (Gate Accession: {accession_id})\n"
+            f"**Gate Accession ID:** `{accession_id}` (assigned at Synthetic Agora Embassy Gate)\n"
+            f"**Original Source Filename:** `{filename}`\n"
+            f"{title_line}"
+        )
 
     if re.search(r"^#\s*(?:Frontier\s+Epistemic\s+Dossier|Epistemic\s+Dossier|DOSSIER:?)\s*#?\s*\d*.*$", content, flags=re.MULTILINE | re.IGNORECASE):
         stamped_content = re.sub(
@@ -412,10 +515,116 @@ def rescue_rejected_files(ledger: Dict[str, Any], imported_hashes: set) -> int:
     return rescued_count
 
 
+def _import_outbox_candidates(
+    outbox_path: str,
+    source_repo: str,
+    commit_sha: str,
+    ledger: Dict[str, Any],
+    imported_hashes: set,
+    imported_filenames: set,
+) -> Tuple[int, int, int]:
+    """Scans an outbox directory from a counterpart world or The Academy and imports valid dossiers."""
+    candidates = sorted(
+        f for f in os.listdir(outbox_path)
+        if f.lower().endswith(".md") and not NON_CANDIDATE_FILENAME_RE.search(f)
+    )
+
+    imported_count = 0
+    skipped_count = 0
+    rejected_count = 0
+
+    for filename in candidates:
+        src_path = os.path.join(outbox_path, filename)
+
+        if os.path.islink(src_path):
+            rejected_count += 1
+            print(f"[EmbassyBridge] Rejected symlink candidate (untrusted input): {filename}")
+            continue
+
+        if not os.path.isfile(src_path):
+            continue
+
+        file_size = os.path.getsize(src_path)
+        if file_size > MAX_CANDIDATE_SIZE_BYTES:
+            rejected_count += 1
+            print(f"[EmbassyBridge] Rejected oversized candidate: {filename} "
+                  f"({file_size} bytes > {MAX_CANDIDATE_SIZE_BYTES} byte cap)")
+            continue
+
+        file_hash = sha256_of(src_path)
+        if file_hash in imported_hashes or filename in imported_filenames:
+            skipped_count += 1
+            continue
+
+        with open(src_path, "r", encoding="utf-8", errors="replace") as f:
+            content = f.read()
+
+        if not is_valid_dossier(content):
+            rejected_count += 1
+            rejected_banner = f"\n\n---\n{UNTRUSTED_CONTENT_NOTICE.format(source=source_repo)}\n"
+            with open(os.path.join(REJECTED_DIR, filename), "w", encoding="utf-8") as f:
+                f.write(content.rstrip("\n") + rejected_banner)
+            print(f"[EmbassyBridge] Rejected malformed candidate ({source_repo}): {filename}")
+            continue
+
+        rewritten_content = rewrite_artifact_references(content, commit_sha, source_repo=source_repo)
+
+        # Compute sequential accession number and canonical inbox filename
+        accession_num = get_next_dossier_accession_number(ledger, INBOX_DIR)
+        inbox_filename, accession_id, stamped_content = assign_gate_accession(
+            filename, rewritten_content, accession_num, source_repo=source_repo
+        )
+
+        origin_footer = (
+            f"\n\n---\n{UNTRUSTED_CONTENT_NOTICE.format(source=source_repo)}\n\n"
+            f"*Synced from `{source_repo}` (commit `{commit_sha[:12]}`) by embassy_bridge.py.*\n"
+        )
+        final_content = stamped_content.rstrip("\n") + origin_footer
+        dest_path = os.path.join(INBOX_DIR, inbox_filename)
+        _archive_if_colliding(dest_path, final_content)
+        with open(dest_path, "w", encoding="utf-8") as f:
+            f.write(final_content)
+
+        # If canonical inbox_filename differs from original filename, also maintain
+        # the original filename so any existing/legacy reference continues to work
+        if inbox_filename != filename:
+            orig_dest = os.path.join(INBOX_DIR, filename)
+            with open(orig_dest, "w", encoding="utf-8") as f:
+                f.write(final_content)
+
+        ledger.setdefault("imported", []).append({
+            "accession_id": accession_id,
+            "accession_number": accession_num,
+            "source_repo": source_repo,
+            "source_commit": commit_sha,
+            "filename": filename,
+            "inbox_filename": inbox_filename,
+            "sha256": file_hash,
+            "imported_at": utc_now_iso(),
+        })
+        ledger["last_accession_number"] = max(ledger.get("last_accession_number", 0), accession_num)
+        imported_hashes.add(file_hash)
+        imported_filenames.add(filename)
+        imported_count += 1
+        print(f"[EmbassyBridge] Imported new dossier ({source_repo}): {filename} -> {inbox_filename} ({accession_id})")
+
+        # If this candidate was previously sitting in rejected/, clean it up
+        rej_path = os.path.join(REJECTED_DIR, filename)
+        if os.path.exists(rej_path):
+            try:
+                os.remove(rej_path)
+                print(f"[EmbassyBridge] Removed previously rejected copy: {filename}")
+            except Exception:
+                pass
+
+        save_ledger(ledger)
+
+    return imported_count, skipped_count, rejected_count
+
+
 def sync() -> bool:
-    """Runs one sync pass. Returns True on success (including a legitimate no-op),
-    False on a hard failure (e.g. clone failure or missing counterpart outbox) so the
-    caller can signal failure to the calling workflow instead of silently exiting 0."""
+    """Runs one sync pass across World A ('evolution_sandbox') and Universe Knowledge ('univers-knowledge').
+    Returns True on success (including a legitimate no-op), False on a hard failure."""
     os.makedirs(INBOX_DIR, exist_ok=True)
     os.makedirs(REJECTED_DIR, exist_ok=True)
     ledger = load_ledger()
@@ -446,113 +655,64 @@ def sync() -> bool:
                 print(f"[EmbassyBridge] ERROR: Counterpart outbox not found at {COUNTERPART_OUTBOX_REL}.", file=sys.stderr)
                 return False
 
-            candidates = sorted(
-                f for f in os.listdir(outbox_path)
-                if f.lower().endswith(".md") and not NON_CANDIDATE_FILENAME_RE.search(f)
+            imp_a, skip_a, rej_a = _import_outbox_candidates(
+                outbox_path=outbox_path,
+                source_repo=COUNTERPART_NAME,
+                commit_sha=commit_sha,
+                ledger=ledger,
+                imported_hashes=imported_hashes,
+                imported_filenames=imported_filenames,
             )
 
-            imported_count = 0
-            skipped_count = 0
-            rejected_count = 0
-
-            for filename in candidates:
-                src_path = os.path.join(outbox_path, filename)
-
-                # The counterpart repo is untrusted input. Reject symlinks outright --
-                # os.path.isfile()/getsize()/open() all follow symlinks, so a malicious
-                # symlink could otherwise cause us to read and commit arbitrary local
-                # files from the CI runner into this repo.
-                if os.path.islink(src_path):
-                    rejected_count += 1
-                    print(f"[EmbassyBridge] Rejected symlink candidate (untrusted input): {filename}")
-                    continue
-
-                if not os.path.isfile(src_path):
-                    continue
-
-                file_size = os.path.getsize(src_path)
-                if file_size > MAX_CANDIDATE_SIZE_BYTES:
-                    rejected_count += 1
-                    print(f"[EmbassyBridge] Rejected oversized candidate: {filename} "
-                          f"({file_size} bytes > {MAX_CANDIDATE_SIZE_BYTES} byte cap)")
-                    continue
-
-                file_hash = sha256_of(src_path)
-                if file_hash in imported_hashes or filename in imported_filenames:
-                    skipped_count += 1
-                    continue
-
-                with open(src_path, "r", encoding="utf-8", errors="replace") as f:
-                    content = f.read()
-
-                if not is_valid_dossier(content):
-                    rejected_count += 1
-                    rejected_banner = f"\n\n---\n{UNTRUSTED_CONTENT_NOTICE.format(source=COUNTERPART_NAME)}\n"
-                    with open(os.path.join(REJECTED_DIR, filename), "w", encoding="utf-8") as f:
-                        f.write(content.rstrip("\n") + rejected_banner)
-                    print(f"[EmbassyBridge] Rejected malformed candidate: {filename}")
-                    continue
-
-                rewritten_content = rewrite_artifact_references(content, commit_sha)
-
-                # Compute sequential accession number and canonical inbox filename
-                accession_num = get_next_dossier_accession_number(ledger, INBOX_DIR)
-                inbox_filename, accession_id, stamped_content = assign_gate_accession(
-                    filename, rewritten_content, accession_num
+            imp_uk = 0
+            skip_uk = 0
+            rej_uk = 0
+            # Also sync Universe Knowledge ("The Academy") unless explicitly skipped or running a single-counterpart mock test
+            should_sync_academy = (
+                not os.environ.get("EMBASSY_SKIP_ACADEMY")
+                and (
+                    os.environ.get("EMBASSY_ACADEMY_PATH")
+                    or os.environ.get("EMBASSY_ACADEMY_URL")
+                    or (not os.environ.get("EMBASSY_COUNTERPART_PATH") and not os.environ.get("EMBASSY_COUNTERPART_URL"))
                 )
-
-                origin_footer = (
-                    f"\n\n---\n{UNTRUSTED_CONTENT_NOTICE.format(source=COUNTERPART_NAME)}\n\n"
-                    f"*Synced from `{COUNTERPART_NAME}` (commit `{commit_sha[:12]}`) by embassy_bridge.py.*\n"
-                )
-                final_content = stamped_content.rstrip("\n") + origin_footer
-                dest_path = os.path.join(INBOX_DIR, inbox_filename)
-                _archive_if_colliding(dest_path, final_content)
-                with open(dest_path, "w", encoding="utf-8") as f:
-                    f.write(final_content)
-
-                # If canonical inbox_filename differs from original filename, also maintain
-                # the original filename so any existing/legacy reference continues to work
-                if inbox_filename != filename:
-                    orig_dest = os.path.join(INBOX_DIR, filename)
-                    with open(orig_dest, "w", encoding="utf-8") as f:
-                        f.write(final_content)
-
-                ledger.setdefault("imported", []).append({
-                    "accession_id": accession_id,
-                    "accession_number": accession_num,
-                    "source_repo": COUNTERPART_NAME,
-                    "source_commit": commit_sha,
-                    "filename": filename,
-                    "inbox_filename": inbox_filename,
-                    "sha256": file_hash,
-                    "imported_at": utc_now_iso(),
-                })
-                ledger["last_accession_number"] = max(ledger.get("last_accession_number", 0), accession_num)
-                imported_hashes.add(file_hash)
-                imported_count += 1
-                print(f"[EmbassyBridge] Imported new dossier: {filename} -> {inbox_filename} ({accession_id})")
-
-                # If this candidate was previously sitting in rejected/, clean it up
-                rej_path = os.path.join(REJECTED_DIR, filename)
-                if os.path.exists(rej_path):
-                    try:
-                        os.remove(rej_path)
-                        print(f"[EmbassyBridge] Removed previously rejected copy: {filename}")
-                    except Exception:
-                        pass
-
-                # Persist the ledger immediately after each successful import (not only
-                # at the very end), so a mid-run failure can't leave imported files on
-                # disk with no matching ledger entry -- which would otherwise cause them
-                # to be re-processed (and potentially re-archived) on the next run.
-                save_ledger(ledger)
+            )
+            if should_sync_academy:
+                try:
+                    academy_dir = clone_academy(tmp_dir)
+                    uk_sha = get_commit_sha(academy_dir, fallback_candidates=ACADEMY_LOCAL_CANDIDATES)
+                    uk_outbox = os.path.join(academy_dir, ACADEMY_OUTBOX_REL)
+                    if os.path.isdir(uk_outbox):
+                        imp_uk, skip_uk, rej_uk = _import_outbox_candidates(
+                            outbox_path=uk_outbox,
+                            source_repo=ACADEMY_NAME,
+                            commit_sha=uk_sha,
+                            ledger=ledger,
+                            imported_hashes=imported_hashes,
+                            imported_filenames=imported_filenames,
+                        )
+                    else:
+                        print(f"[EmbassyBridge] Notice: Academy outbox not yet present at {ACADEMY_OUTBOX_REL}; skipping Academy sync.")
+                except Exception as uk_err:
+                    print(f"[EmbassyBridge] Warning: Academy sync skipped due to non-fatal error: {uk_err}", file=sys.stderr)
 
             # Rescue any eligible dossiers currently trapped in REJECTED_DIR
             rescued_count = rescue_rejected_files(ledger, imported_hashes)
 
+            # Post Academy Literature & Dimensional Audit briefs into Colleague Commons for any newly arrived DOSSIER-UK files
+            try:
+                from commons_chat import sync_academy_literature_briefs
+                briefs_posted = sync_academy_literature_briefs()
+                if briefs_posted:
+                    print(f"[EmbassyBridge] Posted {briefs_posted} Academy Literature & Theory brief(s) to Colleague Commons.")
+            except Exception as chat_err:
+                print(f"[EmbassyBridge] Warning: Could not sync Academy literature briefs to Commons: {chat_err}")
+
+            imported_count = imp_a + imp_uk
+            skipped_count = skip_a + skip_uk
+            rejected_count = rej_a + rej_uk
+
             print(
-                f"[EmbassyBridge] Sync complete. Imported: {imported_count}, "
+                f"[EmbassyBridge] Sync complete. Imported: {imported_count} (World A: {imp_a}, Academy: {imp_uk}), "
                 f"Rescued: {rescued_count}, "
                 f"Skipped (already known): {skipped_count}, Rejected: {rejected_count}."
             )

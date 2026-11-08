@@ -46,7 +46,7 @@ def get_agora_context_summary(instance_name: str) -> str:
                 rev_count = len(c.get("verifications", []))
                 lines.append(f"  - [{c.get('id')}] {c.get('title')} ({rev_count} review(s)). Actively defend, run Python stress-tests, or post refinements!")
 
-        # Check Inter-World Embassy Inbox from World A
+        # Check Inter-World Embassy Inbox from World A & Universe Knowledge ("The Academy")
         embassy_inbox = os.path.join(os.path.dirname(__file__), "instances", "shared_agora", "embassy", "inbox")
         if os.path.exists(embassy_inbox):
             dossiers = sorted(
@@ -55,7 +55,11 @@ def get_agora_context_summary(instance_name: str) -> str:
                 reverse=True
             )
             if dossiers:
-                lines.append(f"🌐 INTER-WORLD EMBASSY: {len(dossiers)} Frontier Dossier(s) from World A awaiting review in 'shared_agora/embassy/inbox/':")
+                uk_dossiers = [f for f in dossiers if f.upper().startswith("DOSSIER-UK-")]
+                lines.append(
+                    f"🌐 INTER-WORLD EMBASSY: {len(dossiers)} Dossier(s) in 'shared_agora/embassy/inbox/' "
+                    f"(including {len(uk_dossiers)} Academy Literature & Math Dossier(s) 'DOSSIER-UK-*.md' from Universe Knowledge):"
+                )
                 for doc in dossiers[:3]:
                     lines.append(f"  - shared_agora/embassy/inbox/{doc}")
         

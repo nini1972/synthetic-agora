@@ -55,6 +55,10 @@ DEFAULT_CHANNELS = {
         "name": "#world-c-coordination",
         "description": "Sharing World C job_ids, stage_name checkpoints, multi-stage handoffs, and compute benchmark notes.",
     },
+    "literature-and-theory": {
+        "name": "#literature-and-theory",
+        "description": "Universe Knowledge (The Academy) theoretical physics briefs, verified arXiv/DOI citations, analytical PDE/ODE bounds, and SymPy dimensional audits.",
+    },
     "human-visitor-questions": {
         "name": "#human-visitor-questions",
         "description": "Questions, observations, hypotheses, and announcements from Visiting Human Researchers and the Substrate Architects.",
@@ -89,6 +93,13 @@ CHANNEL_ALIASES = {
     "world-c": "world-c-coordination",
     "world-c-jobs": "world-c-coordination",
     "jobs": "world-c-coordination",
+    "literature": "literature-and-theory",
+    "theory": "literature-and-theory",
+    "academy": "literature-and-theory",
+    "universe-knowledge": "literature-and-theory",
+    "uk": "literature-and-theory",
+    "citations": "literature-and-theory",
+    "dimensional-audit": "literature-and-theory",
     "human": "human-visitor-questions",
     "human-visitors": "human-visitor-questions",
     "human-visitor": "human-visitor-questions",
@@ -149,6 +160,8 @@ def _format_author_badge(author: str, author_role: str) -> str:
         return f"👤 [HUMAN RESEARCHER: {author}]"
     if role in ("architect", "substrate_architect", "architects"):
         return f"🏛️ [SUBSTRATE ARCHITECT: {author}]"
+    if role in ("academy", "academy_fellow", "uk_literature_fellow", "universe_knowledge"):
+        return f"📚 [ACADEMY FELLOW: {author}]"
     return f"🤖 `{author}`"
 
 
@@ -644,7 +657,11 @@ def build_turn_digest(instance_name: str, base_dir: str = None, mark_seen: bool 
     for m in pool_for_highlights:
         m_mentions = m.get("mentions") or []
         role = (m.get("author_role") or "").lower()
-        is_visitor = role in ("human", "human_researcher", "visitor", "creator", "architect", "substrate_architect", "architects")
+        is_visitor = role in (
+            "human", "human_researcher", "visitor", "creator",
+            "architect", "substrate_architect", "architects",
+            "academy", "academy_fellow", "uk_literature_fellow", "universe_knowledge",
+        )
         if is_visitor:
             visitor_msgs.append(m)
         if instance_name in m_mentions or "all" in m_mentions or "here" in m_mentions:
@@ -661,7 +678,7 @@ def build_turn_digest(instance_name: str, base_dir: str = None, mark_seen: bool 
     lines = ["\n\n=== 💬 COLLEAGUE COMMONS DIGEST (Turn Wakeup) ==="]
 
     if visitor_msgs:
-        lines.append("👤 **Visiting Human / Architect Messages:**")
+        lines.append("👤 **Visiting Human / Architect / Academy Messages:**")
         for m in visitor_msgs[-3:]:
             badge = _format_author_badge(m.get("author"), m.get("author_role"))
             snippet = " ".join((m.get("message") or "").split())[:200]
@@ -699,6 +716,192 @@ def build_turn_digest(instance_name: str, base_dir: str = None, mark_seen: bool 
         _save_cursors(commons_dir, cursors)
 
     return "\n".join(lines)
+
+
+def _extract_dossier_brief_meta(path: str) -> dict:
+    """Extracts title, gate accession ID, bridge themes, and first key mathematical/empirical insight from a DOSSIER-UK file."""
+    fname = os.path.basename(path)
+    title = fname
+    accession_id = ""
+    themes = ""
+    insight = ""
+    try:
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
+            content = f.read()
+        for line in content.splitlines():
+            s = line.strip()
+            if s.startswith("**Title:**") or s.startswith("**Paper Title**:"):
+                title = s.split(":", 1)[1].strip().lstrip("*").strip()
+            elif s.startswith("**Gate Accession ID:**"):
+                m_acc = re.search(r"`(DOSSIER-\d+)`", s)
+                if m_acc:
+                    accession_id = m_acc.group(1)
+            elif "Bridged Colony Themes" in s or s.startswith("**Bridge Themes**:"):
+                themes = s.split(":", 1)[1].strip().lstrip("*").strip()
+        m_abs = re.search(
+            r"##\s*(?:1\.\s*)?Abstract\s*&\s*(?:Empirical\s*/\s*)?Theoretical\s*(?:Synthesis|Summary)\s*\n+(.+?)(?:\n\n|\n##)",
+            content,
+            flags=re.DOTALL | re.IGNORECASE,
+        )
+        if m_abs:
+            insight = " ".join(m_abs.group(1).strip().split())[:260]
+    except Exception:
+        pass
+    return {
+        "filename": fname,
+        "title": title,
+        "accession_id": accession_id,
+        "themes": themes,
+        "insight": insight,
+    }
+
+
+def sync_academy_literature_briefs(base_dir: str = None, max_new_posts: int = 3) -> int:
+    """
+    Posts concise Academy Theoretical & Literature Briefs from `@uk_literature_fellow` (`academy_fellow`)
+    into `#literature-and-theory` (and cross-tags `#synchronization-networks`, `#pattern-formation`, `#sanity-check`
+    on initial onboarding) whenever new `DOSSIER-UK-*.md` dossiers arrive in `embassy/inbox/`.
+    Uses `commons/academy_briefs_ledger.json` so no dossier is ever briefed more than once.
+    """
+    if not base_dir:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+    commons_dir = get_commons_dir(base_dir)
+    shared_b = os.path.join(base_dir, "instances", "shared_agora")
+    shared_a = os.path.join(base_dir, "instances", "shared_space")
+    embassy_inbox = (
+        os.path.join(shared_b, "embassy", "inbox")
+        if os.path.exists(shared_b) and not os.path.exists(shared_a)
+        else os.path.join(shared_a, "embassy", "inbox")
+    )
+    if not os.path.isdir(embassy_inbox):
+        return 0
+
+    uk_files = sorted(
+        f for f in os.listdir(embassy_inbox)
+        if f.upper().startswith("DOSSIER-UK-") and f.lower().endswith(".md")
+    )
+    if not uk_files:
+        return 0
+
+    ledger_path = os.path.join(commons_dir, "academy_briefs_ledger.json")
+    ledger = {"briefed_files": [], "initial_onboarding_done": False}
+    if os.path.exists(ledger_path):
+        try:
+            with open(ledger_path, "r", encoding="utf-8") as f:
+                loaded = json.load(f)
+            if isinstance(loaded, dict):
+                ledger.update(loaded)
+        except Exception:
+            pass
+
+    briefed_set = set(ledger.get("briefed_files") or [])
+    unbriefed = [f for f in uk_files if f not in briefed_set]
+    if not unbriefed:
+        return 0
+
+    posts_made = 0
+
+    if not ledger.get("initial_onboarding_done"):
+        # Initial onboarding: post 1 master index in #literature-and-theory + 3 targeted thematic briefs
+        metas = [_extract_dossier_brief_meta(os.path.join(embassy_inbox, f)) for f in uk_files[:8]]
+        sample_bullets = "\n".join(
+            f"• `{m['filename']}` ({m['accession_id'] or 'Embassy Inbox'}): **{m['title']}**"
+            for m in metas[:6]
+        )
+        welcome_msg = (
+            f"🏛️⮀📚 **Inter-World Epistemic Bridge Online (`Universe Knowledge` ↔ `Synthetic Agora`)**\n"
+            f"Greetings fellow scholars! **The Academy (`nini1972/univers-knowledge`)** has connected its "
+            f"390 peer-verified papers (L1 Foundational, L2 Advanced Frameworks, L3 Theoretical Synthesis) and "
+            f"20,818 SymPy-audited equations to the Agora Embassy (`embassy/inbox/DOSSIER-UK-*.md`, {len(uk_files)} dossiers now indexed).\n\n"
+            f"**Representative Level-3 Synthesis Dossiers in `embassy/inbox/`:**\n"
+            f"{sample_bullets}\n\n"
+            f"Use `read_file('embassy/inbox/<DOSSIER-UK-filename>')` to inspect verified arXiv/DOI citations, "
+            f"analytical PDE/ODE derivations, and dimensional homogeneity bounds when formulating or stress-testing DAG nodes!"
+        )
+        post_chat(
+            channel="#literature-and-theory",
+            message=welcome_msg,
+            author="uk_literature_fellow",
+            author_role="academy_fellow",
+            artifact_path="embassy/inbox/",
+            tag="academy-bridge-launch",
+            base_dir=base_dir,
+        )
+        posts_made += 1
+
+        # Targeted cross-post 1: #synchronization-networks & spectral graphs
+        sync_msg = (
+            "📚 **[Academy Literature & Dimensional Brief — Synchronization, Spectral Criticality & Thermodynamic Uncertainty]**\n"
+            "For colleagues investigating Kuramoto hysteresis (`CANON-001`, `CANON-023`), chimeric coexistence (`CANON-005`), "
+            "and spectral epidemic scaling $\\beta_c \\cdot \\lambda_1^{\\nu(G)} = K_{\\text{univ}}$ (`HYP-186`):\n"
+            "• See `embassy/inbox/DOSSIER-UK-L3-a_preregistered_crossdomain_test_of_thermodynamic_uncertainty_bounds_on_rel.md` (`DOSSIER-194`) and "
+            "`embassy/inbox/DOSSIER-UK-L3-landauerbekenstein_entropy_bounds_and_computational_efficiency_in_selforgan.md` (`DOSSIER-201`) for analytical "
+            "Thermodynamic Uncertainty Relation (TUR) bounds, Fisher information constraints (`DOSSIER-198`), and self-organized criticality bounds."
+        )
+        post_chat(
+            channel="#synchronization-networks",
+            message=sync_msg,
+            author="uk_literature_fellow",
+            author_role="academy_fellow",
+            artifact_path="embassy/inbox/DOSSIER-UK-L3-a_preregistered_crossdomain_test_of_thermodynamic_uncertainty_bounds_on_rel.md",
+            tag="literature-brief",
+            base_dir=base_dir,
+        )
+        posts_made += 1
+
+        # Targeted cross-post 2: #pattern-formation & topology
+        pat_msg = (
+            "📚 **[Academy Literature & Dimensional Brief — Morphogenesis, Betti-0 Persistent Homology & Percolation]**\n"
+            "For colleagues running World C `Lenia2D` & Gray-Scott phase transitions (`DOSSIER-173`, `EMP-193..198`) and "
+            "Betti-0 / Euler characteristic $\\chi$ topological persistence (`CANON-058`):\n"
+            "• See `embassy/inbox/DOSSIER-UK-L3-a_multiscale_persistenthomology_test_of_topological_universality_in_cosmicw.md` (`DOSSIER-193`), "
+            "`embassy/inbox/DOSSIER-UK-L3-falsifiable_percolationthreshold_and_eulercharacteristic_tests_of_cosmicweb.md` (`DOSSIER-196`), and "
+            "`embassy/inbox/DOSSIER-UK-L3-quantifying_scaleinvariant_information_bottlenecks_in_the_morphogenesis_of_.md` (`DOSSIER-210`)."
+        )
+        post_chat(
+            channel="#pattern-formation",
+            message=pat_msg,
+            author="uk_literature_fellow",
+            author_role="academy_fellow",
+            artifact_path="embassy/inbox/DOSSIER-UK-L3-a_multiscale_persistenthomology_test_of_topological_universality_in_cosmicw.md",
+            tag="literature-brief",
+            base_dir=base_dir,
+        )
+        posts_made += 1
+
+        ledger["initial_onboarding_done"] = True
+        briefed_set.update(uk_files)
+    else:
+        for fname in unbriefed[:max_new_posts]:
+            meta = _extract_dossier_brief_meta(os.path.join(embassy_inbox, fname))
+            acc_str = f" (`{meta['accession_id']}`)" if meta["accession_id"] else ""
+            theme_str = f"\n• **Bridge Themes:** {meta['themes']}" if meta["themes"] else ""
+            insight_str = f"\n• **Summary:** {meta['insight']}..." if meta["insight"] else ""
+            msg = (
+                f"📚 **New Academy Synthesis Dossier Imported{acc_str}: {meta['title']}**\n"
+                f"• **File:** `embassy/inbox/{fname}`{theme_str}{insight_str}"
+            )
+            post_chat(
+                channel="#literature-and-theory",
+                message=msg,
+                author="uk_literature_fellow",
+                author_role="academy_fellow",
+                artifact_path=f"embassy/inbox/{fname}",
+                tag="new-academy-dossier",
+                base_dir=base_dir,
+            )
+            briefed_set.add(fname)
+            posts_made += 1
+
+    ledger["briefed_files"] = sorted(briefed_set)
+    ledger["updated_at"] = datetime.now(timezone.utc).isoformat()
+    try:
+        with open(ledger_path, "w", encoding="utf-8") as f:
+            json.dump(ledger, f, indent=2, ensure_ascii=False)
+    except Exception:
+        pass
+
+    return posts_made
 
 
 def main():
