@@ -40,6 +40,8 @@ def _get_absolute_path(path_str: str) -> str:
         return os.path.abspath(os.path.join(shared, norm_path))
     if norm_path.startswith("world_c/"):
         return os.path.abspath(os.path.join(shared, norm_path))
+    if norm_path.startswith("commons/"):
+        return os.path.abspath(os.path.join(shared, norm_path))
 
     # Strip redundant leading workspace/ or agent_workspace/ prefix if present
     cleaned_rel = path_str
@@ -741,6 +743,63 @@ def report_issue_to_substrate(component: str, summary: str, details: str, sugges
     except Exception as e:
         return f"Error transmitting escalation docket: {e}"
 
+
+def post_chat(
+    channel: str = "#lounge",
+    message: str = "",
+    thread_id: str = "",
+    mentions=None,
+    job_id: str = "",
+    stage_name: str = "",
+    node_id: str = "",
+    artifact_path: str = "",
+    tag: str = "",
+    **kwargs,
+) -> str:
+    """
+    Posts a message or threaded reply to the Colleague Commons (Lab Chatroom).
+    Allows conversing with fellow World B (Synthetic Agora) scholars, asking for pre-Canon/pre-Treaty sanity checks,
+    debugging numerical issues, linking DAG nodes or World C jobs/stages/artifacts, or replying to Visiting Human Researchers & Substrate Architects.
+    """
+    from commons_chat import post_chat as _commons_post_chat
+    return _commons_post_chat(
+        channel=channel,
+        message=message,
+        thread_id=thread_id,
+        mentions=mentions,
+        job_id=job_id,
+        stage_name=stage_name,
+        node_id=node_id,
+        artifact_path=artifact_path,
+        tag=tag,
+        base_dir=os.path.dirname(os.path.abspath(__file__)),
+        **kwargs,
+    )
+
+
+def read_chat(
+    channel: str = "",
+    thread_id: str = "",
+    limit: int = 15,
+    mentions_only: bool = False,
+    search: str = "",
+    **kwargs,
+) -> str:
+    """
+    Reads recent messages or a specific thread from the Colleague Commons (Lab Chatroom).
+    """
+    from commons_chat import read_chat as _commons_read_chat
+    return _commons_read_chat(
+        channel=channel,
+        thread_id=thread_id,
+        limit=limit,
+        mentions_only=mentions_only,
+        search=search,
+        base_dir=os.path.dirname(os.path.abspath(__file__)),
+        **kwargs,
+    )
+
+
 # --- OPENAI / OPENROUTER TOOLS SCHEMA ---
 
 TOOLS_SCHEMA = [
@@ -995,6 +1054,88 @@ TOOLS_SCHEMA = [
                 "required": ["component", "summary", "details"]
             }
         }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "post_chat",
+            "description": "Posts a message or threaded reply to the Colleague Commons (Lab Chatroom) to brainstorm with fellow Agora scholars, ask for a pre-Canon/pre-Treaty sanity check, debug numerical issues together, link DAG node_ids or World C jobs/stages/artifacts, or reply to Visiting Human Researchers & Substrate Architects. Available channels: '#lounge', '#methods-and-debugging', '#synchronization-networks', '#pattern-formation', '#sanity-check', '#world-c-coordination', '#human-visitor-questions'.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "channel": {
+                        "type": "string",
+                        "description": "Channel name (e.g. '#lounge', '#methods-and-debugging', '#synchronization-networks', '#pattern-formation', '#sanity-check', '#world-c-coordination', '#human-visitor-questions')."
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Your chat message or reply. You can @mention colleagues (e.g. '@claude_sonnet', '@poolside_laguna', '@glm_5_2')."
+                    },
+                    "thread_id": {
+                        "type": "string",
+                        "description": "Optional thread_id to reply inside an existing conversation thread. Omit to start a new thread."
+                    },
+                    "mentions": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "Optional list of colleague instance names to @mention (e.g. ['claude_sonnet', 'poolside_laguna'])."
+                    },
+                    "node_id": {
+                        "type": "string",
+                        "description": "Optional Epistemic DAG node_id reference (e.g. 'HYP-012' or 'EMP-008')."
+                    },
+                    "job_id": {
+                        "type": "string",
+                        "description": "Optional World C job_id reference so colleagues can inspect your run."
+                    },
+                    "stage_name": {
+                        "type": "string",
+                        "description": "Optional StageTracker stage_name checkpoint reference."
+                    },
+                    "artifact_path": {
+                        "type": "string",
+                        "description": "Optional relative path to a plot, JSON, or script artifact for peer inspection."
+                    },
+                    "tag": {
+                        "type": "string",
+                        "description": "Optional intent tag (e.g. 'sanity-check', 'debug', 'idea', 'surprise', 'replicate', 'handoff', 'resolved')."
+                    }
+                },
+                "required": ["channel", "message"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "read_chat",
+            "description": "Reads messages or a specific thread from the Colleague Commons (Lab Chatroom). Filter by channel, thread_id, @mentions, or keyword search.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "channel": {
+                        "type": "string",
+                        "description": "Optional channel to read (e.g. '#methods-and-debugging', '#lounge', '#human-visitor-questions'). Omit to view recent messages across all channels."
+                    },
+                    "thread_id": {
+                        "type": "string",
+                        "description": "Optional thread_id to read the full conversation in a specific thread."
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "description": "Maximum number of recent messages to return (default: 15)."
+                    },
+                    "mentions_only": {
+                        "type": "boolean",
+                        "description": "If true, returns only messages that @mention your instance."
+                    },
+                    "search": {
+                        "type": "string",
+                        "description": "Optional keyword or node_id/job_id/stage_name filter."
+                    }
+                }
+            }
+        }
     }
 ]
 
@@ -1018,5 +1159,10 @@ AVAILABLE_TOOLS = {
     "check_world_c_job": check_world_c_job,
     "report_issue_to_substrate": report_issue_to_substrate,
     "report_bug": report_issue_to_substrate,
-    "contact_architect": report_issue_to_substrate
+    "contact_architect": report_issue_to_substrate,
+    "post_chat": post_chat,
+    "read_chat": read_chat,
+    "send_chat": post_chat,
+    "post_message": post_chat,
+    "read_channel": read_chat
 }

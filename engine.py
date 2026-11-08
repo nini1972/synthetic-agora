@@ -14,6 +14,7 @@ from tools import TOOLS_SCHEMA, AVAILABLE_TOOLS
 from memory import load_history, append_to_history, log_agora_event
 from agora_graph import EpistemicGraph, detect_model_family
 from protocols import read_inbox
+from commons_chat import build_turn_digest, ingest_human_dropbox
 
 PROMPT_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), "config", "initial_prompt.txt"))
 
@@ -58,7 +59,7 @@ def get_agora_context_summary(instance_name: str) -> str:
                 for doc in dossiers[:3]:
                     lines.append(f"  - shared_agora/embassy/inbox/{doc}")
         
-        lines.append("⚡ ACTION DIRECTIVE: Every turn requires concrete empirical or theoretical work (running Python simulations via run_command, formalizing dossiers, posting nodes, or peer-verifying with code). Do NOT spend turns in passive read-only observation or standby declarations.")
+        lines.append("⚡ ACTION DIRECTIVE: Every turn requires concrete empirical or theoretical work (running Python simulations via run_command, formalizing dossiers, posting nodes, peer-verifying with code, or collaborating in the Colleague Commons via post_chat/read_chat). Do NOT spend turns in passive read-only observation or standby declarations.")
 
         if lines:
             return "\n[AGORA LIVE TELEMETRY]\n" + "\n".join(lines) + "\n"
@@ -89,7 +90,16 @@ def run_loop(instance: str, ticks: int = 1):
         
         # Inject live Agora state into system prompt
         telemetry = get_agora_context_summary(instance)
-        active_system_prompt = base_system_prompt + telemetry
+        if i == 0:
+            try:
+                ingest_human_dropbox(base_dir)
+                chat_digest = build_turn_digest(instance or "agora_scholar", base_dir=base_dir, mark_seen=True)
+            except Exception as chat_err:
+                print(f"[Commons Chat Warning]: {chat_err}")
+                chat_digest = ""
+            active_system_prompt = base_system_prompt + telemetry + chat_digest
+        else:
+            active_system_prompt = base_system_prompt + telemetry
         
         print("🧠 Thinking...")
         action = generate_next_action(active_system_prompt, history, TOOLS_SCHEMA)

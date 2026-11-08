@@ -25,7 +25,8 @@ def estimate_tokens(obj) -> int:
 _INLINE_TOOL_RE = re.compile(
     r"(?:\[\s*(?:read_file|write_file|edit_file|run_command|search_web|submit_world_c_job|check_world_c_job|"
     r"report_issue_to_substrate|report_bug|contact_architect|post_epistemic_node|peer_verify_node|"
-    r"query_epistemic_graph|send_agent_dispatch|read_agent_inbox|export_treaty_to_embassy)\s*\(|!function_call:|<tool_call>|"
+    r"query_epistemic_graph|send_agent_dispatch|read_agent_inbox|export_treaty_to_embassy|"
+    r"post_chat|read_chat|send_chat|post_message|read_channel)\s*\(|!function_call:|<tool_call>|"
     r"```(?:json)?\s*\{\s*\"(?:name|call|tool)\"\s*:)"
 )
 
@@ -277,7 +278,8 @@ def extract_fallback_tool_call(content: str, tools: list = None) -> dict:
         "post_epistemic_node", "peer_verify_node", "query_epistemic_graph",
         "send_agent_dispatch", "read_agent_inbox", "export_treaty_to_embassy",
         "read_file", "write_file", "edit_file", "run_command", "search_web", "submit_world_c_job",
-        "check_world_c_job", "report_issue_to_substrate"
+        "check_world_c_job", "report_issue_to_substrate",
+        "post_chat", "read_chat", "send_chat", "post_message", "read_channel"
     ])
     if tools:
         for t in tools:
@@ -445,6 +447,11 @@ def extract_fallback_tool_call(content: str, tools: list = None) -> dict:
         "send_agent_dispatch": {"recipient", "recipient_instance", "subject", "body", "reference_node_id", "node_id_ref", "action_requested", "content"},
         "read_agent_inbox": {"unread_only"},
         "export_treaty_to_embassy": {"node_id", "originating_dossier_filename", "treaty_id", "title", "ratified_theorems", "consensus_proof"},
+        "post_chat": {"channel", "message", "thread_id", "mentions", "node_id", "job_id", "stage_name", "artifact_path", "tag", "text", "content", "reply_to"},
+        "read_chat": {"channel", "thread_id", "limit", "mentions_only", "search", "query"},
+        "send_chat": {"channel", "message", "thread_id", "mentions", "node_id", "job_id", "stage_name", "artifact_path", "tag", "text", "content"},
+        "post_message": {"channel", "message", "thread_id", "mentions", "node_id", "job_id", "stage_name", "artifact_path", "tag", "text", "content"},
+        "read_channel": {"channel", "thread_id", "limit", "mentions_only", "search", "query"},
     }
     REQUIRED_PARAMS = {
         "read_file": {"path"},
@@ -461,6 +468,9 @@ def extract_fallback_tool_call(content: str, tools: list = None) -> dict:
         "peer_verify_node": {"node_id", "verdict"},
         "send_agent_dispatch": {"subject"},
         "export_treaty_to_embassy": {"node_id"},
+        "post_chat": {"message"},
+        "send_chat": {"message"},
+        "post_message": {"message"},
     }
 
     candidates = []
@@ -815,6 +825,20 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
         messages = merge_consecutive_messages(messages)
         msg_tokens = sum(estimate_tokens(m) for m in messages)
         est_prompt_tokens = tools_tokens + msg_tokens
+
+    # Surface the live Colleague Commons Digest as a user-turn notification at the start of the turn
+    if "=== 💬 COLLEAGUE COMMONS DIGEST" in effective_system_prompt and len(messages) >= 1:
+        digest_idx = effective_system_prompt.find("=== 💬 COLLEAGUE COMMONS DIGEST")
+        digest_block = effective_system_prompt[digest_idx:].strip()
+        last_tool_called = messages[-1].get("name") if messages[-1]["role"] == "tool" else None
+        if last_tool_called not in ("read_chat", "post_chat", "read_channel", "send_chat", "post_message"):
+            if messages[-1]["role"] == "user" and "COLLEAGUE COMMONS DIGEST" not in (messages[-1].get("content") or ""):
+                messages[-1]["content"] = (messages[-1].get("content") or "") + "\n\n" + digest_block
+            elif messages[-1]["role"] == "tool":
+                messages.append({
+                    "role": "user",
+                    "content": digest_block,
+                })
 
     # Dynamically budget max_tokens with model-specific headroom so reasoning thoughts + code never truncate
     remaining_headroom = max_model_len - est_prompt_tokens - 256
