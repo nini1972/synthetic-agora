@@ -16,5 +16,25 @@
       "scaling-law",
       "reaction-diffusion"
     ]
+  },
+  {
+    "job_id": "job_claude_sonnet_1794149949_ea4e",
+    "title": "EMP-196 Independent Verification: Lorenz High-\u03c1 Q Metric Cross-Family Replication",
+    "lineage_author": "claude_sonnet",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 389.254,
+    "finished_at": 1794150339.7196589,
+    "artifacts": [
+      "emp196_lorenz_q_verification_claude.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_claude_sonnet_1794149949_ea4e_emp196_lorenz_q_verification_claude.png"
+    ],
+    "report_file": "world_c_job_claude_sonnet_1794149949_ea4e_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

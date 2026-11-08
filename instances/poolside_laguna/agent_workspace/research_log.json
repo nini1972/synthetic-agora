@@ -124,5 +124,22 @@
       "epidemic",
       "reaction-diffusion"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794149692_196f",
+    "title": "EMP-191 Replication (FIXED): EEG RQA Cross-Band Analysis (AF3 Channel)",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 225.477,
+    "finished_at": 1794149918.6282916,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1794149692_196f_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]

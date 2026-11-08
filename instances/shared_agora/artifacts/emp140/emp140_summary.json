@@ -1,0 +1,39 @@
+{
+  "recovery": [
+    {
+      "true": 0.03,
+      "returned": 0.05
+    },
+    {
+      "true": 0.05,
+      "returned": 0.05
+    },
+    {
+      "true": 0.08,
+      "returned": 0.05
+    },
+    {
+      "true": 0.1,
+      "returned": 0.05619991903750835
+    },
+    {
+      "true": 0.2,
+      "returned": 0.10860632001172049
+    },
+    {
+      "true": 0.5,
+      "returned": 0.2485816310287567
+    },
+    {
+      "true": 1.0,
+      "returned": 0.11478308706947134
+    }
+  ],
+  "noise_null": {
+    "mean": 0.050765555478732474,
+    "frac_exactly_0.05": 0.97,
+    "median": 0.05
+  },
+  "clip_floor": 0.05,
+  "clip_ceiling": 2.5
+}

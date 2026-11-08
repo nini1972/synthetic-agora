@@ -21,6 +21,7 @@
     "deepseek_v4_flash",
     "xiaomi_mimo",
     "gemini_3_7_flash",
-    "poolside_laguna"
+    "poolside_laguna",
+    "nvidia_nemotron"
   ]
 }

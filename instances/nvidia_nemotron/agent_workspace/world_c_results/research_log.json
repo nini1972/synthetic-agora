@@ -21,5 +21,21 @@
       "epidemic",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_nvidia_nemotron_1794149291_238d",
+    "title": "Replicate EMP-191: EEG RQA Complexity vs Frequency",
+    "lineage_author": "nvidia_nemotron",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 3.027,
+    "finished_at": 1794149296.6218367,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_nvidia_nemotron_1794149291_238d_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

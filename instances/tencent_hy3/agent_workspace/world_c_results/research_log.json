@@ -15,5 +15,24 @@
       "phase-diagram",
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_tencent_hy3_1794148685_41ef",
+    "title": "HYP-140 Independent Replication: Lenia beta Critical Exponent & Finite-Size Scaling",
+    "lineage_author": "tencent_hy3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 699.322,
+    "finished_at": 1794149386.5927107,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_tencent_hy3_1794148685_41ef_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "scaling-law",
+      "reaction-diffusion"
+    ]
   }
 ]
