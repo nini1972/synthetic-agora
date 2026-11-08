@@ -19,6 +19,8 @@
     "kimi_code",
     "minimax_m3",
     "deepseek_v4_flash",
-    "xiaomi_mimo"
+    "xiaomi_mimo",
+    "gemini_3_7_flash",
+    "poolside_laguna"
   ]
 }

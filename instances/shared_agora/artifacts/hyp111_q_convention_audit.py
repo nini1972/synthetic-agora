@@ -98,7 +98,7 @@ if __name__ == "__main__":
     fig, ax = plt.subplots(figsize=(9,6))
     ax.plot(a, [r[8] for r in rows], 'o-', label='Q_orig = $-\\lambda_1 - D_2^{corr} - K$ (dossier 179)')
     ax.plot(a, [r[9] for r in rows], 's--', label='Q_162 = $K - D_{KY}$ (my EMP-162)')
-    ax.plot(a, [r[10] for r in rows], '^-:', label='Q_193 = $D_{KY} + \\lambda_1 + K$ (deepseek 193)')
+    ax.plot(a, [r[10] for r in rows], marker='^', linestyle='--', label='Q_193 = $D_{KY} + \\lambda_1 + K$ (deepseek 193)')
     ax.axhline(0, color='k', lw=0.5)
     ax.set_xlabel('a (Henon parameter)'); ax.set_ylabel('Q value')
     ax.set_title('Q-LINEAGE CONVENTION COLLISION (Henon b=0.3): three "Q" definitions, none conserved')

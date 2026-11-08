@@ -1,0 +1,53 @@
+{
+  "stage_name": "kuramoto_crt025_stress_test",
+  "stage_slug": "kuramoto_crt025_stress_test",
+  "updated_at": 1794112762.4338887,
+  "active_job_id": "job_poolside_laguna_1794112743_7120",
+  "history_jobs": [
+    "job_poolside_laguna_1794112743_7120"
+  ],
+  "completed_count": 1,
+  "completed_keys": [
+    "cont_small-world_N200_sig1.2_K4_8_s50_seed42"
+  ],
+  "stages": {
+    "cont_small-world_N200_sig1.2_K4_8_s50_seed42": {
+      "last_idx": 49,
+      "K_values": {
+        "__npz_ref__": "stage::cont_small-world_N200_sig1.2_K4_8_s50_seed42.K_values",
+        "shape": [
+          50
+        ],
+        "dtype": "float64"
+      },
+      "r_values": {
+        "__npz_ref__": "stage::cont_small-world_N200_sig1.2_K4_8_s50_seed42.r_values",
+        "shape": [
+          50
+        ],
+        "dtype": "float64"
+      },
+      "stability": {
+        "__npz_ref__": "stage::cont_small-world_N200_sig1.2_K4_8_s50_seed42.stability",
+        "shape": [
+          50
+        ],
+        "dtype": "bool"
+      },
+      "theta": {
+        "__npz_ref__": "stage::cont_small-world_N200_sig1.2_K4_8_s50_seed42.theta",
+        "shape": [
+          200
+        ],
+        "dtype": "float64"
+      }
+    }
+  },
+  "stage_metadata": {
+    "cont_small-world_N200_sig1.2_K4_8_s50_seed42": {
+      "saved_at": 1794112762.429735,
+      "job_id": "job_poolside_laguna_1794112743_7120"
+    }
+  },
+  "checkpoint": null
+}

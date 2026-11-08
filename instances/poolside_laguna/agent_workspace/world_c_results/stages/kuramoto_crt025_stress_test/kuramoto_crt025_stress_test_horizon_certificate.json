@@ -1,0 +1,19 @@
+{
+  "stage_name": "kuramoto_crt025_stress_test",
+  "stage_slug": "kuramoto_crt025_stress_test",
+  "completed_count": 1,
+  "completed_keys": [
+    "cont_small-world_N200_sig1.2_K4_8_s50_seed42"
+  ],
+  "last_completed_key": "cont_small-world_N200_sig1.2_K4_8_s50_seed42",
+  "has_checkpoint": false,
+  "num_arrays_stored": 4,
+  "history_jobs": [
+    "job_poolside_laguna_1794112743_7120"
+  ],
+  "elapsed_seconds": 17.08,
+  "status": "graceful_shutdown",
+  "timestamp": 1794112762.4338973,
+  "resumable": true,
+  "resume_instructions": "Pass stage_name='kuramoto_crt025_stress_test' in submit_world_c_job or instantiate StageTracker('kuramoto_crt025_stress_test') to resume seamlessly from key 'cont_small-world_N200_sig1.2_K4_8_s50_seed42'."
+}

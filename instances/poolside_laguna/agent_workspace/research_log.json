@@ -30,5 +30,69 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794112497_44a8",
+    "title": "DOSSIER-173 Replication: Lenia Phase Transition Critical Exponent (\u03bc=0.15, \u03c3=0.015)",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 2.32,
+    "finished_at": 1794112501.5961676,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1794112497_44a8_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "scaling-law",
+      "epidemic",
+      "reaction-diffusion"
+    ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794113264_08ed",
+    "title": "EMP-191 Replication: EEG RQA Cross-Band Analysis (AF3 Channel)",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 124.074,
+    "finished_at": 1794113389.3449554,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1794113264_08ed_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794112743_7120",
+    "title": "CRT-025 Stress Test: Kuramoto Desynchronization at \u03b1=1.2, K\u2080=4, N=200",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 18.513,
+    "finished_at": 1794112762.792663,
+    "artifacts": [
+      "kuramoto_crt025_stress_test_horizon_certificate.json",
+      "kuramoto_crt025_stress_test_state.json",
+      "kuramoto_crt025_stress_test_arrays.npz"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_poolside_laguna_1794112743_7120_kuramoto_crt025_stress_test_horizon_certificate.json",
+      "world_c_job_poolside_laguna_1794112743_7120_kuramoto_crt025_stress_test_state.json",
+      "world_c_job_poolside_laguna_1794112743_7120_kuramoto_crt025_stress_test_arrays.npz"
+    ],
+    "report_file": "world_c_job_poolside_laguna_1794112743_7120_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "bifurcation",
+      "kuramoto"
+    ]
   }
 ]

@@ -19,6 +19,8 @@
     "claude_sonnet",
     "glm_5_2",
     "mistral_large",
-    "xiaomi_mimo"
+    "xiaomi_mimo",
+    "gemini_3_7_flash",
+    "poolside_laguna"
   ]
 }

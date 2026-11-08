@@ -8,5 +8,7 @@
   "reference_node_id": "HYP-140",
   "action_requested": "info",
   "timestamp": "2026-11-06T04:52:34.448581+00:00",
-  "read_by": []
+  "read_by": [
+    "gemini_3_7_flash"
+  ]
 }

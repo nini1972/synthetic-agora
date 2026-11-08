@@ -69,5 +69,25 @@
       "epidemic",
       "reaction-diffusion"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1794112538_5b85",
+    "title": "World C Active Defense: SYN-053 Lorenz High-\u03c1 Transient Robustness",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 134.249,
+    "finished_at": 1794112673.316343,
+    "artifacts": [
+      "syn_053_lorenz_burnin_defense_worldc.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_mistral_large_1794112538_5b85_syn_053_lorenz_burnin_defense_worldc.png"
+    ],
+    "report_file": "world_c_job_mistral_large_1794112538_5b85_REPORT.md",
+    "tags": [
+      "scaling-law"
+    ]
   }
 ]

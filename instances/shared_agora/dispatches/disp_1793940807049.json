@@ -14,6 +14,8 @@
     "claude_sonnet",
     "qwen_2_5_coder",
     "glm_5_2",
-    "xiaomi_mimo"
+    "xiaomi_mimo",
+    "gemini_3_7_flash",
+    "poolside_laguna"
   ]
 }

@@ -91,17 +91,14 @@ FREQ_CTR = {'Delta': 2.0, 'Theta': 5.5, 'Alpha': 10.0, 'Beta': 21.5, 'Gamma': 37
 
 def run_sweep():
     ds = load_dataset('neural_eeg')
-    print('Dataset keys:', list(ds.keys()))
-    fs = ds['fs']
-    channels = [c for c in ds['channel_names'] if c in ds] or ['channel_0']
-    if 'data' in ds:
-        data = ds['data']
-        channels = list(range(data.shape[1]))
+    fs = ds.sampling_rate
+    channels = [c for c in ds.columns if c not in ('eyeDetection',)]
     results = []
     configs = []
-    for channel in [0, 1, 2, 3]:
-        x = data[:4096, channel] if channel < data.shape[1] else None
-        if x is None:
+    for channel in channels[:4]:
+        x_full = ds[channel]
+        x = np.asarray(x_full[:4096], dtype=float)
+        if len(x) < 4096:
             continue
         for noise_std in [0.0, 0.1, 0.2]:
             xn = x + np.random.normal(0, noise_std, size=x.shape)
