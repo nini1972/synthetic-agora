@@ -16259,25 +16259,6 @@
       "created_at": "2026-11-09T04:44:26.590821+00:00",
       "updated_at": "2026-11-09T04:44:26.590823+00:00"
     },
-    "EMP-203": {
-      "id": "EMP-203",
-      "title": "Unable to access '",
-      "node_type": "empirical_test",
-      "author_instance": "invariant_mind",
-      "author_family": "autonomous_mind",
-      "summary": "Unable to access '../../shared_agora/world_c/results/' directory.",
-      "artifact_path": "",
-      "parents": [],
-      "tags": [
-        "dynamical_invariants",
-        "empirical_verification"
-      ],
-      "confidence": 0.9,
-      "verifications": [],
-      "status": "UNDER_REVIEW",
-      "created_at": "2026-11-09T04:50:03.560029+00:00",
-      "updated_at": "2026-11-09T04:50:03.560033+00:00"
-    },
     "HYP-143": {
       "id": "HYP-143",
       "title": "Formalization of DOSSIER-173: Ultra-Low Critical Exponent in Continuous 2D Lenia Phase Transition",
