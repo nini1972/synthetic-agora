@@ -3,6 +3,7 @@ import sys
 import re
 import json
 import time
+import contextlib
 from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 
@@ -10,6 +11,52 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
+@contextlib.contextmanager
+def _graph_file_lock(lock_path: str, timeout: float = 30.0, poll_interval: float = 0.05):
+    start = time.time()
+    fd = None
+    while True:
+        try:
+            fd = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_RDWR)
+            break
+        except (FileExistsError, OSError):
+            if os.path.exists(lock_path):
+                try:
+                    mtime = os.path.getmtime(lock_path)
+                    if time.time() - mtime > timeout:
+                        # Break stale lock
+                        try:
+                            os.unlink(lock_path)
+                        except OSError:
+                            pass
+                        continue
+                except OSError:
+                    pass
+            if time.time() - start >= timeout:
+                try:
+                    os.unlink(lock_path)
+                except OSError:
+                    pass
+                try:
+                    fd = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_RDWR)
+                    break
+                except OSError:
+                    pass
+            time.sleep(poll_interval)
+    try:
+        yield
+    finally:
+        if fd is not None:
+            try:
+                os.close(fd)
+            except OSError:
+                pass
+        try:
+            if os.path.exists(lock_path):
+                os.unlink(lock_path)
+        except OSError:
+            pass
 
 def utc_now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -62,6 +109,10 @@ class EpistemicGraph:
     def __init__(self):
         self.file_path = get_graph_path()
         self._load()
+
+    @property
+    def lock_path(self) -> str:
+        return self.file_path + ".lock"
 
     def _load(self):
         if os.path.exists(self.file_path):
@@ -132,36 +183,41 @@ class EpistemicGraph:
         tags: Optional[List[str]] = None,
         confidence: float = 0.85
     ) -> Dict[str, Any]:
-        self._load()
-        node_id = self.generate_node_id(node_type)
-        author_family = detect_model_family(author_instance)
-        
-        valid_parents = [p for p in (parents or []) if p in self.nodes]
-        
-        node = {
-            "id": node_id,
-            "title": title,
-            "node_type": node_type,
-            "author_instance": author_instance,
-            "author_family": author_family,
-            "summary": summary,
-            "artifact_path": artifact_path,
-            "parents": valid_parents,
-            "tags": tags or [],
-            "confidence": round(float(confidence), 3),
-            "verifications": [],
-            "status": "UNVERIFIED_HYPOTHESIS" if node_type == "hypothesis" else "UNDER_REVIEW",
-            "created_at": utc_now_iso(),
-            "updated_at": utc_now_iso()
-        }
+        with _graph_file_lock(self.lock_path):
+            self._load()
+            node_id = self.generate_node_id(node_type)
+            author_family = detect_model_family(author_instance)
+            
+            valid_parents = [p for p in (parents or []) if p in self.nodes]
+            
+            node = {
+                "id": node_id,
+                "title": title,
+                "node_type": node_type,
+                "author_instance": author_instance,
+                "author_family": author_family,
+                "summary": summary,
+                "artifact_path": artifact_path,
+                "parents": valid_parents,
+                "tags": tags or [],
+                "confidence": round(float(confidence), 3),
+                "verifications": [],
+                "status": "UNVERIFIED_HYPOTHESIS" if node_type == "hypothesis" else "UNDER_REVIEW",
+                "created_at": utc_now_iso(),
+                "updated_at": utc_now_iso()
+            }
 
-        if node_type == "canon_theorem" and len(valid_parents) >= 2:
-            node["status"] = "UNDER_REVIEW"
+            if node_type == "canon_theorem" and len(valid_parents) >= 2:
+                node["status"] = "UNDER_REVIEW"
 
-        self.nodes[node_id] = node
-        self._evaluate_quorum(node_id)
-        self.save()
-        return node
+            self.nodes[node_id] = node
+            self._evaluate_quorum(node_id)
+            self.save()
+
+            # Atomic read-back confirmation
+            if node_id not in self.nodes or self.nodes[node_id].get("title") != title:
+                raise RuntimeError(f"Atomic read-back verification failed for node [{node_id}]")
+            return node
 
     def peer_verify(
         self,
@@ -172,32 +228,33 @@ class EpistemicGraph:
         confidence: float = 0.9,
         reproduced_artifact_path: str = ""
     ) -> Dict[str, Any]:
-        self._load()
-        if node_id not in self.nodes:
-            raise ValueError(f"Node '{node_id}' does not exist in the Epistemic DAG.")
-        
-        node = self.nodes[node_id]
-        verifier_family = detect_model_family(verifier_instance)
+        with _graph_file_lock(self.lock_path):
+            self._load()
+            if node_id not in self.nodes:
+                raise ValueError(f"Node '{node_id}' does not exist in the Epistemic DAG.")
+            
+            node = self.nodes[node_id]
+            verifier_family = detect_model_family(verifier_instance)
 
-        verification_entry = {
-            "verifier_instance": verifier_instance,
-            "verifier_family": verifier_family,
-            "verdict": verdict,
-            "critique_notes": critique_notes,
-            "confidence": round(float(confidence), 3),
-            "reproduced_artifact_path": reproduced_artifact_path,
-            "timestamp": utc_now_iso()
-        }
-        
-        node["verifications"] = [
-            v for v in node["verifications"] if v.get("verifier_instance") != verifier_instance
-        ]
-        node["verifications"].append(verification_entry)
-        node["updated_at"] = utc_now_iso()
+            verification_entry = {
+                "verifier_instance": verifier_instance,
+                "verifier_family": verifier_family,
+                "verdict": verdict,
+                "critique_notes": critique_notes,
+                "confidence": round(float(confidence), 3),
+                "reproduced_artifact_path": reproduced_artifact_path,
+                "timestamp": utc_now_iso()
+            }
+            
+            node["verifications"] = [
+                v for v in node["verifications"] if v.get("verifier_instance") != verifier_instance
+            ]
+            node["verifications"].append(verification_entry)
+            node["updated_at"] = utc_now_iso()
 
-        self._evaluate_quorum(node_id)
-        self.save()
-        return node
+            self._evaluate_quorum(node_id)
+            self.save()
+            return node
 
     def _evaluate_quorum(self, node_id: str):
         node = self.nodes[node_id]
