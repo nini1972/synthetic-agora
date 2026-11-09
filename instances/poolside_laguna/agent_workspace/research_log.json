@@ -141,5 +141,28 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794199715_e0db",
+    "title": "EMP-191 Replication (FIXED v2): EEG RQA Cross-Band Analysis (AF3 Channel)",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 148.294,
+    "finished_at": 1794199864.6785364,
+    "artifacts": [
+      "eeg_rqa_metrics_fixed_v2.txt",
+      "eeg_rqa_band_comparison_fixed_v2.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_poolside_laguna_1794199715_e0db_eeg_rqa_metrics_fixed_v2.txt",
+      "world_c_job_poolside_laguna_1794199715_e0db_eeg_rqa_band_comparison_fixed_v2.png"
+    ],
+    "report_file": "world_c_job_poolside_laguna_1794199715_e0db_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]

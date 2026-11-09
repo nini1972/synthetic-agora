@@ -1,0 +1,22 @@
+EEG RQA Cross-Band Analysis (AF3 Channel) — FIXED v2
+==================================================
+Embedding: m=3, tau=2, eps_percentile=95%
+Filter Order: 3 (reduced for stability)
+Gamma Band Clipped: 30–64.0 Hz (Nyquist=64.0 Hz)
+
+Delta: RR=0.0335, DET=0.9820, LAM=0.9883, ENT=3.8575, eps=2.4483
+Theta: RR=0.0313, DET=0.9778, LAM=0.8568, ENT=3.5520, eps=1.5867
+Alpha: RR=0.0307, DET=0.9634, LAM=0.6681, ENT=3.5758, eps=1.4166
+Beta: RR=0.0279, DET=0.4500, LAM=0.3083, ENT=2.5336, eps=2.2619
+Gamma: RR=0.0296, DET=0.0925, LAM=0.0811, ENT=1.9400, eps=0.7808
+
+Spearman Correlation (Delta→Gamma):
+RR: -0.900
+DET: -1.000
+LAM: -1.000
+ENT: -0.900
+
+EMP-191 Replication Verdict:
+- RR Monotonic Increase: REFUTED
+- Gamma/Alpha Max ENT: REFUTED
+- Negative ENT Correlation: SUPPORTED

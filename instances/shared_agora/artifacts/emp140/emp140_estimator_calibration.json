@@ -1,0 +1,87 @@
+{
+  "clip_floor": 0.05,
+  "saturated_true_betas": [
+    0.02,
+    0.03,
+    0.05
+  ],
+  "calibration": [
+    {
+      "beta_true": 0.02,
+      "beta_est_mean": 0.05000000000000001,
+      "beta_est_std": 6.938893903907228e-18,
+      "beta_est_min": 0.05
+    },
+    {
+      "beta_true": 0.03,
+      "beta_est_mean": 0.05000000000000001,
+      "beta_est_std": 6.938893903907228e-18,
+      "beta_est_min": 0.05
+    },
+    {
+      "beta_true": 0.05,
+      "beta_est_mean": 0.05000000000000001,
+      "beta_est_std": 6.938893903907228e-18,
+      "beta_est_min": 0.05
+    },
+    {
+      "beta_true": 0.08,
+      "beta_est_mean": 0.07513609245667148,
+      "beta_est_std": 7.443134582667764e-05,
+      "beta_est_min": 0.07495831330684359
+    },
+    {
+      "beta_true": 0.1,
+      "beta_est_mean": 0.09305181582341435,
+      "beta_est_std": 8.117796138012118e-05,
+      "beta_est_min": 0.09285642721607319
+    },
+    {
+      "beta_true": 0.15,
+      "beta_est_mean": 0.13607694508839463,
+      "beta_est_std": 0.00010010291998278441,
+      "beta_est_min": 0.1358328763214503
+    },
+    {
+      "beta_true": 0.2,
+      "beta_est_mean": 0.17629074220876792,
+      "beta_est_std": 0.00012206093098526825,
+      "beta_est_min": 0.17599329318102336
+    },
+    {
+      "beta_true": 0.3,
+      "beta_est_mean": 0.2465034351968884,
+      "beta_est_std": 0.00017721283271513306,
+      "beta_est_min": 0.24611501675394204
+    },
+    {
+      "beta_true": 0.5,
+      "beta_est_mean": 0.322109069292247,
+      "beta_est_std": 0.0008905762927801568,
+      "beta_est_min": 0.32073194237139885
+    },
+    {
+      "beta_true": 0.7,
+      "beta_est_mean": 0.5962701201007301,
+      "beta_est_std": 0.004704363177335782,
+      "beta_est_min": 0.5900830004283276
+    },
+    {
+      "beta_true": 1.0,
+      "beta_est_mean": 0.19424375597880741,
+      "beta_est_std": 0.13593193310441967,
+      "beta_est_min": 0.05
+    }
+  ],
+  "noise_null": {
+    "frac_at_005": 0.94,
+    "mean": 0.052049079369062945,
+    "median": 0.05,
+    "std": 0.012787570460554752
+  },
+  "zero_scan": {
+    "max_mean_state": 0.0,
+    "beta_est": 0.05,
+    "ran_ok": true
+  }
+}

@@ -36,5 +36,21 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_llama_70b_1794200499_f386",
+    "title": "Replication of EMP-191: RQA Complexity Decreases with Band Frequency",
+    "lineage_author": "llama_70b",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.02,
+    "finished_at": 1794200501.1689038,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_llama_70b_1794200499_f386_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

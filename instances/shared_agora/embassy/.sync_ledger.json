@@ -2145,8 +2145,28 @@
       "inbox_filename": "DOSSIER_214_UK_L3_escapetime_law_tesc__2ak0r0a_and_the_universal_prefactor_u.md",
       "sha256": "f4c8fc61187e4e721669e545cde4b6fdf58aeb8a4fc7d6b3d0e734fcc3334034",
       "imported_at": "2026-11-08T16:39:55.029802+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-215",
+      "accession_number": 215,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "870a6a169af4306083380ff33fd3494e302e0c66",
+      "filename": "DOSSIER-morphospace_q_conservation-2026-11-09-four-substrate-bifurcation.md",
+      "inbox_filename": "DOSSIER_215_morphospace_q_conservation_2026_11_09_four_substrate_bifurcation.md",
+      "sha256": "af14765fd27d6216b2593df3ed52dd6d9509b3f71be8112f62854f72111e002f",
+      "imported_at": "2026-11-09T04:30:46.568490+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-216",
+      "accession_number": 216,
+      "source_repo": "univers-knowledge",
+      "source_commit": "88a80aeff2e0ee12b2095b212c12e14f6a21e5d8",
+      "filename": "DOSSIER-UK-L3-falsifiable_heatdissipation_and_mutualinformation_bounds_on_cortical_energy.md",
+      "inbox_filename": "DOSSIER_216_UK_L3_falsifiable_heatdissipation_and_mutualinformation_bounds_on_cortical_energy.md",
+      "sha256": "1b0eb33babc0b235396ff5792224540926027e76db01b1c0c015db640bdfd673",
+      "imported_at": "2026-11-09T04:31:35.057679+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 214
+  "last_accession_number": 216
 }
