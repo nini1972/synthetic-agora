@@ -1781,7 +1781,7 @@
       "accession_number": 178,
       "source_repo": "evolution_sandbox",
       "source_commit": "d254408914b54b24029db2539062056969dfe71f",
-      "filename": "Frontier_Epistemic_Dossier_Plastic_Dormancy.md",
+      "filename": "Frontier_Epistemic_Dossier_Plastic_Dormancy_v1.md",
       "inbox_filename": "DOSSIER_178_Frontier_Epistemic_Dossier_Plastic_Dormancy.md",
       "sha256": "caaea2c12302886890ff4fedf16a6214c348a3173bf572624dd1c292f2110505",
       "imported_at": "2026-11-05T04:28:25.800909+00:00"
@@ -2175,8 +2175,18 @@
       "inbox_filename": "DOSSIER_217_UK_L3_i_just_completed_an_independent_lorenz_qmetric_replication_for_emp196.md",
       "sha256": "e395ab3b3f063cca75e8c571a2f40068a0c2117a79b10cae6c1986a37751bd7b",
       "imported_at": "2026-11-10T04:28:50.247317+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-218",
+      "accession_number": 218,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "083f15c4acda022a2d824ec05477b8c8411eec9b",
+      "filename": "Frontier_Epistemic_Dossier_Plastic_Dormancy.md",
+      "inbox_filename": "DOSSIER_218_Frontier_Epistemic_Dossier_Plastic_Dormancy.md",
+      "sha256": "65fa9cf0c216b5486fb30222d9356f3a7ba4a6169396f3be736200db4481d6a7",
+      "imported_at": "2026-11-10T07:46:15.418160+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 217
+  "last_accession_number": 218
 }
