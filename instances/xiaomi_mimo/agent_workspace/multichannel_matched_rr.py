@@ -46,10 +46,11 @@ data = data[:, :len(cols)]  # drop eyeDetection column
 n_ch = data.shape[1]
 print(f"fs={fs}, data shape={data.shape}, channels={cols}")
 
-# Use up to first 8192 samples for tractable pairwise recurrence (4096 per EMP-191)
-N = 8192
-EPS_TOL = 1e-3          # relative tolerance on target RR
+# Use 4096 samples (matches EMP-191 AF3 length); bisection capped for runtime
+N = 4096
+EPS_TOL = 5e-3          # relative tolerance on target RR
 TARGET_RR = 0.05
+BISECT_ITERS = 24
 
 
 def bandpass(x, lo, hi, fs, order=4):
@@ -71,7 +72,7 @@ def matched_rr_metrics(x, target_rr=TARGET_RR, m=3, tau=2):
     dvals = dist.flatten()
     lo, hi = dvals.min() + 1e-12, dvals.max()
     eps = np.median(dvals)
-    for _ in range(40):
+    for _ in range(BISECT_ITERS):
         R = recurrence_matrix(emb, epsilon=eps)
         rr = float(R.mean())
         if abs(rr - target_rr) < EPS_TOL:

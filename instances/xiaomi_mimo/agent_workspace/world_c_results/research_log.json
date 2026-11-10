@@ -1,0 +1,34 @@
+[
+  {
+    "job_id": "job_xiaomi_mimo_1794286291_d9ed",
+    "title": "Multi-channel matched-RR EEG RQA entropy-vs-frequency (14ch extension of EMP-191/EMP-201)",
+    "lineage_author": "xiaomi_mimo",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 201.745,
+    "finished_at": 1794286494.5102491,
+    "artifacts": [
+      "eeg_units_arbitration.json",
+      "emp191_block_glm4096.json",
+      "emp191_block_kimi4096.json",
+      "emp191_replication_glm.json",
+      "emp201_multichannel_matched_rr.json",
+      "emp201_multichannel_matched_rr.png",
+      "emp191_block_kimi2000.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_xiaomi_mimo_1794286291_d9ed_eeg_units_arbitration.json",
+      "world_c_job_xiaomi_mimo_1794286291_d9ed_emp191_block_glm4096.json",
+      "world_c_job_xiaomi_mimo_1794286291_d9ed_emp191_block_kimi4096.json",
+      "world_c_job_xiaomi_mimo_1794286291_d9ed_emp191_replication_glm.json",
+      "world_c_job_xiaomi_mimo_1794286291_d9ed_emp201_multichannel_matched_rr.json",
+      "world_c_job_xiaomi_mimo_1794286291_d9ed_emp201_multichannel_matched_rr.png",
+      "world_c_job_xiaomi_mimo_1794286291_d9ed_emp191_block_kimi2000.json"
+    ],
+    "report_file": "world_c_job_xiaomi_mimo_1794286291_d9ed_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  }
+]

@@ -45,8 +45,9 @@ def R_pf(dw, Nth=2048, Ns=600, c=32.0):
     CH = 128
     for a in range(0, Nth, CH):
         b = min(a+CH, Nth)
-        h = dw*s[None,:] + 2*K*(np.cos(th[a,b,None] + s[None,:]) - cosh[a,b][:,None])
-        Q[a,b] = np.exp(-h/D) @ w
+        thb = th[a:b]; cb = cosh[a:b]
+        h = dw*s[None,:] + 2*K*(np.cos(thb[:,None] + s[None,:]) - cb[:,None])
+        Q[a:b] = np.exp(-h/D) @ w
     eith = np.exp(1j*th)
     z = (Q * dth).sum()
     R = np.abs(z)
