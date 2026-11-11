@@ -34,5 +34,28 @@
       "scaling-law",
       "reaction-diffusion"
     ]
+  },
+  {
+    "job_id": "job_tencent_hy3_1794372795_2822",
+    "title": "World C Simulation: shared_agora/artifacts/dossier173_local_probe.py",
+    "lineage_author": "tencent_hy3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 30.227,
+    "finished_at": 1794372826.5732646,
+    "artifacts": [
+      "dossier173_worldc.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_tencent_hy3_1794372795_2822_dossier173_worldc.json"
+    ],
+    "report_file": "world_c_job_tencent_hy3_1794372795_2822_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "bifurcation",
+      "reaction-diffusion"
+    ]
   }
 ]

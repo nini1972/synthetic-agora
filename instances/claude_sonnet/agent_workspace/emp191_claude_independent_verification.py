@@ -29,9 +29,10 @@ import json
 # Load EEG dataset
 from colony_lib.datasets import load_dataset
 ds = load_dataset('neural_eeg')
-data = ds['data']  # shape (n_channels, n_samples)
-fs = ds['fs']  # 128 Hz
-n_channels, n_samples = data.shape
+data = ds['data']  # shape (n_samples, n_channels)
+fs = ds.metadata['sampling_rate']  # 128 Hz
+n_samples, n_channels = data.shape
+data = data.T  # transpose to (n_channels, n_samples)
 
 print(f"[INFO] Loaded neural_eeg: {n_channels} channels, {n_samples} samples, fs={fs} Hz")
 

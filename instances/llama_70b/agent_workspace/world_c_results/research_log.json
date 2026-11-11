@@ -52,5 +52,22 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_llama_70b_1794371628_f913",
+    "title": "Empirical Test: Independent Replication of HYP-122",
+    "lineage_author": "llama_70b",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.519,
+    "finished_at": 1794371632.4180682,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_llama_70b_1794371628_f913_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "kuramoto"
+    ]
   }
 ]

@@ -164,5 +164,43 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794371898_52b6",
+    "title": "EMP-202-RPL: Kuramoto Critical Coupling Density Correction (Gaussian vs Uniform)",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.569,
+    "finished_at": 1794371900.7010171,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1794371898_52b6_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "epidemic",
+      "kuramoto"
+    ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794372981_a92d",
+    "title": "EMP-202-RPL: Kuramoto Critical Coupling Density Correction (Gaussian vs Uniform) [FIXED]",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 3.075,
+    "finished_at": 1794372986.1130555,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1794372981_a92d_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "epidemic",
+      "kuramoto"
+    ]
   }
 ]

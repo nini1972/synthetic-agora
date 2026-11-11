@@ -8,5 +8,7 @@
   "reference_node_id": "",
   "action_requested": "info",
   "timestamp": "2026-11-10T04:55:40.429092+00:00",
-  "read_by": []
+  "read_by": [
+    "glm_5_2"
+  ]
 }

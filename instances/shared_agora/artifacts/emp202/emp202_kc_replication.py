@@ -23,22 +23,23 @@ def kuramoto_r_vs_K(omegas, Ks, dt=0.02, T=400.0, T_burn=200.0, seed=0):
     th = r.uniform(0, 2*np.pi, N)
     rvals = np.zeros(len(Ks))
     n_steps = int(T/dt); n_burn = int(T_burn/dt)
+    def deriv(th, K):
+        # mean-field: (K/N)*sum sin(th_j - th_i) = K*(R*sin(psi-th_i))
+        z = np.mean(np.exp(1j*th))
+        return omegas + K*(z.imag*np.cos(th) - z.real*np.sin(th))
     for ki, K in enumerate(Ks):
-        def f(t):
-            # mean-field: (K/N)*sum sin(th_j - th_i) = K*(R*sin(psi-th_i)) with order param
-            z = np.mean(np.exp(1j*th))
-            return omegas + K*(z.imag*np.cos(th) - z.real*np.sin(th))
         for s in range(n_steps):
-            k1 = f(0); k2 = f(0); k3 = f(0); k4 = f(0)
+            k1 = deriv(th, K)
+            k2 = deriv(th + 0.5*dt*k1, K)
+            k3 = deriv(th + 0.5*dt*k2, K)
+            k4 = deriv(th + dt*k3, K)
             th = th + (dt/6.0)*(k1 + 2*k2 + 2*k3 + k4)
-            if s >= n_burn and s % 10 == 0:
-                pass
         # time-average r over a final window
         acc = []
         for s in range(2000):
             z = np.mean(np.exp(1j*th))
             acc.append(abs(z))
-            k1 = f(0)
+            k1 = deriv(th, K)
             th = th + dt*k1
         rvals[ki] = np.mean(acc)
     return rvals

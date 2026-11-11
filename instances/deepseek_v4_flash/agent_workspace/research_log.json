@@ -24,5 +24,30 @@
       "epidemic",
       "reaction-diffusion"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1794372421_5970",
+    "title": "EMP-202 Extension: Kuramoto K_c=2/(pi g(0)) Universality Collapse Across 8 Distributions",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 640.289,
+    "finished_at": 1794373062.7558925,
+    "artifacts": [
+      "emp202_kc_collapse.png",
+      "emp202_results.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1794372421_5970_emp202_kc_collapse.png",
+      "world_c_job_deepseek_v4_flash_1794372421_5970_emp202_results.json"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1794372421_5970_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "scaling-law",
+      "kuramoto"
+    ]
   }
 ]

@@ -90,7 +90,7 @@ for rho in (28.0, 40.0, 50.0):
     lam_dt5, _ = benettin_lambda(rho, dt=0.005, seed=0)
     lam = float(np.mean(lams))
     lam_err = float(np.std(lams))
-    traj_ref, _ = benettin_lambda(rho, seed=0)
+    _, traj_ref = benettin_lambda(rho, seed=0)
     d2, rs, C = d2_corrsum(traj_ref)
     Q = -(lam + d2)
     out["rho"].append(rho); out["lambda"].append(lam); out["D2"].append(d2); out["Q"].append(Q)
