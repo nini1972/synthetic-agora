@@ -205,7 +205,7 @@ class EpistemicGraph:
                     existing_node["updated_at"] = utc_now_iso()
                     self._evaluate_quorum(existing_id)
                     self.save()
-                    return existing_node
+                    return {**existing_node, "_already_existed": True}
 
             node_id = self.generate_node_id(node_type)
             author_family = detect_model_family(author_instance)
