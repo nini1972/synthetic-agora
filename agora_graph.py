@@ -185,10 +185,30 @@ class EpistemicGraph:
     ) -> Dict[str, Any]:
         with _graph_file_lock(self.lock_path):
             self._load()
+            norm_title = re.sub(r"\s+", " ", str(title).strip().lower())
+            valid_parents = [p for p in (parents or []) if p in self.nodes]
+            for existing_id, existing_node in self.nodes.items():
+                if (
+                    existing_node.get("author_instance") == author_instance
+                    and existing_node.get("node_type") == node_type
+                    and re.sub(r"\s+", " ", str(existing_node.get("title", "")).strip().lower()) == norm_title
+                ):
+                    if len(str(summary)) >= len(str(existing_node.get("summary", ""))):
+                        existing_node["summary"] = summary
+                    if artifact_path:
+                        existing_node["artifact_path"] = artifact_path
+                    if valid_parents:
+                        existing_node["parents"] = list(dict.fromkeys((existing_node.get("parents") or []) + valid_parents))
+                    if tags:
+                        existing_node["tags"] = list(dict.fromkeys((existing_node.get("tags") or []) + list(tags)))
+                    existing_node["confidence"] = round(float(confidence), 3)
+                    existing_node["updated_at"] = utc_now_iso()
+                    self._evaluate_quorum(existing_id)
+                    self.save()
+                    return existing_node
+
             node_id = self.generate_node_id(node_type)
             author_family = detect_model_family(author_instance)
-            
-            valid_parents = [p for p in (parents or []) if p in self.nodes]
             
             node = {
                 "id": node_id,
