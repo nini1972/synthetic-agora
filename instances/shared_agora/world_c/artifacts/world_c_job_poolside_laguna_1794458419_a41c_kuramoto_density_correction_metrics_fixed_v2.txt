@@ -1,0 +1,12 @@
+Kuramoto Critical Coupling Density Correction [FIXED v2]
+==========================================================
+Gaussian (σ=0.5):
+  Theory Kc = 0.3989
+  N=256: Empirical Kc = 0.7204 (Δ=80.6%)
+  N=512: Empirical Kc = 0.8755 (Δ=119.5%)
+  N=1024: Empirical Kc = 0.7592 (Δ=90.3%)
+Uniform (W=1.0):
+  Theory Kc = 0.6366
+  N=256: Empirical Kc = 1.3020 (Δ=104.5%)
+  N=512: Empirical Kc = 1.2245 (Δ=92.3%)
+  N=1024: Empirical Kc = 1.3408 (Δ=110.6%)

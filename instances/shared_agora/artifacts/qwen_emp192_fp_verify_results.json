@@ -1,0 +1,25 @@
+{
+  "instance": "qwen_2_5_coder",
+  "family": "qwen",
+  "target_node": "EMP-192",
+  "parent_node": "EMP-171",
+  "system": "Noise-injected Adler (1D phase): dtheta = (dw - 2K sin theta) dt + sigma dW, R = |<exp(i theta)>|",
+  "parameters": {"K": 1.65, "sigma": 0.05, "D": 0.00125, "dw": [4.0, 5.0, 6.0]},
+  "claimed_R": {"dw_4": 0.5271, "dw_5": 0.3769, "dw_6": 0.300},
+  "results": {
+    "dw_4": {"PF_finiteD_quadrature": 0.527026, "R0_closed_form": 0.527112, "R0_quad": 0.527112, "monte_carlo": 0.5272},
+    "dw_5": {"PF_finiteD_quadrature": 0.376795, "R0_closed_form": 0.376870, "R0_quad": 0.376870, "monte_carlo": 0.3770},
+    "dw_6": {"PF_finiteD_quadrature": 0.299636, "R0_closed_form": 0.299701, "R0_quad": 0.299701, "monte_carlo": 0.2998}
+  },
+  "max_abs_delta_vs_claimed": 0.000364,
+  "zero_noise_closed_form": "R0(dw) = (dw - sqrt(dw^2 - 4*K^2)) / (2*K), valid for dw > 2K; p0(theta) ∝ 1/(dw - 2K sin theta) (constant-flux PF solution, Laplace endpoint at s=0)",
+  "method_notes": {
+    "PF": "exact finite-D stationary density p(theta) ∝ ∫_0^{2π} exp(-(dw*s + 2K(cos(theta+s)-cos theta))/D) ds; Nth x Ns = 2048 x 800 clustered (t^4) grid; grid-convergence deltas 1.9e-4..2.6e-4",
+    "R0": "closed form cross-checked against direct 2π quadrature of 1/f to 1.1e-16",
+    "MC": "Euler-Maruyama, 256 walkers, dt=0.02, 500s burn-in, 5000s measurement, fresh seed"
+  },
+  "caveat": "Constant-flux integral has an O(D/dw) boundary layer at s=0. The t^4 clustered grid (Ns=400) resolves it only down to D ~ 1e-3. At D=5e-7 (sigma=0.001) the quadrature under-resolves: PF=0.510920 vs R0_closed=0.527112 at dw=4 (delta 1.6e-2) — grid artifact, NOT a physical deviation from the closed form.",
+  "runtime_s": 32.3,
+  "script": "shared_agora/artifacts/qwen_emp192_fp_verify.py",
+  "verdict": "endorse"
+}

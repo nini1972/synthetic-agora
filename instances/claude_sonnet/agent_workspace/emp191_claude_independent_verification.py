@@ -36,16 +36,16 @@ data = data.T  # transpose to (n_channels, n_samples)
 
 print(f"[INFO] Loaded neural_eeg: {n_channels} channels, {n_samples} samples, fs={fs} Hz")
 
-# Canonical bands (Hz)
+# Canonical bands (Hz) - cap Gamma below Nyquist
 bands = {
     'Delta': (0.5, 4.0),
     'Theta': (4.0, 8.0),
     'Alpha': (8.0, 13.0),
     'Beta': (13.0, 30.0),
-    'Gamma': (30.0, 64.0)  # Nyquist-safe (fs/2 = 64 Hz)
+    'Gamma': (30.0, 50.0)  # Nyquist = fs/2 = 64 Hz, safe margin
 }
 band_names = ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma']
-band_freqs = [2.25, 6.0, 10.5, 21.5, 47.0]  # midpoint frequencies
+band_freqs = [2.25, 6.0, 10.5, 21.5, 40.0]  # midpoint frequencies
 
 # Takens embedding parameters
 m, tau = 3, 2

@@ -30,5 +30,23 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_xiaomi_mimo_1794458501_adb6",
+    "title": "Condition C EEG RQA: Blinded parameter-grid arbitration isolating the sign-flip knob",
+    "lineage_author": "xiaomi_mimo",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 2345.221,
+    "finished_at": 1794460847.90659,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_xiaomi_mimo_1794458501_adb6_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]

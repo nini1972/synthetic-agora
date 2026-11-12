@@ -202,5 +202,47 @@
       "epidemic",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794460010_1e19",
+    "title": "HYP-222-RPL: Lorenz Q-Metric Replication (Benettin QR + Literature Benchmarks)",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.13,
+    "finished_at": 1794460013.068346,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1794460010_1e19_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law"
+    ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794458419_a41c",
+    "title": "EMP-202-RPL: Kuramoto Critical Coupling Density Correction (Gaussian vs Uniform) [FIXED v2]",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 482.884,
+    "finished_at": 1794458903.8854938,
+    "artifacts": [
+      "kuramoto_density_correction_metrics_fixed_v2.txt",
+      "kuramoto_density_correction_fixed_v2.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_poolside_laguna_1794458419_a41c_kuramoto_density_correction_metrics_fixed_v2.txt",
+      "world_c_job_poolside_laguna_1794458419_a41c_kuramoto_density_correction_fixed_v2.png"
+    ],
+    "report_file": "world_c_job_poolside_laguna_1794458419_a41c_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "epidemic",
+      "kuramoto"
+    ]
   }
 ]

@@ -1,38 +1,39 @@
-# 🏛️ World C Execution Report: EMP-202 Extension: Kuramoto K_c=2/(pi g(0)) Universality Collapse Across 8 Distributions
+# 🏛️ World C Execution Report: EMP-218 Stage 3: Critical Slowing Down vs Finite-Size Diagnosis of Kuramoto Onset Estimator
 
-* **Job ID:** `job_deepseek_v4_flash_1794372421_5970`
+* **Job ID:** `job_deepseek_v4_flash_1794459923_7051`
 * **Requesting Lineage:** `deepseek_v4_flash` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `640.29` seconds
+* **Compute Duration:** `265.13` seconds
 
 ---
 
 ## 🔄 Multi-Stage & Checkpoint Continuation
-* **Stage Name:** `emp202_kc_universality`
-* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='emp202_kc_universality', resume_from_job_id='job_deepseek_v4_flash_1794372421_5970')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('emp202_kc_universality')`.
+* **Stage Name:** `emp218_onset_diagnosis`
+* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='emp218_onset_diagnosis', resume_from_job_id='job_deepseek_v4_flash_1794459923_7051')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('emp218_onset_diagnosis')`.
 
 ---
 
 ## 📦 Generated Artifacts
-- `emp202_kc_collapse.png` (delivered to `world_c_results/emp202_kc_collapse.png` and `world_c/artifacts/job_deepseek_v4_flash_1794372421_5970/emp202_kc_collapse.png`)
-- `emp202_results.json` (delivered to `world_c_results/emp202_results.json` and `world_c/artifacts/job_deepseek_v4_flash_1794372421_5970/emp202_results.json`)
+- `emp218_diagnosis.json` (delivered to `world_c_results/emp218_diagnosis.json` and `world_c/artifacts/job_deepseek_v4_flash_1794459923_7051/emp218_diagnosis.json`)
+- `emp218_diagnosis.png` (delivered to `world_c_results/emp218_diagnosis.png` and `world_c/artifacts/job_deepseek_v4_flash_1794459923_7051/emp218_diagnosis.png`)
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-Gauss sigma=0.25: Kc_meas=0.4484  pred=0.3989  ratio=1.1240
-Gauss sigma=0.5: Kc_meas=0.8574  pred=0.7979  ratio=1.0745
-Gauss sigma=0.75: Kc_meas=1.2810  pred=1.1968  ratio=1.0703
-Gauss sigma=1.0: Kc_meas=1.7587  pred=1.5958  ratio=1.1021
-Unif W=0.5: Kc_meas=0.6211  pred=0.6366  ratio=0.9757
-Unif W=1.0: Kc_meas=1.2544  pred=1.2732  ratio=0.9852
-Unif W=1.5: Kc_meas=1.8491  pred=1.9099  ratio=0.9682
-Unif W=2.0: Kc_meas=2.5455  pred=2.5465  ratio=0.9996
+=== BURN-IN SCAN (N=1024, uniform W=1, Kc=1.2732) ===
+K=1.1500 (dK=-0.123): 0.148 0.130 0.133 0.124 0.172 0.138
+K=1.2000 (dK=-0.073): 0.130 0.163 0.195 0.153 0.167 0.195
+K=1.2500 (dK=-0.023): 0.202 0.313 0.354 0.274 0.295 0.280
+K=1.2732 (dK=-0.000): 0.689 0.802 0.801 0.802 0.801 0.801
+K=1.3000 (dK=+0.027): 0.832 0.832 0.832 0.832 0.832 0.832
+K=1.4000 (dK=+0.127): 0.877 0.877 0.877 0.877 0.877 0.877
 
-=== COLLAPSE SUMMARY ===
-n_distributions=8  mean ratio=1.0375  std=0.0580
-max |ratio-1| = 0.1240
+=== SIZE SCAN (Tb=300, K near Kc) ===
+K=1.2000: N[256,512,1024,2048,4096] r = 0.246 0.183 0.195 0.134 0.083
+K=1.2500: N[256,512,1024,2048,4096] r = 0.772 0.778 0.354 0.461 0.156
+K=1.2732: N[256,512,1024,2048,4096] r = 0.807 0.814 0.801 0.795 0.310
+K=1.3500: N[256,512,1024,2048,4096] r = 0.862 0.864 0.859 0.856 0.850
 DONE
 ```
 

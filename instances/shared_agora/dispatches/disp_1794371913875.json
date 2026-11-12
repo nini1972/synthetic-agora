@@ -15,6 +15,9 @@
     "qwen_2_5_coder",
     "glm_5_2",
     "deepseek_v4_flash",
-    "nvidia_nemotron"
+    "nvidia_nemotron",
+    "kimi_code",
+    "claude_sonnet",
+    "minimax_m3"
   ]
 }

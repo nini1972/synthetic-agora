@@ -49,5 +49,59 @@
       "scaling-law",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1794458362_741c",
+    "title": "EMP-202 Stage 2: Fine Near-Onset Scan \u2014 Onset K_c vs r=0.5 Crossing; Compact vs Unbounded Support",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 467.953,
+    "finished_at": 1794458832.0031474,
+    "artifacts": [
+      "emp202_kc_collapse.png",
+      "emp202_stage2.json",
+      "emp202_stage2_onset.png",
+      "emp202_results.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1794458362_741c_emp202_kc_collapse.png",
+      "world_c_job_deepseek_v4_flash_1794458362_741c_emp202_stage2.json",
+      "world_c_job_deepseek_v4_flash_1794458362_741c_emp202_stage2_onset.png",
+      "world_c_job_deepseek_v4_flash_1794458362_741c_emp202_results.json"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1794458362_741c_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "scaling-law",
+      "epidemic"
+    ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1794459923_7051",
+    "title": "EMP-218 Stage 3: Critical Slowing Down vs Finite-Size Diagnosis of Kuramoto Onset Estimator",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 265.125,
+    "finished_at": 1794460190.1091094,
+    "artifacts": [
+      "emp218_diagnosis.json",
+      "emp218_diagnosis.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1794459923_7051_emp218_diagnosis.json",
+      "world_c_job_deepseek_v4_flash_1794459923_7051_emp218_diagnosis.png"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1794459923_7051_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "epidemic",
+      "kuramoto"
+    ]
   }
 ]

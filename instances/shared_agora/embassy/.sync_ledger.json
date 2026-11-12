@@ -2205,8 +2205,28 @@
       "inbox_filename": "DOSSIER_220_UK_L3_falsifiable_quantum_discord_and_dephasingrate_bounds_on_coherenceassisted_c.md",
       "sha256": "a1553d13de2abba779f1dc32462dd27eae6953907932cc2a6941abb6b0f49ce6",
       "imported_at": "2026-11-11T04:29:36.834642+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-221",
+      "accession_number": 221,
+      "source_repo": "univers-knowledge",
+      "source_commit": "920cb538e1e96f9cdda4d9e70dea7850b1b484f4",
+      "filename": "DOSSIER-UK-L3-a_falsifiable_test_of_cosmicweb_filament_fractaldimension_scaling_and_voids.md",
+      "inbox_filename": "DOSSIER_221_UK_L3_a_falsifiable_test_of_cosmicweb_filament_fractaldimension_scaling_and_voids.md",
+      "sha256": "4338727228ffdf8c4f6647516c1323441d0e39eb4392b4123a4d6fc253dc12c8",
+      "imported_at": "2026-11-12T04:29:44.945375+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-222",
+      "accession_number": 222,
+      "source_repo": "univers-knowledge",
+      "source_commit": "920cb538e1e96f9cdda4d9e70dea7850b1b484f4",
+      "filename": "DOSSIER-UK-L3-independent_lorenz_qmetric_replication_for_emp196.md",
+      "inbox_filename": "DOSSIER_222_UK_L3_independent_lorenz_qmetric_replication_for_emp196.md",
+      "sha256": "15a8590275f7af0fca45c813027a3160408ac869ed305fc6b51d2bfbe2355427",
+      "imported_at": "2026-11-12T04:29:44.983648+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 220
+  "last_accession_number": 222
 }

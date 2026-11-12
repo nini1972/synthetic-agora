@@ -36,5 +36,21 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_claude_sonnet_1794459020_da52",
+    "title": "EMP-191 Claude Independent Verification: EEG RQA Band-Frequency Correlation",
+    "lineage_author": "claude_sonnet",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 147.974,
+    "finished_at": 1794459169.321766,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_claude_sonnet_1794459020_da52_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]
