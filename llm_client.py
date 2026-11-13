@@ -372,8 +372,18 @@ def extract_fallback_tool_call(content: str, tools: list = None) -> dict:
                     "arguments": args,
                     "content": strip_inline_tool_syntax(content[:m.start()]),
                 }
-            if not tool_name and any(k in data for k in ("summary", "message", "next_steps", "plot_paths")) and data.get("status") != "SKIPPED":
+            if not tool_name and any(k in data for k in ("title", "summary", "message", "analysis", "next_steps", "plot_paths")) and data.get("status") != "SKIPPED":
                 summary_json_match = (m.start(), data)
+        except Exception:
+            pass
+
+    if summary_json_match is None and content.lstrip().startswith("{"):
+        try:
+            lead_idx = len(content) - len(content.lstrip())
+            data, _ = json.JSONDecoder().raw_decode(content[lead_idx:])
+            if isinstance(data, dict) and not (data.get("call") or data.get("name") or data.get("tool")):
+                if any(k in data for k in ("title", "summary", "message", "analysis", "next_steps", "plot_paths")) and data.get("status") != "SKIPPED":
+                    summary_json_match = (lead_idx, data)
         except Exception:
             pass
 
@@ -669,17 +679,29 @@ def extract_fallback_tool_call(content: str, tools: list = None) -> dict:
     if summary_json_match:
         match_idx, s_data = summary_json_match
         prose = strip_inline_tool_syntax(content[:match_idx]).strip()
-        summary_text = str(s_data.get("summary") or s_data.get("message") or "").strip()
-        if "post_epistemic_node" in known_tools:
-            title_cand = summary_text.split(".")[0].strip()[:90] if summary_text else "Empirical Verification Analysis"
+        summary_text = str(s_data.get("summary") or s_data.get("analysis") or s_data.get("message") or "").strip()
+        explicit_title = str(s_data.get("title") or "").strip()
+        nid_hint = str(s_data.get("node_id") or "").strip().upper()
+        inferred_type = str(s_data.get("node_type") or "").strip()
+        if not inferred_type:
+            if nid_hint.startswith("CRT"):
+                inferred_type = "critique"
+            elif nid_hint.startswith("HYP"):
+                inferred_type = "hypothesis"
+            elif nid_hint.startswith("SYN"):
+                inferred_type = "synthesis"
+            else:
+                inferred_type = "empirical_test"
+        if "post_epistemic_node" in known_tools and (explicit_title or len(summary_text) >= 40):
+            title_cand = explicit_title or (summary_text.split(".")[0].strip()[:90] if summary_text else "Empirical Verification Analysis")
             full_summary = summary_text if len(summary_text) >= 60 else f"{prose[-400:]} {summary_text}".strip()
             node_args = {
                 "title": title_cand or "Empirical Verification Analysis",
-                "node_type": "empirical_test",
+                "node_type": inferred_type,
                 "summary": full_summary or prose[:500] or "Completed empirical verification analysis.",
-                "confidence": 0.9,
-                "tags": ["dynamical_invariants", "empirical_verification"],
-                "parents": [],
+                "confidence": float(s_data.get("confidence", 0.9)),
+                "tags": s_data.get("tags") if isinstance(s_data.get("tags"), list) else ["dynamical_invariants", "empirical_verification"],
+                "parents": s_data.get("parents") if isinstance(s_data.get("parents"), list) else [],
             }
             plots = s_data.get("plot_paths") or s_data.get("output_files") or []
             if isinstance(plots, list) and plots and isinstance(plots[0], str):

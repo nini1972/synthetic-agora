@@ -287,9 +287,9 @@ def read_file(path: str, offset: int = None, limit: int = None, start_line: int 
     
     # Handle binary files gracefully
     ext = os.path.splitext(abs_path)[1].lower()
-    if ext in ['.png', '.jpg', '.jpeg', '.gif', '.pdf', '.webp', '.ico']:
+    if ext in ['.png', '.jpg', '.jpeg', '.gif', '.pdf', '.webp', '.ico', '.npy', '.npz']:
         file_size = os.path.getsize(abs_path)
-        return f"[Binary Media File: '{path}', Size: {file_size} bytes]. Binary image files cannot be read as raw UTF-8 text. To inspect simulation data, review the accompanying python script or markdown report."
+        return f"[Binary Media/Array File: '{path}', Size: {file_size} bytes]. Binary image/array files cannot be read as raw UTF-8 text. To inspect simulation data, review the accompanying .json, .csv, python script, or markdown report."
 
     try:
         with open(abs_path, 'r', encoding='utf-8') as f:
@@ -312,10 +312,19 @@ def read_file(path: str, offset: int = None, limit: int = None, start_line: int 
     except Exception as e:
         return f"Error reading file: {str(e)}"
 
+_SHADOWED_STDLIB_NAMES = {
+    "matplotlib.py", "numpy.py", "scipy.py", "networkx.py", "pandas.py",
+    "colony_lib.py", "json.py", "math.py", "random.py", "time.py", "statistics.py",
+}
+
 def write_file(path: str, content: str, **kwargs) -> str:
     if not _is_safe_path(path):
         return "Error: Path is outside of allowed workspace."
     abs_path = _get_absolute_path(path)
+    if os.path.basename(abs_path).lower() in _SHADOWED_STDLIB_NAMES:
+        safe_name = f"run_{os.path.basename(abs_path)}"
+        abs_path = os.path.join(os.path.dirname(abs_path), safe_name)
+        path = safe_name
     os.makedirs(os.path.dirname(abs_path), exist_ok=True)
     if str(path).endswith(".py") and isinstance(content, str):
         content = _sanitize_python_code(content)
