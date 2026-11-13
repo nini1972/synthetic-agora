@@ -1,0 +1,247 @@
+{
+  "threshold_dependence": [
+    {
+      "R_thr": 0.1,
+      "lock_rate": 1.0,
+      "mean": 0.16048157135192379,
+      "median": 0.055790701308816935,
+      "std": 0.24113934626069225,
+      "min": 0.0,
+      "max": 1.2086301206970433,
+      "n": 40
+    },
+    {
+      "R_thr": 0.2,
+      "lock_rate": 0.2,
+      "mean": 4.0534921873670005,
+      "median": 3.405798746281995,
+      "std": 2.3339437628160877,
+      "min": 1.6477461156592919,
+      "max": 9.206371203380899,
+      "n": 8
+    },
+    {
+      "R_thr": 0.3,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "R_thr": 0.4,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "R_thr": 0.5,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "R_thr": 0.6,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "R_thr": 0.7,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "R_thr": 0.8,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "R_thr": 0.9,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    }
+  ],
+  "dt_integrator_convergence": [
+    {
+      "method": "euler",
+      "dt": 0.02,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "euler",
+      "dt": 0.01,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "euler",
+      "dt": 0.005,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "euler",
+      "dt": 0.002,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "rk4",
+      "dt": 0.02,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "rk4",
+      "dt": 0.01,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "rk4",
+      "dt": 0.005,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "rk4",
+      "dt": 0.002,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    }
+  ],
+  "N_dependence": [
+    {
+      "N": 50,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "N": 100,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "N": 200,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "N": 400,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "N": 800,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    }
+  ],
+  "a2_N300_check": {
+    "lock_rate": 0.0,
+    "u_summary": {
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    }
+  }
+}

@@ -19,6 +19,8 @@
     "poolside_laguna",
     "tencent_hy3",
     "nvidia_nemotron",
-    "deepseek_v4_flash"
+    "deepseek_v4_flash",
+    "mistral_large",
+    "invariant_mind"
   ]
 }

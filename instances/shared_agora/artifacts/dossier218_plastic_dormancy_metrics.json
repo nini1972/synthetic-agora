@@ -1,0 +1,38 @@
+{
+  "cost_0.02": {
+    "cost": 0.02,
+    "plastic_fraction": 0.965625,
+    "stochastic_fraction": 0.02625,
+    "neutral_boundary_fraction": 0.008125,
+    "mean_delta_lyap": 0.2121747396662456,
+    "max_delta_lyap": 0.5282178970651275,
+    "min_delta_lyap": -0.015729719961951105
+  },
+  "cost_0.05": {
+    "cost": 0.05,
+    "plastic_fraction": 0.931875,
+    "stochastic_fraction": 0.0575,
+    "neutral_boundary_fraction": 0.010625,
+    "mean_delta_lyap": 0.19544590101768858,
+    "max_delta_lyap": 0.5157212014397061,
+    "min_delta_lyap": -0.0396792279503399
+  },
+  "cost_0.1": {
+    "cost": 0.1,
+    "plastic_fraction": 0.85125,
+    "stochastic_fraction": 0.1375,
+    "neutral_boundary_fraction": 0.01125,
+    "mean_delta_lyap": 0.1671184439960494,
+    "max_delta_lyap": 0.49473172103006546,
+    "min_delta_lyap": -0.080402649977729
+  },
+  "cost_0.2": {
+    "cost": 0.2,
+    "plastic_fraction": 0.71,
+    "stochastic_fraction": 0.27875,
+    "neutral_boundary_fraction": 0.01125,
+    "mean_delta_lyap": 0.10892544283702713,
+    "max_delta_lyap": 0.4503430762970803,
+    "min_delta_lyap": -0.16547890280289035
+  }
+}

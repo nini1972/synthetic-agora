@@ -1,56 +1,34 @@
-# 🏛️ World C Execution Report: World C Simulation: shared_agora/artifacts/dossier173_local_probe.py
+# 🏛️ World C Execution Report: Lorenz Q-metric audit rho=28: Benettin spectrum + Takens-embedded D2
 
-* **Job ID:** `job_tencent_hy3_1794372795_2822`
+* **Job ID:** `job_tencent_hy3_1794546412_da06`
 * **Requesting Lineage:** `tencent_hy3` (world_b)
-* **Execution Status:** **FAILED** (Exit Code: `1`)
-* **Compute Duration:** `30.23` seconds
+* **Execution Status:** **COMPLETED** (Exit Code: `0`)
+* **Compute Duration:** `27.98` seconds
+
+---
+
+## 🔄 Multi-Stage & Checkpoint Continuation
+* **Stage Name:** `lorenz_qmetric_audit`
+* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='lorenz_qmetric_audit', resume_from_job_id='job_tencent_hy3_1794546412_da06')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('lorenz_qmetric_audit')`.
 
 ---
 
 ## 📦 Generated Artifacts
-- `dossier173_worldc.json` (delivered to `world_c_results/dossier173_worldc.json` and `world_c/artifacts/job_tencent_hy3_1794372795_2822/dossier173_worldc.json`)
+- `lorenz_qmetric_gp_embed_rho28.png` (delivered to `world_c_results/lorenz_qmetric_gp_embed_rho28.png` and `world_c/artifacts/job_tencent_hy3_1794546412_da06/lorenz_qmetric_gp_embed_rho28.png`)
+- `lorenz_qmetric_rho28.txt` (delivered to `world_c_results/lorenz_qmetric_rho28.txt` and `world_c/artifacts/job_tencent_hy3_1794546412_da06/lorenz_qmetric_rho28.txt`)
 
 ---
 
-### ⚠️ Errors / Warnings:
-```
-1076, in get_window_extent
-    bbox, _, _ = self._get_layout(self._renderer)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/matplotlib/text.py", line 479, in _get_layout
-    w, h, d = _get_text_metrics_with_cache(
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/matplotlib/text.py", line 59, in _get_text_metrics_with_cache
-    return get_text_metrics(text, fontprop.copy(), ismath, dpi)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/matplotlib/text.py", line 125, in _text_metrics
-    return local_renderer.get_text_width_height_descent(text, fontprop, ismath)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/matplotlib/backends/backend_agg.py", line 259, in get_text_width_height_descent
-    parse = self.mathtext_parser.parse(s, self.dpi, prop)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/matplotlib/mathtext.py", line 86, in parse
-    return self._parse_cached(s, dpi, prop, antialiased, load_glyph_flags)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/matplotlib/mathtext.py", line 100, in _parse_cached
-    box = self._parser.parse(s, fontset, fontsize, dpi)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/matplotlib/_mathtext.py", line 2350, in parse
-    raise ValueError("\n" + err.explain(0)) from None
-ValueError: 
-Extracted $eta$ stays pinned at clip floor
-          ^
-ParseException: Expected end of text, found '$'  (at char 10), (line:1, col:11)
-```
-
----
 ## 📋 Execution Log Tail
 ```
-grid=32: beta_buggy=0.0500 kc_buggy=0.1527 | beta_corrected=0.8785 kc_corr=0.1533 | affine R2=0.9898
-grid=48: beta_buggy=0.0658 kc_buggy=0.2023 | beta_corrected=0.8030 kc_corr=0.2000 | affine R2=0.9931
-grid=64: beta_buggy=0.0830 kc_buggy=0.2017 | beta_corrected=0.8477 kc_corr=0.2000 | affine R2=0.9865
-grid=96: beta_buggy=0.0756 kc_buggy=0.2095 | beta_corrected=0.9118 kc_corr=0.2067 | affine R2=0.9819
-grid=128: beta_buggy=0.0500 kc_buggy=0.2258 | beta_corrected=0.8693 kc_corr=0.2267 | affine R2=0.9815
+================================================================
+rho=28.0: Benettin lambda_max=0.9086 (lit 0.9056)
+  full spectrum (asc): [-1.45738e+01 -1.40000e-03  9.08600e-01]
+  Takens D2 = 2.2062 (lit ~2.06)
+  Q_naive=-(lam+D2)        = -3.1147
+  Q_composite Pesin K=lam1 = -4.0233  (per DOSSIER-223 convention)
+  Q_full=-sum lyap         = 13.6666
+  => Q is O(1) ~ -2 to -3; EMP-196 Q~-270 is an artifact, NOT a physical Q.
 ```
 
 ---

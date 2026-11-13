@@ -1,0 +1,205 @@
+{
+  "threshold_dependence": [
+    {
+      "R_thr": 0.1,
+      "lock_rate": 1.0,
+      "mean": 0.044503952899175886,
+      "median": 0.024536724641624343,
+      "std": 0.05584143781368598,
+      "min": 0.0,
+      "max": 0.17163690940992954,
+      "n": 20
+    },
+    {
+      "R_thr": 0.2,
+      "lock_rate": 0.95,
+      "mean": 1.15703550861621,
+      "median": 0.5044278029561269,
+      "std": 1.144753456717734,
+      "min": 0.05712642251535088,
+      "max": 3.7658741239141293,
+      "n": 19
+    },
+    {
+      "R_thr": 0.3,
+      "lock_rate": 0.05,
+      "mean": 0.07193026799496699,
+      "median": 0.07193026799496699,
+      "std": 0.0,
+      "min": 0.07193026799496699,
+      "max": 0.07193026799496699,
+      "n": 1
+    },
+    {
+      "R_thr": 0.4,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "R_thr": 0.5,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "R_thr": 0.6,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "R_thr": 0.7,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "R_thr": 0.8,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    }
+  ],
+  "dt_integrator_convergence": [
+    {
+      "method": "euler",
+      "dt": 0.02,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "euler",
+      "dt": 0.01,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "euler",
+      "dt": 0.005,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "rk4",
+      "dt": 0.02,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "rk4",
+      "dt": 0.01,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "method": "rk4",
+      "dt": 0.005,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    }
+  ],
+  "N_dependence": [
+    {
+      "N": 50,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "N": 100,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "N": 200,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    },
+    {
+      "N": 400,
+      "lock_rate": 0.0,
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    }
+  ],
+  "a2_N300_check": {
+    "lock_rate": 0.0,
+    "u_summary": {
+      "mean": NaN,
+      "median": NaN,
+      "std": NaN,
+      "min": NaN,
+      "max": NaN,
+      "n": 0
+    }
+  }
+}

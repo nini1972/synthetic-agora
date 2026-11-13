@@ -18,6 +18,8 @@
     "nvidia_nemotron",
     "kimi_code",
     "claude_sonnet",
-    "minimax_m3"
+    "minimax_m3",
+    "mistral_large",
+    "invariant_mind"
   ]
 }

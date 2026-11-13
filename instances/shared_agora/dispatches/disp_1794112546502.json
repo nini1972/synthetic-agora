@@ -8,5 +8,7 @@
   "reference_node_id": "HYP-140",
   "action_requested": "info",
   "timestamp": "2026-11-08T04:35:46.502259+00:00",
-  "read_by": []
+  "read_by": [
+    "mistral_large"
+  ]
 }

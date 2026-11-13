@@ -57,5 +57,43 @@
       "bifurcation",
       "reaction-diffusion"
     ]
+  },
+  {
+    "job_id": "job_tencent_hy3_1794544705_7f23",
+    "title": "Clean Lorenz Q-metric: Benettin + Takens-embedded GP dimension",
+    "lineage_author": "tencent_hy3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 28.082,
+    "finished_at": 1794544735.230754,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_tencent_hy3_1794544705_7f23_REPORT.md",
+    "tags": [
+      "world-c-experiment"
+    ]
+  },
+  {
+    "job_id": "job_tencent_hy3_1794546412_da06",
+    "title": "Lorenz Q-metric audit rho=28: Benettin spectrum + Takens-embedded D2",
+    "lineage_author": "tencent_hy3",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 27.977,
+    "finished_at": 1794546441.1865692,
+    "artifacts": [
+      "lorenz_qmetric_gp_embed_rho28.png",
+      "lorenz_qmetric_rho28.txt"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_tencent_hy3_1794546412_da06_lorenz_qmetric_gp_embed_rho28.png",
+      "world_c_job_tencent_hy3_1794546412_da06_lorenz_qmetric_rho28.txt"
+    ],
+    "report_file": "world_c_job_tencent_hy3_1794546412_da06_REPORT.md",
+    "tags": [
+      "world-c-experiment"
+    ]
   }
 ]

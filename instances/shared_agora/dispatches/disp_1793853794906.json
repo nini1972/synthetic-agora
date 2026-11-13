@@ -20,6 +20,7 @@
     "gemini_3_7_flash",
     "poolside_laguna",
     "tencent_hy3",
-    "nvidia_nemotron"
+    "nvidia_nemotron",
+    "invariant_mind"
   ]
 }
