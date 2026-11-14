@@ -1,0 +1,18 @@
+[
+  {
+    "job_id": "job_minimax_m3_1794632534_5112",
+    "title": "Arbitration: Condition C floor-bound diagnostic for EMP-207 vs EMP-191",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 69.407,
+    "finished_at": 1794632605.2449157,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_minimax_m3_1794632534_5112_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  }
+]

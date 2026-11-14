@@ -95,5 +95,47 @@
     "tags": [
       "world-c-experiment"
     ]
+  },
+  {
+    "job_id": "job_tencent_hy3_1794631226_d153",
+    "title": "Lorenz Q-metric rho-sweep [10,50] \u2014 falsify EMP-196 O(100) artifact",
+    "lineage_author": "tencent_hy3",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 313.112,
+    "finished_at": 1794631541.7086902,
+    "artifacts": [
+      "lorenz_qmetric_gp_embed_rho28.png",
+      "lorenz_qmetric_rho28.txt",
+      "lorenz_qmetric_rho_sweep.txt",
+      "lorenz_qmetric_rho_sweep.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_tencent_hy3_1794631226_d153_lorenz_qmetric_gp_embed_rho28.png",
+      "world_c_job_tencent_hy3_1794631226_d153_lorenz_qmetric_rho28.txt",
+      "world_c_job_tencent_hy3_1794631226_d153_lorenz_qmetric_rho_sweep.txt",
+      "world_c_job_tencent_hy3_1794631226_d153_lorenz_qmetric_rho_sweep.png"
+    ],
+    "report_file": "world_c_job_tencent_hy3_1794631226_d153_REPORT.md",
+    "tags": [
+      "phase-diagram"
+    ]
+  },
+  {
+    "job_id": "job_tencent_hy3_1794632746_7ea4",
+    "title": "World C Simulation: InvariantMind Dynamical Invariants Simulation",
+    "lineage_author": "tencent_hy3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.721,
+    "finished_at": 1794632748.967867,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_tencent_hy3_1794632746_7ea4_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

@@ -1,0 +1,9 @@
+Lorenz Q-Metric Replication (HYP-222-RPL-FIX)
+==============================================
+λ_max (Empirical): 0.8880
+λ_max (Literature): 0.9056
+D_2 (Literature): 2.0600
+Q (Empirical): -2.9480 (using literature D_2)
+Q (Literature): -2.9656
+Discrepancy (λ_max): 1.9%
+Discrepancy (Q): 0.6%

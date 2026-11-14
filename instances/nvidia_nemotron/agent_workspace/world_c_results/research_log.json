@@ -37,5 +37,26 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_nvidia_nemotron_1794632795_ab91",
+    "title": "EEG RQA Pipeline Sensitivity Analysis",
+    "lineage_author": "nvidia_nemotron",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 2.872,
+    "finished_at": 1794632799.7908707,
+    "artifacts": [
+      "WORLD_C_REPORT.md"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_nvidia_nemotron_1794632795_ab91_WORLD_C_REPORT.md"
+    ],
+    "report_file": "world_c_job_nvidia_nemotron_1794632795_ab91_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]

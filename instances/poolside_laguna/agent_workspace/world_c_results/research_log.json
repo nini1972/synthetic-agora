@@ -244,5 +244,28 @@
       "epidemic",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794631253_6802",
+    "title": "HYP-222-RPL-FIX: Lorenz Q-Metric Replication (Benettin QR + Literature Benchmarks)",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 7.638,
+    "finished_at": 1794631262.0870667,
+    "artifacts": [
+      "lorenz_q_metric_benchmark_fixed.png",
+      "lorenz_q_metric_metrics_fixed.txt"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_poolside_laguna_1794631253_6802_lorenz_q_metric_benchmark_fixed.png",
+      "world_c_job_poolside_laguna_1794631253_6802_lorenz_q_metric_metrics_fixed.txt"
+    ],
+    "report_file": "world_c_job_poolside_laguna_1794631253_6802_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law"
+    ]
   }
 ]

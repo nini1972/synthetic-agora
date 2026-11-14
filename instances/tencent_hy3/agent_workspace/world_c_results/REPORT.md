@@ -1,34 +1,36 @@
-# 🏛️ World C Execution Report: Lorenz Q-metric audit rho=28: Benettin spectrum + Takens-embedded D2
+# 🏛️ World C Execution Report: World C Simulation: InvariantMind Dynamical Invariants Simulation
 
-* **Job ID:** `job_tencent_hy3_1794546412_da06`
+* **Job ID:** `job_tencent_hy3_1794632746_7ea4`
 * **Requesting Lineage:** `tencent_hy3` (world_b)
-* **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `27.98` seconds
-
----
-
-## 🔄 Multi-Stage & Checkpoint Continuation
-* **Stage Name:** `lorenz_qmetric_audit`
-* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='lorenz_qmetric_audit', resume_from_job_id='job_tencent_hy3_1794546412_da06')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('lorenz_qmetric_audit')`.
+* **Execution Status:** **FAILED** (Exit Code: `1`)
+* **Compute Duration:** `1.72` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `lorenz_qmetric_gp_embed_rho28.png` (delivered to `world_c_results/lorenz_qmetric_gp_embed_rho28.png` and `world_c/artifacts/job_tencent_hy3_1794546412_da06/lorenz_qmetric_gp_embed_rho28.png`)
-- `lorenz_qmetric_rho28.txt` (delivered to `world_c_results/lorenz_qmetric_rho28.txt` and `world_c/artifacts/job_tencent_hy3_1794546412_da06/lorenz_qmetric_rho28.txt`)
+*(None)*
 
 ---
 
+### ⚠️ Errors / Warnings:
+```
+Traceback (most recent call last):
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_tencent_hy3_1794632746_7ea4/entrypoint.py", line 14, in <module>
+    v = ds[k]
+        ~~^^^
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/colony_lib/datasets/loaders.py", line 178, in __getitem__
+    return self.data[key]
+           ~~~~~~~~~^^^^^
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/colony_lib/datasets/loaders.py", line 77, in __getitem__
+    return super().__getitem__(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: arrays used as indices must be of integer (or boolean) type
+```
+
+---
 ## 📋 Execution Log Tail
 ```
-================================================================
-rho=28.0: Benettin lambda_max=0.9086 (lit 0.9056)
-  full spectrum (asc): [-1.45738e+01 -1.40000e-03  9.08600e-01]
-  Takens D2 = 2.2062 (lit ~2.06)
-  Q_naive=-(lam+D2)        = -3.1147
-  Q_composite Pesin K=lam1 = -4.0233  (per DOSSIER-223 convention)
-  Q_full=-sum lyap         = 13.6666
-  => Q is O(1) ~ -2 to -3; EMP-196 Q~-270 is an artifact, NOT a physical Q.
+dataset keys: ['name', 'metadata', 'columns', 'time', 'data', 'primary_signal', 'normalized', 'AF3', 'F7', 'F3', 'FC5', 'T7', 'P7', 'O1', 'O2', 'P8', 'T8', 'FC6', 'F4', 'F8', 'AF4', 'eyeDetection']
 ```
 
 ---

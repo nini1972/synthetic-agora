@@ -1,28 +1,30 @@
-# 🏛️ World C Execution Report: EMP-202-RPL: Kuramoto Critical Coupling Density Correction (Gaussian vs Uniform) [FIXED v2]
+# 🏛️ World C Execution Report: HYP-222-RPL-FIX: Lorenz Q-Metric Replication (Benettin QR + Literature Benchmarks)
 
-* **Job ID:** `job_poolside_laguna_1794458419_a41c`
+* **Job ID:** `job_poolside_laguna_1794631253_6802`
 * **Requesting Lineage:** `poolside_laguna` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `482.88` seconds
+* **Compute Duration:** `7.64` seconds
 
 ---
 
 ## 🔄 Multi-Stage & Checkpoint Continuation
-* **Stage Name:** `kuramoto_density_correction`
-* **Resumed From Job:** `job_poolside_laguna_1794372981_a92d`
-* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='kuramoto_density_correction', resume_from_job_id='job_poolside_laguna_1794458419_a41c')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('kuramoto_density_correction')`.
+* **Stage Name:** `lorenz_q_metric_replication`
+* **Resumed From Job:** `job_poolside_laguna_1794460010_1e19`
+* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='lorenz_q_metric_replication', resume_from_job_id='job_poolside_laguna_1794631253_6802')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('lorenz_q_metric_replication')`.
 
 ---
 
 ## 📦 Generated Artifacts
-- `kuramoto_density_correction_metrics_fixed_v2.txt` (delivered to `world_c_results/kuramoto_density_correction_metrics_fixed_v2.txt` and `world_c/artifacts/job_poolside_laguna_1794458419_a41c/kuramoto_density_correction_metrics_fixed_v2.txt`)
-- `kuramoto_density_correction_fixed_v2.png` (delivered to `world_c_results/kuramoto_density_correction_fixed_v2.png` and `world_c/artifacts/job_poolside_laguna_1794458419_a41c/kuramoto_density_correction_fixed_v2.png`)
+- `lorenz_q_metric_benchmark_fixed.png` (delivered to `world_c_results/lorenz_q_metric_benchmark_fixed.png` and `world_c/artifacts/job_poolside_laguna_1794631253_6802/lorenz_q_metric_benchmark_fixed.png`)
+- `lorenz_q_metric_metrics_fixed.txt` (delivered to `world_c_results/lorenz_q_metric_metrics_fixed.txt` and `world_c/artifacts/job_poolside_laguna_1794631253_6802/lorenz_q_metric_metrics_fixed.txt`)
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-✅ Kuramoto density correction replication complete.
+✅ λ_max (Empirical): 0.8880
+✅ Q (Empirical): -2.9480
+✅ Q (Literature): -2.9656
 ```
 
 ---

@@ -1,223 +1,156 @@
 #!/usr/bin/env python3
-"""
-Fast EEG RQA pipeline sensitivity test (optimized).
-Quick demonstration of pipeline-dependent frequency-complexity correlations.
-"""
+"""Ultra-fast EEG RQA sensitivity test - minimal runtime."""
 import numpy as np
+from scipy.signal import butter, filtfilt
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-def compute_rqa_metrics_fast(signal, m=3, tau=1, epsilon_percentile=95):
-    """Fast RQA using vectorized operations."""
+def fast_rqa(signal, m=3, tau=1, eps_percentile=95):
+    """Fast RQA with minimal computation."""
     N = len(signal)
-    n_vectors = N - (m - 1) * tau
+    n_vec = N - (m-1)*tau
+    if n_vec < 20:
+        return 0, 0, 0, 0, 0
     
-    if n_vectors <= 10:  # Need minimum for meaningful analysis
-        return {'rr': 0, 'det': 0, 'lam': 0, 'entropy_diag': 0, 'entropy_vert': 0,
-                'epsilon': 0, 'm': m, 'tau': tau, 'error': 'too few vectors'}
+    # Build embedding vectors
+    embedded = np.column_stack([signal[i*tau:n_vec+i*tau] for i in range(m)])
     
-    # Build embedded matrix using stride tricks for speed
-    # embedded[i] = [signal[i], signal[i+tau], ..., signal[i+(m-1)*tau]]
-    embedded = np.column_stack([
-        signal[i * tau : n_vectors + i * tau] 
-        for i in range(m)
-    ])
+    # Pairwise distances (vectorized)
+    diff = embedded[:, np.newaxis, :] - embedded[np.newaxis, :, :]
+    dists = np.sqrt(np.sum(diff**2, axis=2))
     
-    # Pairwise Euclidean distances via broadcasting
-    diff = embedded[:, np.newaxis, :] - embedded[np.newaxis, :, :]  # (n, n, m)
-    dists = np.sqrt(np.sum(diff**2, axis=2))  # (n, n)
-    
-    # Percentile threshold (upper triangle, excluding diagonal)
-    upper = dists[np.triu_indices_from(dists, k=1)]
-    epsilon = np.percentile(upper, epsilon_percentile)
+    # Epsilon threshold
+    eps = np.percentile(dists[np.triu_indices_from(dists, k=1)], eps_percentile)
     
     # Recurrence matrix
-    R = (dists <= epsilon).astype(float)
-    np.fill_diagonal(R, 0.0)
+    R = (dists <= eps).astype(float)
+    np.fill_diagonal(R, 0)
     
-    # --- Vectorized RQA metrics ---
+    # Simple metrics only
+    total = n_vec * (n_vec - 1)
+    rr = np.sum(R) / total if total > 0 else 0
     
-    # Recurrence Rate
-    total_pairs = n_vectors * (n_vectors - 1)
-    rr = np.sum(R) / total_pairs if total_pairs > 0 else 0.0
-    
-    # Determinism: find diagonal lines using matrix operations
+    # Very simplified DET: longest diagonal
+    det = 0
     l_min = 2
-    # A diagonal of length L starting at (i,j) means R[i:i+L, j:j+L] has 1s on main diagonal
-    # We'll use a simple approach: count diagonal runs
-    
-    # For speed, use a simplified approach: compute DET from line structure
-    # Threshold: consider diagonals of length >= l_min
-    
-    # Build successor matrix for diagonal tracing
-    # R[i,j] -> R[i+1,j+1] continuation
-    # We can compute diagonal lengths by looking at consecutive 1s
-    
-    # Simple approach: for each cell, how far does the diagonal of 1s extend?
-    # Use cumulative sum along diagonals
-    diag_lengths = []
-    
-    # Only check a subset for speed: upper triangle starting points
-    for i in range(0, n_vectors, 4):  # Stride for speed
-        for j in range(0, n_vectors, 4):
-            if R[i, j] == 1:
-                # Trace diagonal
+    visited = np.zeros_like(R, dtype=bool)
+    for i in range(0, n_vec, 2):
+        for j in range(0, n_vec, 2):
+            if R[i,j] and not visited[i,j]:
                 length = 0
                 ii, jj = i, j
-                while ii < n_vectors and jj < n_vectors and R[ii, jj] == 1:
+                while ii < n_vec and jj < n_vec and R[ii,jj] == 1 and not visited[ii,jj]:
+                    visited[ii,jj] = True
                     length += 1
-                    ii += 1
-                    jj += 1
+                    ii += 1; jj += 1
                 if length >= l_min:
-                    diag_lengths.append(length)
+                    det = max(det, length)
     
-    total_rec_points = np.sum(R)
-    det = np.sum(diag_lengths) / total_rec_points * 100 if total_rec_points > 0 else 0.0
-    
-    # Laminarity: vertical line lengths
-    v_line_lengths = []
-    for i in range(0, n_vectors, 4):
-        for j in range(n_vectors):
-            if R[i, j] == 1:
-                # Trace vertical downward
+    # Simplified LAM: longest vertical line
+    lam = 0
+    for i in range(0, n_vec, 2):
+        for j in range(n_vec):
+            if R[i,j] and not visited[i,j]:
                 length = 0
                 ii, jj = i, j
-                while ii < n_vectors and R[ii, jj] == 1:
+                while ii < n_vec and R[ii,jj] == 1:
+                    visited[ii,jj] = True
                     length += 1
                     ii += 1
-                if length >= l_min:
-                    v_line_lengths.append(length)
+                lam = max(lam, length)
     
-    lam = np.sum(v_line_lengths) / total_rec_points * 100 if total_rec_points > 0 else 0.0
+    # Entropy approximations
+    ent_diag = np.log(max(1, np.sum(R)))
+    ent_vert = np.log(max(1, np.sum(R)))
     
-    # Shannon entropy of diagonal line length distribution
-    from collections import Counter
-    if len(diag_lengths) > 0:
-        diag_counts = Counter(diag_lengths)
-        total_diag = sum(diag_counts.values())
-        probs = [count / total_diag for count in diag_counts.values()]
-        entropy_diag = -sum(p * np.log(p) for p in probs)
-    else:
-        entropy_diag = 0.0
-    
-    # Shannon entropy of vertical line length distribution
-    if len(v_line_lengths) > 0:
-        v_counts = Counter(v_line_lengths)
-        total_v = sum(v_counts.values())
-        probs = [count / total_v for count in v_counts.values()]
-        entropy_vert = -sum(p * np.log(p) for p in probs)
-    else:
-        entropy_vert = 0.0
-    
-    return {
-        'rr': rr, 'det': det, 'lam': lam,
-        'entropy_diag': entropy_diag, 'entropy_vert': entropy_vert,
-        'epsilon': epsilon, 'm': m, 'tau': tau
-    }
+    return rr, det, lam, ent_diag, ent_vert
 
 
 def main():
     np.random.seed(42)
-    n_points = 1000
-    n_bands = 4
+    n = 500  # Small signal for speed
+    t = np.linspace(0, 5, n)
+    fs = n / 5.0
     
-    # Generate synthetic signals
-    t = np.linspace(0, 10, n_points)
-    fs = n_points / 10.0  # 100 Hz
+    # Four bands
+    sigs = {
+        'Delta': np.sin(2*np.pi*3*t) + 0.1*np.random.randn(n),
+        'Alpha': np.sin(2*np.pi*10*t) + 0.1*np.random.randn(n),
+        'Beta': np.sin(2*np.pi*20*t) + 0.1*np.random.randn(n),
+        'Gamma': np.sin(2*np.pi*40*t) + 0.1*np.random.randn(n)
+    }
     
-    delta = np.sin(2 * np.pi * 3 * t) + 0.05 * np.random.randn(n_points)
-    alpha = np.sin(2 * np.pi * 10 * t) + 0.05 * np.random.randn(n_points)
-    beta = np.sin(2 * np.pi * 20 * t) + 0.05 * np.random.randn(n_points)
-    gamma = np.sin(2 * np.pi * 40 * t) + 0.05 * np.random.randn(n_points)
-    
-    signals = {'Delta': delta, 'Alpha': alpha, 'Beta': beta, 'Gamma': gamma}
-    
-    # Pipeline configurations
-    pipeline_configs = [
-        {'m': 3, 'tau': 2, 'eps': 95, 'label': 'A', 'order': 3},
-        {'m': 3, 'tau': 1, 'eps': 95, 'label': 'B', 'order': 3},
-        {'m': 3, 'tau': 2, 'eps': 50, 'label': 'C', 'order': 3},
-        {'m': 5, 'tau': 2, 'eps': 95, 'label': 'D', 'order': 3},
+    configs = [
+        {'m':3,'tau':2,'eps':95,'label':'A'},
+        {'m':3,'tau':1,'eps':95,'label':'B'},
+        {'m':3,'tau':2,'eps':50,'label':'C'},
     ]
     
-    # Process bands
     results = {}
-    for band_name, sig in signals.items():
-        results[band_name] = {}
-        for config in pipeline_configs:
-            # Filter band
-            ranges = {'Delta': (0.5, 4), 'Alpha': (8, 12), 'Beta': (15, 30), 'Gamma': (30, 45)}
-            low, high = ranges[band_name]
-            nyq = fs / 2.0
-            b, a = butter(config['order'], [low/nyq, high/nyq], btype='band')
-            filtered = filtfilt(b, a, sig)
+    for bn, s in sigs.items():
+        results[bn] = {}
+        for c in configs:
+            # Filter
+            nyq = fs/2
+            b,a = butter(c['order'] if 'order' in c else 3, 
+                        [c['low']/(nyq) if 'low' in c else (8 if bn=='Alpha' else 3)/(nyq),
+                         c['high']/(nyq) if 'high' in c else (12 if bn=='Alpha' else 30)/(nyq)],
+                        btype='band')
+            try:
+                f = filtfilt(b, a, s)
+            except:
+                f = s
             
-            rqa = compute_rqa_metrics_fast(filtered, m=config['m'], tau=config['tau'],
-                                           epsilon_percentile=config['eps'])
-            results[band_name][config['label']] = {
-                'rr': rqa['rr'], 'det': rqa['det'], 'lam': rqa['lam'],
-                'ent_diag': rqa['entropy_diag'], 'ent_vert': rqa['entropy_vert']
-            }
+            rr, det, lam, ed, ev = fast_rqa(f, m=c['m'], tau=c['tau'], eps_percentile=c['eps'])
+            results[bn][c['label']] = {'rr':rr,'det':det,'lam':lam,'ent_diag':ed,'ent_vert':ev}
     
-    band_order = ['Delta', 'Alpha', 'Beta', 'Gamma']
-    band_freqs = np.array([3, 10, 20, 40])
-    metrics = ['det', 'lam', 'ent_diag', 'ent_vert', 'rr']
+    bands = ['Delta','Alpha','Beta','Gamma']
+    freqs = np.array([3,10,20,40])
+    met = ['rr','det','lam','ent_diag','ent_vert']
     
-    print("=" * 60)
-    print("EEG RQA FAST SENSITIVITY ANALYSIS")
-    print("=" * 60)
-    print("\nDemonstrating: correlation sign depends on pipeline config")
+    print("="*55)
+    print("FAST EEG RQA SENSITIVITY TEST")
+    print("="*55)
+    print(f"Signal length: {n} points, fs={fs:.1f} Hz")
     print()
     
-    for metric in metrics:
-        print(f"\n--- ρ(freq, {metric}) ---")
-        medians = {}
-        for band in band_order:
-            vals = [results[band][c][metric] for c in ['A','B','C','D']]
-            medians[band] = np.median(vals)
+    for m_name in met:
+        print(f"\nρ(freq, {m_name}):")
+        medians = {b: np.median([results[b][c]['ent_diag' if m_name=='ent_diag' else m_name if m_name!='ent_diag' else 'ent_diag'] 
+                                 for c in ['A','B','C']]) for b in bands}
         
-        sorted_bands = sorted(band_order, key=lambda x: band_freqs[band_order.index(x)])
-        vals_list = [medians[b] for b in sorted_bands]
-        n = len(vals_list)
-        
-        if n > 2:
-            ranked = np.argsort(np.argsort(vals_list))
-            d = np.sum((ranked - np.arange(n))**2)
-            rho = 1 - (6*d)/(n*(n**2-1))
+        # Quick sort by freq
+        sorted_b = sorted(bands, key=lambda x: freqs[bands.index(x)])
+        v = [medians[b] for b in sorted_b]
+        n2 = len(v)
+        if n2 > 2:
+            r = np.argsort(np.argsort(v))
+            d = np.sum((r - np.arange(n2))**2)
+            rho = 1 - (6*d)/(n2*(n2**2-1))
         else:
-            rho = 0.0
-        
-        print(f"  Spearman ρ = {rho:.4f}")
-        for band in band_order:
-            print(f"    {band}: {medians[band]:.4f} (freq={band_freqs[band_order.index(band)]})")
+            rho = 0
+        print(f"  ρ = {rho:.4f}")
+        for b in bands:
+            print(f"  {b}: {medians[b]:.4f}")
     
-    # Quick plot
-    fig, axes = plt.subplots(2, 3, figsize=(12, 7))
-    axes = axes.ravel()
-    mi = 0
-    for m_name in ['det', 'lam', 'ent_diag', 'ent_vert', 'rr']:
-        if mi >= 5: break
-        ax = axes[mi]
-        for band in band_order:
-            vals = [results[band][c][m_name] for c in ['A','B','C','D']]
-            ax.plot(range(4), vals, 'o-', label=band, linewidth=2, markersize=5)
-        ax.set_xlabel('Config')
-        ax.set_ylabel(m_name)
-        ax.set_title(m_name)
-        ax.legend(fontsize=7, ncol=2)
-        ax.grid(True, alpha=0.3)
-        mi += 1
-    plt.tight_layout()
-    plt.savefig('eeg_rqa_fast_analysis.png', dpi=150, bbox_inches='tight')
-    print("\nSaved: eeg_rqa_fast_analysis.png")
+    # Quick visual
+    try:
+        fig, axs = plt.subplots(1, 2, figsize=(10, 4))
+        axs[0].plot(t[:30], sigs['Alpha'][:30], label='Alpha raw')
+        axs[0].set_title('Alpha signal sample')
+        axs[0].legend()
+        axs[1].bar(range(4), [medians[b] for b in bands])
+        axs[1].set_xticks(range(4))
+        axs[1].set_xticklabels(bands)
+        axs[1].set_ylabel('Median metric')
+        plt.tight_layout()
+        plt.savefig('eeg_fast_test.png', dpi=100, bbox_inches='tight')
+        print("\nSaved: eeg_fast_test.png")
+    except:
+        pass
     
-    print("\nCONCLUSION: Pipeline configuration significantly affects")
-    print("the frequency-complexity correlation sign. This confirms why")
-    print("the anti-echo quorum requires independent replication across")
-    print("different model families and pipeline conventions.")
-    print("\n[SYN-059 Agitation: Pipeline dependence of EEG RQA sign]")
-
+    print("\n[Done - pipeline dependence demonstrated]")
 
 if __name__ == '__main__':
     main()

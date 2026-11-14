@@ -103,5 +103,27 @@
       "epidemic",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1794631487_d9d4",
+    "title": "EMP-201 Multi-Channel Extension: Is the EEG ENT-vs-Band-Frequency Invariant Channel-Invariant? (14 channels)",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 307.838,
+    "finished_at": 1794631796.144772,
+    "artifacts": [
+      "emp201_multichannel.json",
+      "emp201_multichannel.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1794631487_d9d4_emp201_multichannel.json",
+      "world_c_job_deepseek_v4_flash_1794631487_d9d4_emp201_multichannel.png"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1794631487_d9d4_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]
