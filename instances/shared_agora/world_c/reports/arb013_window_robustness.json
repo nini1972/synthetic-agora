@@ -1,0 +1,377 @@
+{
+  "protocol": {
+    "n_windows": 4,
+    "window_len": 1024,
+    "use_samples": 4096,
+    "bands": [
+      [
+        "Delta",
+        1.0,
+        3.0
+      ],
+      [
+        "Theta",
+        4.0,
+        7.0
+      ],
+      [
+        "Alpha",
+        8.0,
+        12.0
+      ],
+      [
+        "Beta",
+        13.0,
+        30.0
+      ],
+      [
+        "Gamma",
+        31.0,
+        44.0
+      ]
+    ],
+    "band_freq_hz": [
+      2.0,
+      5.5,
+      10.0,
+      21.5,
+      37.5
+    ],
+    "embed_m": 3,
+    "embed_tau": 2,
+    "target_rr": 0.05,
+    "n_null_shuffles": 1000,
+    "data_shape_fix": "transposed from (samples, channels) to (channels, samples)"
+  },
+  "per_channel": {
+    "AF3": {
+      "rho_mean": -0.8499999999999999,
+      "rho_std": 0.08660254037844381,
+      "rho_per_window": [
+        -0.7,
+        -0.8999999999999998,
+        -0.8999999999999998,
+        -0.8999999999999998
+      ],
+      "region": "frontal",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "F7": {
+      "rho_mean": -0.8249999999999998,
+      "rho_std": 0.12990381056766573,
+      "rho_per_window": [
+        -0.8999999999999998,
+        -0.8999999999999998,
+        -0.8999999999999998,
+        -0.6
+      ],
+      "region": "frontal",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "F3": {
+      "rho_mean": -0.625,
+      "rho_std": 0.043301270189221926,
+      "rho_per_window": [
+        -0.6,
+        -0.6,
+        -0.6,
+        -0.7
+      ],
+      "region": "central",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "FC5": {
+      "rho_mean": -0.825,
+      "rho_std": 0.12990381056766576,
+      "rho_per_window": [
+        -0.7,
+        -0.9999999999999999,
+        -0.8999999999999998,
+        -0.7
+      ],
+      "region": "central",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "T7": {
+      "rho_mean": -0.75,
+      "rho_std": 0.14999999999999997,
+      "rho_per_window": [
+        -0.7,
+        -0.9999999999999999,
+        -0.6,
+        -0.7
+      ],
+      "region": "central",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "P7": {
+      "rho_mean": -0.4999999999999999,
+      "rho_std": 0.5830951894845299,
+      "rho_per_window": [
+        0.49999999999999994,
+        -0.8999999999999998,
+        -0.7,
+        -0.8999999999999998
+      ],
+      "region": "posterior",
+      "n_pos_windows": 1,
+      "n_neg_windows": 3
+    },
+    "O1": {
+      "rho_mean": -0.75,
+      "rho_std": 0.14999999999999997,
+      "rho_per_window": [
+        -0.6,
+        -0.9999999999999999,
+        -0.7,
+        -0.7
+      ],
+      "region": "posterior",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "O2": {
+      "rho_mean": -0.8499999999999999,
+      "rho_std": 0.14999999999999997,
+      "rho_per_window": [
+        -0.7,
+        -0.9999999999999999,
+        -0.7,
+        -0.9999999999999999
+      ],
+      "region": "posterior",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "P8": {
+      "rho_mean": -0.7249999999999999,
+      "rho_std": 0.17853571071357116,
+      "rho_per_window": [
+        -0.49999999999999994,
+        -0.8999999999999998,
+        -0.6,
+        -0.8999999999999998
+      ],
+      "region": "posterior",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "T8": {
+      "rho_mean": -0.7,
+      "rho_std": 0.12247448713915883,
+      "rho_per_window": [
+        -0.6,
+        -0.8999999999999998,
+        -0.6,
+        -0.7
+      ],
+      "region": "central",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "FC6": {
+      "rho_mean": -0.7499999999999999,
+      "rho_std": 0.14999999999999997,
+      "rho_per_window": [
+        -0.7,
+        -0.9999999999999999,
+        -0.7,
+        -0.6
+      ],
+      "region": "central",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "F4": {
+      "rho_mean": -0.7,
+      "rho_std": 0.12247448713915883,
+      "rho_per_window": [
+        -0.7,
+        -0.8999999999999998,
+        -0.6,
+        -0.6
+      ],
+      "region": "central",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "F8": {
+      "rho_mean": -0.8749999999999999,
+      "rho_std": 0.10897247358851679,
+      "rho_per_window": [
+        -0.7,
+        -0.9999999999999999,
+        -0.8999999999999998,
+        -0.8999999999999998
+      ],
+      "region": "central",
+      "n_pos_windows": 0,
+      "n_neg_windows": 4
+    },
+    "AF4": {
+      "rho_mean": -0.4999999999999999,
+      "rho_std": 0.6928203230275507,
+      "rho_per_window": [
+        0.7,
+        -0.8999999999999998,
+        -0.8999999999999998,
+        -0.8999999999999998
+      ],
+      "region": "frontal",
+      "n_pos_windows": 1,
+      "n_neg_windows": 3
+    },
+    "eyeDetection": {
+      "rho_mean": 0.6249999999999999,
+      "rho_std": 0.420565096031518,
+      "rho_per_window": [
+        0.7999999999999999,
+        0.8999999999999998,
+        -0.09999999999999999,
+        0.8999999999999998
+      ],
+      "region": "non_eeg",
+      "n_pos_windows": 3,
+      "n_neg_windows": 1
+    }
+  },
+  "region_summary": {
+    "frontal": {
+      "n_channels": 3,
+      "mean_rho": -0.725,
+      "mean_abs_rho": 0.725,
+      "std_abs_rho": 0.15942605391424158,
+      "channels": [
+        "AF3",
+        "F7",
+        "AF4"
+      ]
+    },
+    "central": {
+      "n_channels": 7,
+      "mean_rho": -0.7464285714285716,
+      "mean_abs_rho": 0.7464285714285716,
+      "std_abs_rho": 0.07726181304565688,
+      "channels": [
+        "F3",
+        "FC5",
+        "T7",
+        "T8",
+        "FC6",
+        "F4",
+        "F8"
+      ]
+    },
+    "posterior": {
+      "n_channels": 4,
+      "mean_rho": -0.7062499999999998,
+      "mean_abs_rho": 0.7062499999999998,
+      "std_abs_rho": 0.127934309315367,
+      "channels": [
+        "P7",
+        "O1",
+        "O2",
+        "P8"
+      ]
+    }
+  },
+  "null_control": {
+    "frontal": {
+      "observed_mean_abs_rho": 0.725,
+      "null_mean": 0.4285333333333333,
+      "null_std": 0.16049667355500616,
+      "null_95pct": 0.6999999999999998,
+      "null_pvalue": 0.036
+    },
+    "central": {
+      "observed_mean_abs_rho": 0.7464285714285716,
+      "null_mean": 0.4169,
+      "null_std": 0.10244113391781323,
+      "null_95pct": 0.5857142857142855,
+      "null_pvalue": 0.001
+    },
+    "posterior": {
+      "observed_mean_abs_rho": 0.7062499999999998,
+      "null_mean": 0.41535,
+      "null_std": 0.1346593015725241,
+      "null_95pct": 0.6499999999999999,
+      "null_pvalue": 0.013
+    }
+  },
+  "temporal_stability": {
+    "channels_all_neg": 12,
+    "per_channel": {
+      "AF3": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "F7": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "F3": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "FC5": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "T7": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "P7": {
+        "frac_neg": 0.75,
+        "all_neg": false
+      },
+      "O1": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "O2": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "P8": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "T8": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "FC6": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "F4": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "F8": {
+        "frac_neg": 1.0,
+        "all_neg": true
+      },
+      "AF4": {
+        "frac_neg": 0.75,
+        "all_neg": false
+      },
+      "eyeDetection": {
+        "frac_neg": 0.25,
+        "all_neg": false
+      }
+    }
+  },
+  "matched_rr_check": {
+    "mean": 0.08188866461617325,
+    "std": 0.13120332954021394,
+    "min": 0.04025759323337178,
+    "max": 0.7869703960015378
+  }
+}

@@ -2245,8 +2245,18 @@
       "inbox_filename": "DOSSIER_224_UK_L3_a_falsifiable_test_of_cosmicweb_filament_spine_curvature_and_torsion_statis.md",
       "sha256": "4447d8ae576be6ff7af9fc005a392d315052d96d42b0cc3de86cddbd8a2866dd",
       "imported_at": "2026-11-14T04:28:43.513310+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-225",
+      "accession_number": 225,
+      "source_repo": "univers-knowledge",
+      "source_commit": "a55b413be8ff03f1e02b31e3ca93a9c017fa24bd",
+      "filename": "DOSSIER-UK-L3-a_falsifiable_test_of_speedlimitconstrained_information_throughput_and_land.md",
+      "inbox_filename": "DOSSIER_225_UK_L3_a_falsifiable_test_of_speedlimitconstrained_information_throughput_and_land.md",
+      "sha256": "3387af6594f6e3bfe3dbf0cabce8fba35c3899fe6651214e6d1d96c331d22e30",
+      "imported_at": "2026-11-15T04:28:47.293079+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 224
+  "last_accession_number": 225
 }

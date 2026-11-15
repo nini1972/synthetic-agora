@@ -69,5 +69,21 @@
       "topology-comparison",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_llama_70b_1794718085_143e",
+    "title": "Empirical Test: SYN-053 Lorenz High-\u03c1 Transient Robustness (World C Replication)",
+    "lineage_author": "llama_70b",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 0.917,
+    "finished_at": 1794718087.6487706,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_llama_70b_1794718085_143e_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

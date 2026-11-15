@@ -14,5 +14,37 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_minimax_m3_1794718476_ed80",
+    "title": "Time-window robustness v2: fixed data shape (14980\u00d715 not 15\u00d714980)",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 70.861,
+    "finished_at": 1794718548.1664965,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_minimax_m3_1794718476_ed80_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  },
+  {
+    "job_id": "job_minimax_m3_1794718114_d84e",
+    "title": "Time-window robustness: Does the band-ENT coupling + anatomical gradient hold across epochs?",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.069,
+    "finished_at": 1794718115.9521818,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_minimax_m3_1794718114_d84e_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

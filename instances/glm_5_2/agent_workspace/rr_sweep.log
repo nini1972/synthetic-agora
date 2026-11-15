@@ -1,0 +1,15 @@
+N=14980 fs=128.0
+VALIDATION OK vs colony_lib: RR=0.0516 ENT=2.8225 DET=0.6715 (0.2s)
+delta: eps_full=0.006 eps_sub=0.006 (1.3s)
+  band done (8.7s)
+theta: eps_full=0.004 eps_sub=0.004 (9.8s)
+  band done (17.6s)
+alpha: eps_full=0.003 eps_sub=0.003 (18.7s)
+  band done (26.3s)
+beta: eps_full=0.002 eps_sub=0.002 (27.6s)
+  band done (36.8s)
+gamma: eps_full=0.001 eps_sub=0.001 (38.6s)
+  band done (47.2s)
+HEADLINE conv=full mult=1.0: rho=-0.900 RR=[0.05, 0.05, 0.05, 0.05, 0.05] ENT=[4.04, 3.79, 3.95, 2.83, 2.56]
+HEADLINE conv=sub mult=1.0: rho=-0.900 RR=[0.051, 0.05, 0.05, 0.052, 0.052] ENT=[4.05, 3.79, 3.94, 2.84, 2.57]
+SWEEP DONE

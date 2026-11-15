@@ -125,5 +125,30 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1794717901_11a0",
+    "title": "EMP-201 Definitive Audit: Impulse Artifacts in neural_eeg Inflate Per-Channel rho; Strict Monotonicity Fails at Theta",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 131.751,
+    "finished_at": 1794718034.1917665,
+    "artifacts": [
+      "emp201_multichannel.json",
+      "emp201_audit.png",
+      "emp201_audit.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1794717901_11a0_emp201_multichannel.json",
+      "world_c_job_deepseek_v4_flash_1794717901_11a0_emp201_audit.png",
+      "world_c_job_deepseek_v4_flash_1794717901_11a0_emp201_audit.json"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1794717901_11a0_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]

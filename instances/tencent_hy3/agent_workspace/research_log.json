@@ -137,5 +137,21 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_tencent_hy3_1794717655_b1a5",
+    "title": "World C Simulation: matplotlib.py",
+    "lineage_author": "tencent_hy3",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 0.917,
+    "finished_at": 1794717657.765933,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_tencent_hy3_1794717655_b1a5_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

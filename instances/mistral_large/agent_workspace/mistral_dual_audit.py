@@ -43,10 +43,9 @@ def lambda_max_benettin(rhs, s0, dt, T_trans, T_run, args=()):
         J = np.array([[-sigma, sigma, 0.0],
                       [rho-z, -1.0, -x],
                       [y, x, -beta]])
-        for j in range(n):
-            Q[:, j] = J @ Q[:, j]
-        Q, R = np.linalg.qr(Q)
-        lam_sum += np.log(np.abs(np.diag(R)))
+        V = J @ Q
+        Q, R = np.linalg.qr(V)
+        lam_sum += np.log(np.abs(R[0, 0]))
         xs[i] = s[0]
     return lam_sum/steps, xs
 
@@ -59,11 +58,10 @@ def henon_lambda(a=1.4, b=0.3, T_trans=1000, T_run=20000):
     for i in range(T_trans+T_run):
         x, y = henon_map(x, y, a, b)
         J = np.array([[-2*a*x, 1.0],[b, 0.0]])
-        for j in range(2):
-            Q[:, j] = J @ Q[:, j]
-        Q, R = np.linalg.qr(Q)
+        V = J @ Q
+        Q, R = np.linalg.qr(V)
         if i >= T_trans:
-            lam += np.log(np.abs(np.diag(R)))
+            lam += np.log(np.abs(R[0, 0]))
     return lam/T_run
 
 def takens(x, m=3, tau=7):
@@ -83,12 +81,12 @@ def d2_gp(x, m=3, tau=7, npts=1500, r_frac=(0.02, 0.2)):
     rs = np.geomspace(dmax*r_frac[0], dmax*r_frac[1], 25)
     C = np.array([(d < r).mean() for r in rs])
     mask = C > 0
-    return np.polyfit(np.log(rs[mask]), np.log(C[mask]), 1)[0]
+    return float(np.polyfit(np.log(rs[mask]), np.log(C[mask]), 1)[0])
 
 results_A = []
 print("=== PART A: Q-metric audit ===")
 for rho in [10.0, 20.0, 24.74, 28.0, 35.0, 45.0]:
-    lam, xs = lambda_max_benettin(lorenz_rhs, [1.0, 1.0, 20.0], 0.01, 100.0, 1500.0,
+    lam, xs = lambda_max_benettin(lorenz_rhs, [1.0, 1.0, 20.0], 0.01, 100.0, 500.0,
                                   args=(10.0, rho, 8.0/3.0))
     d2 = d2_gp(xs)
     Q0 = -(lam + d2)
@@ -106,15 +104,19 @@ for a in [0.8, 1.0, 1.2, 1.4]:
     pts = np.array(pts[::4])
     d = np.sqrt(((pts[:, None, :]-pts[None, :, :])**2).sum(-1))
     iu = np.triu_indices(len(pts), 1); d = d[iu]
-    dmax = d.max(); rs = np.geomspace(dmax*0.02, dmax*0.2, 25)
-    C = np.array([(d < r).mean() for r in rs]); mask = C > 0
-    d2 = np.polyfit(np.log(rs[mask]), np.log(C[mask]), 1)[0]
+    dmax = d.max()
+    if dmax <= 0:
+        d2 = 0.0
+    else:
+        rs = np.geomspace(dmax*0.02, dmax*0.2, 25)
+        C = np.array([(d < r).mean() for r in rs]); mask = C > 0
+        d2 = float(np.polyfit(np.log(rs[mask]), np.log(C[mask]), 1)[0])
     Q0 = -(lam + d2); Qp = -(2*lam + d2)
     results_A.append(dict(system='henon', param=a, lam=float(lam), D2=float(d2),
                           Q_K0=float(Q0), Q_Pesin=float(Qp)))
     print(f"Henon  a={a:4.2f}  lam={lam:+.4f}  D2={d2:.3f}  Q(K=0)={Q0:+.3f}  Q(Pesin)={Qp:+.3f}")
 
-def lambda_euler(rho=28.0, dt=0.001, T_trans=100.0, T_run=800.0):
+def lambda_euler(rho=28.0, dt=0.001, T_trans=100.0, T_run=200.0):
     s = np.array([1.0, 1.0, 20.0]); sigma, beta = 10.0, 8.0/3.0
     for _ in range(int(T_trans/dt)):
         s = s + dt*lorenz_rhs(s, sigma, rho, beta)
@@ -123,17 +125,17 @@ def lambda_euler(rho=28.0, dt=0.001, T_trans=100.0, T_run=800.0):
         s = s + dt*lorenz_rhs(s, sigma, rho, beta)
         x, y, z = s
         J = np.array([[-sigma, sigma, 0.0],[rho-z, -1.0, -x],[y, x, -beta]])
-        for j in range(3): Q[:, j] = J @ Q[:, j]
-        Q, R = np.linalg.qr(Q); lam += np.log(np.abs(np.diag(R)))
+        V = J @ Q
+        Q, R = np.linalg.qr(V); lam += np.log(np.abs(R[0, 0]))
     return lam/steps
 
 print("\n-- integrator/dt robustness, Lorenz rho=28 --")
 integ = []
 for dt in [0.005, 0.01, 0.02]:
-    lam, _ = lambda_max_benettin(lorenz_rhs, [1.0,1.0,20.0], dt, 100.0, 1000.0, args=(10.0,28.0,8.0/3.0))
+    lam, _ = lambda_max_benettin(lorenz_rhs, [1.0,1.0,20.0], dt, 100.0, 400.0, args=(10.0,28.0,8.0/3.0))
     integ.append(dict(method='RK4', dt=dt, lam=float(lam)))
     print(f"RK4   dt={dt:5.3f}  lam_max={lam:+.4f}")
-for dt in [0.0005, 0.001, 0.002]:
+for dt in [0.001, 0.002]:
     lam = lambda_euler(dt=dt)
     integ.append(dict(method='Euler', dt=dt, lam=float(lam)))
     print(f"Euler dt={dt:6.4f}  lam_max={lam:+.4f}")
@@ -151,12 +153,13 @@ print(f"R_inf (g=1 Lorentzian) = {R_inf:.4f}")
 
 def run_trial(K, Delta, phi0, T=12.0, dt=0.01, N=N):
     omega = Delta * rng.standard_cauchy(N)
-    theta = phi0 * np.abs(rng.standard_normal(N)) * np.sign(rng.standard_normal(N))
+    theta = phi0 * rng.standard_normal(N)
     rs = []
     steps = int(T/dt)
     for i in range(steps):
-        r = np.abs(np.mean(np.exp(1j*theta)))
-        dtheta = omega + (K/N)*np.sum(np.sin(theta[None, :]-theta[:, None]), axis=1)
+        z = np.mean(np.exp(1j*theta))
+        r = abs(z)
+        dtheta = omega + K*r*np.sin(np.angle(z) - theta)
         theta = theta + dt*dtheta
         if i >= int(1.0/dt):
             rs.append(r)
