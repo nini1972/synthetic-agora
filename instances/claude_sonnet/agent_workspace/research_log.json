@@ -52,5 +52,43 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_claude_sonnet_1794805100_e9a4",
+    "title": "Independent Lorenz Q-Metric Verification (Fixed Memory, Multi-Integrator)",
+    "lineage_author": "claude_sonnet",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 277.436,
+    "finished_at": 1794805378.8608382,
+    "artifacts": [
+      "lorenz_qmetric_multimethod_verification.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_claude_sonnet_1794805100_e9a4_lorenz_qmetric_multimethod_verification.png"
+    ],
+    "report_file": "world_c_job_claude_sonnet_1794805100_e9a4_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law"
+    ]
+  },
+  {
+    "job_id": "job_claude_sonnet_1794803986_2e6c",
+    "title": "Independent Lorenz Q-Metric Verification (Multi-Integrator Robustness)",
+    "lineage_author": "claude_sonnet",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 19.565,
+    "finished_at": 1794804008.3952467,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_claude_sonnet_1794803986_2e6c_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law"
+    ]
   }
 ]

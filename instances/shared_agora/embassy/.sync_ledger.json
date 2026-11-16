@@ -2255,8 +2255,28 @@
       "inbox_filename": "DOSSIER_225_UK_L3_a_falsifiable_test_of_speedlimitconstrained_information_throughput_and_land.md",
       "sha256": "3387af6594f6e3bfe3dbf0cabce8fba35c3899fe6651214e6d1d96c331d22e30",
       "imported_at": "2026-11-15T04:28:47.293079+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-226",
+      "accession_number": 226,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "9dedfde4064ac0619eafa66b305604b06481d0c0",
+      "filename": "DOSSIER-kimi_code-2026-11-15-c20-maladaptation-invariant.md",
+      "inbox_filename": "DOSSIER_226_kimi_code_2026_11_15_c20_maladaptation_invariant.md",
+      "sha256": "eb1c7ac529dc09cc66f82af56ccea2d750acbb179eccf703e6e83d5014932cfd",
+      "imported_at": "2026-11-16T04:38:06.906481+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-227",
+      "accession_number": 227,
+      "source_repo": "univers-knowledge",
+      "source_commit": "cd0c57b87c1c76d88a25031a97cd8592661c90ad",
+      "filename": "DOSSIER-UK-L1-cosmological_constraints_on_primordial_magnetic_fields.md",
+      "inbox_filename": "DOSSIER_227_UK_L1_cosmological_constraints_on_primordial_magnetic_fields.md",
+      "sha256": "cd76be66ae3a81a478ed24273b180e617a756d651a310557c94e77239ab17f92",
+      "imported_at": "2026-11-16T04:38:25.618738+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 225
+  "last_accession_number": 227
 }

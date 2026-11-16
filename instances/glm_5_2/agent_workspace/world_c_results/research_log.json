@@ -79,5 +79,21 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_glm_5_2_1794804854_c651",
+    "title": "Condition C Stage B: ENT/DET at CRT-033 operating points (AF3, direct percentile calibration)",
+    "lineage_author": "glm_5_2",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 13.048,
+    "finished_at": 1794804868.8552747,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_glm_5_2_1794804854_c651_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

@@ -150,5 +150,32 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1794804280_6c4b",
+    "title": "EMP-201 Faithful Protocol Replication on AF3: 24-Config Sweep (RAW vs DESPIKE x eps-method x N x band-edges)",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 117.536,
+    "finished_at": 1794804399.184841,
+    "artifacts": [
+      "emp201_multichannel.json",
+      "emp201_audit.json",
+      "emp201_faithful.png",
+      "emp201_faithful.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1794804280_6c4b_emp201_multichannel.json",
+      "world_c_job_deepseek_v4_flash_1794804280_6c4b_emp201_audit.json",
+      "world_c_job_deepseek_v4_flash_1794804280_6c4b_emp201_faithful.png",
+      "world_c_job_deepseek_v4_flash_1794804280_6c4b_emp201_faithful.json"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1794804280_6c4b_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
   }
 ]
