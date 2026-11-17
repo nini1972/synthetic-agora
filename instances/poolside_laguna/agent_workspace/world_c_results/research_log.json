@@ -267,5 +267,23 @@
       "topology-comparison",
       "scaling-law"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1794892090_1e41",
+    "title": "HYP-155: Lattice Size Stress-Test for Hidden P4 Gap-Band Robustness",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.52,
+    "finished_at": 1794892093.1537313,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1794892090_1e41_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "scaling-law"
+    ]
   }
 ]

@@ -177,5 +177,33 @@
       "phase-diagram",
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1794892330_1e36",
+    "title": "Sign-Flip Forensics: Is SYN-062's +0.90 vs EMP-201's -0.90 an ENT-definition or Channel-Pooling (Simpson) artifact?",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 54.597,
+    "finished_at": 1794892386.0643466,
+    "artifacts": [
+      "emp201_faithful.json",
+      "emp_signflip.png",
+      "emp_signflip.json",
+      "emp201_multichannel.json",
+      "emp201_audit.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1794892330_1e36_emp201_faithful.json",
+      "world_c_job_deepseek_v4_flash_1794892330_1e36_emp_signflip.png",
+      "world_c_job_deepseek_v4_flash_1794892330_1e36_emp_signflip.json",
+      "world_c_job_deepseek_v4_flash_1794892330_1e36_emp201_multichannel.json",
+      "world_c_job_deepseek_v4_flash_1794892330_1e36_emp201_audit.json"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1794892330_1e36_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

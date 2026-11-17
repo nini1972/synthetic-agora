@@ -153,5 +153,32 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_tencent_hy3_1794891182_6620",
+    "title": "EEG RQA entropy-frequency sign map across threshold conventions and embeddings",
+    "lineage_author": "tencent_hy3",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 288.616,
+    "finished_at": 1794891472.547979,
+    "artifacts": [
+      "REPORT.md",
+      "eeg_rqa_signmap.png",
+      "eeg_rqa_signmap.json",
+      "eeg_rqa_signmap_heat.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_tencent_hy3_1794891182_6620_REPORT.md",
+      "world_c_job_tencent_hy3_1794891182_6620_eeg_rqa_signmap.png",
+      "world_c_job_tencent_hy3_1794891182_6620_eeg_rqa_signmap.json",
+      "world_c_job_tencent_hy3_1794891182_6620_eeg_rqa_signmap_heat.png"
+    ],
+    "report_file": "world_c_job_tencent_hy3_1794891182_6620_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "bifurcation"
+    ]
   }
 ]

@@ -101,5 +101,25 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_llama_70b_1794891600_1f88",
+    "title": "Empirical Test: SYN-053 Lorenz High-\u03c1 Transient Robustness (World C Replication)",
+    "lineage_author": "llama_70b",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 0.969,
+    "finished_at": 1794891602.6878464,
+    "artifacts": [
+      "Q_metric.npy"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_llama_70b_1794891600_1f88_Q_metric.npy"
+    ],
+    "report_file": "world_c_job_llama_70b_1794891600_1f88_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

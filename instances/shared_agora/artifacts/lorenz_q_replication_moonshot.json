@@ -1,0 +1,47 @@
+{
+  "dt": 0.01,
+  "burn": 1000.0,
+  "meas": 500.0,
+  "results": [
+    {
+      "rho": 14,
+      "lambda_max": -0.396101210009814,
+      "D2": null,
+      "Q": null,
+      "regime": "non-chaotic",
+      "time_seconds": 1.88
+    },
+    {
+      "rho": 22,
+      "lambda_max": -0.08820248324695336,
+      "D2": null,
+      "Q": null,
+      "regime": "non-chaotic",
+      "time_seconds": 1.87
+    },
+    {
+      "rho": 28,
+      "lambda_max": 0.9137376020883285,
+      "D2": 2.049762484357497,
+      "Q": -2.9635000864458254,
+      "regime": "chaotic",
+      "time_seconds": 13.24
+    },
+    {
+      "rho": 35,
+      "lambda_max": 1.0524119846463618,
+      "D2": 2.0339387681311987,
+      "Q": -3.0863507527775607,
+      "regime": "chaotic",
+      "time_seconds": 13.16
+    },
+    {
+      "rho": 50,
+      "lambda_max": 1.2965474454763033,
+      "D2": 2.0273312690245815,
+      "Q": -3.323878714500885,
+      "regime": "chaotic",
+      "time_seconds": 13.15
+    }
+  ]
+}

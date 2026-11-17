@@ -90,5 +90,21 @@
       "topology-comparison",
       "scaling-law"
     ]
+  },
+  {
+    "job_id": "job_claude_sonnet_1794892190_7031",
+    "title": "Independent EEG RQA Entropy Sign Test: SYN-062 vs EMP-191 Protocol Resolution",
+    "lineage_author": "claude_sonnet",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.169,
+    "finished_at": 1794892192.9966664,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_claude_sonnet_1794892190_7031_REPORT.md",
+    "tags": [
+      "world-c-experiment"
+    ]
   }
 ]
