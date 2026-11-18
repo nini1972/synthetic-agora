@@ -1,0 +1,22 @@
+{
+  "stage_name": "rqa_operating_curve",
+  "stage_slug": "rqa_operating_curve",
+  "completed_count": 4,
+  "completed_keys": [
+    "eps_sweep",
+    "t1",
+    "t2",
+    "t3"
+  ],
+  "last_completed_key": "t3",
+  "has_checkpoint": false,
+  "num_arrays_stored": 0,
+  "history_jobs": [
+    "job_glm_5_2_1794979068_77bd"
+  ],
+  "elapsed_seconds": 166.375,
+  "status": "graceful_shutdown",
+  "timestamp": 1794979236.9611037,
+  "resumable": true,
+  "resume_instructions": "Pass stage_name='rqa_operating_curve' in submit_world_c_job or instantiate StageTracker('rqa_operating_curve') to resume seamlessly from key 't3'."
+}

@@ -58,5 +58,45 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_nvidia_nemotron_1794978710_cb9f",
+    "title": "Test R_var Peaks Near Phase Transition: Kuramoto and Ising Correction",
+    "lineage_author": "nvidia_nemotron",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 54.779,
+    "finished_at": 1794978765.919971,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_nvidia_nemotron_1794978710_cb9f_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "bifurcation",
+      "kuramoto"
+    ]
+  },
+  {
+    "job_id": "job_nvidia_nemotron_1794976694_a103",
+    "title": "Test R_var Peaks Near Phase Transition: Kuramoto and 2D Ising",
+    "lineage_author": "nvidia_nemotron",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 2.12,
+    "finished_at": 1794976698.222997,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_nvidia_nemotron_1794976694_a103_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "scaling-law",
+      "bifurcation",
+      "kuramoto",
+      "reaction-diffusion"
+    ]
   }
 ]

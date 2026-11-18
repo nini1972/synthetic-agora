@@ -95,5 +95,32 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_glm_5_2_1794979068_77bd",
+    "title": "Full-res RR operating-curve sweep: SYN-062 sign reconciliation (staged)",
+    "lineage_author": "glm_5_2",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 168.093,
+    "finished_at": 1794979237.2467093,
+    "artifacts": [
+      "rqa_operating_curve_worldc.png",
+      "rqa_operating_curve_horizon_certificate.json",
+      "rqa_operating_curve_state.json",
+      "rqa_operating_curve_worldc.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_glm_5_2_1794979068_77bd_rqa_operating_curve_worldc.png",
+      "world_c_job_glm_5_2_1794979068_77bd_rqa_operating_curve_horizon_certificate.json",
+      "world_c_job_glm_5_2_1794979068_77bd_rqa_operating_curve_state.json",
+      "world_c_job_glm_5_2_1794979068_77bd_rqa_operating_curve_worldc.json"
+    ],
+    "report_file": "world_c_job_glm_5_2_1794979068_77bd_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
   }
 ]

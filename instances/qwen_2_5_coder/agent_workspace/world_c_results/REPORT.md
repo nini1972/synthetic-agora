@@ -1,47 +1,40 @@
-# 🏛️ World C Execution Report: Q-branch replication v3 (HYP-133): correct Benettin (J@C), correct Henon map, frozen K*=-0.572 protocol, R110 double-history + conditional entropy, native K, time-rescaling obstruction
+# 🏛️ World C Execution Report: Qwen decisive sweep: EEG RQA rho(metric,band freq) vs RR regime — adjudicates SYN-062 vs SYN-064 vs EMP-191
 
-* **Job ID:** `job_qwen_2_5_coder_1793507533_6b42`
+* **Job ID:** `job_qwen_2_5_coder_1794978979_3f6b`
 * **Requesting Lineage:** `qwen_2_5_coder` (world_b)
-* **Execution Status:** **FAILED** (Exit Code: `1`)
-* **Compute Duration:** `20.42` seconds
+* **Execution Status:** **COMPLETED** (Exit Code: `0`)
+* **Compute Duration:** `545.13` seconds
+
+---
+
+## 🔄 Multi-Stage & Checkpoint Continuation
+* **Stage Name:** `qwen_rqa_rr_sweep`
+* **Completed Stage Slices Saved:** `10` (Last completed key: `ch09_T8`)
+* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='qwen_rqa_rr_sweep', resume_from_job_id='job_qwen_2_5_coder_1794978979_3f6b')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('qwen_rqa_rr_sweep')`.
 
 ---
 
 ## 📦 Generated Artifacts
-*(None)*
+- `qwen_rqa_rr_sweep_horizon_certificate.json` (delivered to `world_c_results/qwen_rqa_rr_sweep_horizon_certificate.json` and `world_c/artifacts/job_qwen_2_5_coder_1794978979_3f6b/qwen_rqa_rr_sweep_horizon_certificate.json`)
+- `qwen_rqa_rr_sweep_state.json` (delivered to `world_c_results/qwen_rqa_rr_sweep_state.json` and `world_c/artifacts/job_qwen_2_5_coder_1794978979_3f6b/qwen_rqa_rr_sweep_state.json`)
+- `qwen_rqa_rr_sweep_horizon_certificate.json` (delivered to `world_c_results/qwen_rqa_rr_sweep_horizon_certificate.json` and `world_c/artifacts/job_qwen_2_5_coder_1794978979_3f6b/qwen_rqa_rr_sweep_horizon_certificate.json`)
+- `qwen_rqa_rr_sweep_state.json` (delivered to `world_c_results/qwen_rqa_rr_sweep_state.json` and `world_c/artifacts/job_qwen_2_5_coder_1794978979_3f6b/qwen_rqa_rr_sweep_state.json`)
 
 ---
 
-### ⚠️ Errors / Warnings:
-```
-Traceback (most recent call last):
-  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_qwen_2_5_coder_1793507533_6b42/entrypoint.py", line 191, in <module>
-    D2, st = gp_d2(line.astype(float), m=4, tau=1, n_sub=2000)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_qwen_2_5_coder_1793507533_6b42/entrypoint.py", line 28, in gp_d2
-    D2 = float(np.median(slopes)) if slopes else float(np.polyfit(logq, logC, 1)[0])
-                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/numpy/lib/_polynomial_impl.py", line 645, in polyfit
-    raise TypeError("expected non-empty vector for x")
-TypeError: expected non-empty vector for x
-```
-
----
 ## 📋 Execution Log Tail
 ```
-LORENZ...
-  rho=20: lam=264.1356 D2=0.855 Qn=-269.546 Qf=-264.419
-  rho=24: lam=267.3659 D2=1.010 Qn=-272.932 Qf=-267.804
-  rho=28: lam=272.1047 D2=0.897 Qn=-277.558 Qf=-272.430
-  rho=35: lam=280.3297 D2=0.781 Qn=-285.666 Qf=-280.539
-  rho=45: lam=290.8701 D2=0.792 Qn=-296.217 Qf=-291.090
-HENON...
-  a=1.05: lam=-0.0125 D2=0.000 Qn=-0.544 Qf=0.585
-  a=1.2: lam=0.3066 D2=1.128 Qn=-2.071 Qf=-0.863
-  a=1.3: lam=-0.2375 D2=0.000 Qn=-0.452 Qf=0.809
-  a=1.35: lam=0.3695 D2=1.124 Qn=-2.209 Qf=-0.922
-  a=1.4: lam=0.4194 D2=1.520 Qn=-2.682 Qf=-1.368
-RULE 110...
+channels: ['AF3', 'F7', 'F3', 'FC5', 'T7', 'P7', 'O1', 'O2', 'P8', 'T8', 'FC6', 'F4', 'F8', 'AF4', 'eyeDetection'] shape: (14980, 15)
+[1/15] AF3: done
+[2/15] F7: done
+[3/15] F3: done
+[4/15] FC5: done
+[5/15] T7: done
+[6/15] P7: done
+[7/15] O1: done
+[8/15] O2: done
+[9/15] P8: done
+[10/15] T8: done
 ```
 
 ---

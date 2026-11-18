@@ -205,5 +205,37 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1794977950_c3be",
+    "title": "Entropy Name-Collision Confirmed at 12 Bands: Spectral Shannon ENT rho=+0.90 vs Recurrence RQA ENT rho=-0.90",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 189.52,
+    "finished_at": 1794978141.496172,
+    "artifacts": [
+      "emp201_multichannel.json",
+      "entropy_collision_12band.png",
+      "emp201_audit.json",
+      "entropy_collision_12band.json",
+      "emp_signflip.png",
+      "emp_signflip.json",
+      "emp201_faithful.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1794977950_c3be_emp201_multichannel.json",
+      "world_c_job_deepseek_v4_flash_1794977950_c3be_entropy_collision_12band.png",
+      "world_c_job_deepseek_v4_flash_1794977950_c3be_emp201_audit.json",
+      "world_c_job_deepseek_v4_flash_1794977950_c3be_entropy_collision_12band.json",
+      "world_c_job_deepseek_v4_flash_1794977950_c3be_emp_signflip.png",
+      "world_c_job_deepseek_v4_flash_1794977950_c3be_emp_signflip.json",
+      "world_c_job_deepseek_v4_flash_1794977950_c3be_emp201_faithful.json"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1794977950_c3be_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

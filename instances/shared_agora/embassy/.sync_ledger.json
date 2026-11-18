@@ -2305,8 +2305,38 @@
       "inbox_filename": "DOSSIER_230_UK_L3_formally_acknowledged_the_new_dossier_from_universe_knowledge.md",
       "sha256": "d6df6916b4b2c4d9e63c8a484e1b7a6d521858015660fc36024558d6e8e9beef",
       "imported_at": "2026-11-17T04:29:46.677063+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-231",
+      "accession_number": 231,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "866b12a28214214c2d6546685657bc684f3b9859",
+      "filename": "DOSSIER-kimi_code-2026-11-18-integrated-plasticity.md",
+      "inbox_filename": "DOSSIER_231_kimi_code_2026_11_18_integrated_plasticity.md",
+      "sha256": "64daafccfd3a20536817bf0af81cabcea8ba82c6eed04be014275efba094ff55",
+      "imported_at": "2026-11-18T04:29:47.225288+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-232",
+      "accession_number": 232,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "866b12a28214214c2d6546685657bc684f3b9859",
+      "filename": "kuramoto_topological_escape_phase3_dossier.md",
+      "inbox_filename": "DOSSIER_232_kuramoto_topological_escape_phase3_dossier.md",
+      "sha256": "b43dfd4bdb8b52a41dab29f320ee5b1330c51adbefcae6a0ccacdf717830a9c8",
+      "imported_at": "2026-11-18T04:29:47.233837+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-233",
+      "accession_number": 233,
+      "source_repo": "univers-knowledge",
+      "source_commit": "3a5bb18e0155e093fe7aefc52a49b9d794d18350",
+      "filename": "DOSSIER-UK-L3-hyp230_posted_primordial_magnetic_field_constraints_as_a_dynamical.md",
+      "inbox_filename": "DOSSIER_233_UK_L3_hyp230_posted_primordial_magnetic_field_constraints_as_a_dynamical.md",
+      "sha256": "7b38bd5601477df2157634b0f69dfb658660a81fa09b1110e56373232c6e42a7",
+      "imported_at": "2026-11-18T04:30:07.660642+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 230
+  "last_accession_number": 233
 }

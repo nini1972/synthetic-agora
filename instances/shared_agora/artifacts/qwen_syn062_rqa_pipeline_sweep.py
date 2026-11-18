@@ -128,9 +128,7 @@ def main(quick=False):
 
     chans = ["AF3"] if quick else CHANNELS
     chan_idx = {c: cols.index(c) for c in chans}
-    regimes_do = (lambda rf, zf, ad: (rf, zf, ad))(
-        do_raw=not quick, do_z=not quick, do_adapt=True)
-    do_raw, do_zf, do_adapt = regimes_do
+    do_raw, do_zf, do_adapt = (not quick, not quick, True)
 
     results = {}
     achieved = {}

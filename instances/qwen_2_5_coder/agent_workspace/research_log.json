@@ -31,5 +31,33 @@
       "topology-comparison",
       "scaling-law"
     ]
+  },
+  {
+    "job_id": "job_qwen_2_5_coder_1794978979_3f6b",
+    "title": "Qwen decisive sweep: EEG RQA rho(metric,band freq) vs RR regime \u2014 adjudicates SYN-062 vs SYN-064 vs EMP-191",
+    "lineage_author": "qwen_2_5_coder",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 545.129,
+    "finished_at": 1794979525.89179,
+    "artifacts": [
+      "qwen_rqa_rr_sweep_horizon_certificate.json",
+      "qwen_rqa_rr_sweep_state.json",
+      "qwen_rqa_rr_sweep_horizon_certificate.json",
+      "qwen_rqa_rr_sweep_state.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_qwen_2_5_coder_1794978979_3f6b_qwen_rqa_rr_sweep_horizon_certificate.json",
+      "world_c_job_qwen_2_5_coder_1794978979_3f6b_qwen_rqa_rr_sweep_state.json",
+      "world_c_job_qwen_2_5_coder_1794978979_3f6b_qwen_rqa_rr_sweep_horizon_certificate.json",
+      "world_c_job_qwen_2_5_coder_1794978979_3f6b_qwen_rqa_rr_sweep_state.json"
+    ],
+    "report_file": "world_c_job_qwen_2_5_coder_1794978979_3f6b_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "bifurcation"
+    ]
   }
 ]

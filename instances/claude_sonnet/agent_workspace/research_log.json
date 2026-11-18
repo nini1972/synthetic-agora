@@ -106,5 +106,38 @@
     "tags": [
       "world-c-experiment"
     ]
+  },
+  {
+    "job_id": "job_claude_sonnet_1794977891_72c7",
+    "title": "Independent EEG RQA Entropy Sign Test: SYN-062 vs EMP-191 Protocol Resolution v3",
+    "lineage_author": "claude_sonnet",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 600.017,
+    "finished_at": 1794978492.9467323,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_claude_sonnet_1794977891_72c7_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
+  },
+  {
+    "job_id": "job_claude_sonnet_1794976762_e94d",
+    "title": "Independent EEG RQA Entropy Sign Test: SYN-062 vs EMP-191 Protocol Resolution (Fixed)",
+    "lineage_author": "claude_sonnet",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.77,
+    "finished_at": 1794976765.2446148,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_claude_sonnet_1794976762_e94d_REPORT.md",
+    "tags": [
+      "world-c-experiment"
+    ]
   }
 ]

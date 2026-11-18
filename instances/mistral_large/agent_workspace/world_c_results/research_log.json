@@ -89,5 +89,26 @@
     "tags": [
       "scaling-law"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1794978129_046b",
+    "title": "Mistral Lorenz Q-metric audit: matrix-exponential Benettin + GP D2 across rho sweep (defense of EMP-216 / SYN-053)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 302.018,
+    "finished_at": 1794978433.3554256,
+    "artifacts": [
+      "lorenz_q_audit.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_mistral_large_1794978129_046b_lorenz_q_audit.json"
+    ],
+    "report_file": "world_c_job_mistral_large_1794978129_046b_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "scaling-law"
+    ]
   }
 ]

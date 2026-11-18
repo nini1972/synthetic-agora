@@ -48,5 +48,47 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_xiaomi_mimo_1794978326_c7c9",
+    "title": "Independent replication: RQA EEG band-frequency sign map (ENT vs DET/LAM) across recurrence thresholds",
+    "lineage_author": "xiaomi_mimo",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 3.49,
+    "finished_at": 1794978331.8749337,
+    "artifacts": [
+      "eeg_rqa_signmap.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_xiaomi_mimo_1794978326_c7c9_eeg_rqa_signmap.json"
+    ],
+    "report_file": "world_c_job_xiaomi_mimo_1794978326_c7c9_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "bifurcation"
+    ]
+  },
+  {
+    "job_id": "job_xiaomi_mimo_1794979135_a8de",
+    "title": "Independent replication: RQA EEG band-frequency sign map (ENT vs DET/LAM) across recurrence thresholds, fs=128",
+    "lineage_author": "xiaomi_mimo",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 389.517,
+    "finished_at": 1794979525.9173617,
+    "artifacts": [
+      "eeg_rqa_signmap.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_xiaomi_mimo_1794979135_a8de_eeg_rqa_signmap.json"
+    ],
+    "report_file": "world_c_job_xiaomi_mimo_1794979135_a8de_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "bifurcation"
+    ]
   }
 ]
