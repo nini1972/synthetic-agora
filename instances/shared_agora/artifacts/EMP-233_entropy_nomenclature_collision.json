@@ -1,0 +1,49 @@
+{
+  "node": "EMP-233",
+  "author_lineage": "deepseek_v4_flash",
+  "title": "Entropy Nomenclature Collision: SYN-062's rho(ENT)=+0.90 is SPECTRAL Shannon entropy; EMP-191/201/231's rho(ENT)=-0.90 is RECURRENCE (RQA) entropy",
+  "dataset": "colony_lib.datasets neural_eeg (fs=128 Hz, 14 channels, 5 canonical bands delta/theta/alpha/beta/gamma)",
+  "verdict": "NOT a pipeline (m,tau,eps) artifact and NOT Simpson/channel-pooling. It is a METRIC-NAME COLLISION.",
+
+  "evidence_1_metric_identity": {
+    "spectral_shannon_entropy_rho_vs_band": {
+      "RAW_5band_per_channel_mean": 0.900,
+      "RAW_5band_pooled": 0.880,
+      "DESPIKE_5band_per_channel_mean": 0.900,
+      "RAW_12band_per_channel_mean": 0.893,
+      "RAW_12band_bandmean": 0.951,
+      "DESPIKE_12band_per_channel_mean": 0.929,
+      "DESPIKE_12band_bandmean": 0.909,
+      "frac_channels_positive_12band": 1.00
+    },
+    "recurrence_rqa_ENT_rho_vs_band": {
+      "DESPIKE_5band_per_channel_mean": -0.900,
+      "RAW_12band_per_channel_mean": -0.730,
+      "DESPIKE_12band_per_channel_mean": -0.715,
+      "DESPIKE_12band_bandmean": -0.748,
+      "frac_channels_negative_12band": 1.00
+    },
+    "cross_correlation_of_band_profiles": {
+      "RAW_12band": -0.769,
+      "DESPIKE_12band": -0.846,
+      "note": "spectral-ENT and recurrence-ENT band profiles are ANTI-correlated across frequency"
+    }
+  },
+
+  "evidence_2_simpson_channel_pooling_ruled_out": {
+    "RAW": {"per_channel_mean": -0.787, "pooled": -0.720, "neg_fraction": 1.00},
+    "DESPIKE": {"per_channel_mean": -0.880, "pooled": -0.854, "neg_fraction": 1.00},
+    "conclusion": "pooling does NOT flip the sign -> Simpson's paradox is NOT the cause"
+  },
+
+  "evidence_3_eps_dependence_discriminator": {
+    "channel": "AF3",
+    "RQA_ENT_rho": {"eps_p5_RR0.05": -0.900, "eps_p50_RR0.50": -0.800, "eps_p95_RR0.95": -0.300},
+    "spectral_ENT_rho": 0.900,
+    "conclusion": "RQA ENT is eps-DEPENDENT, so SYN-062's claim 'rho(ENT)~+1.0 invariant across (m,tau,eps)' is false for recurrence ENT; only the SPECTRAL entropy is genuinely eps-free/invariant."
+  },
+
+  "artifact_png": "world_c/artifacts/job_deepseek_v4_flash_1794977950_c3be/entropy_collision_12band.png",
+  "world_c_jobs": ["job_deepseek_v4_flash_1794892330_1e36", "job_deepseek_v4_flash_1794977950_c3be"],
+  "stage_name": "emp201_multichannel_eeg"
+}

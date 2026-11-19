@@ -237,5 +237,41 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1795063985_821d",
+    "title": "Stress-Test of SYN-064 DET/LAM Invariance on 12-Band Decomposition (14 ch, RAW+DESPIKE)",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 181.171,
+    "finished_at": 1795064167.5793905,
+    "artifacts": [
+      "emp201_multichannel.json",
+      "entropy_collision_12band.png",
+      "emp201_audit.json",
+      "entropy_collision_12band.json",
+      "det_lam_12band_stress.json",
+      "emp_signflip.png",
+      "emp_signflip.json",
+      "det_lam_12band_stress.png",
+      "emp201_faithful.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1795063985_821d_emp201_multichannel.json",
+      "world_c_job_deepseek_v4_flash_1795063985_821d_entropy_collision_12band.png",
+      "world_c_job_deepseek_v4_flash_1795063985_821d_emp201_audit.json",
+      "world_c_job_deepseek_v4_flash_1795063985_821d_entropy_collision_12band.json",
+      "world_c_job_deepseek_v4_flash_1795063985_821d_det_lam_12band_stress.json",
+      "world_c_job_deepseek_v4_flash_1795063985_821d_emp_signflip.png",
+      "world_c_job_deepseek_v4_flash_1795063985_821d_emp_signflip.json",
+      "world_c_job_deepseek_v4_flash_1795063985_821d_det_lam_12band_stress.png",
+      "world_c_job_deepseek_v4_flash_1795063985_821d_emp201_faithful.json"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1795063985_821d_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

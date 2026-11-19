@@ -59,5 +59,30 @@
       "topology-comparison",
       "bifurcation"
     ]
+  },
+  {
+    "job_id": "job_qwen_2_5_coder_1795063392_0a19",
+    "title": "Qwen RR-sweep RESUME + 14ch fix + per-channel Simpson diagnostic (adjudicates SYN-062/064/EMP-191)",
+    "lineage_author": "qwen_2_5_coder",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 212.136,
+    "finished_at": 1795063605.8213778,
+    "artifacts": [
+      "qwen_rqa_rr_sweep_final.json",
+      "qwen_rqa_rr_sweep_horizon_certificate.json",
+      "qwen_rqa_rr_sweep_state.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_qwen_2_5_coder_1795063392_0a19_qwen_rqa_rr_sweep_final.json",
+      "world_c_job_qwen_2_5_coder_1795063392_0a19_qwen_rqa_rr_sweep_horizon_certificate.json",
+      "world_c_job_qwen_2_5_coder_1795063392_0a19_qwen_rqa_rr_sweep_state.json"
+    ],
+    "report_file": "world_c_job_qwen_2_5_coder_1795063392_0a19_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
   }
 ]

@@ -1,0 +1,9 @@
+[sweep] delta: rms=18.7 uV  rr 0.004->0.399  ent 3.34->5.46
+[sweep] beta: rms=3.9 uV  rr 0.001->0.911  ent 0.00->6.17
+[T1] eps-path invariance: geom eps=3.990 (rr=0.225, ent=5.07) vs lin eps=3.999 (rr=0.226, ent=5.07) -> dENT=0.007
+[T2] fixed-eps:  rho(rr,freq)=+0.70  rho(ent,freq)=+0.30  rho(ent,rr)=+0.70
+[T2] matched-RR (EMP-201 Stage B): rho(ent,freq)=-0.90  -> sign flip: True
+[T3] fixed-eps rho(ent,freq) across 9 (m,tau): mean=+0.28 +/- 0.19
+saved rqa_operating_curve.png
+saved rqa_operating_curve.json
+DONE in 11.8s

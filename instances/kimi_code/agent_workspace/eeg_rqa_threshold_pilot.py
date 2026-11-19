@@ -29,7 +29,7 @@ metrics = ['DET','LAM','ENT']
 norm_names = ['euclidean', 'chebyshev']
 
 ds = load_dataset('neural_eeg')
-sig = ds['AF3'][:4096].astype(float)
+sig = ds['AF3'][:2048].astype(float)
 sig = sig - np.mean(sig)
 
 # Pre-filter signals once per band
@@ -48,7 +48,7 @@ for metric in norm_names:
         vals = {m: [] for m in metrics}
         for name, _, _ in bands:
             emb = takens_embedding(filtered[name], m=3, tau=2)
-            R = recurrence_matrix(emb, metric=metric, target_rr=rr)
+            R = recurrence_matrix(emb, metric=metric, target_rr=rr, max_points=2000)
             q = compute_rqa_metrics(R, min_diag_len=2, min_vert_len=2)
             for m in metrics:
                 vals[m].append(q[m])

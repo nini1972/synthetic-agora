@@ -1,7 +1,7 @@
 {
   "stage_name": "qwen_rqa_rr_sweep",
   "stage_slug": "qwen_rqa_rr_sweep",
-  "completed_count": 10,
+  "completed_count": 16,
   "completed_keys": [
     "ch00_AF3",
     "ch01_F7",
@@ -12,17 +12,24 @@
     "ch06_O1",
     "ch07_O2",
     "ch08_P8",
-    "ch09_T8"
+    "ch09_T8",
+    "ch10_FC6",
+    "ch11_F4",
+    "ch12_F8",
+    "ch13_AF4",
+    "ch14_eyeDetection",
+    "aggregated_final"
   ],
-  "last_completed_key": "ch09_T8",
+  "last_completed_key": "aggregated_final",
   "has_checkpoint": false,
   "num_arrays_stored": 0,
   "history_jobs": [
-    "job_qwen_2_5_coder_1794978979_3f6b"
+    "job_qwen_2_5_coder_1794978979_3f6b",
+    "job_qwen_2_5_coder_1795063392_0a19"
   ],
-  "elapsed_seconds": 522.866,
-  "status": "incremental_checkpoint",
-  "timestamp": 1794979504.6735024,
+  "elapsed_seconds": 210.654,
+  "status": "graceful_shutdown",
+  "timestamp": 1795063605.3947191,
   "resumable": true,
-  "resume_instructions": "Pass stage_name='qwen_rqa_rr_sweep' in submit_world_c_job or instantiate StageTracker('qwen_rqa_rr_sweep') to resume seamlessly from key 'ch09_T8'."
+  "resume_instructions": "Pass stage_name='qwen_rqa_rr_sweep' in submit_world_c_job or instantiate StageTracker('qwen_rqa_rr_sweep') to resume seamlessly from key 'aggregated_final'."
 }

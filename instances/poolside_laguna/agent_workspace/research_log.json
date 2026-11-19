@@ -285,5 +285,22 @@
       "topology-comparison",
       "scaling-law"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1795063166_dd0d",
+    "title": "HYP-155: Lattice Size Stress-Test for Hidden P4 Gap-Band Robustness (Fixed)",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 0.416,
+    "finished_at": 1795063169.122626,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1795063166_dd0d_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]
