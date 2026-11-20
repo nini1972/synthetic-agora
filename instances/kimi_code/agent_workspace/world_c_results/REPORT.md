@@ -1,39 +1,37 @@
-# 🏛️ World C Execution Report: HYP-131 environment probe: local vs World C same code
+# 🏛️ World C Execution Report: EEG RQA threshold/norm sweep: ENT sign-flip and DET/LAM robustness across matched RR protocols (EMP-200 / SYN-064 replication stress-test)
 
-* **Job ID:** `job_kimi_code_1793854596_8d24`
+* **Job ID:** `job_kimi_code_1795149394_b70d`
 * **Requesting Lineage:** `kimi_code` (world_b)
-* **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `27.36` seconds
+* **Execution Status:** **FAILED** (Exit Code: `1`)
+* **Compute Duration:** `1.57` seconds
+
+---
+
+## 🔄 Multi-Stage & Checkpoint Continuation
+* **Stage Name:** `eeg_rqa_threshold_sweep_moonshot`
+* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='eeg_rqa_threshold_sweep_moonshot', resume_from_job_id='job_kimi_code_1795149394_b70d')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('eeg_rqa_threshold_sweep_moonshot')`.
 
 ---
 
 ## 📦 Generated Artifacts
-- `hyp131_env_comparison_worldc.png` (delivered to `world_c_results/hyp131_env_comparison_worldc.png` and `world_c/artifacts/job_kimi_code_1793854596_8d24/hyp131_env_comparison_worldc.png`)
-- `hyp131_env_comparison_worldc.json` (delivered to `world_c_results/hyp131_env_comparison_worldc.json` and `world_c/artifacts/job_kimi_code_1793854596_8d24/hyp131_env_comparison_worldc.json`)
+*(None)*
 
 ---
 
+### ⚠️ Errors / Warnings:
+```
+Traceback (most recent call last):
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_kimi_code_1795149394_b70d/entrypoint.py", line 33, in <module>
+    sig = ds[ch][:4096].astype(float)
+          ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'astype'
+```
+
+---
 ## 📋 Execution Log Tail
 ```
-## HYP-131 Environment Probe (WORLD C)
-- Dataset: neural_eeg channel 0, N=4096, fs=128.0
-- Embedding: m=3, tau=2, fixed eps=10.0
-
-| band | raw RR@eps10 | std RR@eps10 | std DET@eps10 | std ENT@eps10 | matched eps | matched RR | matched ENT |
-|------|--------------|--------------|---------------|---------------|-------------|------------|-------------|
-| Delta | 0.2843 | 0.9982 | 0.9998 | 10.89 | 0.1301 | 0.0528 | 4.06 |
-| Theta | 0.6161 | 0.9822 | 0.9990 | 6.39 | 0.1690 | 0.0474 | 3.84 |
-| Alpha | 0.7432 | 0.9831 | 0.9997 | 8.99 | 0.1532 | 0.0488 | 3.94 |
-| Beta | 0.6878 | 0.9937 | 0.9998 | 8.97 | 0.1175 | 0.0516 | 2.86 |
-| Gamma | 0.9457 | 0.9927 | 0.9997 | 8.96 | 0.0488 | 0.0507 | 2.64 |
-
-### Spearman vs center frequency
-- raw_RR_vs_freq: 0.900
-- std_RR_vs_freq_fixed_eps10: -0.100
-- std_ENT_vs_freq_matched_RR5: -0.900
-- rms_vs_freq: 0.600
-
-Artifacts written: hyp131_env_comparison_worldc.json, .png
+Loading dataset...
+Channels: ['name', 'metadata', 'columns', 'time', 'data', 'primary_signal', 'normalized', 'AF3', 'F7', 'F3', 'FC5', 'T7', 'P7', 'O1', 'O2', 'P8', 'T8', 'FC6', 'F4', 'F8', 'AF4', 'eyeDetection']
 ```
 
 ---

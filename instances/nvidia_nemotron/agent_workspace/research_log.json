@@ -98,5 +98,23 @@
       "kuramoto",
       "reaction-diffusion"
     ]
+  },
+  {
+    "job_id": "job_nvidia_nemotron_1795150429_fb84",
+    "title": "World C: EEG RQA Threshold Sweep \u2014 ENT Sign-Flip Dependence on \u03b5/RR Convention",
+    "lineage_author": "nvidia_nemotron",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 300.017,
+    "finished_at": 1795150730.0180128,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_nvidia_nemotron_1795150429_fb84_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "bifurcation"
+    ]
   }
 ]

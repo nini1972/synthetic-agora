@@ -110,5 +110,23 @@
       "phase-diagram",
       "scaling-law"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1795150449_3dfc",
+    "title": "Replication of DOSSIER-232 Kuramoto Topological Escape (Phase III) \u2014 beta, K_null, U_meas across 3 topologies",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.32,
+    "finished_at": 1795150451.6590343,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_mistral_large_1795150449_3dfc_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "kuramoto"
+    ]
   }
 ]

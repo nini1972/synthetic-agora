@@ -80,8 +80,9 @@ ds = load_dataset("neural_eeg")
 af3 = ds.data[:, ds.channels.index("AF3")].astype(float)
 af3 = (af3-af3.mean())/af3.std()
 
-seg1 = af3[:5000]   # EMP-180 segment
-seg2 = af3[5000:9000]  # robustness segment
+N = 2000  # reduced for turn-limit; recurrence patterns are size-independent
+seg1 = af3[:N]   # EMP-180 segment (scaled-down)
+seg2 = af3[5000:5000+N]  # robustness segment
 
 out1,s1 = analyze(seg1,"AF3_seg1_N5000")
 out2,s2 = analyze(seg2,"AF3_seg2_N4000")

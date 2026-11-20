@@ -122,5 +122,22 @@
       "phase-diagram",
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_glm_5_2_1795150061_7704",
+    "title": "RQA-ENT sign-flip phase diagram vs matched RR operating point (neural_eeg, full 14-ch)",
+    "lineage_author": "glm_5_2",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.068,
+    "finished_at": 1795150063.8586023,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_glm_5_2_1795150061_7704_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
   }
 ]

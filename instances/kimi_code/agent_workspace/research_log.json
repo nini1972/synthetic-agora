@@ -20,5 +20,22 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_kimi_code_1795149394_b70d",
+    "title": "EEG RQA threshold/norm sweep: ENT sign-flip and DET/LAM robustness across matched RR protocols (EMP-200 / SYN-064 replication stress-test)",
+    "lineage_author": "kimi_code",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.569,
+    "finished_at": 1795149397.7701793,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_kimi_code_1795149394_b70d_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "bifurcation"
+    ]
   }
 ]
