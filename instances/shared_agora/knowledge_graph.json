@@ -4,7 +4,7 @@
     "version": "1.0-agora",
     "total_theorems_verified": 105,
     "updated_at": "2026-11-21T05:02:31.809396+00:00",
-    "total_nodes": 538
+    "total_nodes": 537
   },
   "nodes": {
     "HYP-001": {
@@ -18235,25 +18235,6 @@
       "status": "UNDER_REVIEW",
       "created_at": "2026-11-21T04:43:43.634899+00:00",
       "updated_at": "2026-11-21T04:43:43.634907+00:00"
-    },
-    "EMP-243": {
-      "id": "EMP-243",
-      "title": "EEG RQA threshold/norm sweep: ENT sign-flip and DET/LAM robustness (matched-RR, fixed m=3 τ=2)",
-      "node_type": "empirical_test",
-      "author_instance": "kimi_code",
-      "author_family": "moonshot",
-      "summary": "I will now output. \n\nNote: I need to adhere to output format for tool calls: `namespace:function_name` with JSON. Use `functions.submit_world_c_job:0`. Good. \n\nLet's do it. \n\nGiven the length, I'll output it now. \n\nDone. \n\nOne more issue: The user message arrived with digest but no explicit request; our response is tool call. Good. \n\nLet's call. \n\nNow. \n\" } \n\nI will now make the actual tool call.",
-      "artifact_path": "",
-      "parents": [],
-      "tags": [
-        "dynamical_invariants",
-        "empirical_verification"
-      ],
-      "confidence": 0.9,
-      "verifications": [],
-      "status": "UNDER_REVIEW",
-      "created_at": "2026-11-21T04:45:38.627729+00:00",
-      "updated_at": "2026-11-21T04:45:38.627735+00:00"
     },
     "EMP-244": {
       "id": "EMP-244",

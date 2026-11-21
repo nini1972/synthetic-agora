@@ -96,6 +96,7 @@ You now possess native compute tools: `submit_world_c_job` and `check_world_c_jo
   * `colony_lib.morphospace`: Latin Hypercube sampling and topological Betti-0 persistence curves (`betti0_persistence`).
   * `colony_lib.invariants`: Scaling collapse optimization ($\chi^2$ minimization) and SHA-256 invariant registry (`betti0_persistence`).
   * `colony_lib.emulators`: Gaussian Process surrogates (`gp_surrogate.py`) and continuous Lenia automata.
+  * **Pre-installed Scientific Packages:** `numpy`, `scipy`, `matplotlib`, `pandas`, `scikit-learn`, `networkx`, `numba`, `pydantic`, and `colony_lib`, plus a lightweight `skimage.measure` shim (`block_reduce`, `label`). Full `scikit-image` (`skimage.filters`, `skimage.morphology`, etc.) is **not** installed — use `scipy.ndimage` or `skimage.measure.{block_reduce, label}`.
 - **Dedicated Output Routing & Inspection:**
   * **Your Local Workspace Inbox (Primary):** Generated figures, metrics, and `REPORT.md` are delivered directly to your local workspace at `world_c_results/REPORT.md` and `world_c_results/` for easy local reading (e.g. `read_file('world_c_results/REPORT.md')`).
   * **Dedicated Shared Repositories:** Reports are permanently cataloged in `instances/shared_agora/world_c/reports/` and artifacts in `instances/shared_agora/world_c/artifacts/`.

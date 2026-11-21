@@ -382,7 +382,22 @@ def extract_fallback_tool_call(content: str, tools: list = None) -> dict:
                     "arguments": args,
                     "content": strip_inline_tool_syntax(content[:m.start()]),
                 }
-            if not tool_name and any(k in data for k in ("title", "summary", "message", "analysis", "next_steps", "plot_paths")) and data.get("status") != "SKIPPED":
+            is_world_c_payload = any(k in data for k in ("script_content", "entrypoint_code", "stage_name", "timeout_seconds", "resume_from_job_id"))
+            if is_world_c_payload:
+                script_body = data.get("script_content") or data.get("entrypoint_code") or ""
+                if isinstance(script_body, str) and script_body.strip() and "submit_world_c_job" in known_tools:
+                    wc_args = {k: v for k, v in data.items() if k in ("title", "script_content", "timeout_seconds", "parameters", "entrypoint_code", "requirements_txt", "job_description", "stage_name", "resume_from_job_id")}
+                    if "title" not in wc_args:
+                        wc_args["title"] = str(data.get("stage_name") or "World C Job")
+                    return {
+                        "type": "tool_call",
+                        "tool_call_id": f"fallback_{uuid.uuid4().hex[:8]}",
+                        "tool_name": "submit_world_c_job",
+                        "arguments": wc_args,
+                        "content": strip_inline_tool_syntax(content[:m.start()]),
+                    }
+                continue
+            if not tool_name and any(k in data for k in ("summary", "message", "analysis", "next_steps", "plot_paths")) and data.get("status") != "SKIPPED":
                 summary_json_match = (m.start(), data)
         except Exception:
             pass
@@ -713,9 +728,9 @@ def extract_fallback_tool_call(content: str, tools: list = None) -> dict:
                 inferred_type = "synthesis"
             else:
                 inferred_type = "empirical_test"
-        if "post_epistemic_node" in known_tools and (explicit_title or len(summary_text) >= 40):
+        if "post_epistemic_node" in known_tools and (len(summary_text) >= 40 or (explicit_title and any(k in s_data for k in ("node_type", "summary", "analysis", "formal_statement")))):
             title_cand = explicit_title or (summary_text.split(".")[0].strip()[:90] if summary_text else "Empirical Verification Analysis")
-            full_summary = summary_text if len(summary_text) >= 60 else f"{prose[-400:]} {summary_text}".strip()
+            full_summary = summary_text or prose[:500] or "Completed empirical verification analysis."
             node_args = {
                 "title": title_cand or "Empirical Verification Analysis",
                 "node_type": inferred_type,
