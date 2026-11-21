@@ -1,0 +1,57 @@
+{
+  "lorenz_benettin_qwen_replication_v2": {
+    "dt=0.005": {
+      "lambda": [
+        0.8961781718221499,
+        -0.000549871305059538,
+        -14.562288822872482
+      ],
+      "trace_sum": -13.666660522355391,
+      "trace_target": -13.666666666666666,
+      "trace_rel_err": 4.4958375182052186e-07,
+      "D_KY": 2.061503264453206,
+      "Q_self_consistent": -2.957681436275356,
+      "tail_time": 700.0,
+      "wall_s": 5.2
+    },
+    "dt=0.01": {
+      "lambda": [
+        0.903406955514316,
+        -0.00022509459121680922,
+        -14.56974640025562
+      ],
+      "trace_sum": -13.66656453933252,
+      "trace_target": -13.666666666666666,
+      "trace_rel_err": 7.472731766841127e-06,
+      "D_KY": 2.0619902252318716,
+      "Q_self_consistent": -2.9653971807461876,
+      "tail_time": 700.0,
+      "wall_s": 2.6
+    },
+    "dt=0.02": {
+      "lambda": [
+        0.9097346676803068,
+        0.0009062509391111253,
+        -14.575534830032097
+      ],
+      "trace_sum": -13.66489391141268,
+      "trace_target": -13.666666666666666,
+      "trace_rel_err": 0.0001297137990721717,
+      "D_KY": 2.062477358754829,
+      "Q_self_consistent": -2.9722120264351357,
+      "tail_time": 700.0,
+      "wall_s": 1.3
+    }
+  },
+  "literature": {
+    "lambda_max_GP83": 0.9056,
+    "D2_Leonov": 2.06,
+    "Q_literature": -2.9656
+  },
+  "emp229_canon": {
+    "lambda_max": 0.888,
+    "Q": -2.948
+  },
+  "v1_bug_note": "V=Q@V preserved window-contracted magnitudes -> float64 underflow -> -inf exponents",
+  "v2_fix": "V <- Q (orthonormal reset) after each reorthogonalization; RK4 on augmented 12D state"
+}

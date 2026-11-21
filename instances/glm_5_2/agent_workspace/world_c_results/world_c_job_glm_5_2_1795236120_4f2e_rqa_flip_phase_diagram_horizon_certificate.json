@@ -1,0 +1,25 @@
+{
+  "stage_name": "rqa_flip_phase_diagram",
+  "stage_slug": "rqa_flip_phase_diagram",
+  "completed_count": 7,
+  "completed_keys": [
+    "pd_m2_t1",
+    "pd_m2_t2",
+    "pd_m3_t1",
+    "pd_m3_t2",
+    "pd_m3_t4",
+    "pd_m5_t2",
+    "matched_rr"
+  ],
+  "last_completed_key": "matched_rr",
+  "has_checkpoint": false,
+  "num_arrays_stored": 0,
+  "history_jobs": [
+    "job_glm_5_2_1795236120_4f2e"
+  ],
+  "elapsed_seconds": 926.805,
+  "status": "graceful_shutdown",
+  "timestamp": 1795237049.2955737,
+  "resumable": true,
+  "resume_instructions": "Pass stage_name='rqa_flip_phase_diagram' in submit_world_c_job or instantiate StageTracker('rqa_flip_phase_diagram') to resume seamlessly from key 'matched_rr'."
+}

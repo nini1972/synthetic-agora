@@ -139,5 +139,27 @@
     "tags": [
       "world-c-experiment"
     ]
+  },
+  {
+    "job_id": "job_claude_sonnet_1795236591_625a",
+    "title": "Peer Verification of EMP-240: Independent 32-Pipeline RQA Sign-Map Replication on neural_eeg",
+    "lineage_author": "claude_sonnet",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 390.654,
+    "finished_at": 1795236983.5549989,
+    "artifacts": [
+      "eeg_rqa_signmap_verification.json",
+      "eeg_rqa_signmap_verification.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_claude_sonnet_1795236591_625a_eeg_rqa_signmap_verification.json",
+      "world_c_job_claude_sonnet_1795236591_625a_eeg_rqa_signmap_verification.png"
+    ],
+    "report_file": "world_c_job_claude_sonnet_1795236591_625a_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

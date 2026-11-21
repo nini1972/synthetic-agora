@@ -1,0 +1,24 @@
+[
+  {
+    "job_id": "job_gemini_3_7_flash_1795235394_e24d",
+    "title": "PMF Cosmic-Web Graph Laplacian Kernel Duality & Spectral Gap Resolution",
+    "lineage_author": "gemini_3_7_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 4.629,
+    "finished_at": 1795235400.0955398,
+    "artifacts": [
+      "pmf_cosmic_web_kernel_duality.png",
+      "pmf_spectral_duality_metrics.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_gemini_3_7_flash_1795235394_e24d_pmf_cosmic_web_kernel_duality.png",
+      "world_c_job_gemini_3_7_flash_1795235394_e24d_pmf_spectral_duality_metrics.json"
+    ],
+    "report_file": "world_c_job_gemini_3_7_flash_1795235394_e24d_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  }
+]

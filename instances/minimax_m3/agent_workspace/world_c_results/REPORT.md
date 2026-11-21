@@ -1,56 +1,39 @@
-# 🏛️ World C Execution Report: Red-team control audit: EEG band-frequency vs RQA-ENT coupling (adaptive/fixed/pct epsilon x white/pink/surrogate controls)
+# 🏛️ World C Execution Report: EMP-242: Independent 3-Prediction Discriminator of rho(ENT,freq) Sign-War
 
-* **Job ID:** `job_minimax_m3_1794892318_fabb`
+* **Job ID:** `job_minimax_m3_1795235775_5329`
 * **Requesting Lineage:** `minimax_m3` (world_b)
-* **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `136.90` seconds
+* **Execution Status:** **FAILED** (Exit Code: `None`)
+* **Compute Duration:** `900.04` seconds
 
 ---
 
 ## 🔄 Multi-Stage & Checkpoint Continuation
-* **Stage Name:** `eeg_rqa_control_audit`
-* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='eeg_rqa_control_audit', resume_from_job_id='job_minimax_m3_1794892318_fabb')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('eeg_rqa_control_audit')`.
+* **Stage Name:** `emp242_sign_war_discriminator`
+* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='emp242_sign_war_discriminator', resume_from_job_id='job_minimax_m3_1795235775_5329')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('emp242_sign_war_discriminator')`.
 
 ---
 
 ## 📦 Generated Artifacts
-- `eeg_rqa_control_audit.json` (delivered to `world_c_results/eeg_rqa_control_audit.json` and `world_c/artifacts/job_minimax_m3_1794892318_fabb/eeg_rqa_control_audit.json`)
-- `eeg_rqa_control_audit.png` (delivered to `world_c_results/eeg_rqa_control_audit.png` and `world_c/artifacts/job_minimax_m3_1794892318_fabb/eeg_rqa_control_audit.png`)
+*(None)*
 
 ---
 
 ## 📋 Execution Log Tail
 ```
-ne in band INDEX=0.000
-     pct5 | rho(natural freq)=-0.691 | rho(scrambled freq labels)=-0.236+-0.602 | frac monotone in band INDEX=0.000
+Loading neural_eeg ...
+  data shape = (14980, 15), fs = 128.0
+  using n_ch=14, n_t=4096
 
-========================================================================================================
-PHASE 3  per-band means (adaptive epsilon)
-========================================================================================================
-EEG        ENT: delta=3.734 theta=3.820 alpha=3.777 beta=3.480 gamma=3.040
-           RR : delta=0.0500 theta=0.0500 alpha=0.0500 beta=0.0500 gamma=0.0500
-WHITE      ENT: delta=3.767 theta=3.833 alpha=3.788 beta=3.373 gamma=3.077
-           RR : delta=0.0500 theta=0.0500 alpha=0.0500 beta=0.0500 gamma=0.0500
-PINK       ENT: delta=3.761 theta=3.833 alpha=3.789 beta=3.428 gamma=3.046
-           RR : delta=0.0500 theta=0.0500 alpha=0.0500 beta=0.0500 gamma=0.0500
-SURROGATE  ENT: delta=3.760 theta=3.838 alpha=3.788 beta=3.374 gamma=3.051
-           RR : delta=0.0500 theta=0.0500 alpha=0.0500 beta=0.0500 gamma=0.0500
+Computing 5-band decomposition ...
 
-========================================================================================================
-PHASE 4  samples-per-cycle diagnostic
-========================================================================================================
-samples/cycle (fs/f_center): {'delta': 64.0, 'theta': 23.27, 'alpha': 12.8, 'beta': 5.95, 'gamma': 3.41}
--> gamma sampled at only 3.41 samples/cycle : near-Nyquist embedding regime
+Computing SPECTRAL Shannon entropy per band per channel ...
+  SPECTRAL ENT per-channel rho: mean=1.000, frac>0=1.000
 
-========================================================================================================
-VERDICT
-========================================================================================================
-eps= adaptive  |rho_EEG|=0.698  max|rho_control|=0.750  ratio=0.93  -> CONTROL-CONFOUNDED
-eps=fixed_q10  |rho_EEG|=0.887  max|rho_control|=0.903  ratio=0.98  -> CONTROL-CONFOUNDED
-eps=     pct5  |rho_EEG|=0.691  max|rho_control|=0.731  ratio=0.95  -> CONTROL-CONFOUNDED
-
-JSON : eeg_rqa_control_audit.json
-FIG  : eeg_rqa_control_audit.png
+Computing RQA ENT on 11 eps grid ...
+  eps=p1: band-means=['3.454', '2.896', '2.776', '2.203', '1.833'], pooled rho=-1.000
+  eps=p5: band-means=['3.900', '3.702', '3.655', '2.833', '2.492'], pooled rho=-1.000
+  eps=p10: band-means=['4.235', '4.024', '4.208', '3.145', '2.836'], pooled rho=-0.900
+  eps=p20: band-means=['4.837', '4.276', '4.848', '3.530', '3.267'], pooled rho=-0.700
 ```
 
 ---

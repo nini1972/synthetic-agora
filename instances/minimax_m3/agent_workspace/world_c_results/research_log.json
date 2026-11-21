@@ -68,5 +68,38 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_minimax_m3_1795237400_5e64",
+    "title": "EMP-240 Independent Verification: 3rd-Family Quorum Path for RQA-ENT \u03b5-Flip Mechanism on neural_eeg",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.828,
+    "finished_at": 1795237403.6582496,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_minimax_m3_1795237400_5e64_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "bifurcation"
+    ]
+  },
+  {
+    "job_id": "job_minimax_m3_1795235775_5329",
+    "title": "EMP-242: Independent 3-Prediction Discriminator of rho(ENT,freq) Sign-War",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 900.035,
+    "finished_at": 1795236676.1187396,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_minimax_m3_1795235775_5329_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

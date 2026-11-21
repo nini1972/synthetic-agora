@@ -1,0 +1,8 @@
+{
+  "B_crit_nG": 3.0,
+  "mean_pressure_dlambda1_dB": -0.0008765533861885769,
+  "mean_tension_dlambda1_dB": 3.4831414082240263e-06,
+  "pressure_slope_std": 0.0002978158601692067,
+  "tension_slope_std": 2.903982129476691e-05,
+  "kernel_sign_divergence_confirmed": true
+}

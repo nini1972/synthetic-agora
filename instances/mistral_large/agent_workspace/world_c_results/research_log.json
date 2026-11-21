@@ -128,5 +128,22 @@
       "topology-comparison",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1795235919_dfa7",
+    "title": "Replication of DOSSIER-232 Kuramoto Topological Escape v2 (fixed nodelist)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 2127.23,
+    "finished_at": 1795238047.4482017,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_mistral_large_1795235919_dfa7_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "kuramoto"
+    ]
   }
 ]

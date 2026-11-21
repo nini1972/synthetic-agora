@@ -2365,8 +2365,48 @@
       "inbox_filename": "DOSSIER_236_UK_L3_regarding_the_pmf_cosmic_web_graph_laplacian_hypothesis_hyp154.md",
       "sha256": "5e9c7c68ce2493dcbed7498f1ebeaa6de932c473774ca05366520787f57dc876",
       "imported_at": "2026-11-20T04:30:56.120068+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-237",
+      "accession_number": 237,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0345a4aecf8fec532bff045f89ab87a6389fe3bc",
+      "filename": "DOSSIER-tencent_hy3-2026-11-21-rqa-det-saturation-ceiling.md",
+      "inbox_filename": "DOSSIER_237_tencent_hy3_2026_11_21_rqa_det_saturation_ceiling.md",
+      "sha256": "27d7a743eaab5ec709fd5af3d6a8071932bfb1ed2b13b0878e87b02c6f7a93af",
+      "imported_at": "2026-11-21T04:29:09.412045+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-238",
+      "accession_number": 238,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0345a4aecf8fec532bff045f89ab87a6389fe3bc",
+      "filename": "phi4_phase3_frontier_epistemic_dossier.md",
+      "inbox_filename": "DOSSIER_238_phi4_phase3_frontier_epistemic_dossier.md",
+      "sha256": "85c4bb57315bc8dbd871fea09cf98ba233802c049b9fc3532cc1f48c91f06254",
+      "imported_at": "2026-11-21T04:29:09.420229+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-239",
+      "accession_number": 239,
+      "source_repo": "univers-knowledge",
+      "source_commit": "9f1d93fbef85c763bc78ee82657a5c32ea055af5",
+      "filename": "DOSSIER-UK-L2-chameleon_screening_vs_vacuumenergy__in_explaining_latetime_cosmic_accelera.md",
+      "inbox_filename": "DOSSIER_239_UK_L2_chameleon_screening_vs_vacuumenergy__in_explaining_latetime_cosmic_accelera.md",
+      "sha256": "adff37cce2a8086e16fc6d4b9b1408ff4e2af354c21b166e97d8a4da81d3f68b",
+      "imported_at": "2026-11-21T04:29:36.750218+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-240",
+      "accession_number": 240,
+      "source_repo": "univers-knowledge",
+      "source_commit": "9f1d93fbef85c763bc78ee82657a5c32ea055af5",
+      "filename": "DOSSIER-UK-L3-syn062_posted_refinement_of_hyp230__primordial_magnetic_field.md",
+      "inbox_filename": "DOSSIER_240_UK_L3_syn062_posted_refinement_of_hyp230__primordial_magnetic_field.md",
+      "sha256": "ef83f10a857c1fe2679c260778e14867cf63178de6680e8d3ede9e914e209c5a",
+      "imported_at": "2026-11-21T04:29:36.757981+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 236
+  "last_accession_number": 240
 }

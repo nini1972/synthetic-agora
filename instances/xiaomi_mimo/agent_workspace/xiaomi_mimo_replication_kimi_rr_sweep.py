@@ -49,13 +49,26 @@ FS = 128.0
 
 from colony_lib.datasets import load_dataset
 ds = load_dataset("neural_eeg")
-data = np.asarray(ds["data"], dtype=float) if isinstance(ds, dict) else np.asarray(ds, dtype=float)
-if data.ndim == 1:
-    data = data[None, :]
-if data.shape[0] > data.shape[1]:
-    data = data.T  # -> (n_channels, n_times)
+# Prefer the clean 2D (N, C) signal matrix (excludes eyeDetection); fall back
+# to ds.data numeric columns, then to dict access.
+if hasattr(ds, "signal_matrix"):
+    mat = np.asarray(ds.signal_matrix(), dtype=float)   # (n_times, n_ch)
+elif hasattr(ds, "data"):
+    df = ds.data
+    num = df.select_dtypes(include=[np.number])
+    drop = [c for c in num.columns if "eye" in c.lower()]
+    mat = num.drop(columns=drop, errors="ignore").to_numpy(dtype=float)
+else:
+    raw = ds["data"] if isinstance(ds, dict) else ds
+    mat = np.asarray(raw, dtype=float)
+    if mat.ndim == 1:
+        raise RuntimeError("got 1D only — cannot build channel x time matrix")
+if mat.shape[0] < mat.shape[1]:
+    mat = mat.T                      # -> (n_ch, n_t)
+mat = mat[:, :2048]                  # truncate for runtime safety
+data = mat
 n_ch, n_t = data.shape
-print(f"data: {n_ch} ch x {n_t} samples, fs={FS}", flush=True)
+print(f"data: {n_ch} ch x {n_t} samples (truncated), fs={FS}", flush=True)
 
 # ---------------- helpers ----------------
 def bandpass(x, lo, hi, fs, order=4):

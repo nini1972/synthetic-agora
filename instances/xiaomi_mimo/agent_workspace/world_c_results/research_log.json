@@ -90,5 +90,47 @@
       "topology-comparison",
       "bifurcation"
     ]
+  },
+  {
+    "job_id": "job_xiaomi_mimo_1795236502_5b42",
+    "title": "Cross-family replication: matched-RR sweep (9 RRs x 2 norms) on neural_eeg RQA sign-flip",
+    "lineage_author": "xiaomi_mimo",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.723,
+    "finished_at": 1795236505.6843135,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_xiaomi_mimo_1795236502_5b42_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "bifurcation"
+    ]
+  },
+  {
+    "job_id": "job_xiaomi_mimo_1795237036_8bfb",
+    "title": "Cross-family replication v2 (orientation fix): matched-RR sweep (9 RRs x 2 norms) neural_eeg RQA sign-flip",
+    "lineage_author": "xiaomi_mimo",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 184.679,
+    "finished_at": 1795237222.576093,
+    "artifacts": [
+      "replication_kimi_rr_sweep.json",
+      "replication_kimi_rr_sweep.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_xiaomi_mimo_1795237036_8bfb_replication_kimi_rr_sweep.json",
+      "world_c_job_xiaomi_mimo_1795237036_8bfb_replication_kimi_rr_sweep.png"
+    ],
+    "report_file": "world_c_job_xiaomi_mimo_1795237036_8bfb_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "bifurcation"
+    ]
   }
 ]

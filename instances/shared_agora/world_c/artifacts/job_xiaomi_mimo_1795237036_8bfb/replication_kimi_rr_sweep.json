@@ -1,0 +1,465 @@
+{
+  "bands": [
+    "delta",
+    "theta",
+    "alpha",
+    "beta",
+    "gamma"
+  ],
+  "target_rrs": [
+    0.01,
+    0.02,
+    0.05,
+    0.1,
+    0.2,
+    0.35,
+    0.5,
+    0.7,
+    0.9
+  ],
+  "norms": [
+    "euclidean",
+    "chebyshev"
+  ],
+  "n_channels": 14,
+  "n_samples": 1500,
+  "per_norm": {
+    "euclidean": {
+      "0.01": {
+        "DET": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "LAM": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "ENT": {
+          "mean_rho": -0.9999999999999999,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.02": {
+        "DET": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "LAM": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "ENT": {
+          "mean_rho": -0.9999999999999999,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.05": {
+        "DET": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "LAM": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "ENT": {
+          "mean_rho": -0.9571428571428572,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.1": {
+        "DET": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "LAM": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "ENT": {
+          "mean_rho": -0.7428571428571427,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.2": {
+        "DET": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "LAM": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "ENT": {
+          "mean_rho": -0.7499999999999999,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.35": {
+        "DET": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "LAM": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "ENT": {
+          "mean_rho": -0.7428571428571428,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.5": {
+        "DET": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "LAM": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "ENT": {
+          "mean_rho": -0.7428571428571427,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.7": {
+        "DET": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "LAM": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "ENT": {
+          "mean_rho": -0.857142857142857,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.9": {
+        "DET": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "LAM": {
+          "mean_rho": null,
+          "frac_negative": null,
+          "frac_positive": null,
+          "n_channels": 0
+        },
+        "ENT": {
+          "mean_rho": -0.7571428571428571,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      }
+    },
+    "chebyshev": {
+      "0.01": {
+        "DET": {
+          "mean_rho": 0.009003025224590877,
+          "frac_negative": 0.3,
+          "frac_positive": 0.3,
+          "n_channels": 10
+        },
+        "LAM": {
+          "mean_rho": 0.009003025224590877,
+          "frac_negative": 0.3,
+          "frac_positive": 0.3,
+          "n_channels": 10
+        },
+        "ENT": {
+          "mean_rho": -0.9999999999999999,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.02": {
+        "DET": {
+          "mean_rho": 0.05306152071594701,
+          "frac_negative": 0.4,
+          "frac_positive": 0.4,
+          "n_channels": 10
+        },
+        "LAM": {
+          "mean_rho": 0.05306152071594701,
+          "frac_negative": 0.4,
+          "frac_positive": 0.4,
+          "n_channels": 10
+        },
+        "ENT": {
+          "mean_rho": -0.9999999999999999,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.05": {
+        "DET": {
+          "mean_rho": 0.13245366559397848,
+          "frac_negative": 0.3076923076923077,
+          "frac_positive": 0.46153846153846156,
+          "n_channels": 13
+        },
+        "LAM": {
+          "mean_rho": 0.13245366559397848,
+          "frac_negative": 0.3076923076923077,
+          "frac_positive": 0.46153846153846156,
+          "n_channels": 13
+        },
+        "ENT": {
+          "mean_rho": -0.9785714285714285,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.1": {
+        "DET": {
+          "mean_rho": 0.16254732569397679,
+          "frac_negative": 0.2,
+          "frac_positive": 0.6,
+          "n_channels": 10
+        },
+        "LAM": {
+          "mean_rho": 0.16254732569397679,
+          "frac_negative": 0.2,
+          "frac_positive": 0.6,
+          "n_channels": 10
+        },
+        "ENT": {
+          "mean_rho": -0.9785714285714285,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.2": {
+        "DET": {
+          "mean_rho": 0.08922510666347166,
+          "frac_negative": 0.3076923076923077,
+          "frac_positive": 0.3076923076923077,
+          "n_channels": 13
+        },
+        "LAM": {
+          "mean_rho": 0.08922510666347166,
+          "frac_negative": 0.3076923076923077,
+          "frac_positive": 0.3076923076923077,
+          "n_channels": 13
+        },
+        "ENT": {
+          "mean_rho": -0.9999999999999999,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.35": {
+        "DET": {
+          "mean_rho": 0.06714847144187615,
+          "frac_negative": 0.42857142857142855,
+          "frac_positive": 0.35714285714285715,
+          "n_channels": 14
+        },
+        "LAM": {
+          "mean_rho": 0.06714847144187615,
+          "frac_negative": 0.42857142857142855,
+          "frac_positive": 0.35714285714285715,
+          "n_channels": 14
+        },
+        "ENT": {
+          "mean_rho": -0.9999999999999999,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.5": {
+        "DET": {
+          "mean_rho": 0.37769902252816934,
+          "frac_negative": 0.08333333333333333,
+          "frac_positive": 0.6666666666666666,
+          "n_channels": 12
+        },
+        "LAM": {
+          "mean_rho": 0.37769902252816934,
+          "frac_negative": 0.08333333333333333,
+          "frac_positive": 0.6666666666666666,
+          "n_channels": 12
+        },
+        "ENT": {
+          "mean_rho": -0.9928571428571428,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.7": {
+        "DET": {
+          "mean_rho": 0.1849017983854217,
+          "frac_negative": 0.3076923076923077,
+          "frac_positive": 0.5384615384615384,
+          "n_channels": 13
+        },
+        "LAM": {
+          "mean_rho": 0.1849017983854217,
+          "frac_negative": 0.3076923076923077,
+          "frac_positive": 0.5384615384615384,
+          "n_channels": 13
+        },
+        "ENT": {
+          "mean_rho": -0.9714285714285713,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      },
+      "0.9": {
+        "DET": {
+          "mean_rho": 0.13378867023789295,
+          "frac_negative": 0.3076923076923077,
+          "frac_positive": 0.5384615384615384,
+          "n_channels": 13
+        },
+        "LAM": {
+          "mean_rho": 0.13378867023789295,
+          "frac_negative": 0.3076923076923077,
+          "frac_positive": 0.5384615384615384,
+          "n_channels": 13
+        },
+        "ENT": {
+          "mean_rho": -0.9571428571428571,
+          "frac_negative": 1.0,
+          "frac_positive": 0.0,
+          "n_channels": 14
+        },
+        "ga_frac_ENT_gamma_lt_alpha": 1.0
+      }
+    }
+  },
+  "sign_flip_onset": {
+    "euclidean": {
+      "first_rr_with_positive_mean_rho_ENT": null
+    },
+    "chebyshev": {
+      "first_rr_with_positive_mean_rho_ENT": null
+    }
+  },
+  "norm_dependence_ENT": {
+    "0.01": {
+      "euclidean": -0.9999999999999999,
+      "chebyshev": -0.9999999999999999,
+      "abs_diff": 0.0
+    },
+    "0.02": {
+      "euclidean": -0.9999999999999999,
+      "chebyshev": -0.9999999999999999,
+      "abs_diff": 0.0
+    },
+    "0.05": {
+      "euclidean": -0.9571428571428572,
+      "chebyshev": -0.9785714285714285,
+      "abs_diff": 0.021428571428571352
+    },
+    "0.1": {
+      "euclidean": -0.7428571428571427,
+      "chebyshev": -0.9785714285714285,
+      "abs_diff": 0.23571428571428588
+    },
+    "0.2": {
+      "euclidean": -0.7499999999999999,
+      "chebyshev": -0.9999999999999999,
+      "abs_diff": 0.25
+    },
+    "0.35": {
+      "euclidean": -0.7428571428571428,
+      "chebyshev": -0.9999999999999999,
+      "abs_diff": 0.2571428571428571
+    },
+    "0.5": {
+      "euclidean": -0.7428571428571427,
+      "chebyshev": -0.9928571428571428,
+      "abs_diff": 0.2500000000000001
+    },
+    "0.7": {
+      "euclidean": -0.857142857142857,
+      "chebyshev": -0.9714285714285713,
+      "abs_diff": 0.11428571428571432
+    },
+    "0.9": {
+      "euclidean": -0.7571428571428571,
+      "chebyshev": -0.9571428571428571,
+      "abs_diff": 0.19999999999999996
+    }
+  }
+}

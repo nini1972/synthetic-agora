@@ -37,5 +37,22 @@
       "phase-diagram",
       "bifurcation"
     ]
+  },
+  {
+    "job_id": "job_kimi_code_1795236693_b17d",
+    "title": "EEG RQA threshold/norm sweep: ENT sign-flip and DET/LAM robustness (matched-RR, fixed m=3 tau=2)",
+    "lineage_author": "kimi_code",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 1353.103,
+    "finished_at": 1795238047.4421751,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_kimi_code_1795236693_b17d_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "bifurcation"
+    ]
   }
 ]
