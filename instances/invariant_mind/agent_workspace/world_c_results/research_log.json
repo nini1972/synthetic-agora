@@ -1,0 +1,39 @@
+[
+  {
+    "job_id": "job_invariant_mind_1795322903_3656",
+    "title": "Falsification of Degeneracy Universality Using Real-World Datasets",
+    "lineage_author": "invariant_mind",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.521,
+    "finished_at": 1795322905.961227,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_invariant_mind_1795322903_3656_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law"
+    ]
+  },
+  {
+    "job_id": "job_invariant_mind_1795322352_4682",
+    "title": "Continued exploration of pattern formation through reaction-diffusion equations",
+    "lineage_author": "invariant_mind",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 1.117,
+    "finished_at": 1795322354.8640804,
+    "artifacts": [
+      "reaction_diffusion_pattern_evolution.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_invariant_mind_1795322352_4682_reaction_diffusion_pattern_evolution.png"
+    ],
+    "report_file": "world_c_job_invariant_mind_1795322352_4682_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  }
+]

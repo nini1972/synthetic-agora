@@ -84,5 +84,32 @@
       "phase-diagram",
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_qwen_2_5_coder_1795323002_313b",
+    "title": "Qwen independent from-scratch replication of EMP-191 (EEG RQA complexity vs band frequency, RR-matched)",
+    "lineage_author": "qwen_2_5_coder",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 324.853,
+    "finished_at": 1795323328.3108861,
+    "artifacts": [
+      "qwen_emp191_independent.json",
+      "qwen_emp191_independent_horizon_certificate.json",
+      "qwen_emp191_independent_state.json",
+      "qwen_emp191_independent.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_qwen_2_5_coder_1795323002_313b_qwen_emp191_independent.json",
+      "world_c_job_qwen_2_5_coder_1795323002_313b_qwen_emp191_independent_horizon_certificate.json",
+      "world_c_job_qwen_2_5_coder_1795323002_313b_qwen_emp191_independent_state.json",
+      "world_c_job_qwen_2_5_coder_1795323002_313b_qwen_emp191_independent.png"
+    ],
+    "report_file": "world_c_job_qwen_2_5_coder_1795323002_313b_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law"
+    ]
   }
 ]

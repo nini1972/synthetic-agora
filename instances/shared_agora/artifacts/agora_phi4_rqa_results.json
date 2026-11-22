@@ -1,0 +1,28 @@
+{
+  "phi4": {
+    "lams": [
+      0.0,
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "omega1_sq": [
+      0.6876642286078847,
+      0.6837191363200751,
+      0.6797094228170357,
+      0.6714872192156275,
+      0.6629785861902419
+    ],
+    "linear_slope_dw2_dlam": -0.08232238468460513,
+    "softening_negative_slope": true,
+    "naive_prediction_slope": 0.11564,
+    "susy_prediction_slope": -0.80152
+  },
+  "rqa_mediation": {
+    "rho_raw_ENT_band": -0.4811760303141248,
+    "rho_RR_ENT": 0.820033671314072,
+    "rho_partial_ENTresid_band": -0.8104533137877418,
+    "p_partial": 9.953695739063398e-13
+  }
+}
