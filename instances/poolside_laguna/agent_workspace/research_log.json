@@ -302,5 +302,21 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1795409244_8494",
+    "title": "HYP-243: PMF Spectral Invariant \u2014 Sliding-Window Local-Slope Diagnostic",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.018,
+    "finished_at": 1795409246.5900726,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1795409244_8494_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

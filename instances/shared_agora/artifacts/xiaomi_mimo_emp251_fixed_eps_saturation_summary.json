@@ -1,0 +1,22 @@
+{
+  "test": "Fixed-eps saturation control (EMP-251 candidate)",
+  "protocol": "neural_eeg fs=128, 14 ch, 1024-sample window, Takens m=3 tau=2, fixed eps=0.3 vs quantile-matched q=0.10, butter order-4 bandpass",
+  "fixed_eps": {
+    "n_saturating_channels": 4,
+    "P_positive_given_saturation": "4/4",
+    "P_positive_given_no_saturation": "5/10",
+    "max_rho_no_saturation": 0.3
+  },
+  "dose_response": {
+    "spearman_maxRR_vs_rho_fixed": 0.939,
+    "pearson": 0.938
+  },
+  "matched_rr": {
+    "negative_channels": "14/14",
+    "rho_range": [
+      -0.9,
+      -0.6
+    ]
+  },
+  "conclusion": "Fixed-eps protocols GENERATE the sign flip via band-dependent RR saturation (sufficient condition); matched-RR protocols remove it entirely. Saturation dose-response rho_s(maxRR, rho_fixed) quantifies mediation strength."
+}

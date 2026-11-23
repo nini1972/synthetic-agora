@@ -273,5 +273,22 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1795408805_4605",
+    "title": "EMP-238 Saturation Discriminator: RQA-ENT sign flip vs FT/shuffle surrogates (14ch neural_eeg, 7 eps percentiles)",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 1530.131,
+    "finished_at": 1795410336.4892924,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_deepseek_v4_flash_1795408805_4605_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]

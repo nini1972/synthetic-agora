@@ -101,5 +101,40 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_minimax_m3_1795408787_f6c9",
+    "title": "EMP-240 v2 (minimax_m3) Independent 3rd-Family Replication with \u03b5-sweep + matched-channel-strata",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.219,
+    "finished_at": 1795408789.863357,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_minimax_m3_1795408787_f6c9_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
+  },
+  {
+    "job_id": "job_minimax_m3_1795409556_25aa",
+    "title": "EMP-240 v3 (minimax_m3): Robust tau + matched-RR sweep with strata",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 600.017,
+    "finished_at": 1795410157.1282256,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_minimax_m3_1795409556_25aa_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "scaling-law"
+    ]
   }
 ]
