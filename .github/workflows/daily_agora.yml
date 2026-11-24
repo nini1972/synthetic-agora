@@ -6,6 +6,17 @@ on:
     - cron: '23 4 * * *'
   workflow_dispatch:
     # Allow manual execution via the GitHub Actions tab
+    inputs:
+      instances:
+        description: 'Comma-separated instance override (blank = full 14-agent roster)'
+        required: false
+        default: ''
+        type: string
+      ticks:
+        description: 'Tick count override (blank = auto 5 pulse / 8 deep)'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: write
@@ -128,18 +139,42 @@ jobs:
         RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}
         PYTHONUNBUFFERED: "1"
         PYTHONPATH: "${{ github.workspace }}/world_c"
+        INPUT_INSTANCES: ${{ inputs.instances }}
+        INPUT_TICKS: ${{ inputs.ticks }}
       run: |
-        # Calculate if today is a deep-run day (every 3rd day)
-        EPOCH_DAYS=$(( $(date +%s) / 86400 ))
-        if [ $(( EPOCH_DAYS % 3 )) -eq 0 ]; then
-          TICKS=8
-          echo "🏛️ Deep Dialectic Day! Running 8 ticks per model."
+        DEFAULT_INSTANCES="gemini_3_7_flash,claude_sonnet,invariant_mind,llama_70b,kimi_code,minimax_m3,deepseek_v4_flash,qwen_2_5_coder,glm_5_2,tencent_hy3,poolside_laguna,xiaomi_mimo,nvidia_nemotron,mistral_large"
+        INSTANCES="$(echo "${INPUT_INSTANCES:-}" | tr -d '[:space:]')"
+        if [ -z "$INSTANCES" ]; then
+          INSTANCES="$DEFAULT_INSTANCES"
         else
-          TICKS=5
-          echo "🏛️ Daily Agora Pulse! Running 5 ticks per model."
+          if ! [[ "$INSTANCES" =~ ^[a-zA-Z0-9_,]+$ ]]; then
+            echo "Invalid instances override: $INSTANCES" >&2
+            exit 1
+          fi
+          echo "Manual override: running instances=$INSTANCES"
         fi
-        
-        python run_agora.py --instances gemini_3_7_flash,claude_sonnet,invariant_mind,llama_70b,kimi_code,minimax_m3,deepseek_v4_flash,qwen_2_5_coder,glm_5_2,tencent_hy3,poolside_laguna,xiaomi_mimo,nvidia_nemotron,mistral_large --ticks $TICKS
+
+        RAW_TICKS="$(echo "${INPUT_TICKS:-}" | tr -d '[:space:]')"
+        if [ -n "$RAW_TICKS" ]; then
+          if ! [[ "$RAW_TICKS" =~ ^[1-9][0-9]*$ ]]; then
+            echo "Invalid ticks override: $RAW_TICKS" >&2
+            exit 1
+          fi
+          TICKS="$RAW_TICKS"
+          echo "Manual override: running $TICKS ticks."
+        else
+          # Calculate if today is a deep-run day (every 3rd day)
+          EPOCH_DAYS=$(( $(date +%s) / 86400 ))
+          if [ $(( EPOCH_DAYS % 3 )) -eq 0 ]; then
+            TICKS=8
+            echo "🏛️ Deep Dialectic Day! Running 8 ticks per model."
+          else
+            TICKS=5
+            echo "🏛️ Daily Agora Pulse! Running 5 ticks per model."
+          fi
+        fi
+
+        python run_agora.py --instances "$INSTANCES" --ticks "$TICKS"
 
     - name: Compile Codex Book
       if: always()
