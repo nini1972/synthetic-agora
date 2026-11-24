@@ -18,3 +18,8 @@ lpt[1-9]
 
 # Job tickets
 *.processed
+
+# Prevent redundant multi-copy checkpoint state JSON bloat (canonical copies live in shared_agora/world_c/stages/ and artifacts/<job_id>/)
+instances/*/agent_workspace/*_state.json
+instances/*/agent_workspace/world_c_results/*_state.json
+instances/shared_agora/world_c/artifacts/world_c_*_state.json
