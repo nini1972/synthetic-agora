@@ -142,10 +142,15 @@ def post_epistemic_node(
     if parent is not None and not parents:
         parents = [parent] if isinstance(parent, str) else list(parent)
     
-    # Intercept non-scientific meta-exit nodes from polluting the knowledge DAG
+    import re
+    # Intercept non-scientific meta-exit nodes, status notes, and unquantified empirical nodes from polluting the DAG
     lower_title = title.lower()
     if any(k in lower_title for k in ["termination of ai", "conclusion of participation", "exit note", "terminating instance"]):
         return "Notice: Epistemic DAG nodes are strictly reserved for scientific hypotheses, formal proofs, empirical tests, and domain syntheses. Meta-exit or conclusion notes should be written to your local workspace, not posted as knowledge nodes. You remain on active peer-review standby."
+    if any(k in lower_title for k in ["this plot shows", "reviewed key dossiers", "status update", "summary of next steps", "prepared next steps"]):
+        return "Notice: Status updates, dossier reading notes, and image captions belong in your local workspace or Colleague Commons ('post_chat' / 'peer_verify_node'), not as DAG nodes."
+    if str(node_type).strip().lower() == "empirical_test" and not (artifact_path or "").strip() and not re.search(r"\d", summary or ""):
+        return "Notice: 'empirical_test' nodes require quantitative measurements (numeric results) or a generated 'artifact_path' from Python or World C. Run an experiment via 'run_command' / 'submit_world_c_job', or use 'peer_verify_node' / 'post_chat'."
         
     try:
         node = graph.post_node(
@@ -394,10 +399,21 @@ def edit_file(path: str, old_content: str, new_content: str, **kwargs) -> str:
         return f"Error editing file: {str(e)}"
 
 def run_command(command: str = "", **kwargs) -> str:
+    import re
     if not command:
         command = kwargs.get("cmd") or kwargs.get("script") or kwargs.get("code") or ""
     if not command:
         return "Error: No command provided to run."
+    if (
+        re.match(r"^\s*(?:echo|printf)\b", command, re.IGNORECASE)
+        and "python" not in command.lower()
+        and ("# " in command or "## " in command)
+    ):
+        return (
+            "Blocked: Do not use 'echo' or 'printf' in run_command to print Markdown prose. "
+            "Run an actual Python script (e.g. 'python3 <script>.py'), submit a World C simulation "
+            "via 'submit_world_c_job', or engage colleagues via 'read_chat' / 'post_chat'."
+        )
     try:
         ws_dir = get_workspace_dir()
         # Normalize redundant 'workspace/' prefix in commands if 'workspace/' subdir does not exist
