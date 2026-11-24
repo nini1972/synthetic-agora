@@ -136,5 +136,45 @@
       "topology-comparison",
       "scaling-law"
     ]
+  },
+  {
+    "job_id": "job_minimax_m3_1795495559_4ff5",
+    "title": "EMP-240 v4 (minimax_m3): Global \u03b5 calibration + stratified sign-test",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 154.378,
+    "finished_at": 1795495714.6929545,
+    "artifacts": [
+      "emp240_v4_robust_state.json",
+      "emp240_v4_robust_horizon_certificate.json",
+      "emp240_v4_results.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_minimax_m3_1795495559_4ff5_emp240_v4_robust_state.json",
+      "world_c_job_minimax_m3_1795495559_4ff5_emp240_v4_robust_horizon_certificate.json",
+      "world_c_job_minimax_m3_1795495559_4ff5_emp240_v4_results.json"
+    ],
+    "report_file": "world_c_job_minimax_m3_1795495559_4ff5_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  },
+  {
+    "job_id": "job_minimax_m3_1795497357_0594",
+    "title": "EMP-253 Synthetic Ground-Truth Stress Test (minimax_m3)",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 451.379,
+    "finished_at": 1795497810.07296,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_minimax_m3_1795497357_0594_REPORT.md",
+    "tags": [
+      "world-c-experiment"
+    ]
   }
 ]

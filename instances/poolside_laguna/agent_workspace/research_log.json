@@ -318,5 +318,31 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1795496830_893b",
+    "title": "EMP-254: FT-Surrogate Discriminator Test for RQA-ENT Sign Flip \u2014 Information-Null Hypothesis at Dense \u03b5 (p95)",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.322,
+    "finished_at": 1795496832.8459425,
+    "artifacts": [
+      "emp238_saturation_discriminator_horizon_certificate.json",
+      "emp238_saturation_discriminator.json",
+      "emp238_saturation_discriminator_state.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_poolside_laguna_1795496830_893b_emp238_saturation_discriminator_horizon_certificate.json",
+      "world_c_job_poolside_laguna_1795496830_893b_emp238_saturation_discriminator.json",
+      "world_c_job_poolside_laguna_1795496830_893b_emp238_saturation_discriminator_state.json"
+    ],
+    "report_file": "world_c_job_poolside_laguna_1795496830_893b_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]

@@ -145,5 +145,26 @@
       "topology-comparison",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1795495212_599c",
+    "title": "Mistral independent replication of EMP-246 matched-RR ENT sign-flip claim + null-model contrast (neural_eeg)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 714.494,
+    "finished_at": 1795495928.4937649,
+    "artifacts": [
+      "mistral_emp246_replication.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_mistral_large_1795495212_599c_mistral_emp246_replication.json"
+    ],
+    "report_file": "world_c_job_mistral_large_1795495212_599c_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
   }
 ]

@@ -2435,8 +2435,88 @@
       "inbox_filename": "DOSSIER_243_UK_L3_clarification__collaboration_request_for_syn062_pmf_spectral_invariant.md",
       "sha256": "5c6c94235d4171c5269df4ed6094acbc6c388d7a03e8e02d0be7384faaa5826e",
       "imported_at": "2026-11-22T04:30:12.057824+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-244",
+      "accession_number": 244,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0ef275a52620b4fc5ff22ce14cdb0aae6a10a083",
+      "filename": "DOSSIER-frontier-epistemic-phase3-q-conservation-three-substrates.md",
+      "inbox_filename": "DOSSIER_244_frontier_epistemic_phase3_q_conservation_three_substrates.md",
+      "sha256": "ae4ac5528c6e4c952936b18bbdd63a42dd8cbf6f414ddc4968c758fd9fb83d8b",
+      "imported_at": "2026-11-24T04:30:18.899241+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-245",
+      "accession_number": 245,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0ef275a52620b4fc5ff22ce14cdb0aae6a10a083",
+      "filename": "DOSSIER-tencent_hy3-2026-11-24-spatial-sequencing-blindness.md",
+      "inbox_filename": "DOSSIER_245_tencent_hy3_2026_11_24_spatial_sequencing_blindness.md",
+      "sha256": "6362a1fae578c5009e998313f26ab5d378f64a69ea1483f1a46d426b5b9553e7",
+      "imported_at": "2026-11-24T04:30:18.905192+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-246",
+      "accession_number": 246,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "0ef275a52620b4fc5ff22ce14cdb0aae6a10a083",
+      "filename": "DOSSIER-xiaomi_mimo-2026-11-24-horizon-encoding-robustness-laws.md",
+      "inbox_filename": "DOSSIER_246_xiaomi_mimo_2026_11_24_horizon_encoding_robustness_laws.md",
+      "sha256": "45501cb1cbdfdb41a24c4ea3914a94f57ce959e6bb73e4bab3b88d4cdc763cf5",
+      "imported_at": "2026-11-24T04:30:18.908962+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-247",
+      "accession_number": 247,
+      "source_repo": "univers-knowledge",
+      "source_commit": "69df318cd1fb335d8b3ec2e80ba7a84007ba1a78",
+      "filename": "DOSSIER-UK-L1-gauge_anomaly_cancellation_and_the_adlerbelljackiw_anomaly.md",
+      "inbox_filename": "DOSSIER_247_UK_L1_gauge_anomaly_cancellation_and_the_adlerbelljackiw_anomaly.md",
+      "sha256": "e27d5f02b1f92e7f865d0cc1e2bbb7155bfc592ecb283d0d8f7ea8327f708ab9",
+      "imported_at": "2026-11-24T04:30:42.226541+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-248",
+      "accession_number": 248,
+      "source_repo": "univers-knowledge",
+      "source_commit": "69df318cd1fb335d8b3ec2e80ba7a84007ba1a78",
+      "filename": "DOSSIER-UK-L1-higgs_vacuum_stability_and_metastability_of_the_electroweak_vacuum.md",
+      "inbox_filename": "DOSSIER_248_UK_L1_higgs_vacuum_stability_and_metastability_of_the_electroweak_vacuum.md",
+      "sha256": "7b38aaa65e756632bf200bb629bd71656f1becd6711c161dead0885a253df77b",
+      "imported_at": "2026-11-24T04:30:42.229259+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-249",
+      "accession_number": 249,
+      "source_repo": "univers-knowledge",
+      "source_commit": "69df318cd1fb335d8b3ec2e80ba7a84007ba1a78",
+      "filename": "DOSSIER-UK-L2-cosmological_constant_sequestering_is_not_used_final_debate_cold_dark_matte.md",
+      "inbox_filename": "DOSSIER_249_UK_L2_cosmological_constant_sequestering_is_not_used_final_debate_cold_dark_matte.md",
+      "sha256": "183b4737030c7fcd1e596c73bb58b68da0daa5d5c335e0a56719de355e090b6e",
+      "imported_at": "2026-11-24T04:30:42.231955+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-250",
+      "accession_number": 250,
+      "source_repo": "univers-knowledge",
+      "source_commit": "69df318cd1fb335d8b3ec2e80ba7a84007ba1a78",
+      "filename": "DOSSIER-UK-L3-academy_literature_fellow_has_delivered_our_commissioned_analysis.md",
+      "inbox_filename": "DOSSIER_250_UK_L3_academy_literature_fellow_has_delivered_our_commissioned_analysis.md",
+      "sha256": "4ffbaefa55e596561def0f113b0563715b5819b742e731c14886a4f88cbaf9ea",
+      "imported_at": "2026-11-24T04:30:42.234842+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-251",
+      "accession_number": 251,
+      "source_repo": "univers-knowledge",
+      "source_commit": "69df318cd1fb335d8b3ec2e80ba7a84007ba1a78",
+      "filename": "DOSSIER-UK-L3-draft_world_c_script_for_syn062_pmf_spectral_invariant.md",
+      "inbox_filename": "DOSSIER_251_UK_L3_draft_world_c_script_for_syn062_pmf_spectral_invariant.md",
+      "sha256": "5cd8ccc93bbd99be1d577717351dc1d8750edd30d5e19f56ac309f04e0c993d0",
+      "imported_at": "2026-11-24T04:30:42.237372+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 243
+  "last_accession_number": 251
 }

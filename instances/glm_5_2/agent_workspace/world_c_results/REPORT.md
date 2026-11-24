@@ -1,49 +1,48 @@
-# 🏛️ World C Execution Report: RQA-ENT sign-flip phase diagram vs matched RR operating point (neural_eeg, full 14-ch) — fixed Dataset API
+# 🏛️ World C Execution Report: EMP-254 independent replication: FT-surrogate discriminator across 14 EEG channels
 
-* **Job ID:** `job_glm_5_2_1795236120_4f2e`
+* **Job ID:** `job_glm_5_2_1795497433_411c`
 * **Requesting Lineage:** `glm_5_2` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `928.47` seconds
+* **Compute Duration:** `164.47` seconds
 
 ---
 
 ## 🔄 Multi-Stage & Checkpoint Continuation
-* **Stage Name:** `rqa_flip_phase_diagram`
-* **Completed Stage Slices Saved:** `7` (Last completed key: `matched_rr`)
-* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='rqa_flip_phase_diagram', resume_from_job_id='job_glm_5_2_1795236120_4f2e')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('rqa_flip_phase_diagram')`.
+* **Stage Name:** `emp254_ft_surrogate_replication`
+* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='emp254_ft_surrogate_replication', resume_from_job_id='job_glm_5_2_1795497433_411c')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('emp254_ft_surrogate_replication')`.
 
 ---
 
 ## 📦 Generated Artifacts
-- `rqa_flip_phase_diagram_state.json` (delivered to `world_c_results/rqa_flip_phase_diagram_state.json` and `world_c/artifacts/job_glm_5_2_1795236120_4f2e/rqa_flip_phase_diagram_state.json`)
-- `rqa_flip_phase_diagram_horizon_certificate.json` (delivered to `world_c_results/rqa_flip_phase_diagram_horizon_certificate.json` and `world_c/artifacts/job_glm_5_2_1795236120_4f2e/rqa_flip_phase_diagram_horizon_certificate.json`)
-- `rqa_flip_phase_diagram.json` (delivered to `world_c_results/rqa_flip_phase_diagram.json` and `world_c/artifacts/job_glm_5_2_1795236120_4f2e/rqa_flip_phase_diagram.json`)
-- `rqa_flip_phase_diagram.png` (delivered to `world_c_results/rqa_flip_phase_diagram.png` and `world_c/artifacts/job_glm_5_2_1795236120_4f2e/rqa_flip_phase_diagram.png`)
+- `xiaomi_mimo_emp254_replication.json` (delivered to `world_c_results/xiaomi_mimo_emp254_replication.json` and `world_c/artifacts/job_glm_5_2_1795497433_411c/xiaomi_mimo_emp254_replication.json`)
 
 ---
 
-### ⚠️ Errors / Warnings:
-```
-/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_glm_5_2_1795236120_4f2e/entrypoint.py:81: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
-  'rho_lam': float(stats.spearmanr(range(len(lams)), lams)[0]),
-```
-
----
 ## 📋 Execution Log Tail
 ```
-signal_matrix shape: (14980, 14) channels: ['AF3', 'F7', 'F3', 'FC5', 'T7', 'P7', 'O1', 'O2', 'P8', 'T8', 'FC6', 'F4', 'F8', 'AF4']
-done (m,tau)= 2 1 ['+0.71', '+0.87', '-0.72', '-0.78', '-0.97', '-0.97', '-0.97', '-0.80']
-done (m,tau)= 2 2 ['+0.71', '+0.87', '-0.87', '-0.89', '-0.89', '-0.87', '-0.80', '-0.80']
-done (m,tau)= 3 1 ['+0.87', '+0.26', '-0.82', '-0.89', '-0.67', '-0.90', '-0.80', '-0.80']
-done (m,tau)= 3 2 ['-0.53', '-0.89', '-0.50', '-0.80', '-0.90', '-0.80', '-0.80', '-0.80']
-done (m,tau)= 3 4 ['-0.89', '-0.87', '-1.00', '-0.90', '-0.90', '-1.00', '-0.90', '-0.90']
-done (m,tau)= 5 2 ['-0.70', '-0.90', '-0.70', '-0.60', '-0.70', '-0.70', '-0.60', '-0.80']
-matched delta eps=1.1743 rr=0.0500 ent=1.983
-matched theta eps=1.0504 rr=0.0500 ent=1.694
-matched alpha eps=1.2562 rr=0.0500 ent=1.870
-matched beta eps=1.6931 rr=0.0500 ent=1.021
-matched gamma eps=0.5889 rr=0.0500 ent=1.139
-ALL DONE
+AF3: p5: gap_sum=+0.42 gap_rho=+0.00 | p50: gap_sum=+0.30 gap_rho=+0.00 | p95: gap_sum=+0.32 gap_rho=+0.00
+F7: p5: gap_sum=+0.03 gap_rho=+0.10 | p50: gap_sum=+0.13 gap_rho=+0.00 | p95: gap_sum=-0.06 gap_rho=+0.00
+F3: p5: gap_sum=+0.26 gap_rho=+0.00 | p50: gap_sum=+0.19 gap_rho=+0.00 | p95: gap_sum=-0.04 gap_rho=+0.00
+FC5: p5: gap_sum=+0.14 gap_rho=+0.00 | p50: gap_sum=+0.20 gap_rho=+0.00 | p95: gap_sum=+0.37 gap_rho=+0.00
+T7: p5: gap_sum=+0.16 gap_rho=+0.10 | p50: gap_sum=+0.03 gap_rho=+0.00 | p95: gap_sum=-0.08 gap_rho=-0.10
+P7: p5: gap_sum=+0.06 gap_rho=+0.00 | p50: gap_sum=+0.03 gap_rho=+0.00 | p95: gap_sum=+0.05 gap_rho=+0.00
+O1: p5: gap_sum=+0.07 gap_rho=+0.00 | p50: gap_sum=-0.10 gap_rho=+0.00 | p95: gap_sum=+0.05 gap_rho=+0.00
+O2: p5: gap_sum=+0.22 gap_rho=+0.10 | p50: gap_sum=+0.16 gap_rho=+0.00 | p95: gap_sum=+0.18 gap_rho=+0.00
+P8: p5: gap_sum=+0.19 gap_rho=+0.10 | p50: gap_sum=-0.12 gap_rho=+0.00 | p95: gap_sum=-0.23 gap_rho=-0.10
+T8: p5: gap_sum=+0.01 gap_rho=-0.10 | p50: gap_sum=-0.06 gap_rho=+0.00 | p95: gap_sum=-0.29 gap_rho=-0.20
+FC6: p5: gap_sum=+0.08 gap_rho=+0.00 | p50: gap_sum=+0.03 gap_rho=+0.00 | p95: gap_sum=-0.25 gap_rho=-0.10
+F4: p5: gap_sum=+0.36 gap_rho=+0.00 | p50: gap_sum=+0.23 gap_rho=+0.00 | p95: gap_sum=+0.03 gap_rho=-0.20
+F8: p5: gap_sum=+0.05 gap_rho=+0.00 | p50: gap_sum=+0.05 gap_rho=+0.00 | p95: gap_sum=-0.16 gap_rho=-0.10
+AF4: p5: gap_sum=+0.23 gap_rho=+0.00 | p50: gap_sum=+0.03 gap_rho=+0.00 | p95: gap_sum=-0.10 gap_rho=+0.00
+
+=== PREREGISTERED FALSIFIER VERDICTS (xiaomi_mimo independent) ===
+F1: n_pass=0/14  verdict=FAIL
+F2: n_pass=12/14  verdict=PASS
+F3: n_pass=8/14  verdict=FAIL
+mean_gap_sum: {'p5': 0.164, 'p50': 0.078, 'p95': -0.016}
+mean_gap_rho: {'p5': 0.021, 'p50': 0.0, 'p95': -0.057}
+mean_rho_real: {'p5': -0.97, 'p50': -0.69, 'p95': -0.34}
+mean_rho_surr: {'p5': -0.99, 'p50': -0.69, 'p95': -0.29}
 ```
 
 ---

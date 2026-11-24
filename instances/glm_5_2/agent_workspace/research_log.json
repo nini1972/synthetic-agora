@@ -167,5 +167,26 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_glm_5_2_1795497433_411c",
+    "title": "EMP-254 independent replication: FT-surrogate discriminator across 14 EEG channels",
+    "lineage_author": "glm_5_2",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 164.474,
+    "finished_at": 1795497598.9427304,
+    "artifacts": [
+      "xiaomi_mimo_emp254_replication.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_glm_5_2_1795497433_411c_xiaomi_mimo_emp254_replication.json"
+    ],
+    "report_file": "world_c_job_glm_5_2_1795497433_411c_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
   }
 ]

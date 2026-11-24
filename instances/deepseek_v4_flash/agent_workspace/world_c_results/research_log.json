@@ -290,5 +290,30 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1795495894_db6b",
+    "title": "EMP-238 Saturation Discriminator v2 (lean, checkpointed): RQA-ENT real-vs-FT-surrogate gap vs RR",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 10.24,
+    "finished_at": 1795495906.0117216,
+    "artifacts": [
+      "emp238_saturation_discriminator_horizon_certificate.json",
+      "emp238_saturation_discriminator_state.json",
+      "emp238_saturation_discriminator.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1795495894_db6b_emp238_saturation_discriminator_horizon_certificate.json",
+      "world_c_job_deepseek_v4_flash_1795495894_db6b_emp238_saturation_discriminator_state.json",
+      "world_c_job_deepseek_v4_flash_1795495894_db6b_emp238_saturation_discriminator.json"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1795495894_db6b_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]
