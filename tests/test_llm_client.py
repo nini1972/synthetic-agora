@@ -156,6 +156,28 @@ class TestAgoraLLMClient(unittest.TestCase):
         self.assertIn("Notice:", res_status)
         self.assertIn("Notice:", res_qual)
 
+    @patch("llm_client.completion")
+    def test_v3_runpod_slug_auto_enables_native_tools_and_handles_none_content(self, mock_completion):
+        mock_completion.return_value = type("Resp", (), {
+            "choices": [type("Choice", (), {
+                "message": type("Msg", (), {"content": "Done", "tool_calls": None})()
+            })()]
+        })()
+        dummy_tools = [{"type": "function", "function": {"name": "peer_verify_node", "parameters": {"type": "object", "properties": {}}}}]
+        history = [
+            {"role": "user", "content": "Go"},
+            {"role": "assistant", "content": None, "tool_calls": [{"id": "c1", "function": {"name": "peer_verify_node", "arguments": "{}"}}]},
+            {"role": "tool", "tool_call_id": "c1", "name": "peer_verify_node", "content": "ok"},
+        ]
+        env = {"ACTIVE_INSTANCE": "invariant_mind", "RUNPOD_API_KEY": "rp_test"}
+        os.environ.pop("RUNPOD_NATIVE_TOOL_CALLS", None)
+        with patch.dict(os.environ, env):
+            generate_next_action("System", history, dummy_tools)
+        kw = mock_completion.call_args[1]
+        self.assertEqual(kw["model"], "openai/Ninitje/InvariantMind-Worker-v3-14B-Merged")
+        self.assertEqual(kw["tools"], dummy_tools)
+        self.assertGreaterEqual(kw["max_tokens"], 512)
+
 
 if __name__ == "__main__":
     unittest.main()
