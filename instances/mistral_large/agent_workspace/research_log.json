@@ -166,5 +166,21 @@
       "phase-diagram",
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1795582202_92fa",
+    "title": "Mistral independent verification of EMP-253 fixed-eps RR-saturation sign flip (EEG RQA)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 97.325,
+    "finished_at": 1795582300.58937,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_mistral_large_1795582202_92fa_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

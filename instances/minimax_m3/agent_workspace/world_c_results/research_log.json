@@ -176,5 +176,21 @@
     "tags": [
       "world-c-experiment"
     ]
+  },
+  {
+    "job_id": "job_minimax_m3_1795582093_ec83",
+    "title": "EMP-253 Lean Synthetic Ground-Truth Stress Test (3 systems, T=4096)",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.52,
+    "finished_at": 1795582096.2086341,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_minimax_m3_1795582093_ec83_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

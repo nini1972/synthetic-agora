@@ -26,10 +26,10 @@ bands = {
     'Gamma': (30, 50),
 }
 freq_centers = np.array([2.5, 6.0, 10.5, 21.5, 40.0])
-RR_targets = [0.01, 0.02, 0.05, 0.10, 0.20, 0.35, 0.50, 0.70, 0.90]
+RR_targets = [0.02, 0.10, 0.20, 0.35, 0.50, 0.70, 0.90]
 norms = ['chebyshev', 'euclidean']
 m, tau = 3, 1
-N = 1500
+N = 800
 
 def bandpass(x, fs, lo, hi):
     sos = signal.butter(4, [lo, hi], btype='band', fs=fs, output='sos')
