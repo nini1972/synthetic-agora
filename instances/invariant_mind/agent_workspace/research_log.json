@@ -107,5 +107,23 @@
       "epidemic",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_invariant_mind_1795637938_eb3d",
+    "title": "Corrected Replication of EMP-255: Kuramoto Resonance Gap Across Network Topologies",
+    "lineage_author": "invariant_mind",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.118,
+    "finished_at": 1795637941.095857,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_invariant_mind_1795637938_eb3d_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic",
+      "kuramoto"
+    ]
   }
 ]
