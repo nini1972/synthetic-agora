@@ -191,15 +191,24 @@ class TestAgoraLLMClient(unittest.TestCase):
             + "\n=== 💬 COLLEAGUE COMMONS DIGEST ===\n- @invariant_mind check EMP-258"
         )
         history = [
+            {"role": "assistant", "content": "Executing post_chat.\n<tool_call>{\"name\": \"post_chat\", \"arguments\": {\"message\": \"cut off"},
             {"role": "assistant", "content": "", "tool_calls": [{"id": "c1", "function": {"name": "read_chat", "arguments": "{\"channel\": \"#lounge\"}"}}]},
             {"role": "tool", "tool_call_id": "c1", "name": "read_chat", "content": "msg1"},
             {"role": "assistant", "content": "", "tool_calls": [{"id": "c2", "function": {"name": "read_chat", "arguments": "{\"channel\": \"#sanity-check\"}"}}]},
             {"role": "tool", "tool_call_id": "c2", "name": "read_chat", "content": "msg2"},
+            {"role": "assistant", "content": "", "tool_calls": [{"id": "c3", "function": {"name": "read_chat", "arguments": "{\"channel\": \"#sanity-check\"}"}}]},
+            {"role": "tool", "tool_call_id": "c3", "name": "read_chat", "content": "Notice: You already called read_chat twice."},
+        ]
+        sample_tools = [
+            {"type": "function", "function": {"name": "read_chat", "parameters": {"type": "object", "properties": {}}}},
+            {"type": "function", "function": {"name": "post_chat", "parameters": {"type": "object", "properties": {}}}},
+            {"type": "function", "function": {"name": "peer_verify_node", "parameters": {"type": "object", "properties": {}}}},
         ]
         env = {"ACTIVE_INSTANCE": "invariant_mind", "RUNPOD_API_KEY": "rp_test", "RUNPOD_NATIVE_TOOL_CALLS": "true"}
         with patch.dict(os.environ, env):
-            generate_next_action(long_proclamation, history, [])
-        msgs = mock_completion.call_args[1]["messages"]
+            generate_next_action(long_proclamation, history, sample_tools)
+        kw = mock_completion.call_args[1]
+        msgs = kw["messages"]
         self.assertIn("InvariantMind-v3", msgs[0]["content"])
         self.assertIn("Pending UNDER_REVIEW: EMP-258", msgs[0]["content"])
         self.assertNotIn("COLLEAGUE COMMONS DIGEST", msgs[0]["content"])
@@ -208,6 +217,16 @@ class TestAgoraLLMClient(unittest.TestCase):
         self.assertEqual(msgs[-1]["role"], "user")
         self.assertIn("COLLEAGUE COMMONS DIGEST", msgs[-1]["content"])
         self.assertIn("[ACTION TRANSITION REQUIRED]", msgs[-1]["content"])
+        asst_read_calls = [
+            m for m in msgs
+            if m.get("role") == "assistant"
+            and any(tc.get("function", {}).get("name") == "read_chat" for tc in (m.get("tool_calls") or []))
+        ]
+        self.assertEqual(len(asst_read_calls), 1)
+        sent_tool_names = [t["function"]["name"] for t in kw["tools"]]
+        self.assertNotIn("read_chat", sent_tool_names)
+        self.assertIn("post_chat", sent_tool_names)
+        self.assertEqual(kw["max_tokens"], 3072)
 
 
 if __name__ == "__main__":
