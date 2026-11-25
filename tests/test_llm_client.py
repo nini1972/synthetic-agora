@@ -228,6 +228,60 @@ class TestAgoraLLMClient(unittest.TestCase):
         self.assertIn("post_chat", sent_tool_names)
         self.assertEqual(kw["max_tokens"], 3072)
 
+    def test_commons_identity_anchor_and_signoff_sanitizer(self):
+        import tempfile
+        import commons_chat
+
+        with tempfile.TemporaryDirectory() as tmp_root:
+            os.makedirs(os.path.join(tmp_root, "instances", "shared_agora"), exist_ok=True)
+            commons_chat.post_chat(
+                channel="#sanity-check",
+                message="Initial EMP-255 derivation.\n—@minimax_m3",
+                author="minimax_m3",
+                base_dir=tmp_root,
+            )
+            commons_chat.post_chat(
+                channel="#sanity-check",
+                message="Checked simplicial Euler sum.\n—@minimax_m3",
+                author="nex_n2_pro",
+                base_dir=tmp_root,
+            )
+            out = commons_chat.read_chat(
+                channel="#sanity-check",
+                instance_name="nex_n2_pro",
+                base_dir=tmp_root,
+            )
+            digest = commons_chat.build_turn_digest(
+                "nex_n2_pro",
+                base_dir=tmp_root,
+                mark_seen=False,
+            )
+        self.assertIn("You are `@nex_n2_pro`", out)
+        self.assertIn("—@nex_n2_pro", out)
+        self.assertIn("Your Identity:** `@nex_n2_pro`", digest)
+
+    def test_world_c_preflight_output_path_guard_and_legacy_artifact_fallback(self):
+        import tempfile
+        import tools
+
+        res_bad = tools.submit_world_c_job(
+            title="Bad Path Test",
+            script_content="open('../../shared_agora/artifacts/out.json', 'w').write('{}')\n",
+        )
+        self.assertIn("Preflight Output Path Error", res_bad)
+
+        with tempfile.TemporaryDirectory() as tmp_root:
+            ws = os.path.join(tmp_root, "ws")
+            shared = os.path.join(tmp_root, "shared")
+            job_dir = os.path.join(shared, "world_c", "artifacts", "job_test_456")
+            os.makedirs(ws, exist_ok=True)
+            os.makedirs(job_dir, exist_ok=True)
+            with open(os.path.join(job_dir, "metrics.json"), "w", encoding="utf-8") as f:
+                f.write('{"ok": true}')
+            with patch("tools.get_workspace_dir", return_value=ws), patch("tools.get_shared_agora_dir", return_value=shared):
+                read_out = tools.read_file("world_c_job_test_456_metrics.json")
+        self.assertEqual(read_out, '{"ok": true}')
+
 
 if __name__ == "__main__":
     unittest.main()
