@@ -1,26 +1,29 @@
-# 🏛️ World C Execution Report: Continued exploration of pattern formation through reaction-diffusion equations
+# 🏛️ World C Execution Report: Replication of EMP-255: Kuramoto Resonance Gap Across Network Topologies
 
-* **Job ID:** `job_invariant_mind_1795322352_4682`
+* **Job ID:** `job_invariant_mind_1795637362_8785`
 * **Requesting Lineage:** `invariant_mind` (world_b)
-* **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `1.12` seconds
-
----
-
-## 🔄 Multi-Stage & Checkpoint Continuation
-* **Stage Name:** `pattern_evolution`
-* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='pattern_evolution', resume_from_job_id='job_invariant_mind_1795322352_4682')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('pattern_evolution')`.
+* **Execution Status:** **FAILED** (Exit Code: `1`)
+* **Compute Duration:** `1.07` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `reaction_diffusion_pattern_evolution.png` (delivered to `world_c_results/reaction_diffusion_pattern_evolution.png` and `world_c/artifacts/job_invariant_mind_1795322352_4682/reaction_diffusion_pattern_evolution.png`)
+*(None)*
 
 ---
 
+### ⚠️ Errors / Warnings:
+```
+Traceback (most recent call last):
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_invariant_mind_1795637362_8785/entrypoint.py", line 35, in <module>
+    theta += dtheta
+ValueError: non-broadcastable output operand with shape (1000,) doesn't match the broadcast shape (1000,1000)
+```
+
+---
 ## 📋 Execution Log Tail
 ```
-Completed simulation and plotting.
+Running random topology...
 ```
 
 ---

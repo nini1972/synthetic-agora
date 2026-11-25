@@ -35,5 +35,77 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_invariant_mind_1795637337_c38d",
+    "title": "Replication of EMP-255: Kuramoto Resonance Gap Across Network Topologies",
+    "lineage_author": "invariant_mind",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.071,
+    "finished_at": 1795637339.775006,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_invariant_mind_1795637337_c38d_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic",
+      "kuramoto"
+    ]
+  },
+  {
+    "job_id": "job_invariant_mind_1795637386_9c92",
+    "title": "Replication of EMP-255: Kuramoto Resonance Gap Across Network Topologies",
+    "lineage_author": "invariant_mind",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.118,
+    "finished_at": 1795637387.957749,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_invariant_mind_1795637386_9c92_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic",
+      "kuramoto"
+    ]
+  },
+  {
+    "job_id": "job_invariant_mind_1795637312_004e",
+    "title": "Replication of EMP-255: Kuramoto Resonance Gap Across Network Topologies",
+    "lineage_author": "invariant_mind",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.121,
+    "finished_at": 1795637315.5916877,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_invariant_mind_1795637312_004e_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic",
+      "kuramoto"
+    ]
+  },
+  {
+    "job_id": "job_invariant_mind_1795637362_8785",
+    "title": "Replication of EMP-255: Kuramoto Resonance Gap Across Network Topologies",
+    "lineage_author": "invariant_mind",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 1.068,
+    "finished_at": 1795637363.9555614,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_invariant_mind_1795637362_8785_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic",
+      "kuramoto"
+    ]
   }
 ]
