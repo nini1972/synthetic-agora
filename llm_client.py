@@ -905,6 +905,73 @@ def get_openrouter_extra_body(agent_model: str) -> dict | None:
         return {"provider": {"ignore": list(MINIMAX_BLOCKED_OPENROUTER_PROVIDERS)}}
     return None
 
+V3_RUNPOD_WORLD_B_SYSTEM_PROMPT = (
+    "You are InvariantMind-v3 (`invariant_mind`, family `autonomous_mind`), an autonomous epistemic scientist in World B (Synthetic Agora).\n"
+    "Verify peer claims empirically (`run_command`, `submit_world_c_job`, `peer_verify_node`), "
+    "publish quantitative DAG findings (`post_epistemic_node`), and coordinate with colleagues "
+    "via `read_chat`, `post_chat`, and `read_agent_inbox`.\n\n"
+    "### Key Environment & Paths\n"
+    "- Living Epistemic DAG: inspect `UNDER_REVIEW` / `UNVERIFIED_HYPOTHESIS` nodes (`query_epistemic_graph`), run independent Python or World C replications (`matplotlib.use('Agg')`; inside World C jobs write outputs to `./` in CWD, never `../../shared_agora/...`), then record formal `peer_verify_node(node_id, verdict, critique_notes)` or `post_epistemic_node(...)`.\n"
+    "- World C & `colony_lib`: results in `world_c_results/REPORT.md` (`check_world_c_job`); `colony_lib.persistence.StageTracker`, `colony_lib.datasets.load_dataset` (`neural_eeg`, `power_grid_ieee`, `belousov_zhabotinsky`, `solar_sunspots`, `climate_enso`, `climate_temperatures`, `lynx_hare`), `dynamics`, `recurrence`, `network_topology`, `scaling`.\n"
+    "- Embassy: `embassy/inbox/` (`DOSSIER-*.md`, `DOSSIER-UK-*.md`), `export_treaty_to_embassy` for `CANON_VERIFIED` nodes.\n"
+    "- Commons channels: `#sanity-check`, `#methods-and-debugging`, `#synchronization-networks`, `#pattern-formation`, `#world-c-coordination`, `#literature-and-theory`, `#human-visitor-questions`, `#lounge`.\n"
+    "- Turn Discipline: Read at most 1 channel/node to orient, then ACT (`run_command`, `submit_world_c_job`, `peer_verify_node`, `post_epistemic_node`, or `post_chat` with concrete numbers). Never spend multiple consecutive turns calling `read_chat`."
+)
+
+
+def build_v3_runpod_prompts(system_prompt: str) -> tuple[str, str]:
+    """Splits out the dynamic Commons Digest for user-turn delivery, preserves live Agora telemetry,
+    and replaces the 4.6k-token proclamation prompt with the compact SFT-aligned InvariantMind-v3 system prompt."""
+    raw = system_prompt or ""
+    digest_marker = "=== 💬 COLLEAGUE COMMONS DIGEST"
+    telemetry_marker = "[AGORA LIVE TELEMETRY & EPISTEMIC PRIORITY QUEUE]"
+    digest_block = ""
+    base_sys = raw
+    if digest_marker in raw:
+        d_idx = raw.find(digest_marker)
+        digest_block = raw[d_idx:].strip()
+        base_sys = raw[:d_idx].strip()
+
+    telemetry_block = ""
+    if telemetry_marker in base_sys:
+        t_idx = base_sys.find(telemetry_marker)
+        telemetry_block = base_sys[t_idx:].strip()
+        base_sys = base_sys[:t_idx].strip()
+
+    if len(base_sys) > 800:
+        base_sys = V3_RUNPOD_WORLD_B_SYSTEM_PROMPT
+
+    if telemetry_block:
+        base_sys = base_sys + "\n\n" + telemetry_block
+    return base_sys, digest_block
+
+
+def _count_trailing_chat_reads(messages: list) -> int:
+    """Counts consecutive trailing (assistant -> read_chat) turns at the end of messages."""
+    count = 0
+    idx = len(messages) - 1
+    while idx >= 0:
+        m = messages[idx]
+        role = m.get("role")
+        if role == "tool":
+            if m.get("name") not in ("read_chat", "read_channel"):
+                break
+            idx -= 1
+            continue
+        if role == "assistant":
+            tcs = m.get("tool_calls") or []
+            if not tcs:
+                break
+            names = [tc.get("function", {}).get("name") for tc in tcs]
+            if all(n in ("read_chat", "read_channel") for n in names):
+                count += 1
+                idx -= 1
+                continue
+            break
+        break
+    return count
+
+
 def generate_next_action(system_prompt: str, history: list, tools: list) -> dict:
     global_dotenv = os.path.abspath(os.path.join(os.path.dirname(__file__), "config", ".env"))
     load_dotenv(dotenv_path=global_dotenv, override=False)
@@ -920,7 +987,10 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
         _native_env in ("1", "true", "yes")
         or ("-v3-" in agent_model.lower() and _native_env not in ("0", "false", "no"))
     )
-    if agent_model.startswith("runpod/") and not use_native_tools:
+    v3_digest_block = ""
+    if use_native_tools:
+        effective_system_prompt, v3_digest_block = build_v3_runpod_prompts(system_prompt)
+    elif agent_model.startswith("runpod/") and not use_native_tools:
         effective_system_prompt += (
             "\n\n[TOOL INVOCATION FORMAT]: Always execute your next step by invoking a tool using "
             "<tool_call>{\"name\": \"<tool_name>\", \"arguments\": {...}}</tool_call> "
@@ -928,7 +998,21 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
         )
     messages = [{"role": "system", "content": effective_system_prompt}]
     
-    pruned = prune_history(history)
+    if use_native_tools:
+        pruned = prune_history(history, max_messages=20, max_content_chars=4000, max_prompt_tokens=9500)
+        if pruned and pruned[0].get("role") == "user" and (pruned[0].get("content") or "").startswith("Please continue"):
+            ws_scripts = _list_active_workspace_py_scripts(limit=10)
+            scripts_hint = f" Existing workspace .py scripts: {', '.join(ws_scripts)}." if ws_scripts else ""
+            pruned[0] = {
+                "role": "user",
+                "content": (
+                    "Proceed with your current Synthetic Agora empirical verification or World C investigation: "
+                    "replicate an `UNDER_REVIEW` DAG claim via Python/World C, record `peer_verify_node` or `post_epistemic_node`, "
+                    "or post concrete results to Colleague Commons (`post_chat`)." + scripts_hint
+                ),
+            }
+    else:
+        pruned = prune_history(history)
     for entry in pruned:
         msg = {
             "role": entry["role"],
@@ -997,7 +1081,30 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
         est_prompt_tokens = tools_tokens + msg_tokens
 
     # Surface the live Colleague Commons Digest as a user-turn notification at the start of the turn
-    if "=== 💬 COLLEAGUE COMMONS DIGEST" in effective_system_prompt and len(messages) >= 1:
+    if use_native_tools:
+        trailing_reads = _count_trailing_chat_reads(messages)
+        tail_parts = []
+        if v3_digest_block:
+            tail_parts.append(v3_digest_block)
+        if trailing_reads >= 2:
+            tail_parts.append(
+                f"[ACTION TRANSITION REQUIRED]: Your last {trailing_reads} turns only called `read_chat`. "
+                "Do NOT call `read_chat` on this turn — act on what you already read by running a Python/World C replication "
+                "(`run_command` or `submit_world_c_job`), recording a formal `peer_verify_node` or `post_epistemic_node`, "
+                "or posting concrete quantitative findings (`post_chat`)."
+            )
+        if tail_parts and len(messages) >= 1:
+            combined_tail = "\n\n".join(tail_parts)
+            if messages[-1]["role"] == "user":
+                cur_c = messages[-1].get("content") or ""
+                add_parts = [p for p in tail_parts if p[:40] not in cur_c]
+                if add_parts:
+                    messages[-1]["content"] = (cur_c + "\n\n" + "\n\n".join(add_parts)).strip()
+            elif messages[-1]["role"] == "tool":
+                messages.append({"role": "user", "content": combined_tail})
+            msg_tokens = sum(estimate_tokens(m) for m in messages)
+            est_prompt_tokens = tools_tokens + msg_tokens
+    elif "=== 💬 COLLEAGUE COMMONS DIGEST" in effective_system_prompt and len(messages) >= 1:
         digest_idx = effective_system_prompt.find("=== 💬 COLLEAGUE COMMONS DIGEST")
         digest_block = effective_system_prompt[digest_idx:].strip()
         last_tool_called = messages[-1].get("name") if messages[-1]["role"] == "tool" else None
