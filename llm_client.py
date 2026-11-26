@@ -147,6 +147,63 @@ def _is_runpod_markdown_echo_cmd(cmd: str) -> bool:
         return False
     return ("# " in c) or ("## " in c) or (".md" in cl and len(c) > 60)
 
+
+_PASSIVE_SHELL_VERBS = {
+    "ls", "dir", "pwd", "find", "head", "tail", "cat", "wc", "stat", "du", "file", "which", "grep", "egrep", "fgrep", "tree"
+}
+_ACTIVE_SHELL_TOKENS = (
+    "python", "python3", "pytest", "pip", "uv", "gcc", "g++", "rustc", "cargo", "node", "bash ", "sh ",
+    "cp ", "mv ", "rm ", "mkdir ", "touch ", "sed -i", "perl -i", "patch ", "git "
+)
+
+
+def is_passive_recon_shell_cmd(cmd: str) -> bool:
+    """Returns True when a shell command only inspects directories/files (e.g. ls, find, cat, head)
+    without executing code or mutating workspace state."""
+    if not cmd or not isinstance(cmd, str):
+        return False
+    c = cmd.strip()
+    if not c:
+        return False
+    cl = c.lower()
+    if any(tok in cl for tok in _ACTIVE_SHELL_TOKENS):
+        return False
+    cleaned_redir = re.sub(r"2>\s*/dev/null|2>&1|1>&2", "", cl)
+    if ">" in cleaned_redir or "tee " in cleaned_redir:
+        return False
+    segments = re.split(r"&&|\|\||;|\||\n", c)
+    saw_recon_verb = False
+    for seg in segments:
+        s = seg.strip()
+        if not s:
+            continue
+        tokens = s.split()
+        if not tokens:
+            continue
+        first = os.path.basename(tokens[0]).lower()
+        if first in ("cd", "echo", "printf", "true"):
+            continue
+        if first in _PASSIVE_SHELL_VERBS:
+            saw_recon_verb = True
+            continue
+        return False
+    return saw_recon_verb
+
+
+def is_passive_recon_tool_call(tool_name: str, arguments) -> bool:
+    """Classifies passive read/browse tool calls (read_chat, read_file, query_epistemic_graph, or ls/find shell commands)."""
+    if tool_name in ("read_chat", "read_channel", "read_file", "read_agent_inbox", "query_epistemic_graph"):
+        return True
+    if tool_name == "run_command":
+        if isinstance(arguments, str):
+            try:
+                arguments = json.loads(arguments)
+            except Exception:
+                arguments = {"command": arguments}
+        if isinstance(arguments, dict):
+            return is_passive_recon_shell_cmd(str(arguments.get("command", "")))
+    return False
+
 def _list_active_workspace_py_scripts(base_dir: str = None, limit: int = 12) -> list:
     """Returns up to `limit` real .py filenames in the active instance's workspace so small models stop hallucinating script names."""
     inst = os.getenv("ACTIVE_INSTANCE", "").strip()
@@ -911,7 +968,7 @@ V3_RUNPOD_WORLD_B_SYSTEM_PROMPT = (
     "publish quantitative DAG findings (`post_epistemic_node`), and coordinate with colleagues "
     "via `read_chat`, `post_chat`, and `read_agent_inbox`.\n\n"
     "### Key Environment & Paths\n"
-    "- Living Epistemic DAG: inspect `UNDER_REVIEW` / `UNVERIFIED_HYPOTHESIS` nodes (`query_epistemic_graph`), run independent Python or World C replications (`matplotlib.use('Agg')`; inside World C jobs write outputs to `./` in CWD, never `../../shared_agora/...`), then record formal `peer_verify_node(node_id, verdict, critique_notes)` or `post_epistemic_node(...)`.\n"
+    "- Living Epistemic DAG: inspect `UNDER_REVIEW` / `UNVERIFIED_HYPOTHESIS` nodes (`query_epistemic_graph`), run independent Python or World C replications (`matplotlib.use('Agg')`; every World C `script_content` must be 100% self-contained and write outputs to `./` in CWD, never `../../shared_agora/...` or local `out/...`), then record formal `peer_verify_node(node_id, verdict, critique_notes)` or `post_epistemic_node(...)`.\n"
     "- World C & `colony_lib`: results in `world_c_results/REPORT.md` (`check_world_c_job`); `colony_lib.persistence.StageTracker`, `colony_lib.datasets.load_dataset` (`neural_eeg`, `power_grid_ieee`, `belousov_zhabotinsky`, `solar_sunspots`, `climate_enso`, `climate_temperatures`, `lynx_hare`), `dynamics`, `recurrence`, `network_topology`, `scaling`.\n"
     "- Embassy: `embassy/inbox/` (`DOSSIER-*.md`, `DOSSIER-UK-*.md`), `export_treaty_to_embassy` for `CANON_VERIFIED` nodes.\n"
     "- Commons channels: `#sanity-check`, `#methods-and-debugging`, `#synchronization-networks`, `#pattern-formation`, `#world-c-coordination`, `#literature-and-theory`, `#human-visitor-questions`, `#lounge`.\n"
@@ -947,23 +1004,26 @@ def build_v3_runpod_prompts(system_prompt: str) -> tuple[str, str]:
 
 
 def _count_trailing_chat_reads(messages: list) -> int:
-    """Counts consecutive trailing (assistant -> read_chat) turns at the end of messages."""
+    """Counts consecutive trailing passive reconnaissance turns (read_chat, read_file, or ls/find shell checks)."""
     count = 0
     idx = len(messages) - 1
     while idx >= 0:
         m = messages[idx]
         role = m.get("role")
         if role == "tool":
-            if m.get("name") not in ("read_chat", "read_channel"):
-                break
             idx -= 1
             continue
         if role == "assistant":
             tcs = m.get("tool_calls") or []
             if not tcs:
                 break
-            names = [tc.get("function", {}).get("name") for tc in tcs]
-            if all(n in ("read_chat", "read_channel") for n in names):
+            if all(
+                is_passive_recon_tool_call(
+                    tc.get("function", {}).get("name", ""),
+                    tc.get("function", {}).get("arguments", "{}"),
+                )
+                for tc in tcs
+            ):
                 count += 1
                 idx -= 1
                 continue
@@ -973,39 +1033,54 @@ def _count_trailing_chat_reads(messages: list) -> int:
 
 
 def _collapse_excess_chat_reads(history: list, max_keep: int = 1) -> tuple[list, int]:
-    """Collapses older read_chat (assistant, tool) pairs in history so 14B models are not
-    few-shot conditioned by a streak of historical read_chat calls, and returns (filtered_history, recent_raw_reads)."""
+    """Collapses excess passive reconnaissance (read_chat and read-only ls/find) pairs in history so 14B models
+    are not few-shot conditioned by streaks of passive reads, returning (filtered_history, recent_recon_streak)."""
     if not history:
         return [], 0
 
-    recent_asst_reads = 0
-    last_asst_is_read = False
-    asst_seen = 0
+    recent_recon_streak = 0
     for m in reversed(history):
-        if m.get("role") == "assistant":
-            asst_seen += 1
+        role = m.get("role")
+        if role == "tool":
+            continue
+        if role == "assistant":
             tcs = m.get("tool_calls") or []
-            is_r = bool(tcs) and all(tc.get("function", {}).get("name") in ("read_chat", "read_channel") for tc in tcs)
-            if asst_seen == 1:
-                last_asst_is_read = is_r
-            if is_r:
-                recent_asst_reads += 1
-            if asst_seen >= 3:
-                break
-    if not last_asst_is_read:
-        recent_asst_reads = 0
+            if tcs and all(
+                is_passive_recon_tool_call(
+                    tc.get("function", {}).get("name", ""),
+                    tc.get("function", {}).get("arguments", "{}"),
+                )
+                for tc in tcs
+            ):
+                recent_recon_streak += 1
+                continue
+            break
+        break
 
     drop_indices = set()
+    eff_max_keep = 0 if recent_recon_streak >= 1 else max_keep
     kept_valid_reads = 0
+    seen_recon_sigs = set()
     prev_kept_sig = None
     i = len(history) - 1
     while i >= 0:
         m = history[i]
         if (
             i < len(history) - 1
+            and m.get("role") == "user"
+            and "You stated your intention" in str(m.get("content") or "")
+            and i >= 1
+            and history[i - 1].get("role") == "assistant"
+            and not history[i - 1].get("tool_calls")
+        ):
+            drop_indices.add(i)
+            drop_indices.add(i - 1)
+            i -= 2
+            continue
+        if (
+            i < len(history) - 1
             and m.get("role") == "assistant"
             and not m.get("tool_calls")
-            and "<tool_call>" in str(m.get("content") or "")
         ):
             drop_indices.add(i)
             i -= 1
@@ -1015,27 +1090,54 @@ def _collapse_excess_chat_reads(history: list, max_keep: int = 1) -> tuple[list,
             and i >= 1
             and history[i - 1].get("role") == "assistant"
         ):
-            t_name = m.get("name")
+            t_name = m.get("name") or ""
             asst_m = history[i - 1]
             tcs = asst_m.get("tool_calls") or []
+            tc_id = str(tcs[0].get("id") or "") if tcs else ""
             raw_a = tcs[0].get("function", {}).get("arguments", "{}") if tcs else "{}"
             try:
                 canon_a = json.dumps(json.loads(raw_a), sort_keys=True) if isinstance(raw_a, str) else json.dumps(raw_a, sort_keys=True)
             except Exception:
                 canon_a = str(raw_a)
             call_sig = (t_name, canon_a)
+            obs = str(m.get("content") or "")
+            is_notice = obs.startswith("Notice: You ")
+
+            if i < len(history) - 4 and tc_id.startswith("fallback_"):
+                drop_indices.add(i)
+                drop_indices.add(i - 1)
+                i -= 2
+                continue
 
             if t_name in ("read_chat", "read_channel"):
-                obs = str(m.get("content") or "")
-                is_notice = obs.startswith("Notice: You ")
-                if is_notice or kept_valid_reads >= max_keep:
+                if is_notice or kept_valid_reads >= eff_max_keep or call_sig in seen_recon_sigs:
                     drop_indices.add(i)
                     drop_indices.add(i - 1)
                 else:
                     kept_valid_reads += 1
+                    seen_recon_sigs.add(call_sig)
                     prev_kept_sig = call_sig
                 i -= 2
                 continue
+
+            if is_passive_recon_tool_call(t_name, canon_a) and t_name == "run_command":
+                if is_notice or i < len(history) - 1 or call_sig in seen_recon_sigs:
+                    drop_indices.add(i)
+                    drop_indices.add(i - 1)
+                else:
+                    seen_recon_sigs.add(call_sig)
+                    prev_kept_sig = call_sig
+                i -= 2
+                continue
+
+            if is_passive_recon_tool_call(t_name, canon_a) and call_sig in seen_recon_sigs:
+                drop_indices.add(i)
+                drop_indices.add(i - 1)
+                i -= 2
+                continue
+
+            if is_passive_recon_tool_call(t_name, canon_a):
+                seen_recon_sigs.add(call_sig)
 
             if prev_kept_sig is not None and call_sig == prev_kept_sig:
                 drop_indices.add(i)
@@ -1048,7 +1150,7 @@ def _collapse_excess_chat_reads(history: list, max_keep: int = 1) -> tuple[list,
         i -= 1
 
     filtered = [m for idx, m in enumerate(history) if idx not in drop_indices]
-    return filtered, recent_asst_reads
+    return filtered, recent_recon_streak
 
 
 def generate_next_action(system_prompt: str, history: list, tools: list) -> dict:
@@ -1078,6 +1180,8 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
         )
     messages = [{"role": "system", "content": effective_system_prompt}]
     
+    max_model_len, max_gen_tokens = get_model_context_limits(agent_model)
+
     if use_native_tools:
         compact_hist, v3_recent_raw_reads = _collapse_excess_chat_reads(history, max_keep=1)
         pruned = prune_history(compact_hist, max_messages=16, max_content_chars=3200, max_prompt_tokens=6500)
@@ -1092,6 +1196,8 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
                     "or post concrete results to Colleague Commons (`post_chat`)." + scripts_hint
                 ),
             }
+    elif max_model_len >= 65536:
+        pruned = prune_history(history, max_messages=40, max_content_chars=12000, max_prompt_tokens=32000)
     else:
         pruned = prune_history(history)
     for entry in pruned:
@@ -1151,12 +1257,12 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
     msg_tokens = sum(estimate_tokens(m) for m in messages)
     est_prompt_tokens = tools_tokens + msg_tokens
 
-    max_model_len, max_gen_tokens = get_model_context_limits(agent_model)
-
     # If the combined prompt tokens approach or exceed context window, perform immediate strict re-prune
     if est_prompt_tokens + 512 >= max_model_len:
         target_budget = max(3000, max_model_len - 2500 - tools_tokens)
-        messages = prune_history(messages, max_messages=12, max_content_chars=4000, max_prompt_tokens=target_budget)
+        re_max_msgs = 32 if max_model_len >= 65536 else 12
+        re_max_chars = 8000 if max_model_len >= 65536 else 4000
+        messages = prune_history(messages, max_messages=re_max_msgs, max_content_chars=re_max_chars, max_prompt_tokens=target_budget)
         messages = merge_consecutive_messages(messages)
         msg_tokens = sum(estimate_tokens(m) for m in messages)
         est_prompt_tokens = tools_tokens + msg_tokens
@@ -1165,26 +1271,29 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
     if use_native_tools:
         trailing_reads = max(_count_trailing_chat_reads(messages), v3_recent_raw_reads)
         if trailing_reads >= 2 and tools and len(tools) > 1:
+            blocked_recon_tools = {"read_chat", "read_channel"}
+            if trailing_reads >= 3:
+                blocked_recon_tools.add("read_file")
             filtered_tools = [
                 t for t in tools
-                if t.get("function", {}).get("name") not in ("read_chat", "read_channel")
+                if t.get("function", {}).get("name") not in blocked_recon_tools
             ]
             if filtered_tools:
                 tools = filtered_tools
                 tools_tokens = estimate_tokens(tools)
         tail_parts = []
-        if v3_digest_block:
-            if trailing_reads == 0 and messages[-1]["role"] == "tool" and len(messages) >= 2 and messages[1]["role"] == "user":
+        if v3_digest_block and trailing_reads == 0:
+            if messages[-1]["role"] == "tool" and len(messages) >= 2 and messages[1]["role"] == "user":
                 if v3_digest_block[:40] not in (messages[1].get("content") or ""):
                     messages[1]["content"] = ((messages[1].get("content") or "") + "\n\n" + v3_digest_block).strip()
             else:
                 tail_parts.append(v3_digest_block)
         if trailing_reads >= 2:
             tail_parts.append(
-                f"[ACTION TRANSITION REQUIRED]: Your last {trailing_reads} turns already read Colleague Commons. "
-                "Proceed immediately with an active contribution: run a Python/World C replication "
-                "(`run_command` or `submit_world_c_job`), record a formal `peer_verify_node` or `post_epistemic_node`, "
-                "or post concrete quantitative findings (`post_chat`)."
+                f"[RECONNAISSANCE COMPLETE — EXECUTE VERIFICATION NOW]: Your last {trailing_reads} turns were spent in "
+                "passive reading/directory browsing. Proceed immediately with an active contribution: "
+                "run a Python/World C replication (`write_file` + `run_command` or `submit_world_c_job`), "
+                "record a formal `peer_verify_node` or `post_epistemic_node`, or post concrete quantitative findings (`post_chat`)."
             )
         if tail_parts and len(messages) >= 1:
             combined_tail = "\n\n".join(tail_parts)
