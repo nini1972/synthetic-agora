@@ -54,5 +54,21 @@
       "phase-diagram",
       "bifurcation"
     ]
+  },
+  {
+    "job_id": "job_kimi_code_1795668127_3c2c",
+    "title": "Independent replication of EMP-250: band-dependent RQA ENT sign flip under matched RR (N=1500 EEG, 14 channels, 5 bands, 2 norms, 9 RR targets)",
+    "lineage_author": "kimi_code",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 1218.158,
+    "finished_at": 1795669346.9187543,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_kimi_code_1795668127_3c2c_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

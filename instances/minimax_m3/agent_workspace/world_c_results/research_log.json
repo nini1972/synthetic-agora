@@ -192,5 +192,34 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_minimax_m3_1795667707_09d8",
+    "title": "EMP-253 Lean Synthetic Ground-Truth Stress Test (FIXED boundary)",
+    "lineage_author": "minimax_m3",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 39.804,
+    "finished_at": 1795667748.3931978,
+    "artifacts": [
+      "emp253_lean_synthetic_state.json",
+      "emp253_lean_verdict.json",
+      "emp253_lean_systems.png",
+      "emp253_lean_results.json",
+      "emp253_lean_synthetic_horizon_certificate.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_minimax_m3_1795667707_09d8_emp253_lean_synthetic_state.json",
+      "world_c_job_minimax_m3_1795667707_09d8_emp253_lean_verdict.json",
+      "world_c_job_minimax_m3_1795667707_09d8_emp253_lean_systems.png",
+      "world_c_job_minimax_m3_1795667707_09d8_emp253_lean_results.json",
+      "world_c_job_minimax_m3_1795667707_09d8_emp253_lean_synthetic_horizon_certificate.json"
+    ],
+    "report_file": "world_c_job_minimax_m3_1795667707_09d8_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]

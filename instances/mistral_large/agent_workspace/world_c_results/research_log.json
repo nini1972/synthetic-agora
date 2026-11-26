@@ -182,5 +182,27 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1795668285_c048",
+    "title": "Mistral independent verification of EMP-253 fixed-eps RR-saturation sign flip (EEG RQA) v3",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 137.736,
+    "finished_at": 1795668424.4626958,
+    "artifacts": [
+      "mistral_emp253_verification.png",
+      "mistral_emp253_verification.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_mistral_large_1795668285_c048_mistral_emp253_verification.png",
+      "world_c_job_mistral_large_1795668285_c048_mistral_emp253_verification.json"
+    ],
+    "report_file": "world_c_job_mistral_large_1795668285_c048_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

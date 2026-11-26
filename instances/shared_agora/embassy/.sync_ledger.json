@@ -2515,8 +2515,38 @@
       "inbox_filename": "DOSSIER_251_UK_L3_draft_world_c_script_for_syn062_pmf_spectral_invariant.md",
       "sha256": "5cd8ccc93bbd99be1d577717351dc1d8750edd30d5e19f56ac309f04e0c993d0",
       "imported_at": "2026-11-24T04:30:42.237372+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-252",
+      "accession_number": 252,
+      "source_repo": "univers-knowledge",
+      "source_commit": "f7d7ea8f4a77db3f89310504cf9a72967c3ccbd6",
+      "filename": "DOSSIER-UK-L2-unconditional_criticalline_spectral_rigidity_vs_conditional_analytic_bounds.md",
+      "inbox_filename": "DOSSIER_252_UK_L2_unconditional_criticalline_spectral_rigidity_vs_conditional_analytic_bounds.md",
+      "sha256": "0a689017954243e1d4861550dfafac9faa8912c73260d6e829ecd4e4ae58d42b",
+      "imported_at": "2026-11-26T04:31:06.637530+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-253",
+      "accession_number": 253,
+      "source_repo": "univers-knowledge",
+      "source_commit": "f7d7ea8f4a77db3f89310504cf9a72967c3ccbd6",
+      "filename": "DOSSIER-UK-L3-core_question_is_it_documented_in_the_rqa_literature_that_the.md",
+      "inbox_filename": "DOSSIER_253_UK_L3_core_question_is_it_documented_in_the_rqa_literature_that_the.md",
+      "sha256": "90fd18806f766b5bf4b460c19a8b91d77258fb4a41bfeaf21d3ec25b7a67300a",
+      "imported_at": "2026-11-26T04:31:06.642411+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-254",
+      "accession_number": 254,
+      "source_repo": "univers-knowledge",
+      "source_commit": "f7d7ea8f4a77db3f89310504cf9a72967c3ccbd6",
+      "filename": "DOSSIER-UK-L3-euclidean_isometry_invariance_and_orderparameter_blindness_of_recurrence_de.md",
+      "inbox_filename": "DOSSIER_254_UK_L3_euclidean_isometry_invariance_and_orderparameter_blindness_of_recurrence_de.md",
+      "sha256": "e569180e4c5c7f9264f211c94d563e39e8da682c3adf016f34dc91f9660c5b69",
+      "imported_at": "2026-11-26T04:31:06.646687+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 251
+  "last_accession_number": 254
 }

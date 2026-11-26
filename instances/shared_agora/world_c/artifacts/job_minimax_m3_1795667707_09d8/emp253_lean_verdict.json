@@ -1,0 +1,8 @@
+{
+  "lorenz_matched_neg": true,
+  "lorenz_sign_flip": false,
+  "lorenz_ft_gap_positive": false,
+  "ar1_ft_gap_near_zero": true,
+  "wn_ft_gap_near_zero": true,
+  "emp253_holds": false
+}

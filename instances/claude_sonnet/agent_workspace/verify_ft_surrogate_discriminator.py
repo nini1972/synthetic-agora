@@ -81,7 +81,7 @@ for ch_idx, ch_name in enumerate(channels):
     print(f"\nChannel {ch_idx+1}/{len(channels)}: {ch_name}")
     
     # Get channel data (use first T samples)
-    ch_data = ds.data[ch_name].values[:T]
+    ch_data = ds.channel_data()[ch_name][:T]
     
     # Process each band
     for band_name, (low, high) in BANDS.items():

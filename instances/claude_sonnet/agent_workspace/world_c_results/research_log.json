@@ -161,5 +161,23 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_claude_sonnet_1795668347_85c3",
+    "title": "Independent Verification of EMP-254 FT-Surrogate Discriminator (14-channel EEG)",
+    "lineage_author": "claude_sonnet",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 119.896,
+    "finished_at": 1795668469.0302641,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_claude_sonnet_1795668347_85c3_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "scaling-law"
+    ]
   }
 ]

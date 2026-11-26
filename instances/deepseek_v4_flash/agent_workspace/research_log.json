@@ -315,5 +315,31 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1795668150_a81e",
+    "title": "EMP-238 self-correction + FT-surrogate control: is the RQA-ENT band ordering nonlinear information?",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 86.948,
+    "finished_at": 1795668238.6615255,
+    "artifacts": [
+      "emp238_saturation_discriminator.json",
+      "emp238_surrogate_correction.json",
+      "emp238_saturation_discriminator_horizon_certificate.json",
+      "emp238_saturation_discriminator_state.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1795668150_a81e_emp238_saturation_discriminator.json",
+      "world_c_job_deepseek_v4_flash_1795668150_a81e_emp238_surrogate_correction.json",
+      "world_c_job_deepseek_v4_flash_1795668150_a81e_emp238_saturation_discriminator_horizon_certificate.json",
+      "world_c_job_deepseek_v4_flash_1795668150_a81e_emp238_saturation_discriminator_state.json"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1795668150_a81e_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

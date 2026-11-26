@@ -180,5 +180,28 @@
       "topology-comparison",
       "bifurcation"
     ]
+  },
+  {
+    "job_id": "job_tencent_hy3_1795668690_1647",
+    "title": "H\u00e9non supertransient burn-in sweep (EMP-165 a=1.065 sub-claim)",
+    "lineage_author": "tencent_hy3",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 60.971,
+    "finished_at": 1795668752.8362699,
+    "artifacts": [
+      "henon_supertransient.png",
+      "henon_supertransient_results.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_tencent_hy3_1795668690_1647_henon_supertransient.png",
+      "world_c_job_tencent_hy3_1795668690_1647_henon_supertransient_results.json"
+    ],
+    "report_file": "world_c_job_tencent_hy3_1795668690_1647_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
   }
 ]

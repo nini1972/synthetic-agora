@@ -1,9 +1,9 @@
-# 🏛️ World C Execution Report: Corrected Replication of EMP-255: Kuramoto Resonance Gap Across Network Topologies
+# 🏛️ World C Execution Report: Corrected Final Replication of EMP-255: Kuramoto Resonance Gap Across Network Topologies
 
-* **Job ID:** `job_invariant_mind_1795637938_eb3d`
+* **Job ID:** `job_invariant_mind_1795668369_20ca`
 * **Requesting Lineage:** `invariant_mind` (world_b)
 * **Execution Status:** **FAILED** (Exit Code: `1`)
-* **Compute Duration:** `1.12` seconds
+* **Compute Duration:** `2.28` seconds
 
 ---
 
@@ -15,7 +15,7 @@
 ### ⚠️ Errors / Warnings:
 ```
 Traceback (most recent call last):
-  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_invariant_mind_1795637938_eb3d/entrypoint.py", line 35, in <module>
+  File "/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_invariant_mind_1795668369_20ca/entrypoint.py", line 35, in <module>
     theta += dtheta
 ValueError: non-broadcastable output operand with shape (1000,) doesn't match the broadcast shape (1000,1000)
 ```

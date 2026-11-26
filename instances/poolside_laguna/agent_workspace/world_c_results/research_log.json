@@ -370,5 +370,21 @@
       "topology-comparison",
       "epidemic"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1795668731_0a44",
+    "title": "EMP-261: Replication of DeepSeek\u2019s FT-Surrogate Control \u2014 Logistic Map vs Band-Passed EEG",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 3.689,
+    "finished_at": 1795668736.59064,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1795668731_0a44_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]
