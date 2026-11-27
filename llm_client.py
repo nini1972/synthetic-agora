@@ -964,21 +964,67 @@ def get_openrouter_extra_body(agent_model: str) -> dict | None:
 
 V3_RUNPOD_WORLD_B_SYSTEM_PROMPT = (
     "You are InvariantMind-v3 (`invariant_mind`, family `autonomous_mind`), an autonomous epistemic scientist in World B (Synthetic Agora).\n"
-    "Verify peer claims empirically (`run_command`, `submit_world_c_job`, `peer_verify_node`), "
+    "Fulfill your `citizen_charter.md` mandate: verify peer claims empirically (`write_file` + `run_command`, `submit_world_c_job`, `peer_verify_node`), "
     "publish quantitative DAG findings (`post_epistemic_node`), and coordinate with colleagues "
     "via `read_chat`, `post_chat`, and `read_agent_inbox`.\n\n"
     "### Key Environment & Paths\n"
     "- Living Epistemic DAG: inspect `UNDER_REVIEW` / `UNVERIFIED_HYPOTHESIS` nodes (`query_epistemic_graph`), run independent Python or World C replications (`matplotlib.use('Agg')`; every World C `script_content` must be 100% self-contained and write outputs to `./` in CWD, never `../../shared_agora/...` or local `out/...`), then record formal `peer_verify_node(node_id, verdict, critique_notes)` or `post_epistemic_node(...)`.\n"
-    "- World C & `colony_lib`: results in `world_c_results/REPORT.md` (`check_world_c_job`); `colony_lib.persistence.StageTracker`, `colony_lib.datasets.load_dataset` (`neural_eeg`, `power_grid_ieee`, `belousov_zhabotinsky`, `solar_sunspots`, `climate_enso`, `climate_temperatures`, `lynx_hare`), `dynamics`, `recurrence`, `network_topology`, `scaling`.\n"
+    "- Local Smoke-Test First: BEFORE calling `submit_world_c_job` (especially when debugging a failed World C job!), ALWAYS save a `.py` file via `write_file` first and execute `python3 <script>.py` via `run_command` (NEVER pass multi-line scripts inside `python3 -c \"...\"`, because bash quote escaping breaks f-strings; also use `scipy.linalg.expm`, not `np.linalg.expm`).\n"
+    "- World C & `colony_lib`: results in `world_c_results/REPORT.md` (`check_world_c_job` once — never poll a terminal COMPLETED/FAILED job repeatedly); `colony_lib.persistence.StageTracker`, `colony_lib.datasets.load_dataset` (`neural_eeg`, `power_grid_ieee`, `belousov_zhabotinsky`, `solar_sunspots`, `climate_enso`, `climate_temperatures`, `lynx_hare`), `dynamics`, `recurrence`, `network_topology.generate_topology(kind, N)` -> `(N, N)` adjacency matrix `A` (use `(A * np.sin(theta[None, :] - theta[:, None])).sum(axis=1)` for `(N,)` coupling vectors, never `A.dot(2D_matrix)`), `scaling`.\n"
     "- Embassy: `embassy/inbox/` (`DOSSIER-*.md`, `DOSSIER-UK-*.md`), `export_treaty_to_embassy` for `CANON_VERIFIED` nodes.\n"
     "- Commons channels: `#sanity-check`, `#methods-and-debugging`, `#synchronization-networks`, `#pattern-formation`, `#world-c-coordination`, `#literature-and-theory`, `#human-visitor-questions`, `#lounge`.\n"
-    "- Turn Discipline: Read at most 1 channel/node to orient, then ACT (`run_command`, `submit_world_c_job`, `peer_verify_node`, `post_epistemic_node`, or `post_chat` with concrete numbers). Never spend multiple consecutive turns calling `read_chat`."
+    "- Turn Discipline: Orient in at most 1 read/query step, then ACT (`write_file` + `run_command`, `submit_world_c_job`, `peer_verify_node`, `post_epistemic_node`, or `post_chat` with concrete numbers)."
 )
 
 
+def _build_world_b_charter_anchor(base_dir: str = None) -> str:
+    """Surfaces the active instance's citizen_charter.md and latest World C REPORT.md (including any
+    failure traceback) directly in the World B system prompt so InvariantMind-v3 has clear epistemic grounding."""
+    inst = os.getenv("ACTIVE_INSTANCE", "").strip()
+    if not inst:
+        return ""
+    root = base_dir or os.path.dirname(os.path.abspath(__file__))
+    ws = os.path.join(root, "instances", inst, "agent_workspace")
+    if not os.path.isdir(ws):
+        return ""
+    sections = []
+    for fname, label in (("citizen_charter.md", "citizen_charter.md"), ("existential_core.md", "existential_core.md")):
+        cp = os.path.join(ws, fname)
+        if os.path.isfile(cp):
+            try:
+                with open(cp, "r", encoding="utf-8", errors="replace") as f:
+                    ctxt = f.read().strip()
+                if ctxt:
+                    if len(ctxt) > 1000:
+                        ctxt = ctxt[:1000].rstrip() + "\n..."
+                    sections.append(f"=== 🧭 YOUR AGORA CHARTER (`{label}`) ===\n{ctxt}")
+                    break
+            except Exception:
+                pass
+    rep_path = os.path.join(ws, "world_c_results", "REPORT.md")
+    if os.path.isfile(rep_path):
+        try:
+            with open(rep_path, "r", encoding="utf-8", errors="replace") as f:
+                rep_txt = f.read().strip()
+            if rep_txt:
+                if len(rep_txt) > 1100:
+                    rep_txt = rep_txt[:1100].rstrip() + "\n..."
+                extra_hint = ""
+                if "**FAILED**" in rep_txt:
+                    extra_hint = (
+                        "\n⚡ DEBUG NOTE: Your latest World C job above FAILED. Do NOT call `check_world_c_job` on it again "
+                        "and do NOT resubmit the same script. First write a corrected small-N test script via `write_file` "
+                        "and run `python3 <script>.py` via `run_command` to verify it runs with 0 errors before submitting to World C."
+                    )
+                sections.append(f"=== 📊 YOUR LATEST WORLD C REPORT (`world_c_results/REPORT.md`) ===\n{rep_txt}{extra_hint}")
+        except Exception:
+            pass
+    return "\n\n".join(sections)
+
+
 def build_v3_runpod_prompts(system_prompt: str) -> tuple[str, str]:
-    """Splits out the dynamic Commons Digest for user-turn delivery, preserves live Agora telemetry,
-    and replaces the 4.6k-token proclamation prompt with the compact SFT-aligned InvariantMind-v3 system prompt."""
+    """Splits out the dynamic Commons Digest for user-turn delivery, anchors citizen_charter.md + REPORT.md,
+    preserves live Agora telemetry, and replaces the 4.6k-token proclamation prompt with the compact SFT prompt."""
     raw = system_prompt or ""
     digest_marker = "=== 💬 COLLEAGUE COMMONS DIGEST"
     telemetry_marker = "[AGORA LIVE TELEMETRY & EPISTEMIC PRIORITY QUEUE]"
@@ -997,6 +1043,10 @@ def build_v3_runpod_prompts(system_prompt: str) -> tuple[str, str]:
 
     if len(base_sys) > 800:
         base_sys = V3_RUNPOD_WORLD_B_SYSTEM_PROMPT
+
+    charter_anchor = _build_world_b_charter_anchor()
+    if charter_anchor and "YOUR AGORA CHARTER" not in base_sys and "YOUR LATEST WORLD C REPORT" not in base_sys:
+        base_sys = base_sys + "\n\n" + charter_anchor
 
     if telemetry_block:
         base_sys = base_sys + "\n\n" + telemetry_block
@@ -1057,10 +1107,57 @@ def _collapse_excess_chat_reads(history: list, max_keep: int = 1) -> tuple[list,
             break
         break
 
+    # Detect scripts that later failed in check_world_c_job or were rejected as duplicates so we strip copy-paste attractors
+    failed_job_ids = set()
+    rejected_scripts = set()
+    for idx_scan, m_scan in enumerate(history):
+        if m_scan.get("role") == "tool":
+            obs_s = str(m_scan.get("content") or "")
+            if m_scan.get("name") == "check_world_c_job" and "**FAILED**" in obs_s and idx_scan >= 1:
+                tcs_s = history[idx_scan - 1].get("tool_calls") or []
+                if tcs_s:
+                    try:
+                        jid = json.loads(tcs_s[0].get("function", {}).get("arguments", "{}")).get("job_id", "")
+                        if jid:
+                            failed_job_ids.add(jid)
+                    except Exception:
+                        pass
+            elif m_scan.get("name") == "submit_world_c_job" and idx_scan >= 1:
+                tcs_s = history[idx_scan - 1].get("tool_calls") or []
+                sc_s = ""
+                if tcs_s:
+                    try:
+                        sc_s = str(json.loads(tcs_s[0].get("function", {}).get("arguments", "{}")).get("script_content", "")).strip()
+                    except Exception:
+                        pass
+                if sc_s:
+                    if obs_s.startswith("Notice: You "):
+                        rejected_scripts.add(sc_s)
+                    else:
+                        m_jid = re.search(r"Job '(job_[^']+)'", obs_s)
+                        if m_jid and m_jid.group(1) in failed_job_ids:
+                            rejected_scripts.add(sc_s)
+    # Second pass in case submit_world_c_job appeared before check_world_c_job
+    if failed_job_ids:
+        for idx_scan, m_scan in enumerate(history):
+            if m_scan.get("role") == "tool" and m_scan.get("name") == "submit_world_c_job" and idx_scan >= 1:
+                obs_s = str(m_scan.get("content") or "")
+                m_jid = re.search(r"Job '(job_[^']+)'", obs_s)
+                if m_jid and m_jid.group(1) in failed_job_ids:
+                    tcs_s = history[idx_scan - 1].get("tool_calls") or []
+                    if tcs_s:
+                        try:
+                            sc_s = str(json.loads(tcs_s[0].get("function", {}).get("arguments", "{}")).get("script_content", "")).strip()
+                            if sc_s:
+                                rejected_scripts.add(sc_s)
+                        except Exception:
+                            pass
+
     drop_indices = set()
     eff_max_keep = 0 if recent_recon_streak >= 1 else max_keep
     kept_valid_reads = 0
     seen_recon_sigs = set()
+    seen_action_sigs = set()
     prev_kept_sig = None
     i = len(history) - 1
     while i >= 0:
@@ -1095,11 +1192,16 @@ def _collapse_excess_chat_reads(history: list, max_keep: int = 1) -> tuple[list,
             tcs = asst_m.get("tool_calls") or []
             tc_id = str(tcs[0].get("id") or "") if tcs else ""
             raw_a = tcs[0].get("function", {}).get("arguments", "{}") if tcs else "{}"
+            parsed_a = {}
             try:
-                canon_a = json.dumps(json.loads(raw_a), sort_keys=True) if isinstance(raw_a, str) else json.dumps(raw_a, sort_keys=True)
+                parsed_a = json.loads(raw_a) if isinstance(raw_a, str) else (raw_a if isinstance(raw_a, dict) else {})
+                canon_a = json.dumps(parsed_a, sort_keys=True)
             except Exception:
                 canon_a = str(raw_a)
-            call_sig = (t_name, canon_a)
+            if t_name == "submit_world_c_job" and isinstance(parsed_a, dict) and parsed_a.get("script_content"):
+                call_sig = (t_name, str(parsed_a.get("script_content", "")).strip())
+            else:
+                call_sig = (t_name, canon_a)
             obs = str(m.get("content") or "")
             is_notice = obs.startswith("Notice: You ")
 
@@ -1108,6 +1210,40 @@ def _collapse_excess_chat_reads(history: list, max_keep: int = 1) -> tuple[list,
                 drop_indices.add(i - 1)
                 i -= 2
                 continue
+
+            # Drop ALL Notice: rejections across every tool so blocked attempts never condition future turns
+            if is_notice:
+                drop_indices.add(i)
+                drop_indices.add(i - 1)
+                i -= 2
+                continue
+
+            # Drop historical submit_world_c_job / check_world_c_job pairs for scripts/jobs already known to have FAILED
+            if t_name == "submit_world_c_job" and isinstance(parsed_a, dict):
+                sc_curr = str(parsed_a.get("script_content", "")).strip()
+                if sc_curr and (sc_curr in rejected_scripts or call_sig in seen_action_sigs):
+                    drop_indices.add(i)
+                    drop_indices.add(i - 1)
+                    i -= 2
+                    continue
+                seen_action_sigs.add(call_sig)
+
+            if t_name == "read_file" and isinstance(parsed_a, dict):
+                rp_low = str(parsed_a.get("path", "")).replace("\\", "/").lower()
+                if rp_low.endswith(("world_c_results/report.md", "citizen_charter.md", "existential_core.md")):
+                    drop_indices.add(i)
+                    drop_indices.add(i - 1)
+                    i -= 2
+                    continue
+
+            if t_name == "check_world_c_job" and isinstance(parsed_a, dict):
+                jid_curr = str(parsed_a.get("job_id", "")).strip()
+                if jid_curr in failed_job_ids or call_sig in seen_action_sigs:
+                    drop_indices.add(i)
+                    drop_indices.add(i - 1)
+                    i -= 2
+                    continue
+                seen_action_sigs.add(call_sig)
 
             if t_name in ("read_chat", "read_channel"):
                 if is_notice or kept_valid_reads >= eff_max_keep or call_sig in seen_recon_sigs:
@@ -1191,9 +1327,10 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
             pruned[0] = {
                 "role": "user",
                 "content": (
-                    "Proceed with your current Synthetic Agora empirical verification or World C investigation: "
-                    "replicate an `UNDER_REVIEW` DAG claim via Python/World C, record `peer_verify_node` or `post_epistemic_node`, "
-                    "or post concrete results to Colleague Commons (`post_chat`)." + scripts_hint
+                    "Review YOUR `citizen_charter.md`, latest `world_c_results/REPORT.md`, and `[AGORA LIVE TELEMETRY]` in the system prompt above. "
+                    "If your last World C job failed, write & run a small-N (`N=50`) local Python smoke test via `write_file` + `run_command` (`python3 ...`) "
+                    "to verify array shapes first before calling `submit_world_c_job`; otherwise replicate a Priority Queue claim, record `peer_verify_node` / `post_epistemic_node`, "
+                    "or share concrete results via `post_chat`." + scripts_hint
                 ),
             }
     elif max_model_len >= 65536:
@@ -1238,7 +1375,7 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
         force_tool = True
         messages.append({
             "role": "user",
-            "content": "You stated your intention above. Please proceed immediately by invoking one of the available tool functions (e.g. publish_node, write_artifact, or run_verification) to execute your planned action. Do not simply restate your plan."
+            "content": "You stated your intention above. Please proceed immediately by invoking one of the available tool functions (e.g. write_file, run_command, submit_world_c_job, peer_verify_node, post_epistemic_node, or post_chat) to execute your planned action. Do not simply restate your plan."
         })
     elif (
         messages
@@ -1283,11 +1420,12 @@ def generate_next_action(system_prompt: str, history: list, tools: list) -> dict
                 tools_tokens = estimate_tokens(tools)
         tail_parts = []
         if v3_digest_block and trailing_reads == 0:
+            compact_digest = v3_digest_block[:1200].rstrip() + ("\n..." if len(v3_digest_block) > 1200 else "")
             if messages[-1]["role"] == "tool" and len(messages) >= 2 and messages[1]["role"] == "user":
-                if v3_digest_block[:40] not in (messages[1].get("content") or ""):
-                    messages[1]["content"] = ((messages[1].get("content") or "") + "\n\n" + v3_digest_block).strip()
+                if compact_digest[:40] not in (messages[1].get("content") or ""):
+                    messages[1]["content"] = ((messages[1].get("content") or "") + "\n\n" + compact_digest).strip()
             else:
-                tail_parts.append(v3_digest_block)
+                tail_parts.append(compact_digest)
         if trailing_reads >= 2:
             tail_parts.append(
                 f"[RECONNAISSANCE COMPLETE — EXECUTE VERIFICATION NOW]: Your last {trailing_reads} turns were spent in "
