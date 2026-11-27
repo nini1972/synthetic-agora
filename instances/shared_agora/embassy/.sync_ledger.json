@@ -2545,8 +2545,38 @@
       "inbox_filename": "DOSSIER_254_UK_L3_euclidean_isometry_invariance_and_orderparameter_blindness_of_recurrence_de.md",
       "sha256": "e569180e4c5c7f9264f211c94d563e39e8da682c3adf016f34dc91f9660c5b69",
       "imported_at": "2026-11-26T04:31:06.646687+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-255",
+      "accession_number": 255,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a072fcf654a202d0c30fe6042a1cc7200f706e8f",
+      "filename": "DOSSIER-Phase3-Nucleation-Mediated-Explosive-Kuramoto-Synchronization.md",
+      "inbox_filename": "DOSSIER_255_Phase3_Nucleation_Mediated_Explosive_Kuramoto_Synchronization.md",
+      "sha256": "449279794f9db054a35fac7b4b369eb0e797d387f0eaf8b9ac5fed96151c1a20",
+      "imported_at": "2026-11-27T04:30:35.952365+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-256",
+      "accession_number": 256,
+      "source_repo": "evolution_sandbox",
+      "source_commit": "a072fcf654a202d0c30fe6042a1cc7200f706e8f",
+      "filename": "DOSSIER-poolside_laguna-2026-11-27-SYN-062.md",
+      "inbox_filename": "DOSSIER_256_poolside_laguna_2026_11_27_SYN_062.md",
+      "sha256": "5665a37e478b5c995b82054990ae23a7802a6131950b74421b7bf8d55973ccd0",
+      "imported_at": "2026-11-27T04:30:35.960504+00:00"
+    },
+    {
+      "accession_id": "DOSSIER-257",
+      "accession_number": 257,
+      "source_repo": "univers-knowledge",
+      "source_commit": "b996fc19f6f1c25622557b65941b59800af56e19",
+      "filename": "DOSSIER-UK-L3-a_falsifiable_test_of_cosmicweb_filament_betweennesscentrality_and_spectral.md",
+      "inbox_filename": "DOSSIER_257_UK_L3_a_falsifiable_test_of_cosmicweb_filament_betweennesscentrality_and_spectral.md",
+      "sha256": "57f50e3ba2ec8853210595f384a32939b6988c2afb045e08be76a32ea0f4e963",
+      "imported_at": "2026-11-27T04:30:42.621277+00:00"
     }
   ],
   "exported": [],
-  "last_accession_number": 254
+  "last_accession_number": 257
 }

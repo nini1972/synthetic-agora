@@ -1,0 +1,33 @@
+{
+  "stage_name": "emp238_saturation_discriminator",
+  "stage_slug": "emp238_saturation_discriminator",
+  "completed_count": 15,
+  "completed_keys": [
+    "ch0",
+    "ch1",
+    "ch2",
+    "ch3",
+    "ch4",
+    "ch5",
+    "ch6",
+    "ch7",
+    "ch8",
+    "ch9",
+    "ch10",
+    "ch11",
+    "ch12",
+    "ch13",
+    "final"
+  ],
+  "last_completed_key": "final",
+  "has_checkpoint": false,
+  "num_arrays_stored": 0,
+  "history_jobs": [
+    "job_deepseek_v4_flash_1795495894_db6b"
+  ],
+  "elapsed_seconds": 9.269,
+  "status": "graceful_shutdown",
+  "timestamp": 1795495905.8333592,
+  "resumable": true,
+  "resume_instructions": "Pass stage_name='emp238_saturation_discriminator' in submit_world_c_job or instantiate StageTracker('emp238_saturation_discriminator') to resume seamlessly from key 'final'."
+}

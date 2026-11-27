@@ -1,53 +1,70 @@
-# 🏛️ World C Execution Report: Independent replication of EMP-250: band-dependent RQA ENT sign flip under matched RR (N=1500 EEG, 14 channels, 5 bands, 2 norms, 9 RR targets)
+# 🏛️ World C Execution Report: Fast StageTracker replication of EMP-250 (Kimi) — N=1500 EEG, 14 channels, 5 bands, 9 RR targets, 2 norms
 
-* **Job ID:** `job_kimi_code_1795668127_3c2c`
+* **Job ID:** `job_kimi_code_1795754509_045d`
 * **Requesting Lineage:** `kimi_code` (world_b)
-* **Execution Status:** **FAILED** (Exit Code: `None`)
-* **Compute Duration:** `1218.16` seconds
+* **Execution Status:** **COMPLETED** (Exit Code: `0`)
+* **Compute Duration:** `450.87` seconds
+
+---
+
+## 🔄 Multi-Stage & Checkpoint Continuation
+* **Stage Name:** `emp250_replication_kimi_fast`
+* **Completed Stage Slices Saved:** `140` (Last completed key: `AF4_Gamma_euclidean`)
+* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='emp250_replication_kimi_fast', resume_from_job_id='job_kimi_code_1795754509_045d')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('emp250_replication_kimi_fast')`.
 
 ---
 
 ## 📦 Generated Artifacts
-*(None)*
+- `emp250_replication_kimi_fast_state.json` (delivered to `world_c_results/emp250_replication_kimi_fast_state.json` and `world_c/artifacts/job_kimi_code_1795754509_045d/emp250_replication_kimi_fast_state.json`)
+- `replicate_emp250_fast_results.json` (delivered to `world_c_results/replicate_emp250_fast_results.json` and `world_c/artifacts/job_kimi_code_1795754509_045d/replicate_emp250_fast_results.json`)
+- `replicate_emp250_fast.png` (delivered to `world_c_results/replicate_emp250_fast.png` and `world_c/artifacts/job_kimi_code_1795754509_045d/replicate_emp250_fast.png`)
+- `emp250_replication_kimi_fast_horizon_certificate.json` (delivered to `world_c_results/emp250_replication_kimi_fast_horizon_certificate.json` and `world_c/artifacts/job_kimi_code_1795754509_045d/emp250_replication_kimi_fast_horizon_certificate.json`)
 
 ---
 
-### ⚠️ Errors / Warnings:
-```
-[World C CI Reconciliation Notice] Job 'job_kimi_code_1795668127_3c2c' was still in RUNNING state when the CI workflow step concluded after 1218.2s (background worker interrupted at step boundary or exceeded reconciliation window). Harvested 0 partial artifact(s).
-```
-
----
 ## 📋 Execution Log Tail
 ```
-norm=euclidean RRt=0.050 RR=0.0506 ENT=2.926 DET=0.909
-ch=O2 band=Delta norm=euclidean RRt=0.100 RR=0.1006 ENT=3.307 DET=0.959
-ch=O2 band=Delta norm=euclidean RRt=0.200 RR=0.2005 ENT=4.211 DET=0.993
-ch=O2 band=Delta norm=euclidean RRt=0.350 RR=0.3504 ENT=5.166 DET=0.995
-ch=O2 band=Delta norm=euclidean RRt=0.500 RR=0.5003 ENT=5.886 DET=0.998
-ch=O2 band=Delta norm=euclidean RRt=0.700 RR=0.7002 ENT=6.798 DET=0.999
-ch=O2 band=Delta norm=euclidean RRt=0.900 RR=0.9001 ENT=7.922 DET=0.999
-ch=O2 band=Theta norm=chebyshev RRt=0.010 RR=0.0107 ENT=2.884 DET=0.823
-ch=O2 band=Theta norm=chebyshev RRt=0.020 RR=0.0207 ENT=3.199 DET=0.847
-ch=O2 band=Theta norm=chebyshev RRt=0.050 RR=0.0506 ENT=3.452 DET=0.860
-ch=O2 band=Theta norm=chebyshev RRt=0.100 RR=0.1006 ENT=3.539 DET=0.881
-ch=O2 band=Theta norm=chebyshev RRt=0.200 RR=0.2005 ENT=3.653 DET=0.913
-ch=O2 band=Theta norm=chebyshev RRt=0.350 RR=0.3504 ENT=3.834 DET=0.951
-ch=O2 band=Theta norm=chebyshev RRt=0.500 RR=0.5003 ENT=4.145 DET=0.976
-ch=O2 band=Theta norm=chebyshev RRt=0.700 RR=0.7002 ENT=4.804 DET=0.993
-ch=O2 band=Theta norm=chebyshev RRt=0.900 RR=0.9001 ENT=6.672 DET=0.998
-ch=O2 band=Theta norm=euclidean RRt=0.010 RR=0.0107 ENT=2.600 DET=0.832
-ch=O2 band=Theta norm=euclidean RRt=0.020 RR=0.0207 ENT=2.796 DET=0.855
-ch=O2 band=Theta norm=euclidean RRt=0.050 RR=0.0506 ENT=2.892 DET=0.878
-ch=O2 band=Theta norm=euclidean RRt=0.100 RR=0.1006 ENT=2.930 DET=0.901
-ch=O2 band=Theta norm=euclidean RRt=0.200 RR=0.2005 ENT=3.101 DET=0.932
-ch=O2 band=Theta norm=euclidean RRt=0.350 RR=0.3504 ENT=3.409 DET=0.966
-ch=O2 band=Theta norm=euclidean RRt=0.500 RR=0.5003 ENT=3.817 DET=0.986
-ch=O2 band=Theta norm=euclidean RRt=0.700 RR=0.7002 ENT=4.561 DET=0.997
-ch=O2 band=Theta norm=euclidean RRt=0.900 RR=0.9001 ENT=6.279 DET=0.997
-ch=O2 band=Alpha norm=chebyshev RRt=0.010 RR=0.0107 ENT=2.430 DET=0.811
-ch=O2 band=Alpha norm=chebyshev RRt=0.020 RR=0.0207 ENT=2.831 DET=0.878
-ch=O2 band=Alpha norm=chebyshev RRt=0.050 RR=0.0506 ENT=3.487 DET=0.905
+in 322.8s total elapsed
+DONE FC6_Delta_euclidean in 326.0s total elapsed
+DONE FC6_Theta_chebyshev in 329.2s total elapsed
+DONE FC6_Theta_euclidean in 332.4s total elapsed
+DONE FC6_Alpha_chebyshev in 335.7s total elapsed
+DONE FC6_Alpha_euclidean in 338.9s total elapsed
+DONE FC6_Beta_chebyshev in 342.2s total elapsed
+DONE FC6_Beta_euclidean in 345.5s total elapsed
+DONE FC6_Gamma_chebyshev in 348.7s total elapsed
+DONE FC6_Gamma_euclidean in 352.0s total elapsed
+DONE F4_Delta_chebyshev in 355.2s total elapsed
+DONE F4_Delta_euclidean in 358.3s total elapsed
+DONE F4_Theta_chebyshev in 361.5s total elapsed
+DONE F4_Theta_euclidean in 364.8s total elapsed
+DONE F4_Alpha_chebyshev in 368.0s total elapsed
+DONE F4_Alpha_euclidean in 371.2s total elapsed
+DONE F4_Beta_chebyshev in 374.4s total elapsed
+DONE F4_Beta_euclidean in 377.7s total elapsed
+DONE F4_Gamma_chebyshev in 380.9s total elapsed
+DONE F4_Gamma_euclidean in 384.2s total elapsed
+DONE F8_Delta_chebyshev in 387.3s total elapsed
+DONE F8_Delta_euclidean in 390.5s total elapsed
+DONE F8_Theta_chebyshev in 393.7s total elapsed
+DONE F8_Theta_euclidean in 396.9s total elapsed
+DONE F8_Alpha_chebyshev in 400.1s total elapsed
+DONE F8_Alpha_euclidean in 403.4s total elapsed
+DONE F8_Beta_chebyshev in 406.6s total elapsed
+DONE F8_Beta_euclidean in 409.9s total elapsed
+DONE F8_Gamma_chebyshev in 413.2s total elapsed
+DONE F8_Gamma_euclidean in 416.4s total elapsed
+DONE AF4_Delta_chebyshev in 419.6s total elapsed
+DONE AF4_Delta_euclidean in 422.7s total elapsed
+DONE AF4_Theta_chebyshev in 425.9s total elapsed
+DONE AF4_Theta_euclidean in 429.1s total elapsed
+DONE AF4_Alpha_chebyshev in 432.3s total elapsed
+DONE AF4_Alpha_euclidean in 435.5s total elapsed
+DONE AF4_Beta_chebyshev in 438.8s total elapsed
+DONE AF4_Beta_euclidean in 442.0s total elapsed
+DONE AF4_Gamma_chebyshev in 445.3s total elapsed
+DONE AF4_Gamma_euclidean in 448.5s total elapsed
+Saved replicate_emp250_fast_results.json and replicate_emp250_fast.png. Total elapsed 449.1s
 ```
 
 ---

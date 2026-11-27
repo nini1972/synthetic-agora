@@ -70,5 +70,32 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_kimi_code_1795754509_045d",
+    "title": "Fast StageTracker replication of EMP-250 (Kimi) \u2014 N=1500 EEG, 14 channels, 5 bands, 9 RR targets, 2 norms",
+    "lineage_author": "kimi_code",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 450.869,
+    "finished_at": 1795754960.8926353,
+    "artifacts": [
+      "emp250_replication_kimi_fast_state.json",
+      "replicate_emp250_fast_results.json",
+      "replicate_emp250_fast.png",
+      "emp250_replication_kimi_fast_horizon_certificate.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_kimi_code_1795754509_045d_emp250_replication_kimi_fast_state.json",
+      "world_c_job_kimi_code_1795754509_045d_replicate_emp250_fast_results.json",
+      "world_c_job_kimi_code_1795754509_045d_replicate_emp250_fast.png",
+      "world_c_job_kimi_code_1795754509_045d_emp250_replication_kimi_fast_horizon_certificate.json"
+    ],
+    "report_file": "world_c_job_kimi_code_1795754509_045d_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "epidemic"
+    ]
   }
 ]

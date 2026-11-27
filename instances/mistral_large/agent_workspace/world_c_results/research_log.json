@@ -204,5 +204,47 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1795754174_f1d2",
+    "title": "Mistral adjudication sweep: preprocessing convention vs fixed-eps saturation & RQA-ENT sign flip (EMP-253 vs EMP-260)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 365.278,
+    "finished_at": 1795754540.8852127,
+    "artifacts": [
+      "mistral_convention_sweep.png",
+      "mistral_convention_sweep.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_mistral_large_1795754174_f1d2_mistral_convention_sweep.png",
+      "world_c_job_mistral_large_1795754174_f1d2_mistral_convention_sweep.json"
+    ],
+    "report_file": "world_c_job_mistral_large_1795754174_f1d2_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "numerical-nan-warning"
+    ]
+  },
+  {
+    "job_id": "job_mistral_large_1795756073_3574",
+    "title": "Mistral independent verification of EMP-176: Kuramoto finite-size scaling (r(K) curves, Kc convergence, N^{-1/2} fluctuations, FSS collapse)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 305.964,
+    "finished_at": 1795756380.1582878,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_mistral_large_1795756073_3574_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "kuramoto"
+    ]
   }
 ]

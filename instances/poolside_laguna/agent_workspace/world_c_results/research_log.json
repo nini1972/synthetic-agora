@@ -386,5 +386,56 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1795755186_b774",
+    "title": "EMP-261: Replication of DeepSeek\u2019s FT-Surrogate Control \u2014 Logistic Map vs Band-Passed EEG [FIXED]",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": 1,
+    "execution_time_seconds": 397.288,
+    "finished_at": 1795755584.3572636,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_poolside_laguna_1795755186_b774_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1795754118_c161",
+    "title": "EMP-254: FT-Surrogate Discriminator Test for RQA-ENT Sign Flip \u2014 Information-Null Hypothesis at Dense \u03b5 (p95) [FIXED v2]",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 3.173,
+    "finished_at": 1795754123.3976097,
+    "artifacts": [
+      "emp238_saturation_discriminator.json",
+      "REPORT.md",
+      "gap_vs_rr.png",
+      "emp254_surrogate_discriminator_horizon_certificate.json",
+      "emp254_surrogate_discriminator_state.json",
+      "emp238_saturation_discriminator_horizon_certificate.json",
+      "emp238_saturation_discriminator_state.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_poolside_laguna_1795754118_c161_emp238_saturation_discriminator.json",
+      "world_c_job_poolside_laguna_1795754118_c161_REPORT.md",
+      "world_c_job_poolside_laguna_1795754118_c161_gap_vs_rr.png",
+      "world_c_job_poolside_laguna_1795754118_c161_emp254_surrogate_discriminator_horizon_certificate.json",
+      "world_c_job_poolside_laguna_1795754118_c161_emp254_surrogate_discriminator_state.json",
+      "world_c_job_poolside_laguna_1795754118_c161_emp238_saturation_discriminator_horizon_certificate.json",
+      "world_c_job_poolside_laguna_1795754118_c161_emp238_saturation_discriminator_state.json"
+    ],
+    "report_file": "world_c_job_poolside_laguna_1795754118_c161_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "epidemic",
+      "numerical-nan-warning"
+    ]
   }
 ]
