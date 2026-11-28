@@ -4,28 +4,18 @@ Conventions: ['raw_once', 'per_band', 'no_z']
 Windows: [512, 1024, 2048]
 Bands: ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma']
 
-/home/runner/work/synthetic-agora/synthetic-agora/instances/minimax_m3/agent_workspace/artifacts/emp263_convention_sweep_replication.py:47: RuntimeWarning: overflow encountered in scalar multiply
-  Y[i+1] = Y[i] + h*(28*X[i]-Y[i]-X[i]*Z[i])
-/home/runner/work/synthetic-agora/synthetic-agora/instances/minimax_m3/agent_workspace/artifacts/emp263_convention_sweep_replication.py:48: RuntimeWarning: overflow encountered in scalar multiply
-  Z[i+1] = Z[i] + h*(X[i]*Y[i] - 8/3*Z[i])
-/home/runner/work/synthetic-agora/synthetic-agora/instances/minimax_m3/agent_workspace/artifacts/emp263_convention_sweep_replication.py:47: RuntimeWarning: invalid value encountered in scalar add
-  Y[i+1] = Y[i] + h*(28*X[i]-Y[i]-X[i]*Z[i])
-/home/runner/work/synthetic-agora/synthetic-agora/instances/minimax_m3/agent_workspace/artifacts/emp263_convention_sweep_replication.py:48: RuntimeWarning: invalid value encountered in scalar subtract
-  Z[i+1] = Z[i] + h*(X[i]*Y[i] - 8/3*Z[i])
-/home/runner/work/synthetic-agora/synthetic-agora/instances/minimax_m3/agent_workspace/artifacts/emp263_convention_sweep_replication.py:106: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
-  rec['rho_matched_freq'] = float(spearmanr(ents_m, BANDS_IDX).statistic)
 === SUMMARY ===
 
 --- Lorenz63 ---
-  raw_once  W= 512: rho_matched=+nan (RR=0.000), rho_fixed=NaN(sat) (RR=0.000), sat=0/5, +non_sat=0, -non_sat=0
-  per_band  W= 512: rho_matched=+nan (RR=0.000), rho_fixed=NaN(sat) (RR=0.000), sat=0/5, +non_sat=0, -non_sat=0
-  no_z      W= 512: rho_matched=+nan (RR=0.000), rho_fixed=NaN(sat) (RR=0.000), sat=0/5, +non_sat=0, -non_sat=0
-  raw_once  W=1024: rho_matched=+nan (RR=0.000), rho_fixed=NaN(sat) (RR=0.000), sat=0/5, +non_sat=0, -non_sat=0
-  per_band  W=1024: rho_matched=+nan (RR=0.000), rho_fixed=NaN(sat) (RR=0.000), sat=0/5, +non_sat=0, -non_sat=0
-  no_z      W=1024: rho_matched=+nan (RR=0.000), rho_fixed=NaN(sat) (RR=0.000), sat=0/5, +non_sat=0, -non_sat=0
-  raw_once  W=2048: rho_matched=+nan (RR=0.000), rho_fixed=NaN(sat) (RR=0.000), sat=0/5, +non_sat=0, -non_sat=0
-  per_band  W=2048: rho_matched=+nan (RR=0.000), rho_fixed=NaN(sat) (RR=0.000), sat=0/5, +non_sat=0, -non_sat=0
-  no_z      W=2048: rho_matched=+nan (RR=0.000), rho_fixed=NaN(sat) (RR=0.000), sat=0/5, +non_sat=0, -non_sat=0
+  raw_once  W= 512: rho_matched=+0.200 (RR=0.100), rho_fixed=+0.900 (RR=0.515), sat=0/5, +non_sat=2, -non_sat=2
+  per_band  W= 512: rho_matched=+0.200 (RR=0.100), rho_fixed=+0.900 (RR=0.515), sat=0/5, +non_sat=2, -non_sat=2
+  no_z      W= 512: rho_matched=+0.200 (RR=0.100), rho_fixed=+0.894 (RR=0.803), sat=4/5, +non_sat=0, -non_sat=1
+  raw_once  W=1024: rho_matched=-0.500 (RR=0.100), rho_fixed=+1.000 (RR=0.489), sat=0/5, +non_sat=2, -non_sat=2
+  per_band  W=1024: rho_matched=-0.500 (RR=0.100), rho_fixed=+1.000 (RR=0.489), sat=0/5, +non_sat=2, -non_sat=2
+  no_z      W=1024: rho_matched=-0.500 (RR=0.100), rho_fixed=+0.894 (RR=0.803), sat=4/5, +non_sat=0, -non_sat=1
+  raw_once  W=2048: rho_matched=-0.500 (RR=0.100), rho_fixed=+1.000 (RR=0.477), sat=0/5, +non_sat=2, -non_sat=2
+  per_band  W=2048: rho_matched=-0.500 (RR=0.100), rho_fixed=+1.000 (RR=0.477), sat=0/5, +non_sat=2, -non_sat=2
+  no_z      W=2048: rho_matched=-0.500 (RR=0.100), rho_fixed=+0.894 (RR=0.803), sat=4/5, +non_sat=0, -non_sat=1
 
 --- AR1 ---
   raw_once  W= 512: rho_matched=-0.600 (RR=0.100), rho_fixed=-0.900 (RR=0.019), sat=0/5, +non_sat=2, -non_sat=2
@@ -51,16 +41,16 @@ Bands: ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma']
 
 === EMP-263 UNIVERSALITY TEST ===
 Claim: matched-RR rho(ENT,freq) < 0 across ALL conventions and ALL systems (universal)
-Lorenz63 matched-RR negative: 0/9 cells
+Lorenz63 matched-RR negative: 6/9 cells
 AR1    matched-RR negative: 9/9 cells
 White  matched-RR negative: 9/9 cells
 
 === CONVENTION-SPECIFIC SATURATION FLIP ===
 
 Lorenz63:
-  raw_once: all cells saturated (rho_fixed undefined)
-  per_band: all cells saturated (rho_fixed undefined)
-  no_z: all cells saturated (rho_fixed undefined)
+  raw_once: pos=3/3, neg=0/3
+  per_band: pos=3/3, neg=0/3
+  no_z: pos=3/3, neg=0/3
 
 AR1:
   raw_once: pos=0/3, neg=3/3
@@ -76,7 +66,7 @@ White:
 EMP-263 universal matched-RR claim: False
 {
   "emp263_universal_claim": false,
-  "lorenz_matched_neg_frac": 0.0,
+  "lorenz_matched_neg_frac": 0.6666666666666666,
   "ar1_matched_neg_frac": 1.0,
   "wn_matched_neg_frac": 1.0,
   "interpretation": "EMP-263 universal claim FAILS \u2014 convention-dependent on chaos"

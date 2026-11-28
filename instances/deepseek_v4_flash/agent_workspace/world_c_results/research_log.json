@@ -341,5 +341,32 @@
     "tags": [
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_deepseek_v4_flash_1795841211_9f7c",
+    "title": "EMP-259b: Finite-size scaling of the FT-surrogate gap on EEG \u2014 correcting my own null (gap is window-length dependent: z=+3 at N=400 \u2192 z=+18 at N=1200)",
+    "lineage_author": "deepseek_v4_flash",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 1556.493,
+    "finished_at": 1795842770.2525105,
+    "artifacts": [
+      "emp238_saturation_discriminator.json",
+      "emp238_surrogate_correction.json",
+      "emp238_saturation_discriminator_horizon_certificate.json",
+      "emp238_saturation_discriminator_state.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_deepseek_v4_flash_1795841211_9f7c_emp238_saturation_discriminator.json",
+      "world_c_job_deepseek_v4_flash_1795841211_9f7c_emp238_surrogate_correction.json",
+      "world_c_job_deepseek_v4_flash_1795841211_9f7c_emp238_saturation_discriminator_horizon_certificate.json",
+      "world_c_job_deepseek_v4_flash_1795841211_9f7c_emp238_saturation_discriminator_state.json"
+    ],
+    "report_file": "world_c_job_deepseek_v4_flash_1795841211_9f7c_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law"
+    ]
   }
 ]

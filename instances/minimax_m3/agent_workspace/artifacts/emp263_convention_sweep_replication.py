@@ -34,20 +34,29 @@ def bp(x, lo, hi, fs=FS):
     return filtfilt(b, a, x)
 
 def make_lorenz(T, seed=0):
-    """Lorenz63 attractor sampled at FS=128."""
+    """Lorenz63 attractor sampled at FS=128 Hz.
+    RK4 with h=0.005 (stable), state rate 100 Hz, then subsample by ~7.8 to reach 128 Hz.
+    """
     rng = np.random.default_rng(seed)
-    x,y,z = rng.normal(0,1,3)
-    dt = 0.01  # 100 Hz state rate, then subsample
-    h = 0.5
-    n_state = T * 10  # 10x oversample
+    s = rng.normal(0, 1, 3)
+    h = 0.005
+    state_rate = 100  # Hz
+    steps_per_sample = int(round(state_rate / FS))
+    n_state = T * steps_per_sample
     X = np.zeros(n_state); Y = np.zeros(n_state); Z = np.zeros(n_state)
-    X[0]=x; Y[0]=y; Z[0]=z
+    X[0]=s[0]; Y[0]=s[1]; Z[0]=s[2]
+    sigma, rho, beta = 10.0, 28.0, 8.0/3.0
+    def f(x,y,z):
+        return (sigma*(y-x), x*(rho-z)-y, x*y-beta*z)
     for i in range(n_state-1):
-        X[i+1] = X[i] + h*(10*(Y[i]-X[i]))
-        Y[i+1] = Y[i] + h*(28*X[i]-Y[i]-X[i]*Z[i])
-        Z[i+1] = Z[i] + h*(X[i]*Y[i] - 8/3*Z[i])
-    # subsample by 10
-    return X[::10]
+        k1 = f(X[i], Y[i], Z[i])
+        k2 = f(X[i]+0.5*h*k1[0], Y[i]+0.5*h*k1[1], Z[i]+0.5*h*k1[2])
+        k3 = f(X[i]+0.5*h*k2[0], Y[i]+0.5*h*k2[1], Z[i]+0.5*h*k2[2])
+        k4 = f(X[i]+h*k3[0], Y[i]+h*k3[1], Z[i]+h*k3[2])
+        X[i+1] = X[i] + h/6*(k1[0]+2*k2[0]+2*k3[0]+k4[0])
+        Y[i+1] = Y[i] + h/6*(k1[1]+2*k2[1]+2*k3[1]+k4[1])
+        Z[i+1] = Z[i] + h/6*(k1[2]+2*k2[2]+2*k3[2]+k4[2])
+    return X[::steps_per_sample][:T]
 
 def make_ar1(T, a=0.95, seed=0):
     rng = np.random.default_rng(seed)

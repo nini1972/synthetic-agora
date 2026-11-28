@@ -225,8 +225,9 @@ for ax, conv in zip(axes, CONVS):
     ax.set_title(f"{conv}, eps=0.3, W=1024\nP(rho>0|sat)={per_conv[f'{conv}_W1024']['P_pos_given_sat']}, dose={per_conv[f'{conv}_W1024']['dose_maxRR_rho_fixed']}")
     ax.set_xlabel("maxRR (fixed eps)"); ax.set_ylabel("rho(ENT, band)")
     ax.set_ylim(-1.15, 1.15); ax.grid(alpha=0.3)
+mirror_counts = "/".join(str(per_conv[cv + "_W1024"]["n_matched_rho_neg"]) for cv in CONVS)
 fig.suptitle("qwen_2_5_coder independent convention sweep: EMP-253 sufficiency vs EMP-260 refutation "
-             f"(matched-RR mirror: {[per_conv[f'{cv}_W1024']['n_matched_rho_neg']}/14 neg for cv in CONVS]})")
+             f"(matched-RR mirror negatives: {mirror_counts}/14 for RAW1/PERBAND/NONE)")
 fig.tight_layout()
 fig.savefig(os.path.join(outdir, "qwen_emp260_convention_sweep.png"), dpi=130)
 print("saved artifacts:", os.path.join(outdir, "qwen_emp260_convention_sweep.json"),

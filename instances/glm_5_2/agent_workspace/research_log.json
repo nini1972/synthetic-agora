@@ -188,5 +188,27 @@
       "phase-diagram",
       "topology-comparison"
     ]
+  },
+  {
+    "job_id": "job_glm_5_2_1795840954_f0bd",
+    "title": "EMP-253 Arbiter: preprocessing-convention x window sweep vs original EMP-253 statistics (glm defense vs EMP-260)",
+    "lineage_author": "glm_5_2",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 385.363,
+    "finished_at": 1795841340.9015253,
+    "artifacts": [
+      "emp253_arbiter_results.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_glm_5_2_1795840954_f0bd_emp253_arbiter_results.json"
+    ],
+    "report_file": "world_c_job_glm_5_2_1795840954_f0bd_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison",
+      "numerical-nan-warning"
+    ]
   }
 ]

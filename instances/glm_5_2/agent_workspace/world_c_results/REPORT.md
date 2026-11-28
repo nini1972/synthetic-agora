@@ -1,48 +1,56 @@
-# 🏛️ World C Execution Report: EMP-254 independent replication: FT-surrogate discriminator across 14 EEG channels
+# 🏛️ World C Execution Report: EMP-253 Arbiter: preprocessing-convention x window sweep vs original EMP-253 statistics (glm defense vs EMP-260)
 
-* **Job ID:** `job_glm_5_2_1795497433_411c`
+* **Job ID:** `job_glm_5_2_1795840954_f0bd`
 * **Requesting Lineage:** `glm_5_2` (world_b)
 * **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `164.47` seconds
+* **Compute Duration:** `385.36` seconds
+
+---
+
+> [!WARNING]
+> **⚠️ NUMERICAL CORRUPTION / NaN OVERFLOW DETECTED:** Although this process exited with code `0`, automated post-flight inspection flagged numerical instability:
+> - Generated artifact `emp253_arbiter_results.json` contains NaN/Infinity values.
+> **Do NOT treat zero or flat summary statistics from this run as physical null results.** Verify PDE/ODE CFL step bounds (`dt` vs `dx²`), state clipping, or division-by-zero before citing these metrics.
 
 ---
 
 ## 🔄 Multi-Stage & Checkpoint Continuation
-* **Stage Name:** `emp254_ft_surrogate_replication`
-* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='emp254_ft_surrogate_replication', resume_from_job_id='job_glm_5_2_1795497433_411c')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('emp254_ft_surrogate_replication')`.
+* **Stage Name:** `glm253_arbiter`
+* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='glm253_arbiter', resume_from_job_id='job_glm_5_2_1795840954_f0bd')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('glm253_arbiter')`.
 
 ---
 
 ## 📦 Generated Artifacts
-- `xiaomi_mimo_emp254_replication.json` (delivered to `world_c_results/xiaomi_mimo_emp254_replication.json` and `world_c/artifacts/job_glm_5_2_1795497433_411c/xiaomi_mimo_emp254_replication.json`)
+- `emp253_arbiter_results.json` (delivered to `world_c_results/emp253_arbiter_results.json` and `world_c/artifacts/job_glm_5_2_1795840954_f0bd/emp253_arbiter_results.json`)
 
 ---
 
+### ⚠️ Errors / Warnings:
+```
+/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_glm_5_2_1795840954_f0bd/entrypoint.py:95: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  rho_fix.append(spearmanr(FREQ, ent_f)[0])
+```
+
+---
 ## 📋 Execution Log Tail
 ```
-AF3: p5: gap_sum=+0.42 gap_rho=+0.00 | p50: gap_sum=+0.30 gap_rho=+0.00 | p95: gap_sum=+0.32 gap_rho=+0.00
-F7: p5: gap_sum=+0.03 gap_rho=+0.10 | p50: gap_sum=+0.13 gap_rho=+0.00 | p95: gap_sum=-0.06 gap_rho=+0.00
-F3: p5: gap_sum=+0.26 gap_rho=+0.00 | p50: gap_sum=+0.19 gap_rho=+0.00 | p95: gap_sum=-0.04 gap_rho=+0.00
-FC5: p5: gap_sum=+0.14 gap_rho=+0.00 | p50: gap_sum=+0.20 gap_rho=+0.00 | p95: gap_sum=+0.37 gap_rho=+0.00
-T7: p5: gap_sum=+0.16 gap_rho=+0.10 | p50: gap_sum=+0.03 gap_rho=+0.00 | p95: gap_sum=-0.08 gap_rho=-0.10
-P7: p5: gap_sum=+0.06 gap_rho=+0.00 | p50: gap_sum=+0.03 gap_rho=+0.00 | p95: gap_sum=+0.05 gap_rho=+0.00
-O1: p5: gap_sum=+0.07 gap_rho=+0.00 | p50: gap_sum=-0.10 gap_rho=+0.00 | p95: gap_sum=+0.05 gap_rho=+0.00
-O2: p5: gap_sum=+0.22 gap_rho=+0.10 | p50: gap_sum=+0.16 gap_rho=+0.00 | p95: gap_sum=+0.18 gap_rho=+0.00
-P8: p5: gap_sum=+0.19 gap_rho=+0.10 | p50: gap_sum=-0.12 gap_rho=+0.00 | p95: gap_sum=-0.23 gap_rho=-0.10
-T8: p5: gap_sum=+0.01 gap_rho=-0.10 | p50: gap_sum=-0.06 gap_rho=+0.00 | p95: gap_sum=-0.29 gap_rho=-0.20
-FC6: p5: gap_sum=+0.08 gap_rho=+0.00 | p50: gap_sum=+0.03 gap_rho=+0.00 | p95: gap_sum=-0.25 gap_rho=-0.10
-F4: p5: gap_sum=+0.36 gap_rho=+0.00 | p50: gap_sum=+0.23 gap_rho=+0.00 | p95: gap_sum=+0.03 gap_rho=-0.20
-F8: p5: gap_sum=+0.05 gap_rho=+0.00 | p50: gap_sum=+0.05 gap_rho=+0.00 | p95: gap_sum=-0.16 gap_rho=-0.10
-AF4: p5: gap_sum=+0.23 gap_rho=+0.00 | p50: gap_sum=+0.03 gap_rho=+0.00 | p95: gap_sum=-0.10 gap_rho=+0.00
+neural_eeg: N=14980, C=14, fs=128.0
+bandpass done
+A_w0: sat=8/14 ['AF3', 'F7', 'FC5', 'O1', 'P8', 'FC6', 'F4', 'F8'] Ppos|sat=2/8 dose=+nan matched_neg=True
+A_w1024: sat=13/14 ['AF3', 'F7', 'F3', 'FC5', 'T7', 'P7', 'O1', 'P8', 'T8', 'FC6', 'F4', 'F8', 'AF4'] Ppos|sat=5/13 dose=+nan matched_neg=True
+A_w4096: sat=14/14 ['AF3', 'F7', 'F3', 'FC5', 'T7', 'P7', 'O1', 'O2', 'P8', 'T8', 'FC6', 'F4', 'F8', 'AF4'] Ppos|sat=3/14 dose=+nan matched_neg=True
+B_w0: sat=2/14 ['P7', 'AF4'] Ppos|sat=0/2 dose=+0.605 matched_neg=True
+B_w1024: sat=0/14 [] Ppos|sat=0/1 dose=+0.429 matched_neg=True
+B_w4096: sat=0/14 [] Ppos|sat=0/1 dose=-0.431 matched_neg=True
+C_w0: sat=5/14 ['AF3', 'FC5', 'O1', 'P8', 'F8'] Ppos|sat=0/5 dose=+nan matched_neg=True
+C_w1024: sat=7/14 ['AF3', 'FC5', 'P7', 'O1', 'P8', 'F8', 'AF4'] Ppos|sat=4/7 dose=+nan matched_neg=True
+C_w4096: sat=7/14 ['AF3', 'FC5', 'P7', 'O1', 'P8', 'F8', 'AF4'] Ppos|sat=2/7 dose=+nan matched_neg=True
+D_w0: sat=12/14 ['AF3', 'F7', 'F3', 'T7', 'P7', 'O1', 'P8', 'T8', 'FC6', 'F4', 'F8', 'AF4'] Ppos|sat=3/12 dose=+0.007 matched_neg=True
+D_w1024: sat=4/14 ['AF3', 'F7', 'F8', 'AF4'] Ppos|sat=0/4 dose=+0.880 matched_neg=True
+D_w4096: sat=1/14 ['F8'] Ppos|sat=0/1 dose=+0.576 matched_neg=True
 
-=== PREREGISTERED FALSIFIER VERDICTS (xiaomi_mimo independent) ===
-F1: n_pass=0/14  verdict=FAIL
-F2: n_pass=12/14  verdict=PASS
-F3: n_pass=8/14  verdict=FAIL
-mean_gap_sum: {'p5': 0.164, 'p50': 0.078, 'p95': -0.016}
-mean_gap_rho: {'p5': 0.021, 'p50': 0.0, 'p95': -0.057}
-mean_rho_real: {'p5': -0.97, 'p50': -0.69, 'p95': -0.34}
-mean_rho_surr: {'p5': -0.99, 'p50': -0.69, 'p95': -0.29}
+BEST MATCH: D_w1024 (score=+1.941)
+saved emp253_arbiter_results.json | runtime 384s
 ```
 
 ---

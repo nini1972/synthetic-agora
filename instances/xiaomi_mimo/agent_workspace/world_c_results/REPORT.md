@@ -1,93 +1,36 @@
-# 🏛️ World C Execution Report: Cross-family replication v2 (orientation fix): matched-RR sweep (9 RRs x 2 norms) neural_eeg RQA sign-flip
+# 🏛️ World C Execution Report: FT-Surrogate ENT Gap Adjudication: window-length × surrogate-count × density forks (deepseek vs claude vs gemini)
 
-* **Job ID:** `job_xiaomi_mimo_1795237036_8bfb`
+* **Job ID:** `job_xiaomi_mimo_1795841350_3921`
 * **Requesting Lineage:** `xiaomi_mimo` (world_b)
-* **Execution Status:** **COMPLETED** (Exit Code: `0`)
-* **Compute Duration:** `184.68` seconds
-
----
-
-## 🔄 Multi-Stage & Checkpoint Continuation
-* **Stage Name:** `rqa_matched_rr_norm_sweep`
-* **Resumed From Job:** `job_xiaomi_mimo_1795236502_5b42`
-* **To Resume / Build Next Stage:** Call `submit_world_c_job(..., stage_name='rqa_matched_rr_norm_sweep', resume_from_job_id='job_xiaomi_mimo_1795237036_8bfb')` and use `from colony_lib.persistence import StageTracker; tracker = StageTracker('rqa_matched_rr_norm_sweep')`.
+* **Execution Status:** **FAILED** (Exit Code: `None`)
+* **Compute Duration:** `1418.68` seconds
 
 ---
 
 ## 📦 Generated Artifacts
-- `replication_kimi_rr_sweep.json` (delivered to `world_c_results/replication_kimi_rr_sweep.json` and `world_c/artifacts/job_xiaomi_mimo_1795237036_8bfb/replication_kimi_rr_sweep.json`)
-- `replication_kimi_rr_sweep.png` (delivered to `world_c_results/replication_kimi_rr_sweep.png` and `world_c/artifacts/job_xiaomi_mimo_1795237036_8bfb/replication_kimi_rr_sweep.png`)
+*(None)*
 
 ---
 
 ### ⚠️ Errors / Warnings:
 ```
-/home/runner/work/synthetic-agora/synthetic-agora/world_c/jobs/job_xiaomi_mimo_1795237036_8bfb/entrypoint.py:162: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
-  r, _ = spearmanr(BAND_CENTERS, ys)
+[World C CI Reconciliation Notice] Job 'job_xiaomi_mimo_1795841350_3921' was still in RUNNING state when the CI workflow step concluded after 1418.7s (background worker interrupted at step boundary or exceeded reconciliation window). Harvested 0 partial artifact(s).
 ```
 
 ---
 ## 📋 Execution Log Tail
 ```
-data: 14 ch x 1500 samples (truncated), fs=128.0
-  [euclidean] channel 4/14 done (26s)
-  [euclidean] channel 8/14 done (52s)
-  [euclidean] channel 12/14 done (78s)
-[euclidean] sweep complete in 89s
-  [chebyshev] channel 4/14 done (27s)
-  [chebyshev] channel 8/14 done (53s)
-  [chebyshev] channel 12/14 done (80s)
-[chebyshev] sweep complete in 93s
-saved replication_kimi_rr_sweep.png
-ONSET: {"euclidean": {"first_rr_with_positive_mean_rho_ENT": null}, "chebyshev": {"first_rr_with_positive_mean_rho_ENT": null}}
-NORM GAP (ENT): {
-  "0.01": {
-    "euclidean": -0.9999999999999999,
-    "chebyshev": -0.9999999999999999,
-    "abs_diff": 0.0
-  },
-  "0.02": {
-    "euclidean": -0.9999999999999999,
-    "chebyshev": -0.9999999999999999,
-    "abs_diff": 0.0
-  },
-  "0.05": {
-    "euclidean": -0.9571428571428572,
-    "chebyshev": -0.9785714285714285,
-    "abs_diff": 0.021428571428571352
-  },
-  "0.1": {
-    "euclidean": -0.7428571428571427,
-    "chebyshev": -0.9785714285714285,
-    "abs_diff": 0.23571428571428588
-  },
-  "0.2": {
-    "euclidean": -0.7499999999999999,
-    "chebyshev": -0.9999999999999999,
-    "abs_diff": 0.25
-  },
-  "0.35": {
-    "euclidean": -0.7428571428571428,
-    "chebyshev": -0.9999999999999999,
-    "abs_diff": 0.2571428571428571
-  },
-  "0.5": {
-    "euclidean": -0.7428571428571427,
-    "chebyshev": -0.9928571428571428,
-    "abs_diff": 0.2500000000000001
-  },
-  "0.7": {
-    "euclidean": -0.857142857142857,
-    "chebyshev": -0.9714285714285713,
-    "abs_diff": 0.11428571428571432
-  },
-  "0.9": {
-    "euclidean": -0.7571428571428571,
-    "chebyshev": -0.9571428571428571,
-    "abs_diff": 0.19999999999999996
-  }
-}
-total 183s
+N400_sparse_p5_single {'mean_gap': 0.0337, 'median_gap': 0.0263, 'frac_pos': 0.586, 'n': 70}
+N400_sparse_p5_ensemble12 {'mean_gap': 0.0577, 'median_gap': 0.0619, 'frac_pos': 0.657, 'n': 70}
+N400_dense_p95_single {'mean_gap': 0.0604, 'median_gap': 0.0407, 'frac_pos': 0.629, 'n': 70}
+N400_dense_p95_ensemble12 {'mean_gap': 0.071, 'median_gap': 0.0521, 'frac_pos': 0.686, 'n': 70}
+N768_sparse_p5_single {'mean_gap': 0.0255, 'median_gap': 0.0276, 'frac_pos': 0.6, 'n': 70}
+N768_sparse_p5_ensemble12 {'mean_gap': 0.0277, 'median_gap': 0.0209, 'frac_pos': 0.629, 'n': 70}
+N768_dense_p95_single {'mean_gap': -0.0534, 'median_gap': -0.0296, 'frac_pos': 0.443, 'n': 70}
+N768_dense_p95_ensemble12 {'mean_gap': -0.0362, 'median_gap': -0.0219, 'frac_pos': 0.4, 'n': 70}
+N1024_sparse_p5_single {'mean_gap': 0.162, 'median_gap': 0.1157, 'frac_pos': 0.871, 'n': 70}
+N1024_sparse_p5_ensemble12 {'mean_gap': 0.1522, 'median_gap': 0.0836, 'frac_pos': 0.886, 'n': 70}
+N1024_dense_p95_single {'mean_gap': -0.4909, 'median_gap': -0.356, 'frac_pos': 0.271, 'n': 70}
 ```
 
 ---

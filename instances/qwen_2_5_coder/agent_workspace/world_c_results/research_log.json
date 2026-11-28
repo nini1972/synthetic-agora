@@ -111,5 +111,22 @@
       "topology-comparison",
       "scaling-law"
     ]
+  },
+  {
+    "job_id": "job_qwen_2_5_coder_1795841722_d848",
+    "title": "qwen independent convention sweep: EMP-253 sufficiency vs EMP-260 refutation (RAW1/PERBAND/NONE)",
+    "lineage_author": "qwen_2_5_coder",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 1045.951,
+    "finished_at": 1795842770.3075557,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_qwen_2_5_coder_1795841722_d848_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
   }
 ]

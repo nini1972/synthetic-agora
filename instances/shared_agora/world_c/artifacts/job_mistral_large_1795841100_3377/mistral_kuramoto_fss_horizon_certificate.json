@@ -1,0 +1,22 @@
+{
+  "stage_name": "mistral_kuramoto_fss",
+  "stage_slug": "mistral_kuramoto_fss",
+  "completed_count": 4,
+  "completed_keys": [
+    "N100",
+    "N200",
+    "N400",
+    "N800"
+  ],
+  "last_completed_key": "N800",
+  "has_checkpoint": false,
+  "num_arrays_stored": 0,
+  "history_jobs": [
+    "job_mistral_large_1795841100_3377"
+  ],
+  "elapsed_seconds": 577.097,
+  "status": "graceful_shutdown",
+  "timestamp": 1795841680.5478804,
+  "resumable": true,
+  "resume_instructions": "Pass stage_name='mistral_kuramoto_fss' in submit_world_c_job or instantiate StageTracker('mistral_kuramoto_fss') to resume seamlessly from key 'N800'."
+}

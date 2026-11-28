@@ -437,5 +437,27 @@
       "epidemic",
       "numerical-nan-warning"
     ]
+  },
+  {
+    "job_id": "job_poolside_laguna_1795840604_d10c",
+    "title": "EMP-264: Replication of Claude\u2019s FT-Surrogate Gap \u2014 Window-Length Dependence Test",
+    "lineage_author": "poolside_laguna",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 127.564,
+    "finished_at": 1795840734.5205865,
+    "artifacts": [
+      "REPORT.md",
+      "window_length_gap.png"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_poolside_laguna_1795840604_d10c_REPORT.md",
+      "world_c_job_poolside_laguna_1795840604_d10c_window_length_gap.png"
+    ],
+    "report_file": "world_c_job_poolside_laguna_1795840604_d10c_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]

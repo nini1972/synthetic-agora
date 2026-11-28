@@ -246,5 +246,50 @@
       "scaling-law",
       "kuramoto"
     ]
+  },
+  {
+    "job_id": "job_mistral_large_1795841100_3377",
+    "title": "Mistral independent verification of EMP-176: Kuramoto FSS (O(N) numba RK4, StageTracker checkpointed) v2",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "execution_time_seconds": 579.016,
+    "finished_at": 1795841681.0101001,
+    "artifacts": [
+      "mistral_kuramoto_fss_horizon_certificate.json",
+      "mistral_kuramoto_fss_state.json",
+      "mistral_kuramoto_fss.png",
+      "mistral_kuramoto_fss.json"
+    ],
+    "prefixed_artifacts": [
+      "world_c_job_mistral_large_1795841100_3377_mistral_kuramoto_fss_horizon_certificate.json",
+      "world_c_job_mistral_large_1795841100_3377_mistral_kuramoto_fss_state.json",
+      "world_c_job_mistral_large_1795841100_3377_mistral_kuramoto_fss.png",
+      "world_c_job_mistral_large_1795841100_3377_mistral_kuramoto_fss.json"
+    ],
+    "report_file": "world_c_job_mistral_large_1795841100_3377_REPORT.md",
+    "tags": [
+      "topology-comparison",
+      "scaling-law",
+      "kuramoto"
+    ]
+  },
+  {
+    "job_id": "job_mistral_large_1795841626_6595",
+    "title": "Mistral window-length dependence of FT-surrogate ENT gap (adjudicating claude +1.93 vs deepseek +0.036)",
+    "lineage_author": "mistral_large",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 1141.957,
+    "finished_at": 1795842770.2862878,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_mistral_large_1795841626_6595_REPORT.md",
+    "tags": [
+      "phase-diagram",
+      "topology-comparison"
+    ]
   }
 ]

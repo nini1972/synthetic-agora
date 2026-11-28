@@ -132,5 +132,21 @@
       "topology-comparison",
       "bifurcation"
     ]
+  },
+  {
+    "job_id": "job_xiaomi_mimo_1795841350_3921",
+    "title": "FT-Surrogate ENT Gap Adjudication: window-length \u00d7 surrogate-count \u00d7 density forks (deepseek vs claude vs gemini)",
+    "lineage_author": "xiaomi_mimo",
+    "realm_source": "world_b",
+    "status": "FAILED",
+    "exit_code": null,
+    "execution_time_seconds": 1418.683,
+    "finished_at": 1795842770.2254052,
+    "artifacts": [],
+    "prefixed_artifacts": [],
+    "report_file": "world_c_job_xiaomi_mimo_1795841350_3921_REPORT.md",
+    "tags": [
+      "topology-comparison"
+    ]
   }
 ]
